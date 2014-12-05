@@ -8,7 +8,7 @@ if (!isset($_GET['channel'])) {
 }
 $channelName = $_GET['channel'];
 
-printHead("Channel view", array("css/dashboard.css"));
+printHead($channelName, array("css/dashboard.css"));
 printNav();
 
 ?>
@@ -24,160 +24,34 @@ printNav();
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <div class="tab-content">
 
+      <h1 class="page-header"><?php echo $channelName; ?></h1>
+
+
+      <div class="tab-content">
 
         <div role="tabpanel" class="tab-pane fade in active" id="overview">
 
-          <h1 class="page-header"><?php echo $channelName; ?></h1>
+          Some content will probably go here!
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </div>
+        </div><!--/.tab-pane -->
 
-          <h2 class="sub-header">Section title</h2>
+
+        <div role="tabpanel" class="tab-pane fade" id="commands">
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>Command</th>
+                  <th>Response</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
+                  <td>1</td>
+                  <td>+example</td>
+                  <td>This is an example!</td>
                 </tr>
               </tbody>
             </table>
@@ -186,23 +60,71 @@ printNav();
         </div><!--/.tab-pane -->
 
 
-        <div role="tabpanel" class="tab-pane fade" id="commands">
-          commands
-        </div><!--/.tab-pane -->
-
-
         <div role="tabpanel" class="tab-pane fade" id="quotes">
-          quotes
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Quote</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>"Ox is the best!"</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>"Nooo! Fuck you! Fuck all of you! Fuck everyone! Fuck off! What is this horseshit! What the fuck was that bullshit! I'm fucking, this, fuck fuck this fucking frantic ass shit! Fucking frantic, diarrhea, bullshit, horsefuck, cock, and dick suck, shit balls!"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div><!--/.tab-pane -->
 
 
         <div role="tabpanel" class="tab-pane fade" id="autoreplies">
-          autoreplies
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Prompt</th>
+                  <th>Response</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>hey</td>
+                  <td>Hey there!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div><!--/.tab-pane -->
 
 
         <div role="tabpanel" class="tab-pane fade" id="scheduled">
-          scheduled
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Command</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>+throw hype</td>
+                  <td>every 10 seconds</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div><!--/.tab-pane -->
 
 
