@@ -137,7 +137,7 @@ function displayChannelAutoreplies() {
         var reply = channelData.autoReplies[i];
         var row = '<tr>';
         row += '<td>' + prettifyRegex(reply.trigger) + '</td>';
-        row += '<td>' + reply.response + '</td>';
+        row += '<td>' + prettifyStringVariables(reply.response) + '</td>';
         row += '</tr>';
         rows += row;
     }
