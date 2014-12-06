@@ -46,7 +46,7 @@ downloadChannelData();
 
 function displayChannelTitle() {
 	var channelTitle = channel;
-	var html = channelCoebotData.displayName + ' <small>'
+	var html = ((channelCoebotData.displayName&&channelCoebotData.displayName=="") ? channel : channelCoebotData.displayName) + ' <small>'
 	html += $('#navSidebar a:first-child .sidebar-title').html() + '</small>';
 	$(".js-channel-title").html(html);
 }
@@ -99,9 +99,9 @@ function displayChannelCommands() {
 	var rows = "";
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
-		var row = '<tr style="color:' + colorifyAccessLevel(cmd.restriction) + '">';
+		var row = '<tr>';
 		row += '<td>' + channelData.commandPrefix + cmd.key + '</td>';
-        row += '<td>' + prettifyAccessLevel(cmd.restriction) + '</td>';
+        row += '<td style="color:' + colorifyAccessLevel(cmd.restriction) + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
 		row += '<td>' + prettifyStringVariables(cmd.value) + '</td>';
 		row += '</tr>';
 		rows += row;
@@ -201,7 +201,7 @@ function prettifyAccessLevel(access) {
 
 function colorifyAccessLevel(access) {
     if (access == 0) {
-        return "#7f8c8d";
+        return "#bdc3c7";
     }
     if (access == 1) {
         return "#8e44ad";
