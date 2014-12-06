@@ -58,15 +58,15 @@ function displayChannelOverview() {
 	}
 	html += '</p>';
 
-	if (channelData.maxViewers) {
-		html += '<p>Max viewers: ' + channelData.maxViewers;
+	if (channelData.runningMaxViewers) {
+		html += '<p>Max viewers: ' + channelData.runningMaxViewers;
 		html += ' viewers, <span class="js-livestamp-maxviewers"></span></p>';
 		// html += 'on ' + channelData;
 	}
 
 	$(".js-channel-overview").html(html);
 
-	if (channelData.maxViewers) {
+	if (channelData.runningMaxViewers) {
 		var tsSpan = $('.js-livestamp-maxviewers');
 		var date = new Date(channelData.maxviewerDate);
 		tsSpan.livestamp(date);
