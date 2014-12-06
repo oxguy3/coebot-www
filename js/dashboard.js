@@ -204,7 +204,7 @@ function colorifyAccessLevel(access) {
         return "#7f8c8d";
     }
     if (access == 1) {
-        return "#2980b9";
+        return "#8e44ad";
     }
     if (access == 2) {
         return "#27ae60";
