@@ -72,8 +72,8 @@ function printNav() {
 	  </button>
       <a class="navbar-brand" href="/">
         <span class="pull-left">
-          <img alt="Coebot" src="/img/coebot-icon.png">
-          <?php echo $SITE_TITLE; ?>
+          <!-- <img alt="Coebot" src="/img/coebot-icon.png"> -->
+          <?php echo $SITE_TITLE; ?><sub class="text-muted"> beta</sub>
         </span>
       </a>
     </div>
