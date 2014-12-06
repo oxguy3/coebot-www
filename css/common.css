@@ -1,0 +1,19 @@
+.nobr { white-space:nowrap; }
+
+body {
+  padding-top: 50px;
+}
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar-fixed-top {
+  border: 0;
+}
+
+.sidebar-collapsed {
+  display: none;
+  visibility: hidden;
+}

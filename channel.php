@@ -6,16 +6,22 @@ if (!isset($_GET['channel'])) {
   header("Location: /");
   die();
 }
-$channelName = $_GET['channel'];
+$channel = $_GET['channel'];
+if (!validateChannel($channel)) {
+  header("Location: /");
+  die();
+}
 
-printHead($channelName, array("css/dashboard.css"));
+$extraHeadCode = "<script>var channel = \"$channel\";</script>";
+
+printHead($channel, array("css/dashboard.css"), array("js/dashboard.js"), $extraHeadCode);
 printNav();
 
 ?>
 <div class="container-fluid">
   <div class="row" role="tabpanel">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar" id="navSidebar" role="tablist">
+    <div class="col-sm-3 col-lg-2 sidebar">
+      <ul class="nav nav-sidebar sidebar-collapse collapse" id="navSidebar" role="tablist">
         <li class="active"><a href="#overview">Overview</a></li>
         <li><a href="#commands">Commands</a></li>
         <li><a href="#quotes">Quotes</a></li>
@@ -23,18 +29,19 @@ printNav();
         <li><a href="#scheduled">Scheduled commands</a></li>
       </ul>
     </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <script>enableSidebar()</script>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-      <h1 class="page-header"><?php echo $channelName; ?></h1>
+      <h1 class="page-header js-channel-title"></h1>
+      <script>displayChannelTitle()</script>
 
 
       <div class="tab-content">
 
         <div role="tabpanel" class="tab-pane fade in active" id="overview">
-
-          Some content will probably go here!
-
+          <div class="js-channel-overview"></div>
         </div><!--/.tab-pane -->
+        <script>displayChannelOverview()</script>
 
 
         <div role="tabpanel" class="tab-pane fade" id="commands">
@@ -42,18 +49,12 @@ printNav();
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Command</th>
                   <th>Response</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>+example</td>
-                  <td>This is an example!</td>
-                </tr>
-              </tbody>
+              <tbody class="js-commands-tbody"></tbody>
+              <script>displayChannelCommands()</script>
             </table>
           </div>
 
@@ -69,16 +70,8 @@ printNav();
                   <th>Quote</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>"Ox is the best!"</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>"Nooo! Fuck you! Fuck all of you! Fuck everyone! Fuck off! What is this horseshit! What the fuck was that bullshit! I'm fucking, this, fuck fuck this fucking frantic ass shit! Fucking frantic, diarrhea, bullshit, horsefuck, cock, and dick suck, shit balls!"</td>
-                </tr>
-              </tbody>
+              <tbody class="js-quotes-tbody"></tbody>
+              <script>displayChannelQuotes()</script>
             </table>
           </div>
         </div><!--/.tab-pane -->
@@ -89,18 +82,12 @@ printNav();
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Prompt</th>
+                  <th>Trigger</th>
                   <th>Response</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>hey</td>
-                  <td>Hey there!</td>
-                </tr>
-              </tbody>
+              <tbody class="js-autoreplies-tbody"></tbody>
+              <script>displayChannelAutoreplies()</script>
             </table>
           </div>
         </div><!--/.tab-pane -->
@@ -111,14 +98,12 @@ printNav();
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Command</th>
                   <th>Frequency</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="js-scheduled-tbody">
                 <tr>
-                  <td>1</td>
                   <td>+throw hype</td>
                   <td>every 10 seconds</td>
                 </tr>
@@ -133,5 +118,5 @@ printNav();
   </div>
 </div>
 <?php
-printFoot(array("js/dashboard.js"));
+printFoot();
 ?>
