@@ -3,12 +3,16 @@
         {
             "channel": "beyondsanitylol",
             "displayName": "BeyondSanityLoL",
-            "isActive": true
+            "isActive": true,
+            "youtube": "BeyondLoLSanity",
+            "twitter": "BeyondlolSanity"
         },
         {
             "channel": "endsgamer",
             "displayName": "endsgamer",
-            "isActive": true
+            "isActive": true,
+            "youtube": "endsgamer",
+            "twitter": "endsgamer"
         }
     ]
 }
