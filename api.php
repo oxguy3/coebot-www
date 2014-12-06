@@ -2,7 +2,10 @@
 
 require_once("common.php");
 
-function getNonce() {
+
+apc_store("a","b");
+
+/*function getNonce() {
     $id = Identify Request //(either by username, session, or something)
     $nonce = hash('sha512', makeRandomString());
     storeNonce($id, $nonce);
@@ -24,6 +27,6 @@ function makeRandomString($bits = 256) {
         $return .= chr(mt_rand(0, 255));
     }
     return $return;
-}
+}*/
 
 ?>

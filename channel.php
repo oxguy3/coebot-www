@@ -31,11 +31,11 @@ printNav();
   <div class="row" role="tabpanel">
     <div class="col-sm-3 col-lg-2 sidebar">
       <ul class="nav nav-sidebar sidebar-collapse collapse" id="navSidebar" role="tablist">
-        <li class="active"><a href="#overview">Overview</a></li>
-        <li><a href="#commands">Commands</a></li>
-        <li><a href="#quotes">Quotes</a></li>
-        <li><a href="#autoreplies">Auto-replies</a></li>
-        <li><a href="#scheduled">Scheduled commands</a></li>
+        <li class="active"><a href="#overview"><i class="fa fa-user fa-fw"></i>&nbsp; <span class="sidebar-title">Overview</span></a></li>
+        <li><a href="#commands"><i class="fa fa-terminal fa-fw"></i>&nbsp; <span class="sidebar-title">Commands</span></a></li>
+        <li><a href="#quotes"><i class="fa fa-quote-left fa-fw"></i>&nbsp; <span class="sidebar-title">Quotes</span></a></li>
+        <li><a href="#autoreplies"><i class="fa fa-comments-o fa-fw"></i>&nbsp; <span class="sidebar-title">Auto-replies</span></a></li>
+        <li><a href="#scheduled"><i class="fa fa-calendar fa-fw"></i>&nbsp; <span class="sidebar-title">Scheduled commands</span></a></li>
       </ul>
     </div>
     <script>enableSidebar()</script>

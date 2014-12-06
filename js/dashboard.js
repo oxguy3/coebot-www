@@ -12,7 +12,7 @@ function enableSidebar() {
 	$('#navSidebar a').on('shown.bs.tab', function (e) {
 		var tab = e.target;
 
-		var tabName = $(tab).html();
+		var tabName = $(tab).children('.sidebar-title').html();
 
 		$(".js-channel-title small").html(tabName);
 	});
@@ -47,7 +47,7 @@ downloadChannelData();
 function displayChannelTitle() {
 	var channelTitle = channel;
 	var html = channelCoebotData.displayName + ' <small>'
-	html += $('#navSidebar a:first-child').html() + '</small>';
+	html += $('#navSidebar a:first-child .sidebar-title').html() + '</small>';
 	$(".js-channel-title").html(html);
 }
 
