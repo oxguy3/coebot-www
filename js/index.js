@@ -7,7 +7,7 @@ function displayListChannels() {
         var chan = coebotData.channels[i];
         if (chan.isActive) {
             var li = '<a href="' + getUrlToChannel(chan.channel);
-            li += '" class="list-group-item">' + chan.displayName + '</a>';
+            li += '" class="list-group-item text-center">' + chan.displayName + '</a>';
             list += li;
         }
     }

@@ -8,7 +8,7 @@ function prettifyStringVariables(str) {
 }
 
 function prettifyRegex(pattern) {
-    pattern = pattern.replace(/\.\*/g, '<span class="text-info">*</span>');
+    pattern = pattern.replace(/\.\*/g, '*');
     pattern = pattern.replace(/(\\Q|\\E)/g, "");
     return pattern;
 }
