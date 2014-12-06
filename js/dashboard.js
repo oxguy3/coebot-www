@@ -1,3 +1,7 @@
+downloadCoebotData();
+console.log(coebotData);
+var channelCoebotData = getCoebotDataChannel(channel);
+
 function enableSidebar() {
 
 	$('#navSidebar a').click(function (e) {
@@ -42,7 +46,7 @@ downloadChannelData();
 
 function displayChannelTitle() {
 	var channelTitle = channel;
-	var html = channel + ' <small>'
+	var html = channelCoebotData.displayName + ' <small>'
 	html += $('#navSidebar a:first-child').html() + '</small>';
 	$(".js-channel-title").html(html);
 }
@@ -91,6 +95,9 @@ function displayChannelCommands() {
 		row += '</tr>';
 		rows += row;
 	}
+    if (rows == "") {
+        rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+    }
 	tbody.html(rows);
 }
 
@@ -105,6 +112,10 @@ function displayChannelQuotes() {
 		row += '</tr>';
 		rows += row;
 	}
+    if (rows == "") {
+        rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+    }
+
 	tbody.html(rows);
 }
 
@@ -114,11 +125,15 @@ function displayChannelAutoreplies() {
     for (var i = 0; i < channelData.autoReplies.length; i++) {
         var reply = channelData.autoReplies[i];
         var row = '<tr>';
-        row += '<td>' + reply.trigger + '</td>';
+        row += '<td>' + prettifyRegex(reply.trigger) + '</td>';
         row += '<td>' + reply.response + '</td>';
         row += '</tr>';
         rows += row;
     }
+    if (rows == "") {
+        rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+    }
+
     tbody.html(rows);
 }
 
@@ -129,30 +144,27 @@ function displayChannelScheduled() {
         var cmd = channelData.scheduledCommands[i];
         if (cmd.active) {
             var row = '<tr>';
-            row += '<td>' + cmd.name + '</td>';
-            row += '<td>' + prettyCron.toString(cmd.pattern) + '</td>';
+            row += '<td>' + channelData.commandPrefix + cmd.name + '</td>';
+            row += '<td><span title="Cron command: ' + cmd.pattern + '">'
+            row += prettyCron.toString(cmd.pattern) + '</td>';
             row += '</tr>';
             rows += row;
         }
     }
     for (var i = 0; i < channelData.repeatedCommands.length; i++) {
         var cmd = channelData.repeatedCommands[i];
-        if (cmd.active) {
+        if (cmd.active||true) {
             var row = '<tr>';
-            row += '<td>' + cmd.name + '</td>';
-            row += '<td> Every ' + moment().subtract('seconds', cmd.delay).fromNow(true) + '</td>';
+            row += '<td>' + channelData.commandPrefix + cmd.name + '</td>';
+            row += '<td><span title="Every ' + cmd.delay + ' seconds">Every '
+            row += moment().subtract(cmd.delay, 'seconds').fromNow(true) + '</span></td>';
             row += '</tr>';
             rows += row;
         }
     }
+    if (rows == "") {
+        rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+    }
     
     tbody.html(rows);
-}
-
-
-function prettifyStringVariables(str) {
-    var pattern = /\(_(\w+)_\)/g;
-    var replacement = '<span class="label label-info">$1</span>';
-    str = str.replace(pattern, replacement);
-    return str;
 }

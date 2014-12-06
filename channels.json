@@ -1,0 +1,14 @@
+{
+    "channels": [
+        {
+            "channel": "beyondsanitylol",
+            "displayName": "BeyondSanityLoL",
+            "isActive": true
+        },
+        {
+            "channel": "endsgamer",
+            "displayName": "endsgamer",
+            "isActive": true
+        }
+    ]
+}

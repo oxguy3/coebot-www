@@ -53,13 +53,6 @@
   .sidebar-collapsed {
     display: inline;
     visibility: visible;
-    /*width: 100%;
-    text-align: center;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    background-color: #222;
-    margin-left: 0;
-    margin-right: 0;*/
   }
 }
 
