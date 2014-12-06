@@ -68,20 +68,19 @@ function displayChannelOverview() {
 	}
 	html += '</p>';
 
-	if (channelData.runningMaxViewers) {
-		html += '<p>Max viewers: ' + channelData.runningMaxViewers;
-		html += ' viewers, <span class="js-livestamp-maxviewers"></span></p>';
-		// html += 'on ' + channelData;
-	}
+	// if (channelData.runningMaxViewers) {
+	// 	html += '<p>Max viewers: ' + channelData.runningMaxViewers;
+	// 	html += ' viewers, <span class="js-livestamp-maxviewers"></span></p>';
+	// }
 
 	$(".js-channel-overview").html(html);
 
-	if (channelData.runningMaxViewers) {
-		var tsSpan = $('.js-livestamp-maxviewers');
-		var date = new Date(channelData.maxviewerDate);
-		tsSpan.livestamp(date);
-		tsSpan.attr("title", moment(date).format('LLLL'));
-	}
+	// if (channelData.runningMaxViewers) {
+	// 	var tsSpan = $('.js-livestamp-maxviewers');
+	// 	var date = new Date(channelData.maxviewerDate);
+	// 	tsSpan.livestamp(date);
+	// 	tsSpan.attr("title", moment(date).format('LLLL'));
+	// }
 }
 
 function displayChannelCommands() {
