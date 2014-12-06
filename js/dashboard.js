@@ -87,7 +87,7 @@ function displayChannelCommands() {
 		var cmd = channelData.commands[i];
 		var row = '<tr>';
 		row += '<td>' + cmd.key + '</td>';
-		row += '<td>' + cmd.value + '</td>';
+		row += '<td>' + prettifyStringPlaceholders(cmd.value) + '</td>';
 		row += '</tr>';
 		rows += row;
 	}
@@ -120,4 +120,12 @@ function displayChannelAutoreplies() {
 		rows += row;
 	}
 	tbody.html(rows);
+}
+
+
+function prettifyStringPlaceholders(str) {
+    var pattern = /\(_(\w+)_\)/g;
+    var replacement = '<span class="label label-info">$1</span>';
+    str = str.replace(pattern, replacement);
+    return str;
 }
