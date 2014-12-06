@@ -51,16 +51,16 @@ function displayChannelOverview() {
 	var html = ""
 	html += '<p>';
 	html += '<a class="btn btn-primary" href="http://www.twitch.tv/' 
-	html += channel + '" target="_blank"><i class="fa fa-twitch"></i> Twitch</a> ';
+	html += channel + '" target="_blank"><i class="fa fa-twitch"></i> Twitch</a>';
 
 	if (channelData.steamID && channelData.steamID != "") {
-		html += '<a class="btn btn-default" href="http://steamcommunity.com/profiles/' 
-		html += channelData.steamID + '" target="_blank"><i class="fa fa-steam"></i> Steam</a> ';
+		html += ' <a class="btn btn-default" href="http://steamcommunity.com/profiles/' 
+		html += channelData.steamID + '" target="_blank"><i class="fa fa-steam"></i> Steam</a>';
 	}
 
 	if (channelData.lastfm && channelData.lastfm != "") {
-		html += '<a class="btn btn-default" href="http://www.last.fm/user/' 
-		html += channelData.lastfm + '" target="_blank"><i class="fa fa-lastfm"></i> last.fm</a> ';
+		html += ' <a class="btn btn-default" href="http://www.last.fm/user/' 
+		html += channelData.lastfm + '" target="_blank"><i class="fa fa-lastfm"></i> last.fm</a>';
 	}
 	html += '</p>';
 
