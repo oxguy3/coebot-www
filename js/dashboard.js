@@ -153,7 +153,7 @@ function displayChannelScheduled() {
     }
     for (var i = 0; i < channelData.repeatedCommands.length; i++) {
         var cmd = channelData.repeatedCommands[i];
-        if (cmd.active||true) {
+        if (cmd.active) {
             var row = '<tr>';
             row += '<td>' + channelData.commandPrefix + cmd.name + '</td>';
             row += '<td><span title="Every ' + cmd.delay + ' seconds">Every '
