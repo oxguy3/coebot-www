@@ -2,7 +2,7 @@ var EMPTY_TABLE_PLACEHOLDER = 'There\'s nothing here... <i class="fa fa-frown-o"
 
 function prettifyStringVariables(str) {
     var pattern = /\(_(\w+)_\)/g;
-    var replacement = '<span class="label label-info">$1</span>';
+    var replacement = '<span class="label label-default">$1</span>';
     str = str.replace(pattern, replacement);
     return str;
 }

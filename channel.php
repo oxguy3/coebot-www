@@ -59,6 +59,7 @@ printNav();
               <thead>
                 <tr>
                   <th>Command</th>
+                  <th>Access</th>
                   <th>Response</th>
                 </tr>
               </thead>

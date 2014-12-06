@@ -99,8 +99,9 @@ function displayChannelCommands() {
 	var rows = "";
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
-		var row = '<tr>';
+		var row = '<tr style="color:' + colorifyAccessLevel(cmd.restriction) + '">';
 		row += '<td>' + channelData.commandPrefix + cmd.key + '</td>';
+        row += '<td>' + prettifyAccessLevel(cmd.restriction) + '</td>';
 		row += '<td>' + prettifyStringVariables(cmd.value) + '</td>';
 		row += '</tr>';
 		rows += row;
@@ -177,4 +178,38 @@ function displayChannelScheduled() {
     }
     
     tbody.html(rows);
+}
+
+function prettifyAccessLevel(access) {
+    if (access == 0) {
+        return "All";
+    }
+    if (access == 1) {
+        if (channelData.subsRegsMinusLinks||channelData.subscriberRegulars) {
+            return "Subs";
+        } else {
+            return "Regs";
+        }
+    }
+    if (access == 2) {
+        return "Mods";
+    }
+    if (access == 3) {
+        return "Owners";
+    }
+}
+
+function colorifyAccessLevel(access) {
+    if (access == 0) {
+        return "#7f8c8d";
+    }
+    if (access == 1) {
+        return "#2980b9";
+    }
+    if (access == 2) {
+        return "#27ae60";
+    }
+    if (access == 3) {
+        return "#c0392b";
+    }
 }
