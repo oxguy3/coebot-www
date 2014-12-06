@@ -23,7 +23,7 @@ if (isset($jumpToTab)) {
 }
 $extraHeadCode .= "</script>";
 
-printHead($channel, array("css/dashboard.css"), array("js/dashboard.js"), $extraHeadCode);
+printHead($channel, array("/css/dashboard.css"), array("/js/later.min.js", "/js/prettycron.js", "/js/dashboard.js"), $extraHeadCode);
 printNav();
 
 ?>
@@ -111,16 +111,11 @@ printNav();
                   <th>Frequency</th>
                 </tr>
               </thead>
-              <tbody class="js-scheduled-tbody">
-                <tr>
-                  <td>+throw hype</td>
-                  <td>every 10 seconds</td>
-                </tr>
-              </tbody>
+              <tbody class="js-scheduled-tbody"></tbody>
+              <script>displayChannelScheduled()</script>
             </table>
           </div>
         </div><!--/.tab-pane -->
-
 
       </div>
       <script>tabContentLoaded();</script>

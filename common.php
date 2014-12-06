@@ -14,10 +14,10 @@ function printHead($pageTitle, $extraCss=array(), $extraJs=array(), $extraHeadCo
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><?php echo $SITE_TITLE . " &bull; " . $pageTitle; ?></title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/cyborg.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/cyborg.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/common.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
     <?php
     for ($i = 0; $i < count($extraCss); $i++) {
     	echo '<link href="' . $extraCss[$i] . '" rel="stylesheet">' . "\n";
@@ -35,9 +35,9 @@ function printHead($pageTitle, $extraCss=array(), $extraJs=array(), $extraHeadCo
   <body>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/moment.min.js"></script>
-    <script src="js/livestamp.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/livestamp.min.js"></script>
     <?php
     for ($i = 0; $i < count($extraJs); $i++) {
     	echo '<script src="' . $extraJs[$i] . '"></script>' . "\n";
@@ -96,7 +96,7 @@ function printFoot() {
 
 
 function getUrlToChannel($chan) {
-	return "/channel.php?channel=" . $chan;
+	return "/channel/" . $chan;
 }
 
 /**
