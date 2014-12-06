@@ -1,7 +1,6 @@
 function enableSidebar() {
 
 	$('#navSidebar a').click(function (e) {
-		console.log("enabling sidebar");
 		e.preventDefault();
 		$(this).tab('show');
 	});
@@ -10,10 +9,15 @@ function enableSidebar() {
 		var tab = e.target;
 
 		var tabName = $(tab).html();
-		if (tabName == "Overview") tabName = "";
 
 		$(".js-channel-title small").html(tabName);
-	})
+	});
+}
+
+function tabContentLoaded() {
+    if (typeof jumpToTab !== 'undefined') {
+        $('#navSidebar a[href="#' + jumpToTab + '"]').click();
+    }
 }
 
 // channel config data
@@ -38,7 +42,9 @@ downloadChannelData();
 
 function displayChannelTitle() {
 	var channelTitle = channel;
-	$(".js-channel-title").html(channel+" <small></small>");
+	var html = channel + ' <small>'
+	html += $('#navSidebar a:first-child').html() + '</small>';
+	$(".js-channel-title").html(html);
 }
 
 function displayChannelOverview() {

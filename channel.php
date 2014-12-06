@@ -12,7 +12,16 @@ if (!validateChannel($channel)) {
   die();
 }
 
-$extraHeadCode = "<script>var channel = \"$channel\";</script>";
+if (isset($_GET['tab']) && htmlspecialchars($_GET['tab']) == $_GET['tab']) {
+  $jumpToTab = $_GET['tab'];
+}
+
+$extraHeadCode = "<script>";
+$extraHeadCode .= "var channel = \"$channel\";";
+if (isset($jumpToTab)) {
+  $extraHeadCode .= "var jumpToTab = \"$jumpToTab\";";
+}
+$extraHeadCode .= "</script>";
 
 printHead($channel, array("css/dashboard.css"), array("js/dashboard.js"), $extraHeadCode);
 printNav();
@@ -114,6 +123,7 @@ printNav();
 
 
       </div>
+      <script>tabContentLoaded();</script>
     </div>
   </div>
 </div>
