@@ -275,7 +275,6 @@ function injectEmoticons(html) {
         var emote = twitchEmotes[i];
         if (emote.state == "active") {
             var pattern = new RegExp(emote.regex);
-            // console.log(pattern);
             html = html.replace(pattern, htmlifyEmote(emote), 'g');
         }
     }
@@ -297,7 +296,6 @@ function htmlifyEmote(emote) {
     html += '" width="' + emote.width;
     html += '" title="' + emote.regex;
     html += '" class="twitch-emote">';
-    console.log(html);
     return html;
 }
 
