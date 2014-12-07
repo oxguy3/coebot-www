@@ -283,7 +283,7 @@ function htmlifyEmote(emote) {
 }
 
 $(document).ready(function() {
-    // setTimeout(doSlowStuff, 0);
+    setTimeout(doSlowStuff, 0);
 });
 
 function doSlowStuff() {
