@@ -133,7 +133,7 @@ printNav();
 
         <div role="tabpanel" class="tab-pane fade" id="regulars">
           <div class="">
-            <table class="table table-striped js-regulars-table">
+            <table class="table js-regulars-table">
               <thead>
                 <tr>
                   <th>Twitch name</th>

@@ -223,7 +223,7 @@ function displayChannelRegulars() {
     for (var i = 0; i < channelData.regulars.length; i++) {
         var reg = channelData.regulars[i];
         var row = '<tr>';
-        row += '<td>' +reg + '</td>';
+        row += '<td class="text-capitalize">' +reg + '</td>';
         row += '</tr>';
         rows += row;
     }
