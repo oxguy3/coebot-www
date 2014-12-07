@@ -26,6 +26,7 @@ function tabContentLoaded() {
 
 // channel config data
 var channelData = false;
+var twitchEmotes = false;
 
 function downloadChannelData() {
 	$.ajax({
@@ -42,7 +43,22 @@ function downloadChannelData() {
 	});
 }
 
+function getTwitchEmotes() {
+    $.ajax({
+        async: false, // it's my json and i want it NOW!
+        dataType: "json",
+        url: "https://api.twitch.tv/kraken/chat/" +channel+ "/emoticons",
+        success: function(json) {
+            twitchEmotes = json;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Failed to load Twitch emotes!");
+        }
+    });
+}
+
 downloadChannelData();
+// getTwitchEmotes();
 
 function displayChannelTitle() {
 	var channelTitle = channel;
@@ -115,10 +131,10 @@ function displayChannelCommands() {
 function displayChannelQuotes() {
 	var tbody = $('.js-quotes-tbody');
 	var rows = "";
-	for (var i = 1; i < channelData.quotes.length; i++) {
+	for (var i = 0; i < channelData.quotes.length; i++) {
 		var quote = channelData.quotes[i];
 		var row = '<tr>';
-		row += '<td>' + i + '</td>';
+		row += '<td>' + (i+1) + '</td>';
 		row += '<td>' + quote + '</td>';
 		row += '</tr>';
 		rows += row;
