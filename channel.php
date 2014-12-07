@@ -30,8 +30,7 @@ printHead(
     "//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js",
     "/js/later.min.js", 
     "/js/prettycron.js", 
-    "/js/dashboard.js",
-    "https://api.twitch.tv/kraken/chat/$channel/emoticons?callback=handleTwitchEmotes"
+    "/js/dashboard.js"
   ), 
   $extraHeadCode
 );

@@ -33,6 +33,7 @@ function downloadChannelData() {
 		dataType: "json",
 		url: "/configs/" + channel + ".json",
 		success: function(json) {
+            console.log("Loaded channel data");
 			channelData = json;
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -42,12 +43,7 @@ function downloadChannelData() {
 	});
 }
 
-function handleTwitchEmotes(json) {
-    twitchEmotes = json.emoticons;
-}
-
 downloadChannelData();
-// getTwitchEmotes();
 
 function displayChannelTitle() {
 	var channelTitle = channel;
@@ -306,10 +302,18 @@ function htmlifyEmote(emote) {
 }
 
 $(document).ready(function() {
-    setTimeout(doSlowStuff, 0);
-});
-
-function doSlowStuff() {
-    var commandsTbody = $('.js-commands-tbody');
-    commandsTbody.html(injectEmoticons(commandsTbody.html()));
-}
+    $.ajax({
+        dataType: "jsonp",
+        jsonp: "callback",
+        url: "https://api.twitch.tv/kraken/chat/" + channel + "/emoticons",
+        success: function(json) {
+            console.log("Loaded Twitch emotes");
+            twitchEmotes = json.emoticons;
+            var commandsTbody = $('.js-commands-tbody');
+            commandsTbody.html(injectEmoticons(commandsTbody.html()));
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Failed to load Twitch emotes!");
+        }
+    });
+})

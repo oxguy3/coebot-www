@@ -22,6 +22,7 @@ function downloadCoebotData() {
         dataType: "json",
         url: "/channels.json",
         success: function(json) {
+            console.log("Loaded Coebot data");
             coebotData = json;
         },
         error: function(jqXHR, textStatus, errorThrown) {
