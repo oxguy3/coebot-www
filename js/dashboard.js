@@ -303,6 +303,7 @@ function htmlifyEmote(emote) {
 
 $(document).ready(function() {
     $.ajax({
+        cache: true,
         dataType: "jsonp",
         jsonp: "callback",
         url: "https://api.twitch.tv/kraken/chat/" + channel + "/emoticons",
