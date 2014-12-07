@@ -1,5 +1,4 @@
 downloadCoebotData();
-console.log(coebotData);
 var channelCoebotData = getCoebotDataChannel(channel);
 
 function enableSidebar() {
@@ -43,18 +42,8 @@ function downloadChannelData() {
 	});
 }
 
-function getTwitchEmotes() {
-    $.ajax({
-        async: false, // it's my json and i want it NOW!
-        dataType: "json",
-        url: "https://api.twitch.tv/kraken/chat/" +channel+ "/emoticons",
-        success: function(json) {
-            twitchEmotes = json;
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert("Failed to load Twitch emotes!");
-        }
-    });
+function handleTwitchEmotes(json) {
+    twitchEmotes = json.emoticons;
 }
 
 downloadChannelData();
@@ -119,6 +108,7 @@ var dataTableOptionsClean = {
 function displayChannelCommands() {
 	var tbody = $('.js-commands-tbody');
 	var rows = "";
+    var shouldSortTable = true;
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
 		var row = '<tr>';
@@ -130,15 +120,19 @@ function displayChannelCommands() {
 	}
     if (rows == "") {
         rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        shouldSortTable = false;
     }
 	tbody.html(rows);
 
-    $('.js-commands-table').dataTable(dataTableOptionsClean);
+    if (shouldSortTable) {
+        $('.js-commands-table').dataTable(dataTableOptionsClean);
+    }
 }
 
 function displayChannelQuotes() {
 	var tbody = $('.js-quotes-tbody');
 	var rows = "";
+    var shouldSortTable = true;
 	for (var i = 0; i < channelData.quotes.length; i++) {
 		var quote = channelData.quotes[i];
 		var row = '<tr>';
@@ -149,16 +143,21 @@ function displayChannelQuotes() {
 	}
     if (rows == "") {
         rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        shouldSortTable = false;
     }
 
 	tbody.html(rows);
 
-    $('.js-quotes-table').dataTable(dataTableOptionsClean);
+
+    if (shouldSortTable) {
+        $('.js-quotes-table').dataTable(dataTableOptionsClean);
+    }
 }
 
 function displayChannelAutoreplies() {
     var tbody = $('.js-autoreplies-tbody');
     var rows = "";
+    var shouldSortTable = true;
     for (var i = 0; i < channelData.autoReplies.length; i++) {
         var reply = channelData.autoReplies[i];
         var row = '<tr>';
@@ -169,16 +168,20 @@ function displayChannelAutoreplies() {
     }
     if (rows == "") {
         rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        shouldSortTable = false;
     }
 
     tbody.html(rows);
 
-    $('.js-autoreplies-table').dataTable(dataTableOptionsClean);
+    if (shouldSortTable) {
+        $('.js-autoreplies-table').dataTable(dataTableOptionsClean);
+    }
 }
 
 function displayChannelScheduled() {
     var tbody = $('.js-scheduled-tbody');
     var rows = "";
+    var shouldSortTable = true;
     for (var i = 0; i < channelData.scheduledCommands.length; i++) {
         var cmd = channelData.scheduledCommands[i];
         if (cmd.active) {
@@ -203,11 +206,14 @@ function displayChannelScheduled() {
     }
     if (rows == "") {
         rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        shouldSortTable = false;
     }
     
     tbody.html(rows);
 
-    $('.js-scheduled-table').dataTable(dataTableOptionsClean);
+    if (shouldSortTable) {
+        $('.js-scheduled-table').dataTable(dataTableOptionsClean);
+    }
 }
 
 function prettifyAccessLevel(access) {
@@ -242,4 +248,45 @@ function colorifyAccessLevel(access) {
     if (access == 3) {
         return "#c0392b";
     }
+}
+
+function injectEmoticons(html) {
+    html = htmlDecode(html);
+    for (var i = 0; i < twitchEmotes.length; i++) {
+        var emote = twitchEmotes[i];
+        if (emote.state == "active") {
+            var pattern = new RegExp(emote.regex);
+            // console.log(pattern);
+            html = html.replace(pattern, htmlifyEmote(emote), 'g');
+        }
+    }
+    return html;
+}
+
+function htmlDecode(input) {
+    return String(input)
+        .replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>');
+}
+
+function htmlifyEmote(emote) {
+    var html = '';
+    html += '<img src="' + emote.url;
+    html += '" height="' + emote.height;
+    html += '" width="' + emote.width;
+    html += '" title="' + emote.regex;
+    html += '" class="twitch-emote">';
+    console.log(html);
+    return html;
+}
+
+$(document).ready(function() {
+    // setTimeout(doSlowStuff, 0);
+});
+
+function doSlowStuff() {
+    var commandsTbody = $('.js-commands-tbody');
+    commandsTbody.html(injectEmoticons(commandsTbody.html()));
 }
