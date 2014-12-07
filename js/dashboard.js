@@ -216,6 +216,29 @@ function displayChannelScheduled() {
     }
 }
 
+function displayChannelRegulars() {
+    var tbody = $('.js-regulars-tbody');
+    var rows = "";
+    var shouldSortTable = true;
+    for (var i = 0; i < channelData.regulars.length; i++) {
+        var reg = channelData.regulars[i];
+        var row = '<tr>';
+        row += '<td>' +reg + '</td>';
+        row += '</tr>';
+        rows += row;
+    }
+    if (rows == "") {
+        rows = '<tr><td colspan="1" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        shouldSortTable = false;
+    }
+
+    tbody.html(rows);
+
+    if (shouldSortTable) {
+        $('.js-regulars-table').dataTable(dataTableOptionsClean);
+    }
+}
+
 function prettifyAccessLevel(access) {
     if (access == 0) {
         return "All";
