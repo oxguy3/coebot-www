@@ -110,6 +110,12 @@ function displayChannelOverview() {
 	// }
 }
 
+var dataTableOptionsClean = {
+    "paging": false,
+    "info": false,
+    "searching": false
+};
+
 function displayChannelCommands() {
 	var tbody = $('.js-commands-tbody');
 	var rows = "";
@@ -117,7 +123,7 @@ function displayChannelCommands() {
 		var cmd = channelData.commands[i];
 		var row = '<tr>';
 		row += '<td>' + channelData.commandPrefix + cmd.key + '</td>';
-        row += '<td style="color:' + colorifyAccessLevel(cmd.restriction) + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
+        row += '<td style="color:' + colorifyAccessLevel(cmd.restriction) + '" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
 		row += '<td>' + prettifyStringVariables(cmd.value) + '</td>';
 		row += '</tr>';
 		rows += row;
@@ -126,6 +132,8 @@ function displayChannelCommands() {
         rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
     }
 	tbody.html(rows);
+
+    $('.js-commands-table').dataTable(dataTableOptionsClean);
 }
 
 function displayChannelQuotes() {
@@ -144,6 +152,8 @@ function displayChannelQuotes() {
     }
 
 	tbody.html(rows);
+
+    $('.js-quotes-table').dataTable(dataTableOptionsClean);
 }
 
 function displayChannelAutoreplies() {
@@ -162,6 +172,8 @@ function displayChannelAutoreplies() {
     }
 
     tbody.html(rows);
+
+    $('.js-autoreplies-table').dataTable(dataTableOptionsClean);
 }
 
 function displayChannelScheduled() {
@@ -194,6 +206,8 @@ function displayChannelScheduled() {
     }
     
     tbody.html(rows);
+
+    $('.js-scheduled-table').dataTable(dataTableOptionsClean);
 }
 
 function prettifyAccessLevel(access) {

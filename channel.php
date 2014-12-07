@@ -23,7 +23,17 @@ if (isset($jumpToTab)) {
 }
 $extraHeadCode .= "</script>";
 
-printHead($channel, array("/css/dashboard.css"), array("/js/later.min.js", "/js/prettycron.js", "/js/dashboard.js"), $extraHeadCode);
+printHead(
+  $channel, 
+  array("/css/dashboard.css"), 
+  array("//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js",
+    "//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js",
+    "/js/later.min.js", 
+    "/js/prettycron.js", 
+    "/js/dashboard.js"
+  ), 
+  $extraHeadCode
+);
 printNav();
 
 ?>
@@ -54,8 +64,8 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="commands">
-          <div class="table-responsive">
-            <table class="table table-striped">
+          <div class="">
+            <table class="table table-striped js-commands-table">
               <thead>
                 <tr>
                   <th>Command</th>
@@ -64,16 +74,16 @@ printNav();
                 </tr>
               </thead>
               <tbody class="js-commands-tbody"></tbody>
-              <script>displayChannelCommands()</script>
             </table>
+            <script>displayChannelCommands()</script>
           </div>
 
         </div><!--/.tab-pane -->
 
 
         <div role="tabpanel" class="tab-pane fade" id="quotes">
-          <div class="table-responsive">
-            <table class="table table-striped">
+          <div class="">
+            <table class="table table-striped js-quotes-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -81,15 +91,15 @@ printNav();
                 </tr>
               </thead>
               <tbody class="js-quotes-tbody"></tbody>
-              <script>displayChannelQuotes()</script>
             </table>
+            <script>displayChannelQuotes()</script>
           </div>
         </div><!--/.tab-pane -->
 
 
         <div role="tabpanel" class="tab-pane fade" id="autoreplies">
-          <div class="table-responsive">
-            <table class="table table-striped">
+          <div class="">
+            <table class="table table-striped js-autoreplies-table">
               <thead>
                 <tr>
                   <th>Trigger</th>
@@ -97,15 +107,15 @@ printNav();
                 </tr>
               </thead>
               <tbody class="js-autoreplies-tbody"></tbody>
-              <script>displayChannelAutoreplies()</script>
             </table>
+            <script>displayChannelAutoreplies()</script>
           </div>
         </div><!--/.tab-pane -->
 
 
         <div role="tabpanel" class="tab-pane fade" id="scheduled">
-          <div class="table-responsive">
-            <table class="table table-striped">
+          <div class="">
+            <table class="table table-striped js-scheduled-table">
               <thead>
                 <tr>
                   <th>Command</th>
@@ -113,8 +123,8 @@ printNav();
                 </tr>
               </thead>
               <tbody class="js-scheduled-tbody"></tbody>
-              <script>displayChannelScheduled()</script>
             </table>
+            <script>displayChannelScheduled()</script>
           </div>
         </div><!--/.tab-pane -->
 
