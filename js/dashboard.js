@@ -95,12 +95,6 @@ function displayChannelOverview() {
 	// }
 }
 
-var dataTableOptionsClean = {
-    "paging": false,
-    "info": false,
-    "searching": false
-};
-
 function displayChannelCommands() {
 	var tbody = $('.js-commands-tbody');
 	var rows = "";
@@ -121,7 +115,10 @@ function displayChannelCommands() {
 	tbody.html(rows);
 
     if (shouldSortTable) {
-        $('.js-commands-table').dataTable(dataTableOptionsClean);
+        $('.js-commands-table').dataTable({
+            "paging": false,
+            "info": false
+        });
     }
 }
 
@@ -146,7 +143,10 @@ function displayChannelQuotes() {
 
 
     if (shouldSortTable) {
-        $('.js-quotes-table').dataTable(dataTableOptionsClean);
+        $('.js-quotes-table').dataTable({
+            "paging": false,
+            "info": false
+        });
     }
 }
 
@@ -170,7 +170,11 @@ function displayChannelAutoreplies() {
     tbody.html(rows);
 
     if (shouldSortTable) {
-        $('.js-autoreplies-table').dataTable(dataTableOptionsClean);
+        $('.js-autoreplies-table').dataTable({
+            "paging": false,
+            "info": false,
+            "searching": false
+        });
     }
 }
 
@@ -208,7 +212,11 @@ function displayChannelScheduled() {
     tbody.html(rows);
 
     if (shouldSortTable) {
-        $('.js-scheduled-table').dataTable(dataTableOptionsClean);
+        $('.js-scheduled-table').dataTable({
+            "paging": false,
+            "info": false,
+            "searching": false
+        });
     }
 }
 
