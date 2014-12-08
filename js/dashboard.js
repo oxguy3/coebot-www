@@ -231,7 +231,7 @@ function displayChannelRegulars() {
     tbody.html(rows);
 
     if (shouldSortTable) {
-        $('.js-regulars-table').dataTable(dataTableOptionsClean);
+        $('.js-regulars-table').dataTable();
     }
 }
 
