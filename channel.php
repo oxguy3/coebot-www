@@ -41,12 +41,12 @@ printNav();
   <div class="row" role="tabpanel">
     <div class="col-sm-3 col-lg-2 sidebar">
       <ul class="nav nav-sidebar sidebar-collapse collapse" id="navSidebar" role="tablist">
-        <li class="active"><a href="#overview"><i class="fa fa-star fa-fw"></i>&nbsp; <span class="sidebar-title">Overview</span></a></li>
-        <li><a href="#commands"><i class="fa fa-terminal fa-fw"></i>&nbsp; <span class="sidebar-title">Commands</span></a></li>
-        <li><a href="#quotes"><i class="fa fa-quote-left fa-fw"></i>&nbsp; <span class="sidebar-title">Quotes</span></a></li>
-        <li><a href="#autoreplies"><i class="fa fa-comments-o fa-fw"></i>&nbsp; <span class="sidebar-title">Auto-replies</span></a></li>
-        <li><a href="#scheduled"><i class="fa fa-calendar fa-fw"></i>&nbsp; <span class="sidebar-title">Scheduled commands</span></a></li>
-        <li><a href="#regulars"><i class="fa fa-users fa-fw"></i>&nbsp; <span class="sidebar-title">Regulars</span></a></li>
+        <li class="active"><a href="#tab_overview"><i class="fa fa-star fa-fw"></i>&nbsp; <span class="sidebar-title">Overview</span></a></li>
+        <li><a href="#tab_commands"><i class="fa fa-terminal fa-fw"></i>&nbsp; <span class="sidebar-title">Commands</span></a></li>
+        <li><a href="#tab_quotes"><i class="fa fa-quote-left fa-fw"></i>&nbsp; <span class="sidebar-title">Quotes</span></a></li>
+        <li><a href="#tab_autoreplies"><i class="fa fa-comments-o fa-fw"></i>&nbsp; <span class="sidebar-title">Auto-replies</span></a></li>
+        <li><a href="#tab_scheduled"><i class="fa fa-calendar fa-fw"></i>&nbsp; <span class="sidebar-title">Scheduled commands</span></a></li>
+        <li><a href="#tab_regulars"><i class="fa fa-users fa-fw"></i>&nbsp; <span class="sidebar-title">Regulars</span></a></li>
       </ul>
     </div>
     <script>enableSidebar()</script>
@@ -58,13 +58,13 @@ printNav();
 
       <div class="tab-content">
 
-        <div role="tabpanel" class="tab-pane fade in active" id="overview">
+        <div role="tabpanel" class="tab-pane fade in active" id="tab_overview">
           <div class="js-channel-overview"></div>
         </div><!--/.tab-pane -->
         <script>displayChannelOverview()</script>
 
 
-        <div role="tabpanel" class="tab-pane fade" id="commands">
+        <div role="tabpanel" class="tab-pane fade" id="tab_commands">
           <div class="">
             <table class="table table-striped js-commands-table">
               <thead>
@@ -82,7 +82,7 @@ printNav();
         </div><!--/.tab-pane -->
 
 
-        <div role="tabpanel" class="tab-pane fade" id="quotes">
+        <div role="tabpanel" class="tab-pane fade" id="tab_quotes">
           <div class="">
             <table class="table table-striped js-quotes-table">
               <thead>
@@ -98,7 +98,7 @@ printNav();
         </div><!--/.tab-pane -->
 
 
-        <div role="tabpanel" class="tab-pane fade" id="autoreplies">
+        <div role="tabpanel" class="tab-pane fade" id="tab_autoreplies">
           <div class="">
             <table class="table table-striped js-autoreplies-table">
               <thead>
@@ -114,7 +114,7 @@ printNav();
         </div><!--/.tab-pane -->
 
 
-        <div role="tabpanel" class="tab-pane fade" id="scheduled">
+        <div role="tabpanel" class="tab-pane fade" id="tab_scheduled">
           <div class="">
             <table class="table table-striped js-scheduled-table">
               <thead>
@@ -130,7 +130,7 @@ printNav();
         </div><!--/.tab-pane -->
 
 
-        <div role="tabpanel" class="tab-pane fade" id="regulars">
+        <div role="tabpanel" class="tab-pane fade" id="tab_regulars">
           <div class="">
             <table class="table js-regulars-table">
               <thead>

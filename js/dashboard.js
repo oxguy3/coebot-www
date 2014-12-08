@@ -6,6 +6,8 @@ function enableSidebar() {
 	$('#navSidebar a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
+        window.location.hash = "#" + $(this).attr("href").substr(5);
+        console.log($(this).attr(href).substr(5));
 	});
 
 	$('#navSidebar a').on('shown.bs.tab', function (e) {
@@ -18,8 +20,9 @@ function enableSidebar() {
 }
 
 function tabContentLoaded() {
-    if (typeof jumpToTab !== 'undefined') {
-        $('#navSidebar a[href="#' + jumpToTab + '"]').click();
+    if (window.location.hash != "") {
+        var jumpToTab = window.location.hash.substr(1);
+        $('#navSidebar a[href="#tab_' + jumpToTab + '"]').click();
     }
 }
 

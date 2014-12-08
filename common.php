@@ -102,7 +102,7 @@ function printFoot() {
 
 
 function getUrlToChannel($chan) {
-	return "/channel/" . $chan;
+	return "/channel/" . $chan . "/";
 }
 
 /**

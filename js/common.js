@@ -41,5 +41,5 @@ function getCoebotDataChannel(chan) {
 }
 
 function getUrlToChannel(chan) {
-    return "/channel/" + chan;
+    return "/channel/" + chan + "/";
 }
