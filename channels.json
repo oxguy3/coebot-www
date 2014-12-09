@@ -25,6 +25,14 @@
             "shouldShowOffensiveWords": true
         },
         {
+            "channel": "hcjustin",
+            "displayName": "HCJustin",
+            "isActive": true,
+            "youtube": "",
+            "twitter": "",
+            "shouldShowOffensiveWords": true
+        },
+        {
             "channel": "pauseunpause",
             "displayName": "PauseUnpause",
             "isActive": true,
