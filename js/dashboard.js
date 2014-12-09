@@ -413,11 +413,28 @@ $(document).ready(function() {
     });
 
     checkIfLive();
+    setInterval(checkIfLive, 30000);
 
     $(".command").prepend('<span class="command-prefix">' + channelData.commandPrefix + '</span>');
 })
 
+
+var ISLIVE_CLASSES = ["text-warning", "text-muted", "text-primary"];
+var ISLIVE_ICONS = ["fa-exclamation-triangle", "fa-toggle-off", "fa-toggle-on"];
+var ISLIVE_TITLES = ["Couldn't access Twitch", "Offline", "Live"];
+
 function checkIfLive() {
+    var heading = $('.js-channel-islive');
+    var icon = heading.children("i");
+    icon.removeClass(ISLIVE_CLASSES[0]);
+    icon.removeClass(ISLIVE_CLASSES[1]);
+    icon.removeClass(ISLIVE_CLASSES[2]);
+    icon.removeClass(ISLIVE_ICONS[0]);
+    icon.removeClass(ISLIVE_ICONS[1]);
+    icon.removeClass(ISLIVE_ICONS[2]);
+    icon.addClass("text-muted");
+    icon.addClass("fa-refresh");
+    icon.addClass("fa-spin");
     $.ajax({
         dataType: "jsonp",
         jsonp: "callback",
@@ -436,10 +453,6 @@ function checkIfLive() {
 
 }
 
-var ISLIVE_CLASSES = ["text-warning", "text-muted", "text-primary"];
-var ISLIVE_ICONS = ["fa-exclamation-triangle", "fa-toggle-off", "fa-toggle-on"];
-var ISLIVE_TITLES = ["Couldn't access Twitch", "Offline", "Live"];
-
 function updateIsLive() {
     var liveStatus = 0;
     if (typeof channelStreamData !== 'boolean') {
@@ -453,12 +466,13 @@ function updateIsLive() {
     var heading = $('.js-channel-islive');
     var icon = heading.children("i");
 
+    icon.removeClass("text-muted");
     icon.removeClass(ISLIVE_CLASSES[0]);
     icon.removeClass(ISLIVE_CLASSES[1]);
     icon.removeClass(ISLIVE_CLASSES[2]);
     icon.addClass(ISLIVE_CLASSES[liveStatus]);
 
-    icon.removeClass("fa-twitch");
+    icon.removeClass("fa-refresh");
     icon.removeClass("fa-spin");
     icon.removeClass(ISLIVE_ICONS[0]);
     icon.removeClass(ISLIVE_ICONS[1]);
