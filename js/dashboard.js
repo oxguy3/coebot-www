@@ -85,19 +85,7 @@ function displayChannelOverview() {
 
 	html += '</p>';
 
-	// if (channelData.runningMaxViewers) {
-	// 	html += '<p>Max viewers: ' + channelData.runningMaxViewers;
-	// 	html += ' viewers, <span class="js-livestamp-maxviewers"></span></p>';
-	// }
-
 	$(".js-channel-overview").html(html);
-
-	// if (channelData.runningMaxViewers) {
-	// 	var tsSpan = $('.js-livestamp-maxviewers');
-	// 	var date = new Date(channelData.maxviewerDate);
-	// 	tsSpan.livestamp(date);
-	// 	tsSpan.attr("title", moment(date).format('LLLL'));
-	// }
 }
 
 function displayChannelCommands() {
@@ -353,6 +341,7 @@ function htmlDecode(input) {
         .replace(/&gt;/g, '>');
 }
 
+// generates HTML for an emote
 function htmlifyEmote(emote) {
     var html = '';
     html += '<img src="' + emote.url;
@@ -363,6 +352,7 @@ function htmlifyEmote(emote) {
     return html;
 }
 
+// displays info about the Twitch channel on the overview page
 function injectTwitchData() {
     var oldHtml = $('.js-channel-overview').html();
     var html = '';
@@ -370,13 +360,6 @@ function injectTwitchData() {
     html += '<p>Followers: ' + Humanize.intComma(channelTwitchData.followers) + '</p>';
     html += '<p>Joined Twitch on ' + moment(channelTwitchData.created_at).format('LL') + '</p>';
     html += oldHtml;
-
-    // html += '<h3>Right now</h3>';
-    // html += '<p>' + channelTwitchData.status + '<span class="label label-primary">live?</span></p>'
-    // html += '<p>Playing ' + channelTwitchData.game + '</p>';
-    // if (channelTwitchData.mature) {
-    //     html += '<p class="text-danger">Intended for mature audiences</p>';
-    // }
     
     $('.js-channel-overview').html(html);
 }
@@ -419,22 +402,40 @@ $(document).ready(function() {
 })
 
 
-var ISLIVE_CLASSES = ["text-warning", "text-muted", "text-primary"];
-var ISLIVE_ICONS = ["fa-exclamation-triangle", "fa-toggle-off", "fa-toggle-on"];
-var ISLIVE_TITLES = ["Couldn't access Twitch", "Offline", "Live"];
+/**
+ * states of liveness
+ * 0 = error
+ * 1 = offline
+ * 2 = live
+ * 3 = loading
+ */
 
+var isLiveErr = 0;
+var isLiveOff = 1;
+var isLiveOn = 2;
+var isLiveLoad = 3;
+
+var isLiveClasses = [
+    "text-warning fa-exclamation-triangle",
+    "text-muted fa-toggle-off",
+    "text-primary fa-toggle-on",
+    "text-muted fa-refresh fa-spin"
+];
+var isLiveClassesAll = isLiveClasses.join(" ");
+
+var isLiveTitles = [
+    "Couldn't access Twitch",
+    "Offline",
+    "Live",
+    "Loading..."
+];
+
+// checks if the stream is live
 function checkIfLive() {
     var heading = $('.js-channel-islive');
     var icon = heading.children("i");
-    icon.removeClass(ISLIVE_CLASSES[0]);
-    icon.removeClass(ISLIVE_CLASSES[1]);
-    icon.removeClass(ISLIVE_CLASSES[2]);
-    icon.removeClass(ISLIVE_ICONS[0]);
-    icon.removeClass(ISLIVE_ICONS[1]);
-    icon.removeClass(ISLIVE_ICONS[2]);
-    icon.addClass("text-muted");
-    icon.addClass("fa-refresh");
-    icon.addClass("fa-spin");
+    icon.removeClass(isLiveClassesAll);
+    icon.addClass(isLiveClasses[isLiveLoad]);
     $.ajax({
         dataType: "jsonp",
         jsonp: "callback",
@@ -453,37 +454,33 @@ function checkIfLive() {
 
 }
 
-function updateIsLive() {
-    var liveStatus = 0;
+// determines what the live status is
+function getLiveStatus() {
+    var liveStatus = isLiveErr;
     if (typeof channelStreamData !== 'boolean') {
-        if (channelStreamData != null) {
-            liveStatus = 2;
-        } else {
-            liveStatus = 1;
-        }
+        liveStatus = (channelStreamData != null) ? isLiveOn : isLiveOff;
     }
+    return liveStatus;
+}
+
+// updates the indicator that shows if the channel is currently streaming
+function updateIsLive() {}
+
+    var liveStatus = getLiveStatus();
 
     var heading = $('.js-channel-islive');
     var icon = heading.children("i");
 
-    icon.removeClass("text-muted");
-    icon.removeClass(ISLIVE_CLASSES[0]);
-    icon.removeClass(ISLIVE_CLASSES[1]);
-    icon.removeClass(ISLIVE_CLASSES[2]);
-    icon.addClass(ISLIVE_CLASSES[liveStatus]);
+    // style the indicator with the right colors and icon
+    icon.removeClass(isLiveClassesAll);
+    icon.addClass(isLiveClasses[liveStatus]);
 
-    icon.removeClass("fa-refresh");
-    icon.removeClass("fa-spin");
-    icon.removeClass(ISLIVE_ICONS[0]);
-    icon.removeClass(ISLIVE_ICONS[1]);
-    icon.removeClass(ISLIVE_ICONS[2]);
-    icon.addClass(ISLIVE_ICONS[liveStatus]);
-
-    var popover = ISLIVE_TITLES[liveStatus];
-    if (liveStatus == 2) {
+    // get the hover text. if we're live, it's fancier
+    var popover = isLiveTitles[liveStatus];
+    if (liveStatus == isLiveOn) {
         popover = '';
         popover += '<strong>'+channelStreamData.channel.status+'</strong>';
-        popover += ' <em>' + ISLIVE_TITLES[liveStatus] + '</em><br>';
+        popover += ' <em>' + isLiveTitles[liveStatus] + '</em><br>';
         popover += 'Playing ' + channelStreamData.channel.game + '<br>';
         popover += Humanize.intComma(channelStreamData.viewers) + ' watching now';
     }
@@ -492,6 +489,6 @@ function updateIsLive() {
 
     heading.popover({
         html: true,
-        trigger:'hover'
+        trigger: 'hover'
     });
 }
