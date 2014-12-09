@@ -453,10 +453,10 @@ function updateIsLive() {
     var heading = $('.js-channel-islive');
     var icon = heading.children("i");
 
-    heading.removeClass(ISLIVE_CLASSES[0]);
-    heading.removeClass(ISLIVE_CLASSES[1]);
-    heading.removeClass(ISLIVE_CLASSES[2]);
-    heading.addClass(ISLIVE_CLASSES[liveStatus]);
+    icon.removeClass(ISLIVE_CLASSES[0]);
+    icon.removeClass(ISLIVE_CLASSES[1]);
+    icon.removeClass(ISLIVE_CLASSES[2]);
+    icon.addClass(ISLIVE_CLASSES[liveStatus]);
 
     icon.removeClass("fa-twitch");
     icon.removeClass("fa-spin");
