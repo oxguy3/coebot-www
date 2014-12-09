@@ -23,6 +23,14 @@
             "youtube": "endsgamer",
             "twitter": "endsgamer",
             "shouldShowOffensiveWords": true
+        },
+        {
+            "channel": "pauseunpause",
+            "displayName": "PauseUnpause",
+            "isActive": true,
+            "youtube": "pauseunpause",
+            "twitter": "Pauseunpauses",
+            "shouldShowOffensiveWords": true
         }
     ]
 }
