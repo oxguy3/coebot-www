@@ -163,16 +163,18 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_chatrules">
-          <h3>Banned phrases</h3>
-          <div class="">
-            <table class="table js-chatrules_offensive-table">
-              <thead>
-                <tr>
-                  <th>Phrase</th>
-                </tr>
-              </thead>
-              <tbody class="js-chatrules_offensive-tbody"></tbody>
-            </table>
+          <div class="js-chatrules_offensive">
+            <h3>Banned phrases</h3>
+            <div class="">
+              <table class="table js-chatrules_offensive-table">
+                <thead>
+                  <tr>
+                    <th>Phrase</th>
+                  </tr>
+                </thead>
+                <tbody class="js-chatrules_offensive-tbody"></tbody>
+              </table>
+            </div>
           </div>
           <script>displayChannelChatrules()</script>
         </div><!--/.tab-pane -->

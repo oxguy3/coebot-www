@@ -28,6 +28,7 @@ function tabContentLoaded() {
 
 // channel config data
 var channelData = false;
+var channelTwitchData = false;
 var twitchEmotes = false;
 
 function downloadChannelData() {
@@ -361,7 +362,39 @@ function htmlifyEmote(emote) {
     return html;
 }
 
+function injectTwitchData() {
+    var oldHtml = $('.js-channel-overview').html();
+    var html = '';
+    html += '<p>Views: ' + channelTwitchData.views + '</p>';
+    html += '<p>Followers: ' + channelTwitchData.followers + '</p>';
+    html += '<p>Joined Twitch on ' + moment(channelTwitchData.created_at).format('LL') + '</p>';
+    html += oldHtml;
+
+    // html += '<h3>Right now</h3>';
+    // html += '<p>' + channelTwitchData.status + '<span class="label label-primary">live?</span></p>'
+    // html += '<p>Playing ' + channelTwitchData.game + '</p>';
+    // if (channelTwitchData.mature) {
+    //     html += '<p class="text-danger">Intended for mature audiences</p>';
+    // }
+    
+    $('.js-channel-overview').html(html);
+}
+
 $(document).ready(function() {
+    $.ajax({
+        dataType: "jsonp",
+        jsonp: "callback",
+        url: "https://api.twitch.tv/kraken/channels/" + channel,
+        success: function(json) {
+            console.log("Loaded Twitch channel data");
+            channelTwitchData = json;
+            injectTwitchData();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Failed to load Twitch channel data!");
+        }
+    });
+
     $.ajax({
         cache: true,
         dataType: "jsonp",
