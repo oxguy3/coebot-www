@@ -424,7 +424,7 @@ function checkIfLive() {
         url: "https://api.twitch.tv/kraken/streams/" + channel,
         success: function(json) {
             console.log("Loaded Twitch stream data");
-            channelStreamData = json;
+            channelStreamData = json.stream;
             updateIsLive();
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -442,8 +442,8 @@ var ISLIVE_TITLES = ["Couldn't access Twitch", "Offline", "Live"];
 
 function updateIsLive() {
     var liveStatus = 0;
-    if (channelStreamData) {
-        if (channelStreamData.stream != null) {
+    if (typeof channelStreamData !== 'boolean') {
+        if (channelStreamData != null) {
             liveStatus = 2;
         } else {
             liveStatus = 1;
@@ -465,9 +465,19 @@ function updateIsLive() {
     icon.removeClass(ISLIVE_ICONS[2]);
     icon.addClass(ISLIVE_ICONS[liveStatus]);
 
-    heading.attr("data-content", ISLIVE_TITLES[liveStatus]);
+    var popover = ISLIVE_TITLES[liveStatus];
+    if (liveStatus == 2) {
+        popover = '';
+        popover += '<strong>'+channelStreamData.channel.status+'</strong>';
+        popover += ' <em>' + ISLIVE_TITLES[liveStatus] + '</em><br>';
+        popover += 'Playing ' + channelStreamData.channel.game + '<br>';
+        popover += channelStreamData.viewers + ' watching now';
+    }
+
+    heading.attr("data-content", popover);
 
     heading.popover({
+        html: true,
         trigger:'hover'
     });
 }
