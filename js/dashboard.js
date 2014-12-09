@@ -465,7 +465,9 @@ function updateIsLive() {
     icon.removeClass(ISLIVE_ICONS[2]);
     icon.addClass(ISLIVE_ICONS[liveStatus]);
 
-    heading.attr("title", ISLIVE_TITLES[liveStatus]);
+    heading.attr("data-content", ISLIVE_TITLES[liveStatus]);
 
-    heading.tooltip();
+    heading.popover({
+        trigger:'hover'
+    });
 }
