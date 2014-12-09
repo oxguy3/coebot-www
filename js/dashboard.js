@@ -464,7 +464,7 @@ function getLiveStatus() {
 }
 
 // updates the indicator that shows if the channel is currently streaming
-function updateIsLive() {}
+function updateIsLive() {
 
     var liveStatus = getLiveStatus();
 
