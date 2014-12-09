@@ -47,6 +47,7 @@ printNav();
         <li><a href="#tab_autoreplies"><i class="fa fa-comments-o fa-fw"></i>&nbsp; <span class="sidebar-title">Auto-replies</span></a></li>
         <li><a href="#tab_scheduled"><i class="fa fa-calendar fa-fw"></i>&nbsp; <span class="sidebar-title">Scheduled commands</span></a></li>
         <li><a href="#tab_regulars"><i class="fa fa-users fa-fw"></i>&nbsp; <span class="sidebar-title">Regulars</span></a></li>
+        <li><a href="#tab_chatrules"><i class="fa fa-gavel fa-fw"></i>&nbsp; <span class="sidebar-title">Chat rules</span></a></li>
       </ul>
     </div>
     <script>enableSidebar()</script>
@@ -142,6 +143,22 @@ printNav();
             </table>
             <script>displayChannelRegulars()</script>
           </div>
+        </div><!--/.tab-pane -->
+
+
+        <div role="tabpanel" class="tab-pane fade" id="tab_chatrules">
+          <h3>Banned phrases</h3>
+          <div class="">
+            <table class="table js-chatrules_offensive-table">
+              <thead>
+                <tr>
+                  <th>Phrase</th>
+                </tr>
+              </thead>
+              <tbody class="js-chatrules_offensive-tbody"></tbody>
+            </table>
+          </div>
+          <script>displayChannelChatrules()</script>
         </div><!--/.tab-pane -->
 
       </div>

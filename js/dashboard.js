@@ -7,7 +7,7 @@ function enableSidebar() {
 		e.preventDefault();
 		$(this).tab('show');
         window.location.hash = "#" + $(this).attr("href").substr(5);
-        console.log($(this).attr(href).substr(5));
+        console.log($(this).attr("href").substr(5));
 	});
 
 	$('#navSidebar a').on('shown.bs.tab', function (e) {
@@ -230,7 +230,7 @@ function displayChannelRegulars() {
     for (var i = 0; i < channelData.regulars.length; i++) {
         var reg = channelData.regulars[i];
         var row = '<tr>';
-        row += '<td class="text-capitalize">' +reg + '</td>';
+        row += '<td class="text-capitalize">' + reg + '</td>';
         row += '</tr>';
         rows += row;
     }
@@ -245,6 +245,40 @@ function displayChannelRegulars() {
         $('.js-regulars-table').dataTable();
     }
 }
+
+function displayChannelChatrules() {
+    // var html = ""
+    // html += '<h3>Banned phrases</h3>'
+
+    var tbody = $('.js-chatrules_offensive-tbody');
+    var rows = "";
+    var shouldSortTable = true;
+    for (var i = 0; i < channelData.offensiveWords.length; i++) {
+        var word = channelData.offensiveWords[i];
+        var row = '<tr>';
+        row += '<td>' + prettifyRegex(word) + '</td>';
+        row += '</tr>';
+        rows += row;
+    }
+    if (rows == "") {
+        rows = '<tr><td colspan="1" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        shouldSortTable = false;
+    }
+
+    tbody.html(rows);
+
+    if (shouldSortTable) {
+        $('.js-chatrules_offensive-table').dataTable({
+            "paging": false,
+            "info": false,
+            "searching": false
+        });
+    }
+
+    // $(".js-chatrules-div").html(html);
+}
+
+
 
 function prettifyAccessLevel(access) {
     if (access == 0) {
