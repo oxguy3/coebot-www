@@ -30,6 +30,7 @@ function tabContentLoaded() {
 var channelData = false;
 var channelTwitchData = false;
 var twitchEmotes = false;
+var channelStreamData = false;
 
 function downloadChannelData() {
 	$.ajax({
@@ -57,7 +58,7 @@ function displayChannelTitle() {
 }
 
 function displayChannelOverview() {
-	var html = ""
+	var html = "";
 	html += '<p>';
 	html += '<a class="btn btn-primary" href="http://www.twitch.tv/' 
 	html += channel + '" target="_blank"><i class="fa fa-twitch"></i> Twitch</a>';
@@ -411,5 +412,60 @@ $(document).ready(function() {
         }
     });
 
+    checkIfLive();
+
     $(".command").prepend('<span class="command-prefix">' + channelData.commandPrefix + '</span>');
 })
+
+function checkIfLive() {
+    $.ajax({
+        dataType: "jsonp",
+        jsonp: "callback",
+        url: "https://api.twitch.tv/kraken/streams/" + channel,
+        success: function(json) {
+            console.log("Loaded Twitch stream data");
+            channelStreamData = json;
+            updateIsLive();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Failed to load Twitch stream data!");
+            channelStreamData = false;
+            updateIsLive();
+        }
+    });
+
+}
+
+var ISLIVE_CLASSES = ["text-warning", "text-muted", "text-primary"];
+var ISLIVE_ICONS = ["fa-exclamation-triangle", "fa-toggle-off", "fa-toggle-on"];
+var ISLIVE_TITLES = ["Couldn't access Twitch", "Offline", "Live"];
+
+function updateIsLive() {
+    var liveStatus = 0;
+    if (channelStreamData) {
+        if (channelStreamData.stream != null) {
+            liveStatus = 2;
+        } else {
+            liveStatus = 1;
+        }
+    }
+
+    var heading = $('.js-channel-islive');
+    var icon = heading.children("i");
+
+    heading.removeClass(ISLIVE_CLASSES[0]);
+    heading.removeClass(ISLIVE_CLASSES[1]);
+    heading.removeClass(ISLIVE_CLASSES[2]);
+    heading.addClass(ISLIVE_CLASSES[liveStatus]);
+
+    icon.removeClass("fa-refresh");
+    icon.removeClass("fa-spin");
+    icon.removeClass(ISLIVE_ICONS[0]);
+    icon.removeClass(ISLIVE_ICONS[1]);
+    icon.removeClass(ISLIVE_ICONS[2]);
+    icon.addClass(ISLIVE_ICONS[liveStatus]);
+
+    heading.attr("title", ISLIVE_TITLES[liveStatus]);
+
+    heading.tooltip();
+}

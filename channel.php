@@ -53,7 +53,7 @@ printNav();
     <script>enableSidebar()</script>
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-      <h2 class="page-header js-channel-title"></h2>
+      <h2 class="page-header"><span class="js-channel-islive islive-indicator text-muted small" data-toggle="tooltip" data-placement="right" title="Loading..."><i class="fa fa-fw fa-refresh fa-spin"></i></span><span class="js-channel-title"></span></h2>
       <script>displayChannelTitle()</script>
 
 
