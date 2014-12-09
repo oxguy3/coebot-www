@@ -8,7 +8,7 @@ printNav();
 ?>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
       <h2>Channels</h2>
       <div class="list-group js-list-channels">
       </div>

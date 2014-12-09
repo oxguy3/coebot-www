@@ -59,10 +59,10 @@ var isLiveOn = 2;
 var isLiveLoad = 3;
 
 var isLiveClasses = [
-    "text-warning fa-exclamation-triangle",
-    "text-muted fa-toggle-off",
-    "text-primary fa-toggle-on",
-    "text-muted fa-refresh fa-spin"
+    "fa-exclamation-triangle text-warning",
+    "fa-toggle-off text-muted",
+    "fa-toggle-on text-primary",
+    "fa-refresh fa-spintext-muted"
 ];
 var isLiveClassesAll = isLiveClasses.join(" ");
 
@@ -114,19 +114,18 @@ function getLiveStatus(stream) {
 // updates the indicator that shows if the channel is currently streaming
 function updateIsLive(streams) {
 
-    var heading = $('.js-islive').each(function(index){
+    $('.js-islive').each(function(index){
         var current = $(this);
 
         var currChannel = current.attr("data-channel");
         if (typeof currChannel === 'undefined' && typeof channel !== 'undefined') {
             currChannel = channel;
         }
-        console.log(currChannel);
 
         var stream = findChannelInStreams(streams, currChannel);
         var liveStatus = getLiveStatus(stream);
 
-        var icon = current.children(".js-islive-icon");
+        var icon = current.find(".js-islive-icon");
 
         // style the indicator with the right colors and icon
         icon.removeClass(isLiveClassesAll);
@@ -140,15 +139,19 @@ function updateIsLive(streams) {
             popover += '<i class="fa fa-gamepad"></i> ' + stream.channel.game + '<br>';
             popover += '<i class="fa fa-eye"></i> ' + Humanize.intComma(stream.viewers) + '';
             popover += '</div>';
+
             current.attr("title", stream.channel.status);
+            current.addClass("islive-live");
         } else {
             current.removeAttr("title");
+            current.removeClass("islive-live");
         }
 
         current.attr("data-content", popover);
 
         current.popover({
             html: true,
+            container: 'body',
             trigger: 'hover'
         });
     });

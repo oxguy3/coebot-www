@@ -10,9 +10,9 @@ function displayListChannels() {
         if (chan.isActive) {
             var li = '';
             li += '<a href="' + getUrlToChannel(chan.channel);
-            li += '" class="list-group-item">';
-            li += '<span class="js-islive islive-indicator" data-placement="left" data-channel="';
-            li += chan.channel + '"><i class="js-islive-icon fa fa-fw"></i></span>';
+            li += '" class="list-group-item js-islive" data-placement="bottom" data-channel="';
+            li += chan.channel + '">';
+            li += '<span class="islive-indicator"><i class="js-islive-icon fa fa-fw"></i></span>';
             li += chan.displayName + '</a>';
             list += li;
         }
