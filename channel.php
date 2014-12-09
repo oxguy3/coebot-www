@@ -66,6 +66,9 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_commands">
+          <p>
+            Here are the special commands defined for this channel. You can also use any of the universal/shared commands, listed <a href="http://coebot.tv/">here</a>.
+          </p>
           <div class="">
             <table class="table table-striped js-commands-table">
               <thead>
@@ -84,6 +87,9 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_quotes">
+          <p>
+            To retrieve a particular quote, use <kbd class="command">quote get [number]</kbd>. You can also retrieve a random quote with <kbd class="command">quote random</kbd>.
+          </p>
           <div class="">
             <table class="table table-striped js-quotes-table">
               <thead>
@@ -100,6 +106,9 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_autoreplies">
+          <p>
+            Here are the auto-replies defined for this channel. Whenever Coebot sees anyone say any of these phrases, it will automatically give the appropriate reply. Asterisks (*) represent wildcards.
+          </p>
           <div class="">
             <table class="table table-striped js-autoreplies-table">
               <thead>
@@ -116,6 +125,9 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_scheduled">
+          <p>
+            Here are the scheduled and repeating commands defined for this channel. Coebot will automatically execute these commands according to the given time interval.
+          </p>
           <div class="">
             <table class="table table-striped js-scheduled-table">
               <thead>
@@ -132,6 +144,10 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_regulars">
+          <p>
+            Here are all the users with the "regular" rank for this channel. Regulars can post links in chat and use some commands not available to the general public. Channel owners can give out this rank as they please, so the process and rules to get promoted to regular will differ betweeen channels.
+          </p>
+          <p class="js-regulars-subsinfo"></p>
           <div class="">
             <table class="table js-regulars-table">
               <thead>

@@ -17,3 +17,7 @@ body {
   display: none;
   visibility: hidden;
 }
+
+kbd.command {
+	white-space:nowrap;
+}

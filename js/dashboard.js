@@ -105,7 +105,7 @@ function displayChannelCommands() {
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
 		var row = '<tr>';
-		row += '<td>' + channelData.commandPrefix + cmd.key + '</td>';
+		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
         row += '<td style="color:' + colorifyAccessLevel(cmd.restriction) + '" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
 		row += '<td>' + prettifyStringVariables(cmd.value) + '</td>';
 		row += '</tr>';
@@ -244,6 +244,18 @@ function displayChannelRegulars() {
     if (shouldSortTable) {
         $('.js-regulars-table').dataTable();
     }
+
+
+    var subsinfoText = 'On this channel, ';
+    if (channelData.subcriberRegulars) {
+        subsinfoText += 'subscribers are automatically given all the same privileges as regulars.';
+    } else if (channelData.subsRegsMinusLinks) {
+        subsinfoText += 'subscribers are automatically given the same privileges as regulars, except they cannot post links or use the <kbd class="command">urban</kbd> command.';
+    } else {
+        subsinfoText += 'subscribers do not automatically receive the same privileges as regulars.';
+    }
+
+    $('.js-regulars-subsinfo').html(subsinfoText);
 }
 
 function displayChannelChatrules() {
@@ -360,4 +372,6 @@ $(document).ready(function() {
             alert("Failed to load Twitch emotes!");
         }
     });
+
+    $(".command").prepend('<span class="command-prefix">' + channelData.commandPrefix + '</span>');
 })
