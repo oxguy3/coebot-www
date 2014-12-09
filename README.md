@@ -8,6 +8,4 @@ This site is still very early in development so I'm not gonna bother writing det
 This site uses a private API to communicate with Coebot. This API is still in planning, but the specification so far is available [here](https://docs.google.com/document/d/1tQNETtRvTuSdGKEep57yuO_8J_YfjS5J3--Q6vH0Rcc/edit?usp=sharing).
 
 ## License
-For the time being, this project is licensed under the [GNU General Public License v3](http://www.gnu.org/licenses/gpl-3.0.txt). However, I'm only using the GPLv3 to satisfy the license of prettycron.js. Ultimately, I plan to replace prettycron.js with my own code (or another similar tool) so that I can release this project under the MIT License or GPLv2 (to match Coebot's license) or something. This isn't exactly a top priority, however, so it might stay GPLv3 for a little while.
-
-As a consequence of being between licenses, I probably won't be able to accept contributions from other people. Potential features and suggestions are very welcome, but unfortunately I can't accept pull requests very easily.
+For the time being, this project is licensed under the [GNU General Public License v2](http://www.gnu.org/licenses/gpl-2.0.txt). However, it is very possible that I may switch to a more permissive license (like LGPL or MIT) very soon. As a consequence of being between licenses, I probably won't be able to accept contributions from other people. Potential features and suggestions are very welcome, but unfortunately I can't accept pull requests very easily until I've made up my mind.
