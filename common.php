@@ -38,6 +38,7 @@ function printHead($pageTitle, $extraCss=array(), $extraJs=array(), $extraHeadCo
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/moment.min.js"></script>
     <script src="/js/livestamp.min.js"></script>
+    <script src="/js/humanize.min.js"></script>
     <script src="/js/common.js"></script>
     <?php
     for ($i = 0; $i < count($extraJs); $i++) {

@@ -366,8 +366,8 @@ function htmlifyEmote(emote) {
 function injectTwitchData() {
     var oldHtml = $('.js-channel-overview').html();
     var html = '';
-    html += '<p>Views: ' + channelTwitchData.views + '</p>';
-    html += '<p>Followers: ' + channelTwitchData.followers + '</p>';
+    html += '<p>Views: ' + Humanize.intComma(channelTwitchData.views) + '</p>';
+    html += '<p>Followers: ' + Humanize.intComma(channelTwitchData.followers) + '</p>';
     html += '<p>Joined Twitch on ' + moment(channelTwitchData.created_at).format('LL') + '</p>';
     html += oldHtml;
 
@@ -485,7 +485,7 @@ function updateIsLive() {
         popover += '<strong>'+channelStreamData.channel.status+'</strong>';
         popover += ' <em>' + ISLIVE_TITLES[liveStatus] + '</em><br>';
         popover += 'Playing ' + channelStreamData.channel.game + '<br>';
-        popover += channelStreamData.viewers + ' watching now';
+        popover += Humanize.intComma(channelStreamData.viewers) + ' watching now';
     }
 
     heading.attr("data-content", popover);
