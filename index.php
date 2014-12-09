@@ -2,7 +2,7 @@
 
 require_once("common.php");
 
-printHead("Home", array(), array("/js/index.js"));
+printHead("Home", array("/css/index.css"), array("/js/index.js"));
 printNav();
 
 ?>

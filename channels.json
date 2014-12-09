@@ -39,6 +39,14 @@
             "youtube": "pauseunpause",
             "twitter": "Pauseunpauses",
             "shouldShowOffensiveWords": true
+        },
+        {
+            "channel": "sodapoppin",
+            "displayName": "test",
+            "isActive": true,
+            "youtube": "",
+            "twitter": "",
+            "shouldShowOffensiveWords": true
         }
     ]
 }

@@ -395,100 +395,23 @@ $(document).ready(function() {
         }
     });
 
-    checkIfLive();
-    setInterval(checkIfLive, 30000);
+    checkIfLiveChannel();
+    setInterval(checkIfLiveChannel, 30000);
 
     $(".command").prepend('<span class="command-prefix">' + channelData.commandPrefix + '</span>');
 })
 
 
-/**
- * states of liveness
- * 0 = error
- * 1 = offline
- * 2 = live
- * 3 = loading
- */
-
-var isLiveErr = 0;
-var isLiveOff = 1;
-var isLiveOn = 2;
-var isLiveLoad = 3;
-
-var isLiveClasses = [
-    "text-warning fa-exclamation-triangle",
-    "text-muted fa-toggle-off",
-    "text-primary fa-toggle-on",
-    "text-muted fa-refresh fa-spin"
-];
-var isLiveClassesAll = isLiveClasses.join(" ");
-
-var isLiveTitles = [
-    "Couldn't access Twitch",
-    "Offline",
-    "Live",
-    "Loading..."
-];
-
-// checks if the stream is live
-function checkIfLive() {
-    var heading = $('.js-channel-islive');
-    var icon = heading.children("i");
-    icon.removeClass(isLiveClassesAll);
-    icon.addClass(isLiveClasses[isLiveLoad]);
-    $.ajax({
-        dataType: "jsonp",
-        jsonp: "callback",
-        url: "https://api.twitch.tv/kraken/streams/" + channel,
-        success: function(json) {
-            console.log("Loaded Twitch stream data");
-            channelStreamData = json.stream;
-            updateIsLive();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert("Failed to load Twitch stream data!");
-            channelStreamData = false;
-            updateIsLive();
-        }
-    });
-
+function checkIfLiveChannel() {
+    checkIfLive(channel, handleChannelIsLive);
 }
 
-// determines what the live status is
-function getLiveStatus() {
-    var liveStatus = isLiveErr;
-    if (typeof channelStreamData !== 'boolean') {
-        liveStatus = (channelStreamData != null) ? isLiveOn : isLiveOff;
+function handleChannelIsLive(json) {
+    if (!json) {
+        alert("Failed to load Twitch stream data!");
+        channelStreamData = false;
+    } else {
+        channelStreamData = json.streams;
     }
-    return liveStatus;
-}
-
-// updates the indicator that shows if the channel is currently streaming
-function updateIsLive() {
-
-    var liveStatus = getLiveStatus();
-
-    var heading = $('.js-channel-islive');
-    var icon = heading.children("i");
-
-    // style the indicator with the right colors and icon
-    icon.removeClass(isLiveClassesAll);
-    icon.addClass(isLiveClasses[liveStatus]);
-
-    // get the hover text. if we're live, it's fancier
-    var popover = isLiveTitles[liveStatus];
-    if (liveStatus == isLiveOn) {
-        popover = '';
-        popover += '<strong>'+channelStreamData.channel.status+'</strong>';
-        popover += ' <em>' + isLiveTitles[liveStatus] + '</em><br>';
-        popover += 'Playing ' + channelStreamData.channel.game + '<br>';
-        popover += Humanize.intComma(channelStreamData.viewers) + ' watching now';
-    }
-
-    heading.attr("data-content", popover);
-
-    heading.popover({
-        html: true,
-        trigger: 'hover'
-    });
+    updateIsLive(json.streams);
 }
