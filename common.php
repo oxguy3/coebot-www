@@ -34,7 +34,7 @@ function printHead($pageTitle, $extraCss=array(), $extraJs=array(), $extraHeadCo
   </head>
   <body>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/moment.min.js"></script>
     <script src="/js/livestamp.min.js"></script>
