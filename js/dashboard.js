@@ -458,7 +458,7 @@ function updateIsLive() {
     heading.removeClass(ISLIVE_CLASSES[2]);
     heading.addClass(ISLIVE_CLASSES[liveStatus]);
 
-    icon.removeClass("fa-refresh");
+    icon.removeClass("fa-twitch");
     icon.removeClass("fa-spin");
     icon.removeClass(ISLIVE_ICONS[0]);
     icon.removeClass(ISLIVE_ICONS[1]);
