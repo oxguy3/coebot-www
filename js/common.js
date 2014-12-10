@@ -135,7 +135,7 @@ function updateIsLive(streams) {
         var popover = isLiveTitles[liveStatus];
         if (liveStatus == isLiveOn) {
             popover = '<div class="islive-popover">';
-            popover += '<img src="'+stream.preview.medium+'<" class="img-responsive">';
+            popover += '<img src="'+stream.preview.medium+'<" class="img-responsive" height="180" width="320">';
             popover += '<i class="fa fa-gamepad"></i> ' + stream.channel.game + '<br>';
             popover += '<i class="fa fa-eye"></i> ' + Humanize.intComma(stream.viewers) + '';
             popover += '</div>';
