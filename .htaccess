@@ -1,3 +1,4 @@
 RewriteEngine on
-RewriteRule ^/channel/(\w+)/?$ /channel.php?channel=$1
-RewriteRule ^/channel/(\w+)/(\w+)/?$ /channel.php?channel=$1&tab=$2
+
+RewriteRule ^channel/(\w+)/?$ /channel.php?channel=$1
+RewriteRule ^channel/(\w+)/(\w+)/?$ /channel.php?channel=$1&tab=$2
