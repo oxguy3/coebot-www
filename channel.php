@@ -12,15 +12,8 @@ if (!validateChannel($channel)) {
   die();
 }
 
-if (isset($_GET['tab']) && htmlspecialchars($_GET['tab']) == $_GET['tab']) {
-  $jumpToTab = $_GET['tab'];
-}
-
 $extraHeadCode = "<script>";
 $extraHeadCode .= "var channel = \"$channel\";";
-if (isset($jumpToTab)) {
-  $extraHeadCode .= "var jumpToTab = \"$jumpToTab\";";
-}
 $extraHeadCode .= "</script>";
 
 printHead(
@@ -40,20 +33,85 @@ printNav();
 <div class="container-fluid">
   <div class="row" role="tabpanel">
     <div class="col-sm-3 col-lg-2 sidebar">
-      <ul class="nav nav-sidebar sidebar-collapse collapse" id="navSidebar" role="tablist">
-        <li class="active"><a href="#tab_overview"><i class="fa fa-star fa-fw"></i>&nbsp; <span class="sidebar-title">Overview</span></a></li>
-        <li><a href="#tab_commands"><i class="fa fa-terminal fa-fw"></i>&nbsp; <span class="sidebar-title">Commands</span></a></li>
-        <li><a href="#tab_quotes"><i class="fa fa-quote-left fa-fw"></i>&nbsp; <span class="sidebar-title">Quotes</span></a></li>
-        <li><a href="#tab_autoreplies"><i class="fa fa-comments-o fa-fw"></i>&nbsp; <span class="sidebar-title">Auto-replies</span></a></li>
-        <li><a href="#tab_scheduled"><i class="fa fa-calendar fa-fw"></i>&nbsp; <span class="sidebar-title">Scheduled commands</span></a></li>
-        <li><a href="#tab_regulars"><i class="fa fa-users fa-fw"></i>&nbsp; <span class="sidebar-title">Regulars</span></a></li>
-        <li><a href="#tab_chatrules"><i class="fa fa-gavel fa-fw"></i>&nbsp; <span class="sidebar-title">Chat rules</span></a></li>
-      </ul>
+
+      <div class="panel panel-default channel-sidebar-panel">
+        <div class="panel-heading visible-xs-block" role="tab" id="channelSidebarHeading">
+          <h4 class="panel-title">
+            <div class="channel-sidebar-heading-title">
+              <span class="js-channel-title"></span>
+            </div>
+            <div class="channel-sidebar-heading-toggle">
+              <a data-toggle="collapse" href="#channelSidebarCollapse" aria-expanded="true" aria-controls="channelSidebarCollapse" class="btn btn-default btn-sm js-channel-tab-icon">
+                boop
+              </a>
+            </div>
+            <div class="clearfix"></div>
+          </h4>
+        </div>
+        <div id="channelSidebarCollapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="channelSidebarHeading" data-toggle="false">
+          <div class="panel-body">
+            <ul class="nav nav-sidebar" id="navSidebar" role="tablist">
+              <li class="active"><a href="#tab_overview">
+                <span class="sidebar-icon"><i class="fa fa-star fa-fw"></i></span>
+                <span class="sidebar-title">Overview</span>
+              </a></li>
+              <li><a href="#tab_commands">
+                <span class="sidebar-icon"><i class="fa fa-terminal fa-fw"></i></span>
+                <span class="sidebar-title">Commands</span>
+              </a></li>
+              <li><a href="#tab_quotes">
+                <span class="sidebar-icon"><i class="fa fa-quote-left fa-fw"></i></span>
+                <span class="sidebar-title">Quotes</span>
+              </a></li>
+              <li><a href="#tab_autoreplies">
+                <span class="sidebar-icon"><i class="fa fa-comments-o fa-fw"></i></span>
+                <span class="sidebar-title">Auto-replies</span>
+              </a></li>
+              <li><a href="#tab_scheduled">
+                <span class="sidebar-icon"><i class="fa fa-calendar fa-fw"></i></span>
+                <span class="sidebar-title">Scheduled commands</span>
+              </a></li>
+              <li><a href="#tab_regulars">
+                <span class="sidebar-icon"><i class="fa fa-users fa-fw"></i></span>
+                <span class="sidebar-title">Regulars</span>
+              </a></li>
+              <li><a href="#tab_chatrules">
+                <span class="sidebar-icon"><i class="fa fa-gavel fa-fw"></i></span>
+                <span class="sidebar-title">Chat rules</span>
+              </a></li>
+            </ul>
+            <?php printFooter(); ?>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="sidebar-header collapsed">
+        <a data-toggle="collapse" href="#channelSidebarCollapse" aria-expanded="true" aria-controls="channelSidebarCollapse">
+          asdf
+        </a>
+      </div>
+      <div class="sidebar-collapse collapse in" id="channelSidebarCollapse">
+        <ul class="nav nav-sidebar" id="navSidebar" role="tablist">
+          <li class="active"><a href="#tab_overview"><i class="fa fa-star fa-fw"></i>&nbsp; <span class="sidebar-title">Overview</span></a></li>
+          <li><a href="#tab_commands"><i class="fa fa-terminal fa-fw"></i>&nbsp; <span class="sidebar-title">Commands</span></a></li>
+          <li><a href="#tab_quotes"><i class="fa fa-quote-left fa-fw"></i>&nbsp; <span class="sidebar-title">Quotes</span></a></li>
+          <li><a href="#tab_autoreplies"><i class="fa fa-comments-o fa-fw"></i>&nbsp; <span class="sidebar-title">Auto-replies</span></a></li>
+          <li><a href="#tab_scheduled"><i class="fa fa-calendar fa-fw"></i>&nbsp; <span class="sidebar-title">Scheduled commands</span></a></li>
+          <li><a href="#tab_regulars"><i class="fa fa-users fa-fw"></i>&nbsp; <span class="sidebar-title">Regulars</span></a></li>
+          <li><a href="#tab_chatrules"><i class="fa fa-gavel fa-fw"></i>&nbsp; <span class="sidebar-title">Chat rules</span></a></li>
+        </ul>
+        <?php printFooter(); ?>
+      </div> -->
     </div>
     <script>enableSidebar()</script>
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-      <h2 class="page-header"><span class="js-islive islive-indicator small" data-placement="bottom"><i class="js-islive-icon fa fa-fw"></i></span><span class="js-channel-title"></span></h2>
+      <h2 class="page-header">
+        <span class="js-islive islive-indicator small" data-placement="bottom"><i class="js-islive-icon fa fa-fw"></i></span>
+        <span class="js-channel-title channel-title hidden-xs"></span>
+        <span class="js-channel-tab-title channel-tab-title"><span>
+      </h2>
       <script>displayChannelTitle()</script>
 
 

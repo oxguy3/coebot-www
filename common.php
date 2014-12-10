@@ -59,18 +59,18 @@ function printNav() {
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-<!--       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button> -->
-      <button type="button" class="sidebar-collapsed navbar-toggle" data-toggle="collapse" data-target="#navSidebar">
+      </button>
+<!--       <button type="button" class="sidebar-collapsed navbar-toggle" data-toggle="collapse" data-target="#navSidebar">
 	    <span class="sr-only">Toggle menu</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-	  </button>
+	  </button> -->
       <a class="navbar-brand" href="/">
         <span class="pull-left">
           <!-- <img alt="Coebot" src="/img/coebot-icon.png"> -->
@@ -78,7 +78,7 @@ function printNav() {
         </span>
       </a>
     </div>
-<!--     <div id="navbar" class="navbar-collapse collapse">
+    <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Dashboard</a></li>
         <li><a href="#">Settings</a></li>
@@ -88,9 +88,31 @@ function printNav() {
       <form class="navbar-form navbar-right">
         <input type="text" class="form-control" placeholder="Search...">
       </form>
-    </div> -->
+    </div>
   </div>
 </nav>
+<?php
+}
+
+function printFooter() {
+?>
+<footer class="footer-normal">
+    <span class="footer-section text-muted">
+        Site by <a class="footer-link" href="http://haydenschiff.me" title="Hayden Schiff">oxguy3</a> 
+        <a href="https://github.com/oxguy3/coebot-www" class="btn btn-xs btn-default footer-srccodelink"
+        data-toggle="tooltip" title="Source on GitHub">
+            <i class="fa fa-github"></i>
+        </a> 
+    </span>
+    <span class="footer-section text-muted">
+        Bot by <a class="footer-link" href="https://twitter.com/endsgamer">endsgamer</a>
+        <a href="https://bitbucket.org/tucker_gardner/coebot" class="btn btn-xs btn-default footer-srccodelink"
+        data-toggle="tooltip" title="Source on Bitbucket">
+            <i class="fa fa-bitbucket"></i>
+        </a> 
+    </span>
+    <script>$('.footer-srccodelink').tooltip()</script>
+</footer>
 <?php
 }
 

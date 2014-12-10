@@ -21,3 +21,25 @@ body {
 kbd.command {
 	white-space:nowrap;
 }
+
+/**
+ * Footer
+ */
+.footer-normal {
+    text-align: center;
+}
+
+.footer-section {
+    white-space: nowrap;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.footer-section a {
+    color: inherit;
+}
+
+.footer-srccodelink:not(:hover) {
+    background-color: transparent;
+    border-color: transparent;
+}

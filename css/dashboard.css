@@ -10,18 +10,42 @@
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 20px;
+    /*padding: 20px;*/
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #444;
+    /*background-color: #444;*/
     border-right: 1px solid #777;
   }
+
+  .channel-sidebar-panel .panel-collapse.collapse {
+    visibility: visible;
+    display: block;
+  }
+}
+.sidebar {
+  padding: 0;
+  background-color: #444;
+}
+
+#channelSidebarCollapse .panel-body {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.channel-sidebar-panel {
+  background-color: transparent;
+  border: 0 none transparent;
+  border-radius: 0 none transparent;
+}
+.channel-sidebar-panel .panel-heading {
+  border: 0 none transparent;
+  border-radius: 0 none transparent;
 }
 
 /* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   margin-left: -20px;
 }
 .nav-sidebar > li > a {
@@ -42,25 +66,24 @@
 }
 
 
-
-
-.collapse.sidebar-collapse:not(.in) {
-  display: none;
-  visibility: hidden;
+.channel-sidebar-heading-title {
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #EEE;
+  float: left;
+}
+.channel-sidebar-heading-toggle {
+  float: right;
 }
 
-@media (max-width: 767px) {
-  .sidebar-collapsed {
-    display: inline;
-    visibility: visible;
-  }
+.sidebar-icon {
+  padding-right: 6px;
 }
 
-@media (min-width: 768px) {
-  .collapse.sidebar-collapse:not(.in), .collapse.sidebar-collapse.in {
-    display: block;
-    visibility: visible;
-  }
+.footer-normal {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 
@@ -77,10 +100,18 @@
 .main .page-header {
   margin-top: 0;
 }
-@media (max-width: 767px) {
-  .main .page-header small {
-    display: block;
-    margin-top: 6px;
+.main .page-header.channel-title {
+  padding-right: 4px;
+}
+.main .page-header .channel-tab-title {
+  font-size: 80%;
+}
+@media (min-width: 768px) {
+  .main .page-header .channel-tab-title {
+    font-size: 65%;
+    color: #888;
+    line-height: 1;
+    font-weight: 1;
   }
 }
 

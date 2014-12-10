@@ -17,5 +17,6 @@ printNav();
   </div>
 </div>
 <?php
+printFooter();
 printFoot();
 ?>

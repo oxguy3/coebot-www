@@ -7,15 +7,19 @@ function enableSidebar() {
 		e.preventDefault();
 		$(this).tab('show');
         window.location.hash = "#" + $(this).attr("href").substr(5);
-        console.log($(this).attr("href").substr(5));
+
+        $('#channelSidebarCollapse').collapse('hide');
 	});
 
 	$('#navSidebar a').on('shown.bs.tab', function (e) {
 		var tab = e.target;
 
-		var tabName = $(tab).children('.sidebar-title').html();
+        //TODO functionify tab updates!
+        var tabIconHtml = $(tab).children('.sidebar-icon').html();
+        var tabTitleHtml = $(tab).children('.sidebar-title').html();
 
-		$(".js-channel-title small").html(tabName);
+        $(".js-channel-tab-icon").html(tabIconHtml);
+        $(".js-channel-tab-title").html(tabTitleHtml);
 	});
 }
 
@@ -51,10 +55,12 @@ function downloadChannelData() {
 downloadChannelData();
 
 function displayChannelTitle() {
-	var channelTitle = channel;
-	var html = ((channelCoebotData.displayName&&channelCoebotData.displayName=="") ? channel : channelCoebotData.displayName) + ' <small>'
-	html += $('#navSidebar a:first-child .sidebar-title').html() + '</small>';
-	$(".js-channel-title").html(html);
+	var titleHtml = ((channelCoebotData.displayName&&channelCoebotData.displayName=="") ? channel : channelCoebotData.displayName);
+    var tabIconHtml = $('#navSidebar a:first-child .sidebar-icon').html();
+    var tabTitleHtml = $('#navSidebar a:first-child .sidebar-title').html();
+    $(".js-channel-title").html(titleHtml);
+    $(".js-channel-tab-icon").html(tabIconHtml);
+    $(".js-channel-tab-title").html(tabTitleHtml);
 }
 
 function displayChannelOverview() {

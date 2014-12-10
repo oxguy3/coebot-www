@@ -165,7 +165,7 @@
             "displayName": "DaniPlayerOne",
             "isActive": true,
             "youtube": "",
-            "twitter": "",
+            "twitter": "daniel88pg",
             "shouldShowOffensiveWords": true
         },
         {
@@ -306,7 +306,7 @@
         },
         {
             "channel": "funforfreedom",
-            "displayName": "funforfreedom",
+            "displayName": "FunForFreedom",
             "isActive": true,
             "youtube": "",
             "twitter": "",
@@ -618,7 +618,7 @@
         },
         {
             "channel": "mythbustman",
-            "displayName": "mythbustman",
+            "displayName": "Mythbustman",
             "isActive": true,
             "youtube": "",
             "twitter": "",
@@ -780,8 +780,8 @@
             "channel": "supermcgamer",
             "displayName": "SuperMCGamer",
             "isActive": true,
-            "youtube": "",
-            "twitter": "",
+            "youtube": "supermcgamer",
+            "twitter": "supermcgamer",
             "shouldShowOffensiveWords": true
         },
         {
