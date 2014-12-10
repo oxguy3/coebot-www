@@ -65,12 +65,6 @@ function printNav() {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-<!--       <button type="button" class="sidebar-collapsed navbar-toggle" data-toggle="collapse" data-target="#navSidebar">
-	    <span class="sr-only">Toggle menu</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-	  </button> -->
       <a class="navbar-brand" href="/">
         <span class="pull-left">
           <!-- <img alt="Coebot" src="/img/coebot-icon.png"> -->
@@ -96,15 +90,15 @@ function printNav() {
 
 function printFooter() {
 ?>
-<footer class="footer-normal">
-    <span class="footer-section text-muted">
+<footer class="footer-normal text-muted">
+    <span class="footer-section">
         Site by <a class="footer-link" href="http://haydenschiff.me" title="Hayden Schiff">oxguy3</a> 
         <a href="https://github.com/oxguy3/coebot-www" class="btn btn-xs btn-default footer-srccodelink"
         data-toggle="tooltip" title="Source on GitHub">
             <i class="fa fa-github"></i>
         </a> 
     </span>
-    <span class="footer-section text-muted">
+    <span class="footer-section">
         Bot by <a class="footer-link" href="https://twitter.com/endsgamer">endsgamer</a>
         <a href="https://bitbucket.org/tucker_gardner/coebot" class="btn btn-xs btn-default footer-srccodelink"
         data-toggle="tooltip" title="Source on Bitbucket">

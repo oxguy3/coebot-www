@@ -76,6 +76,9 @@
 .channel-sidebar-heading-toggle {
   float: right;
 }
+.channel-sidebar-heading-toggle .btn {
+  width: 44px;
+}
 
 .sidebar-icon {
   padding-right: 6px;

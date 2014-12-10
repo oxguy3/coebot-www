@@ -41,9 +41,7 @@ printNav();
               <span class="js-channel-title"></span>
             </div>
             <div class="channel-sidebar-heading-toggle">
-              <a data-toggle="collapse" href="#channelSidebarCollapse" aria-expanded="true" aria-controls="channelSidebarCollapse" class="btn btn-default btn-sm js-channel-tab-icon">
-                boop
-              </a>
+              <a data-toggle="collapse" href="#channelSidebarCollapse" aria-expanded="true" aria-controls="channelSidebarCollapse" class="btn btn-default btn-sm js-channel-tab-icon"></a>
             </div>
             <div class="clearfix"></div>
           </h4>
@@ -82,29 +80,14 @@ printNav();
             </ul>
             <?php printFooter(); ?>
           </div>
-          </div>
         </div>
       </div>
-
-      <!-- <div class="sidebar-header collapsed">
-        <a data-toggle="collapse" href="#channelSidebarCollapse" aria-expanded="true" aria-controls="channelSidebarCollapse">
-          asdf
-        </a>
-      </div>
-      <div class="sidebar-collapse collapse in" id="channelSidebarCollapse">
-        <ul class="nav nav-sidebar" id="navSidebar" role="tablist">
-          <li class="active"><a href="#tab_overview"><i class="fa fa-star fa-fw"></i>&nbsp; <span class="sidebar-title">Overview</span></a></li>
-          <li><a href="#tab_commands"><i class="fa fa-terminal fa-fw"></i>&nbsp; <span class="sidebar-title">Commands</span></a></li>
-          <li><a href="#tab_quotes"><i class="fa fa-quote-left fa-fw"></i>&nbsp; <span class="sidebar-title">Quotes</span></a></li>
-          <li><a href="#tab_autoreplies"><i class="fa fa-comments-o fa-fw"></i>&nbsp; <span class="sidebar-title">Auto-replies</span></a></li>
-          <li><a href="#tab_scheduled"><i class="fa fa-calendar fa-fw"></i>&nbsp; <span class="sidebar-title">Scheduled commands</span></a></li>
-          <li><a href="#tab_regulars"><i class="fa fa-users fa-fw"></i>&nbsp; <span class="sidebar-title">Regulars</span></a></li>
-          <li><a href="#tab_chatrules"><i class="fa fa-gavel fa-fw"></i>&nbsp; <span class="sidebar-title">Chat rules</span></a></li>
-        </ul>
-        <?php printFooter(); ?>
-      </div> -->
     </div>
+
+    <!-- </div> -->
     <script>enableSidebar()</script>
+
+
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
       <h2 class="page-header">
