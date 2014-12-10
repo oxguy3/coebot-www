@@ -18,7 +18,7 @@
         },
         {
             "channel": "articuno03",
-            "displayName": "articuno03",
+            "displayName": "Articuno03",
             "isActive": true,
             "youtube": "",
             "twitter": "",
@@ -162,7 +162,7 @@
         },
         {
             "channel": "daniplayerone",
-            "displayName": "daniplayerone",
+            "displayName": "DaniPlayerOne",
             "isActive": true,
             "youtube": "",
             "twitter": "",
@@ -194,7 +194,7 @@
         },
         {
             "channel": "deadbones5",
-            "displayName": "deadbones5",
+            "displayName": "DeadBones5",
             "isActive": true,
             "youtube": "",
             "twitter": "",
@@ -202,7 +202,7 @@
         },
         {
             "channel": "deetheminer",
-            "displayName": "deetheminer",
+            "displayName": "Deetheminer",
             "isActive": true,
             "youtube": "",
             "twitter": "",
@@ -218,7 +218,7 @@
         },
         {
             "channel": "diredwarf",
-            "displayName": "diredwarf",
+            "displayName": "DireDwarf",
             "isActive": true,
             "youtube": "",
             "twitter": "",
@@ -572,16 +572,16 @@
             "channel": "mhykol",
             "displayName": "Mhykol",
             "isActive": true,
-            "youtube": "",
-            "twitter": "",
+            "youtube": "mhykol",
+            "twitter": "mhykol",
             "shouldShowOffensiveWords": true
         },
         {
             "channel": "mindcracknetwork",
             "displayName": "MindcrackNetwork",
             "isActive": true,
-            "youtube": "",
-            "twitter": "",
+            "youtube": "mindcracknetwork",
+            "twitter": "mindcracknetwork",
             "shouldShowOffensiveWords": true
         },
         {

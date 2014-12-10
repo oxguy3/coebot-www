@@ -110,7 +110,7 @@ function getUrlToChannel($chan) {
  * Verifies that a string is a valid Twitch username
  */
 function validateChannel($channel) {
-	return preg_match('/^[A-Z0-9\-]{4,25}$/i', $channel);
+	return preg_match('/^[A-Z0-9\-_]{4,25}$/i', $channel);
 }
 
 
