@@ -31,7 +31,15 @@
   padding-top: 0;
   padding-bottom: 0;
 }
-
+@media (max-width: 767px) {
+  .channel-sidebar-panel {
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+    z-index: 1029;
+  }
+}
 .channel-sidebar-panel {
   background-color: transparent;
   border: 0 none transparent;
@@ -94,12 +102,13 @@
 
 
 .main {
-  padding: 20px;
+  padding: 50px 20px 20px;
 }
 @media (min-width: 768px) {
   .main {
-    padding-right: 40px;
-    padding-left: 40px;
+    padding: 20px 40px;
+/*    padding-right: 40px;
+    padding-left: 40px;*/
   }
 }
 .main .page-header {
