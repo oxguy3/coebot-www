@@ -156,7 +156,7 @@ function displayChannelAutoreplies() {
     for (var i = 0; i < channelData.autoReplies.length; i++) {
         var reply = channelData.autoReplies[i];
         var row = '<tr>';
-        row += '<td>' + prettifyRegex(reply.trigger) + '</td>';
+        row += '<td title="RegEx: ' + cleanHtmlAttr(reply.trigger) + '">' + prettifyRegex(reply.trigger) + '</td>';
         row += '<td>' + prettifyStringVariables(reply.response) + '</td>';
         row += '</tr>';
         rows += row;
@@ -266,7 +266,7 @@ function displayChannelChatrules() {
         for (var i = 0; i < channelData.offensiveWords.length; i++) {
             var word = channelData.offensiveWords[i];
             var row = '<tr>';
-            row += '<td title="RegEx: ' + word + '">' + prettifyRegex(word) + '</td>';
+            row += '<td title="RegEx: ' + cleanHtmlAttr(word) + '">' + prettifyRegex(word) + '</td>';
             row += '</tr>';
             rows += row;
         }
