@@ -61,5 +61,5 @@ $(document).ready(function() {
 
     channelsStr = stringifyChannels();
     checkIfLiveAll();
-    setInterval(checkIfLiveAll, 5000);
+    setInterval(checkIfLiveAll, 30000);
 });
