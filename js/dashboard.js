@@ -266,7 +266,7 @@ function displayChannelChatrules() {
         for (var i = 0; i < channelData.offensiveWords.length; i++) {
             var word = channelData.offensiveWords[i];
             var row = '<tr>';
-            row += '<td>' + prettifyRegex(word) + '</td>';
+            row += '<td title="RegEx: ' + word + '">' + prettifyRegex(word) + '</td>';
             row += '</tr>';
             rows += row;
         }

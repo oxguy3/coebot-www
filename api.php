@@ -3,7 +3,7 @@
 require_once("common.php");
 
 
-apc_store("a","b");
+// apc_store("a","b");
 
 /*function getNonce() {
     $id = Identify Request //(either by username, session, or something)

@@ -1,9 +1,35 @@
 <?php
 
+require_once("safeconfig.php");
+
 $SITE_TITLE = "Coebot";
 
 
-function printHead($pageTitle, $extraCss=array(), $extraJs=array(), $extraHeadCode="") {
+// session_start();
+// date_default_timezone_set($siteTimezone);
+
+
+// DEBUG OPTIONS
+// REMOVE BEFORE GOING LIVE
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+
+/**
+ * Creates a MySQLi object
+ */
+function initMysqli() {
+  global $mysqli, $DB_HOST, $DB_USER, $DB_PASS, $DB_NAME;
+  $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+  
+  if (mysqli_connect_errno()) { //if DB connection failed
+    die("Database connection failed, contact site administrator");
+  }
+  return $mysqli;
+}
+
+
+function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extraHeadCode="") {
 	global $SITE_TITLE;
 ?>
 <!DOCTYPE html>
@@ -13,7 +39,14 @@ function printHead($pageTitle, $extraCss=array(), $extraJs=array(), $extraHeadCo
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $SITE_TITLE . " &bull; " . $pageTitle; ?></title>
+    <title><?php 
+
+    echo $SITE_TITLE;
+    if ($pageTitle) { 
+      echo " &bull; " . $pageTitle;
+    } 
+
+    ?></title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/cyborg.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -132,6 +165,7 @@ function getUrlToChannel($chan) {
 function validateChannel($channel) {
 	return preg_match('/^[A-Z0-9\-_]{4,25}$/i', $channel);
 }
+
 
 
 ?>
