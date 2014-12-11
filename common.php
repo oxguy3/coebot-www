@@ -24,7 +24,7 @@ function printHead($pageTitle, $extraCss=array(), $extraJs=array(), $extraHeadCo
     }
 
     if ($_GET['birthday']=="hellyeah") {
-        echo '<link href="/css/birthday.css" rel="stylesheet">';
+        echo '<link href="/css/birthday.css" rel="stylesheet">'."\n";
     }
 
     echo $extraHeadCode;
