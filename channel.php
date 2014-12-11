@@ -115,7 +115,7 @@ printNav();
               <thead>
                 <tr>
                   <th>Command</th>
-                  <th>Access</th>
+                  <th class="row-command-col-access">Access</th>
                   <th>Response</th>
                 </tr>
               </thead>

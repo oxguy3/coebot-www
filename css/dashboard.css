@@ -1,4 +1,4 @@
-/*
+
  * Sidebar
  */
 
@@ -133,4 +133,64 @@
 
 .islive-indicator {
   margin-right: 6px;
+}
+
+
+.row-command-access-0 .row-command-col-access {
+  color: #bdc3c7;
+}
+
+.row-command-access-1 .row-command-col-access {
+  color: #8e44ad;
+}
+
+.row-command-access-2 .row-command-col-access {
+  color: #27ae60;
+}
+
+.row-command-access-3 .row-command-col-access {
+  color: #c0392b;
+}
+
+/*@media (max-width: 767px) {
+  .row-command-access-0 {
+    color: #bdc3c7;
+  }
+
+  .row-command-access-1 {
+    color: #8e44ad;
+  }
+
+  .row-command-access-2 {
+    color: #27ae60;
+  }
+
+  .row-command-access-3 {
+    color: #c0392b;
+  }
+
+  table td.row-command-col-access, table th.row-command-col-access {
+    display: none;
+    visibility: hidden;
+  }
+  .row-command kbd.command {
+    color: inherit;
+    background-color: #303030;
+  }
+}*/
+
+/*
+function colorifyAccessLevel(access) {
+    if (access == 0) {
+        return "#bdc3c7";
+    }
+    if (access == 1) {
+        return "#8e44ad";
+    }
+    if (access == 2) {
+        return "#27ae60";
+    }
+    if (access == 3) {
+        return "#c0392b";
+    }
 }

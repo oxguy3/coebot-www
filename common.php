@@ -23,6 +23,10 @@ function printHead($pageTitle, $extraCss=array(), $extraJs=array(), $extraHeadCo
     	echo '<link href="' . $extraCss[$i] . '" rel="stylesheet">' . "\n";
     }
 
+    if ($_GET['birthday']=="hellyeah") {
+        echo '<link href="/css/birthday.css" rel="stylesheet">';
+    }
+
     echo $extraHeadCode;
     ?>
 

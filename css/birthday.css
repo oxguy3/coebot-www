@@ -1,0 +1,199 @@
+/**
+ * for ends
+ */
+
+body {
+    animation:rainbowbg 0.7s infinite;
+    -moz-animation:rainbowbg 0.7s infinite;
+    -webkit-animation:rainbowbg 0.7s infinite;
+    animation-timing-function:linear;
+    -moz-animation-timing-function:linear;
+    -webkit-animation-timing-function:linear;
+    background-image: url(/img/coestarhead.png);
+    background-position: center;
+}
+
+.fa:before {
+    content: "\f1fd" ! important;
+}
+
+*:not(i) {
+    font-family: Comic Sans MS, Comic Sans, Marker Felt, sans-serif ! important;
+}
+
+* {
+    animation:rainbowtext 1s infinite;
+    -moz-animation:rainbowtext 1s infinite;
+    -webkit-animation:rainbowtext 1s infinite;
+    animation-timing-function:linear;
+    -moz-animation-timing-function:linear;
+    -webkit-animation-timing-function:linear;
+
+}
+
+.list-group-item, .navbar.navbar-inverse, .sidebar {
+    opacity: 0.7;
+}
+
+@keyframes rainbowtext {
+    0% {
+        color:#00cccc/*#e30303*/;
+        }
+    17% {
+        color:#66cc66/*#004dff*/;
+        }
+    33% {
+        color:#cccc00/*#750686*/;
+        }
+    50% {
+        color:#cc6666/*#e30303*/;
+        }
+    67% {
+        color:#cc00cc/*#ff8b00*/;
+        }
+    83% {
+        color:#6666cc/*#feed00*/;
+        }
+    100% {
+        color:#00cccc/*#008026*/;
+        }
+    }
+@-moz-keyframes rainbowtext {
+    0% {
+        color:#00cccc/*#e30303*/;
+        }
+    17% {
+        color:#66cc66/*#004dff*/;
+        }
+    33% {
+        color:#cccc00/*#750686*/;
+        }
+    50% {
+        color:#cc6666/*#e30303*/;
+        }
+    67% {
+        color:#cc00cc/*#ff8b00*/;
+        }
+    83% {
+        color:#6666cc/*#feed00*/;
+        }
+    100% {
+        color:#00cccc/*#008026*/;
+        }
+    }
+@-webkit-keyframes rainbowtext {
+    0% {
+        color:#00cccc/*#e30303*/;
+        }
+    17% {
+        color:#66cc66/*#004dff*/;
+        }
+    33% {
+        color:#cccc00/*#750686*/;
+        }
+    50% {
+        color:#cc6666/*#e30303*/;
+        }
+    67% {
+        color:#cc00cc/*#ff8b00*/;
+        }
+    83% {
+        color:#6666cc/*#feed00*/;
+        }
+    100% {
+        color:#00cccc/*#008026*/;
+        }
+    }
+
+@keyframes rainbowbg {
+    0% {
+        background-color:#cc6666/*#e30303*/;
+        background-size: 10%;
+        }
+    17% {
+        background-color:#cc00cc/*#ff8b00*/;
+        background-size: 110%;
+        }
+    33% {
+        background-color:#6666cc/*#feed00*/;
+        background-size: 210%;
+        }
+    50% {
+        background-color:#00cccc/*#008026*/;
+        background-size: 310%;
+        }
+    67% {
+        background-color:#66cc66/*#004dff*/;
+        background-size: 210%;
+        }
+    83% {
+        background-color:#cccc00/*#750686*/;
+        background-size: 110%;
+        }
+    100% {
+        background-color:#cc6666/*#e30303*/;
+        background-size: 10%;
+        }
+    }
+
+@-moz-keyframes rainbowbg {
+    0% {
+        background-color:#cc6666/*#e30303*/;
+        background-size: 10%;
+        }
+    17% {
+        background-color:#cc00cc/*#ff8b00*/;
+        background-size: 110%;
+        }
+    33% {
+        background-color:#6666cc/*#feed00*/;
+        background-size: 210%;
+        }
+    50% {
+        background-color:#00cccc/*#008026*/;
+        background-size: 310%;
+        }
+    67% {
+        background-color:#66cc66/*#004dff*/;
+        background-size: 210%;
+        }
+    83% {
+        background-color:#cccc00/*#750686*/;
+        background-size: 110%;
+        }
+    100% {
+        background-color:#cc6666/*#e30303*/;
+        background-size: 10%;
+        }
+    }
+
+@-webkit-keyframes rainbowbg {
+    0% {
+        background-color:#cc6666/*#e30303*/;
+        background-size: 10%;
+        }
+    17% {
+        background-color:#cc00cc/*#ff8b00*/;
+        background-size: 110%;
+        }
+    33% {
+        background-color:#6666cc/*#feed00*/;
+        background-size: 210%;
+        }
+    50% {
+        background-color:#00cccc/*#008026*/;
+        background-size: 310%;
+        }
+    67% {
+        background-color:#66cc66/*#004dff*/;
+        background-size: 210%;
+        }
+    83% {
+        background-color:#cccc00/*#750686*/;
+        background-size: 110%;
+        }
+    100% {
+        background-color:#cc6666/*#e30303*/;
+        background-size: 10%;
+        }
+    }

@@ -100,9 +100,9 @@ function displayChannelCommands() {
     var shouldSortTable = true;
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
-		var row = '<tr>';
+		var row = '<tr class="row-command row-command-access-' + cmd.restriction +'">';
 		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
-        row += '<td style="color:' + colorifyAccessLevel(cmd.restriction) + '" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
+        row += '<td class="row-command-col-access" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
 		row += '<td>' + prettifyStringVariables(cmd.value) + '</td>';
 		row += '</tr>';
 		rows += row;
