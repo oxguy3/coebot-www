@@ -56,7 +56,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
     	echo '<link href="' . $extraCss[$i] . '" rel="stylesheet">' . "\n";
     }
 
-    if ($_GET['birthday']=="hellyeah") {
+    if (isset($_GET['birthday']) && $_GET['birthday']=="hellyeah") {
         echo '<link href="/css/birthday.css" rel="stylesheet">'."\n";
     }
 
