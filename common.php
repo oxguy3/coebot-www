@@ -92,16 +92,16 @@ function printFooter() {
 ?>
 <footer class="footer-normal text-muted">
     <span class="footer-section">
-        Site by <a class="footer-link" href="http://haydenschiff.me" title="Hayden Schiff">oxguy3</a> 
+        Site by <a class="footer-link" href="http://haydenschiff.me" target="_blank" title="Hayden Schiff">oxguy3</a> 
         <a href="https://github.com/oxguy3/coebot-www" class="btn btn-xs btn-default footer-srccodelink"
-        data-toggle="tooltip" title="Source on GitHub">
+        data-toggle="tooltip" title="Source on GitHub" target="_blank">
             <i class="fa fa-github"></i>
         </a> 
     </span>
     <span class="footer-section">
-        Bot by <a class="footer-link" href="https://twitter.com/endsgamer">endsgamer</a>
+        Bot by <a class="footer-link" href="https://twitter.com/endsgamer" target="_blank">endsgamer</a>
         <a href="https://bitbucket.org/tucker_gardner/coebot" class="btn btn-xs btn-default footer-srccodelink"
-        data-toggle="tooltip" title="Source on Bitbucket">
+        data-toggle="tooltip" title="Source on Bitbucket" target="_blank">
             <i class="fa fa-bitbucket"></i>
         </a> 
     </span>
