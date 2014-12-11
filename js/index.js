@@ -3,6 +3,7 @@ downloadCoebotData();
 var channelsStr = false;
 
 function displayListChannels() {
+    $('.js-islive').popover('hide');
     var container = $('.js-list-channels');
     var list = "";
     for (var i = 0; i < coebotData.channels.length; i++) {
@@ -21,6 +22,9 @@ function displayListChannels() {
         list = '<h3>' + EMPTY_TABLE_PLACEHOLDER + '</h3>';
     }
     container.html(list);
+
+    // var liveChannelLis = container.children('.islive-live');
+    // container.prepend(liveChannelLis);
 }
 
 function stringifyChannels() {
@@ -43,11 +47,19 @@ function handleAllIsLive(json) {
         allStreamData = json.streams;
     }
     updateIsLive(json.streams);
+    moveLiveToTop();
+}
+
+function moveLiveToTop() {
+    sortUnorderedList('.js-list-channels');
+    var container = $('.js-list-channels');
+    var liveChannelLis = container.children('.islive-live');
+    container.prepend(liveChannelLis);
 }
 
 $(document).ready(function() {
 
     channelsStr = stringifyChannels();
     checkIfLiveAll();
-    setInterval(checkIfLiveAll, 30000);
+    setInterval(checkIfLiveAll, 5000);
 });

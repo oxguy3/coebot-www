@@ -140,10 +140,10 @@ function updateIsLive(streams) {
             popover += '<i class="fa fa-eye"></i> ' + Humanize.intComma(stream.viewers) + '';
             popover += '</div>';
 
-            current.attr("title", stream.channel.status);
+            current.attr("data-title", stream.channel.status);
             current.addClass("islive-live");
         } else {
-            current.removeAttr("title");
+            current.removeAttr("data-title");
             current.removeClass("islive-live");
         }
 
@@ -164,4 +164,16 @@ function findChannelInStreams(streams, channel) {
          }
     }
     return null;
+}
+
+
+function sortUnorderedList(selector) {
+    var mylist = $(selector);
+    var listitems = mylist.children('li').get();
+    listitems.sort(function(a, b) {
+       var compA = $(a).text().toUpperCase();
+       var compB = $(b).text().toUpperCase();
+       return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+    })
+    $.each(listitems, function(idx, itm) { mylist.append(itm); })
 }
