@@ -117,6 +117,7 @@ printNav();
                   <th>Command</th>
                   <th class="row-command-col-access">Access</th>
                   <th>Response</th>
+                  <th>Count</th>
                 </tr>
               </thead>
               <tbody class="js-commands-tbody"></tbody>

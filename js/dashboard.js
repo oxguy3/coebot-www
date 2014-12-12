@@ -103,7 +103,8 @@ function displayChannelCommands() {
 		var row = '<tr class="row-command row-command-access-' + cmd.restriction +'">';
 		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
         row += '<td class="row-command-col-access" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
-		row += '<td>' + prettifyStringVariables(cmd.value) + '</td>';
+        row += '<td>' + prettifyStringVariables(cmd.value) + '</td>';
+		row += '<td>' + Humanize.intComma(cmd.count) + '</td>';
 		row += '</tr>';
 		rows += row;
 	}
