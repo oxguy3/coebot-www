@@ -157,6 +157,7 @@ function displayChannelAutoreplies() {
     for (var i = 0; i < channelData.autoReplies.length; i++) {
         var reply = channelData.autoReplies[i];
         var row = '<tr>';
+        row += '<td>' + (i+1) + '</td>';
         row += '<td title="RegEx: ' + cleanHtmlAttr(reply.trigger) + '">' + prettifyRegex(reply.trigger) + '</td>';
         row += '<td>' + prettifyStringVariables(reply.response) + '</td>';
         row += '</tr>';

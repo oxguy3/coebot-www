@@ -155,6 +155,7 @@ printNav();
             <table class="table table-striped js-autoreplies-table">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>Trigger</th>
                   <th>Response</th>
                 </tr>
