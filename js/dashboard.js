@@ -64,34 +64,39 @@ function displayChannelTitle() {
 }
 
 function displayChannelOverview() {
-	var html = "";
-	html += '<p>';
-	html += '<a class="btn btn-primary" href="http://www.twitch.tv/' 
-	html += channel + '" target="_blank"><i class="fa fa-twitch"></i> Twitch</a>';
+    var html = "";
+    html += '<p>';
+    html += '<a class="btn btn-primary" href="http://www.twitch.tv/';
+    html += channel + '" target="_blank"><i class="fa fa-twitch"></i> Twitch</a>';
 
     if (channelCoebotData.youtube && channelCoebotData.youtube != "") {
-        html += ' <a class="btn btn-default" href="http://www.youtube.com/user/' 
+        html += ' <a class="btn btn-default" href="http://www.youtube.com/user/';
         html += channelCoebotData.youtube + '" target="_blank"><i class="fa fa-youtube-play"></i> YouTube</a>';
     }
 
     if (channelCoebotData.twitter && channelCoebotData.twitter != "") {
-        html += ' <a class="btn btn-default" href="http://twitter.com/' 
+        html += ' <a class="btn btn-default" href="http://twitter.com/';
         html += channelCoebotData.twitter + '" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>';
     }
 
-	if (channelData.steamID && channelData.steamID != "") {
-		html += ' <a class="btn btn-default" href="http://steamcommunity.com/profiles/' 
-		html += channelData.steamID + '" target="_blank"><i class="fa fa-steam"></i> Steam</a>';
-	}
+    if (channelData.steamID && channelData.steamID != "") {
+        html += ' <a class="btn btn-default" href="http://steamcommunity.com/profiles/';
+        html += channelData.steamID + '" target="_blank"><i class="fa fa-steam"></i> Steam</a>';
+    }
 
     if (channelData.lastfm && channelData.lastfm != "") {
-        html += ' <a class="btn btn-default" href="http://www.last.fm/user/' 
+        html += ' <a class="btn btn-default" href="http://www.last.fm/user/';
         html += channelData.lastfm + '" target="_blank"><i class="fa fa-lastfm"></i> last.fm</a>';
     }
 
-	html += '</p>';
+    if (channelData.extraLifeID) {
+        html += ' <a class="btn btn-default" href="http://www.extra-life.org/index.cfm?fuseaction=donorDrive.participant&participantID=';
+        html += channelData.extraLifeID + '" target="_blank">Extra Life</a>';
+    }
 
-	$(".js-channel-overview").html(html);
+    html += '</p>';
+
+    $(".js-channel-overview").html(html);
 }
 
 function displayChannelCommands() {
@@ -260,7 +265,7 @@ function displayChannelChatrules() {
     // var html = ""
     // html += '<h3>Banned phrases</h3>'
 
-    if (channelCoebotData.shouldShowOffensiveWords) {
+    if (channelCoebotData.shouldShowOffensiveWords && channelData.filterOffensive) {
     
         var tbody = $('.js-chatrules_offensive-tbody');
         var rows = "";
@@ -289,6 +294,38 @@ function displayChannelChatrules() {
     } else {
         $('.js-chatrules_offensive').addClass("hidden");
     }
+
+    console.log(channelData.useFilters);
+
+    if (channelData.useFilters) {
+
+        var miscHtml = '';
+        miscHtml += '<h3>Filter rules</h3>';
+
+        if (channelData.filterCaps) {
+            miscHtml += '<p>Messages with excessive capital letters will be censored if the message contains at least ' + channelData.filterCapsMinCapitals + ' capital letters and consists more than ' + channelData.filterCapsPercent + '% of capital letters.</p>';
+        }
+        if (channelData.filterLinks) {
+            miscHtml += '<p>All URLs linked to by non-regulars ';
+            if (channelData.subscriberRegulars) {
+                miscHtml += '(excluding subscribers) ';
+            } else {
+                miscHtml += '(including subscribers) ';
+            }
+            miscHtml += ' will be censored.';
+            if (channelData.permittedDomains && channelData.permittedDomains.length != 0) {
+                miscHtml += ' However, the following domains are exempt from censoring: ';
+                miscHtml += Humanize.oxford(channelData.permittedDomains);
+            }
+            miscHtml += '</p>';
+        }
+        // if (channelData.filterSymbols) {
+        //     miscHtml += '<p>All caps will be filtered if a message contains more than ' + channelData.filterCapsPercent + '% uppercase letters.</p>'
+        // }
+
+        $(".js-chatrules_misc").html(miscHtml);
+    }
+
 
     // $(".js-chatrules-div").html(html);
 }

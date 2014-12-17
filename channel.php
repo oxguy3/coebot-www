@@ -206,6 +206,7 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_chatrules">
+          <div class="js-chatrules_misc"></div>
           <div class="js-chatrules_offensive">
             <h3>Banned phrases</h3>
             <div class="">
