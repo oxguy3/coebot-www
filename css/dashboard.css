@@ -41,7 +41,7 @@
   }
 }
 .channel-sidebar-panel {
-  background-color: transparent;
+    background-color: #444;
   border: 0 none transparent;
   border-radius: 0 none transparent;
   -webkit-box-shadow: none;
