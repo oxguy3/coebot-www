@@ -4,12 +4,12 @@ require_once("common.php");
 
 if (!isset($_GET['channel'])) {
   header("Location: /");
-  die();
+  die("Missing channel");
 }
 $channel = $_GET['channel'];
 if (!validateChannel($channel)) {
   header("Location: /");
-  die();
+  die("Invalid channel");
 }
 
 $extraHeadCode = "<script>";
@@ -47,35 +47,40 @@ printNav();
           </h4>
         </div>
         <div id="channelSidebarCollapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="channelSidebarHeading" data-toggle="false">
-          <div class="panel-body">
-            <ul class="nav nav-sidebar" id="navSidebar" role="tablist">
-              <li class="active"><a href="#tab_overview">
-                <span class="sidebar-icon"><i class="fa fa-star fa-fw"></i></span>
+          <div class="panel-body" id="navSidebar">
+            <ul class="nav nav-sidebar" role="tablist">
+              <li class="active"><a href="#tab_overview" class="js-sidebar-link">
+                <span class="sidebar-icon"><i class="fa fa-user fa-fw"></i></span>
                 <span class="sidebar-title">Overview</span>
               </a></li>
-              <li><a href="#tab_commands">
+              <li><a href="#tab_commands" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-terminal fa-fw"></i></span>
                 <span class="sidebar-title">Commands</span>
               </a></li>
-              <li><a href="#tab_quotes">
+              <li><a href="#tab_quotes" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-quote-left fa-fw"></i></span>
                 <span class="sidebar-title">Quotes</span>
               </a></li>
-              <li><a href="#tab_autoreplies">
+              <li><a href="#tab_autoreplies" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-comments-o fa-fw"></i></span>
                 <span class="sidebar-title">Auto-replies</span>
               </a></li>
-              <li><a href="#tab_scheduled">
+              <li><a href="#tab_scheduled" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-calendar fa-fw"></i></span>
                 <span class="sidebar-title">Scheduled commands</span>
               </a></li>
-              <li><a href="#tab_regulars">
+              <li class="nav-sidebar-divider"></li>
+              <li><a href="#tab_regulars" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-users fa-fw"></i></span>
                 <span class="sidebar-title">Regulars</span>
               </a></li>
-              <li><a href="#tab_chatrules">
+              <li><a href="#tab_chatrules" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-gavel fa-fw"></i></span>
                 <span class="sidebar-title">Chat rules</span>
+              </a></li>
+              <li><a href="http://coebot.tv/highlights/<?php echo $channel; ?>" target="_blank">
+                <span class="sidebar-icon"><i class="fa fa-star fa-fw"></i></span>
+                <span class="sidebar-title">Highlights</span>
               </a></li>
             </ul>
             <?php printFooter(); ?>

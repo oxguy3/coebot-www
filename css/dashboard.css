@@ -75,6 +75,10 @@
   background-color: #222;
 }
 
+.nav-sidebar-divider {
+  margin-bottom: 20px;
+}
+
 
 .channel-sidebar-heading-title {
   font-size: 18px;

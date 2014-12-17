@@ -13,8 +13,11 @@ function displayListChannels() {
             li += '<a href="' + getUrlToChannel(chan.channel);
             li += '" class="list-group-item js-islive" data-placement="bottom" data-channel="';
             li += chan.channel + '">';
+            
             li += '<span class="islive-indicator"><i class="js-islive-icon fa fa-fw"></i></span>';
-            li += chan.displayName + '</a>';
+            li += chan.displayName;
+            
+            li += '</a>';
             list += li;
         }
     }

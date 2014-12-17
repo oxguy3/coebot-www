@@ -3,7 +3,7 @@ var channelCoebotData = getCoebotDataChannel(channel);
 
 function enableSidebar() {
 
-	$('#navSidebar a').click(function (e) {
+	$('#navSidebar a.js-sidebar-link').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
         window.location.hash = "#" + $(this).attr("href").substr(5);
@@ -11,7 +11,7 @@ function enableSidebar() {
         $('#channelSidebarCollapse').collapse('hide');
 	});
 
-	$('#navSidebar a').on('shown.bs.tab', function (e) {
+	$('#navSidebar a.js-sidebar-link').on('shown.bs.tab', function (e) {
 		var tab = e.target;
 
         //TODO functionify tab updates!
