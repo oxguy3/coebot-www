@@ -2,6 +2,10 @@ RewriteEngine on
 
 RewriteRule ^channel/(\w+)/?$ /channel.php?channel=$1
 RewriteRule ^channel/(\w+)/(\w+)/?$ /channel.php?channel=$1&tab=$2
+
 RewriteRule ^api/(.*)$ /api.php?q=$1
+
 RewriteRule ^commands/?$ /commands.php
 RewriteRule ^commands/(.+)$ /commands.php?prefix=$1
+
+RewriteRule ^channels/?$ /chanlist.php

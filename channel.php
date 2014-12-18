@@ -18,12 +18,12 @@ $extraHeadCode .= "</script>";
 
 printHead(
   $channel, 
-  array("/css/dashboard.css"), 
+  array("/css/channel.css"), 
   array("//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js",
     "//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js",
     "/js/later.min.js", 
     "/js/prettycron.js", 
-    "/js/dashboard.js"
+    "/js/channel.js"
   ), 
   $extraHeadCode
 );

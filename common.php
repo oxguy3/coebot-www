@@ -111,6 +111,7 @@ function printNav() {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-left">
+        <li><a href="/channels">Channels</a></li>
         <li><a href="/commands">Commands</a></li>
       </ul>
 <!--       <form class="navbar-form navbar-right">
