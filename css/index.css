@@ -1,3 +1,18 @@
 #home_placeholder {
   margin-top: 20px;
 }
+
+
+#carousel-whoslive .carousel-caption>p a {
+  color: inherit;
+}
+
+.whoslive-sidebar h4 {
+  margin-top:0;
+}
+
+
+.infobox {
+  margin-top:50px;
+  margin-bottom:50px;
+}
