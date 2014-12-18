@@ -88,7 +88,7 @@ printNav();
 
 
 
-		  <h2 id="custom" class="commands-nav-heading">Custom</h2>
+		  <h2 id="custom" class="commands-nav-heading">Custom commands</h2>
 
 
 		  <h3 id="triggers" class="commands-nav-heading">Triggers</h3>
@@ -110,7 +110,7 @@ printNav();
 		  </dl>
 
 
-		  <h3 id="repeat" class="commands-nav-heading">Repeated commands</h3>
+		  <h3 id="repeat" class="commands-nav-heading">Repeats</h3>
 
 		  <p>The repeat command will repeat a custom trigger every X amount of seconds passed. Message difference allows you to prevent spamming an inactive channel. It requires Y amount of messages have passed in the channel since the last iteration of the message. The default is 1 so at least one message will need to have been sent in the channel in order for the repeat to trigger.</p>
 
@@ -131,7 +131,7 @@ printNav();
 		  </dl>
 
 
-		  <h3 id="scheduled" class="commands-nav-heading">Scheduled commands</h3>
+		  <h3 id="scheduled" class="commands-nav-heading">Schedule</h3>
 
 		  <p>Schedule is similar to repeat but is designed to repeat at specific times such as 5pm, hourly (on the hour), semihourly (on 0:30), etc. pattern accepts: hourly, semihourly, and crontab syntax**. Replace spaces in crontab syntax with _ (underscore)</p>
 
@@ -677,19 +677,19 @@ printNav();
 			<div class="nav-commands-scroll" data-spy="affix"><!--  data-offset-top="60" data-offset-bottom="200" -->
 				<ul class="nav nav-commands">
 				  <li class="active">
-				  	<a href="#general">General</a>
+				  	<a href="#general"><i class="fa fa-fw fa-info-circle"></i>&nbsp; General</a>
 				  </li>
 				  <li>
-				  	<a href="#custom">Custom</a>
+				  	<a href="#custom"><i class="fa fa-fw fa-pencil"></i>&nbsp; Custom commands</a>
 				  	<ul class="nav">
 				  		<li><a href="#triggers">Triggers</a></li>
-				  		<li><a href="#repeat">Repeated commands</a></li>
-				  		<li><a href="#scheduled">Scheduled commands</a></li>
+				  		<li><a href="#repeat">Repeats</a></li>
+				  		<li><a href="#scheduled">Schedule</a></li>
 				  		<li><a href="#autoreplies">Auto-replies</a></li>
 				  	</ul>
 				  </li>
 				  <li>
-				  	<a href="#fun">Fun</a>
+				  	<a href="#fun"><i class="fa fa-fw fa-smile-o"></i>&nbsp; Fun</a>
 				  	<ul class="nav">
 				  		<li><a href="#quotes">Quotes</a></li>
 				  		<li><a href="#polls">Polls</a></li>
@@ -698,7 +698,7 @@ printNav();
 				  	</ul>
 				  </li>
 				  <li>
-				  	<a href="#moderation">Moderation</a>
+				  	<a href="#moderation"><i class="fa fa-fw fa-gavel"></i>&nbsp; Moderation</a>
 				  	<ul class="nav">
 				  		<li><a href="#modshortcuts">Shortcuts</a></li>
 				  		<li><a href="#raids">Raids</a></li>
@@ -707,7 +707,7 @@ printNav();
 				  	</ul>
 				  </li>
 				  <li>
-				  	<a href="#filters">Filters</a>
+				  	<a href="#filters"><i class="fa fa-fw fa-filter"></i>&nbsp; Filters</a>
 				  	<ul class="nav">
 				  		<li><a href="#links">Links</a></li>
 				  		<li><a href="#caps">Capitals</a></li>
@@ -717,7 +717,7 @@ printNav();
 				  	</ul>
 				  </li>
 				  <li>
-				  	<a href="#miscellaneous">Miscellaneous</a>
+				  	<a href="#miscellaneous"><i class="fa fa-fw fa-puzzle-piece"></i>&nbsp; Miscellaneous</a>
 				  	<ul class="nav">
 				  		<li><a href="#stringreplacement">String replacement</a></li>
 				  		<li><a href="#admin">Administration</a></li>
