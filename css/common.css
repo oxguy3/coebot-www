@@ -18,9 +18,9 @@ body {
   visibility: hidden;
 }
 
-kbd.command {
+/*kbd.command {
 	white-space:nowrap;
-}
+}*/
 
 /**
  * Footer

@@ -125,7 +125,7 @@ printNav();
 
         <div role="tabpanel" class="tab-pane fade" id="tab_commands">
           <p>
-            Here are the special commands defined for this channel. You can also use any of the universal/shared commands, listed <a href="http://coebot.tv/">here</a>.
+            Here are the special commands defined for this channel. You can also use any of the universal/shared commands, listed <a href="/commands" class="js-link-commands">here</a>.
           </p>
           <div class="">
             <table class="table table-striped js-commands-table">

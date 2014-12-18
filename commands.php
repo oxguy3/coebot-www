@@ -150,13 +150,12 @@ printNav();
 		    <dd>Lists scheduled commands</dd>
 		  </dl>
 
-		  <p>Examples:</p>
-
-		  <p>
-		    <kbd class="command">schedule add youtube hourly 0 </kbd> This will repeat the !youtube command every hour on the hour.<br>
-		    <kbd class="command">schedule add ip *_*_*_*_* 0 </kbd> This will repeat the !ip command every minute.<br>
-		    <kbd class="command">schedule add texture *_5_*_*_* 0 </kbd> This will repeat the !texture at 5am every day.
-		  </p>
+		  <h4>Examples</h4>
+		  <ul>
+		    <li><kbd class="command">schedule add youtube hourly 0 </kbd> This will repeat the <kbd class="command">!youtube</kbd> command every hour on the hour.</li>
+		    <li><kbd class="command">schedule add ip *_*_*_*_* 0 </kbd> This will repeat the <kbd class="command">!ip</kbd> command every minute.</li>
+		    <li><kbd class="command">schedule add texture *_5_*_*_* 0 </kbd> This will repeat the <kbd class="command">!texture</kbd> at 5am every day.</li>
+		  </ul>
 
 
 		  <h3 id="autoreplies" class="commands-nav-heading">Auto-replies</h3>
@@ -174,10 +173,9 @@ printNav();
 		    <dd>Lists current autoreplies</dd>
 		  </dl>
 
-		  <p>Example:
-		    <br>
-
-		    <kbd class="command">autoreply add *what*texture* The broadcaster is using Sphax.</kbd> will respond with: The broadcaster is using Sphax. if a message similar to: "What texture pack is this?" is typed.
+			<h4>Example</h4>
+		  <p>
+		  	<kbd class="command">autoreply add *what*texture* The broadcaster is using Sphax.</kbd> will respond with: The broadcaster is using Sphax. if a message similar to: "What texture pack is this?" is typed.
 		    
 		  </p>
 
@@ -532,7 +530,7 @@ printNav();
 
 		  <h3 id="symbols" class="commands-nav-heading">Symbols</h3>
 
-		  <p> Covers ASCII symbols, unicode classes for box drawings, block elements and geometric shapes also select other spammed characters.</p>
+		  <p>Covers ASCII symbols, unicode classes for box drawings, block elements and geometric shapes also select other spammed characters.</p>
 
 		  <dl>
 
@@ -653,13 +651,13 @@ printNav();
 		    <dd>This bans the user passed in, similar to (_PARAMETER_). Commands containing this are automatically restricted to moderator+. For autoreplies, the user that triggers the autoreply is the one affected.</dd>
 
 		  </dl>
-		  <h3>Examples:</h3>
 
+		  <h4>Examples</h4>
+		  <ul>
+			  <li><kbd class="command">command add shame (_PARAMETER_) has been a naughty chat participant.</kbd><br>Calling the command: <kbd class="command">shame &lt;user&gt;</kbd><br> Output: &lt;user&gt; has been a naughty chat participant.</li>
 
-		  <p><kbd class="command">command add shame (_PARAMETER_) has been a naughty chat participant.</kbd> <br>Calling the command: !shame &lt;user&gt;<br> Output: &lt;user&gt; has been a naughty chat participant.</p>
-
-		  <p><kbd class="command">command add multistream http://twitch.tv/(_PARAMETER_)/(_PARAMETER_) </kbd> <br>Calling the command: !multistream endsgamer; coebot <br> Output: http://twitch.tv/endsgamer/coebot</p>
-
+			  <li><kbd class="command">command add multistream http://twitch.tv/(_PARAMETER_)/(_PARAMETER_)</kbd><br>Calling the command: <kbd class="command">multistream endsgamer; coebot</kbd><br> Output: http://twitch.tv/endsgamer/coebot</li>
+			</ul>
 
 		  <h3 id="admin" class="commands-nav-heading">Administration</h3>
 

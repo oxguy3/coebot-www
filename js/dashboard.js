@@ -444,6 +444,12 @@ $(document).ready(function() {
     setInterval(checkIfLiveChannel, 30000);
 
     $(".command").prepend('<span class="command-prefix">' + channelData.commandPrefix + '</span>');
+
+    var commandPrefixForUrl = channelData.commandPrefix == '+' ? 'plus' : channelData.commandPrefix;
+    $(".js-link-commands").each(function() {
+        var href = $(this).attr("href");
+        $(this).attr("href", href + "/" + encodeURIComponent(commandPrefixForUrl));
+    });
 })
 
 
