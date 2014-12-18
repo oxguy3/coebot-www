@@ -8,7 +8,7 @@ if ($prefix == "plus") {
 	$prefix = "+";
 }
 
-$extraHead = "<style>kbd.command:before { content:\"$prefix\"; }</style>";
+$extraHead = "<style>.command:before { content:\"$prefix\"; }</style>";
 
 
 printHead("Commands", array("/css/commands.css"), array("/js/commands.js"), $extraHead);
@@ -49,7 +49,7 @@ printNav();
 			  <dd>Displays the link to bot help documentation (this page).</dd>
 
 			  <dt><kbd class="command">commercial</kbd></dt>
-			  <dd>Runs a 30 second commercial. You must use !followme to get CoeBot to follow your account and add the bot as a channel editor. </dd>
+			  <dd>Runs a 30 second commercial. You must use <kbd class="command">followme</kbd> to get CoeBot to follow your account and add the bot as a channel editor. </dd>
 
 			  <dt><kbd class="command">game [new game]</kbd></dt>
 			  <dd>Displays the current Twitch game. Optional - specify a new game to set (must be channel editor).</dd>
@@ -79,10 +79,10 @@ printNav();
 			  <dd>Returns the number of times a punishment has been applied and how long since a punishment has happened</dd>
 
 			  <dt><kbd class="command">whatshouldiplay</kbd></dt>
-			  <dd>Chooses a random game from the Steam games associated with your profile. (Requires Steam id to be set, see !set steam)</dd>
+			  <dd>Chooses a random game from the Steam games associated with your profile. (Requires Steam ID to be set, see <kbd class="command">set steam</kbd>)</dd>
 
 			  <dt><kbd class="command">wiki &lt;article name&gt;</kbd></dt>
-			  <dd>Gives the snippet associated with that wikipedia article, might return nothing based on the style of the WikiText</dd>
+			  <dd>Gives the snippet associated with that Wikipedia article, might return nothing based on the style of the WikiText</dd>
 		  </dl>
 
 
@@ -96,7 +96,7 @@ printNav();
 		  <dl>
 
 		    <dt><kbd class="command">command add &lt;name&gt; &lt;text&gt;</kbd></dt>
-		    <dd>Creates a command (!name)</dd>
+		    <dd>Creates a command (<kbd class="command">name</kbd>)</dd>
 
 		    <dt><kbd class="command">command delete &lt;name&gt;</kbd></dt>
 		    <dd>Removes command "name"</dd>
@@ -176,7 +176,6 @@ printNav();
 			<h4>Example</h4>
 		  <p>
 		  	<kbd class="command">autoreply add *what*texture* The broadcaster is using Sphax.</kbd> will respond with: The broadcaster is using Sphax. if a message similar to: "What texture pack is this?" is typed.
-		    
 		  </p>
 
 
@@ -401,7 +400,7 @@ printNav();
 		    <dd>Treat subscribers as regulars for everything.</dd>
 
 		    <dt><kbd>subsregsminuslinks on|off</kbd></dt>
-		    <dd>Treats subscribers as regulars, but they can't post links or use !urban.</dd>
+		    <dd>Treats subscribers as regulars, but they can't post links or use <kbd class="command">urban</kbd>.</dd>
 
 		    <dt><kbd>subscriberalerts on|off</kbd></dt>
 		    <dd>Toggle chat alert when a new user subscribes.</dd>
