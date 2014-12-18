@@ -49,7 +49,7 @@ printNav();
 			  <dd>Displays the link to bot help documentation (this page).</dd>
 
 			  <dt><kbd class="command">commercial</kbd></dt>
-			  <dd>Runs a 30 second commercial. You must use <kbd class="command">followme</kbd> to get CoeBot to follow your account and add the bot as a channel editor. </dd>
+			  <dd>Runs a 30 second commercial. You must use <kbd class="command">followme</kbd> to get <?php echo $SITE_TITLE; ?> to follow your account and add the bot as a channel editor. </dd>
 
 			  <dt><kbd class="command">game [new game]</kbd></dt>
 			  <dd>Displays the current Twitch game. Optional - specify a new game to set (must be channel editor).</dd>
@@ -409,7 +409,7 @@ printNav();
 		    <dd>Sets the cooldown for custom commands. Default is 5 seconds.</dd>
 
 		    <dt><kbd>updatedelay &lt;seconds&gt;</kbd></dt>
-		    <dd>The delay between your last scrobble and coebot updating the song information in chat. Default is 120 seconds to account for last.fm's preemptive scrobbling and twitch's delay.</dd>
+		    <dd>The delay between your last scrobble and <?php echo $SITE_TITLE; ?> updating the song information in chat. Default is 120 seconds to account for last.fm's preemptive scrobbling and twitch's delay.</dd>
 
 		    <dt><kbd>gamertag &lt;gamertag&gt; </kbd></dt>
 		    <dd>Sets your gamertag for Xbox Live.</dd>
@@ -619,7 +619,7 @@ printNav();
 		    <dd>This is replaced by the parameter after the command is called. Multiple parameters can be used in one command, and when calling it separate the individual parameters with ';'.</dd>
 
 		    <dt><kbd>(_NUMCHANNELS_)</kbd></dt>
-		    <dd>Returns the number of channels that CoeBot is currently active in.</dd>
+		    <dd>Returns the number of channels that <?php echo $SITE_TITLE; ?> is currently active in.</dd>
 
 		    <dt><kbd>(_XBOX_GAME_)</kbd></dt>
 		    <dd>The last played game on Xbox Live</dd>

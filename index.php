@@ -94,13 +94,13 @@ printNav();
   <div class="row">
 
     <div class="col-md-8 col-sm-12 infobox">
-      <h3>Welcome to Coebot</h3>
-      <p class="lead">Coebot is a chat bot for Twitch.tv. Coebot can moderate chat, manage custom commands, track highlights, and much more!</p>
+      <h3>Welcome to <?php echo $SITE_TITLE; ?></h3>
+      <p class="lead"><?php echo $SITE_TITLE; ?> is a chat bot for Twitch.tv. <?php echo $SITE_TITLE; ?> can moderate chat, manage custom commands, track highlights, and much more!</p>
     </div>
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>Need help?</h3>
-      <p>The commands list has all the information you need to learn to use Coebot like a pro.</p>
+      <p>The commands list has all the information you need to learn to use <?php echo $SITE_TITLE; ?> like a pro.</p>
       <p><a class="btn btn-default" href="/commands" role="button">View commands &raquo;</a></p>
     </div>
 
@@ -112,13 +112,13 @@ printNav();
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>Do you stream?</h3>
-      <p>If you're a streamer and you want to use Coebot on your channel, drop us a line! We are always happy to welcome new streamers to the Coebot family.</p>
+      <p>If you're a streamer and you want to use <?php echo $SITE_TITLE; ?> on your channel, drop us a line! We are always happy to welcome new streamers to the <?php echo $SITE_TITLE; ?> family.</p>
       <p><a class="btn btn-default" href="https://twitter.com/endsgamer" role="button">Tweet @endsgamer &raquo;</a></p>
     </div>
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>We're open source!</h3>
-      <p>Interested in how Coebot works? All our code is freely licensed, so go ahead and explore!</p>
+      <p>Interested in how <?php echo $SITE_TITLE; ?> works? All our code is freely licensed, so go ahead and explore!</p>
       <p><a class="btn btn-default" href="https://bitbucket.org/tucker_gardner/coebot" role="button">Bot source &raquo;</a> <a class="btn btn-default" href="https://github.com/oxguy3/coebot-www" role="button">Website source &raquo;</a></p>
     </div>
 

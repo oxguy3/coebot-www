@@ -2,7 +2,7 @@
 
 require_once("safeconfig.php");
 
-$SITE_TITLE = "Coebot";
+$SITE_TITLE = "CoeBot";
 
 
 // session_start();
@@ -47,10 +47,13 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
     } 
 
     ?></title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/cyborg.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/common.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/cyborg.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/common.css">
     <?php
     for ($i = 0; $i < count($extraCss); $i++) {
     	echo '<link href="' . $extraCss[$i] . '" rel="stylesheet">' . "\n";
