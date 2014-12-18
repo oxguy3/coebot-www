@@ -680,7 +680,7 @@ printNav();
 				  	<a href="#general"><i class="fa fa-fw fa-info-circle"></i>&nbsp; General</a>
 				  </li>
 				  <li>
-				  	<a href="#custom"><i class="fa fa-fw fa-pencil"></i>&nbsp; Custom commands</a>
+				  	<a href="#custom"><i class="fa fa-fw fa-paint-brush"></i>&nbsp; Custom commands</a>
 				  	<ul class="nav">
 				  		<li><a href="#triggers">Triggers</a></li>
 				  		<li><a href="#repeat">Repeats</a></li>
