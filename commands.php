@@ -246,7 +246,7 @@ printNav();
 		    <dd>Displays winner(s).</dd>
 
 		    <dt><kbd class="command">ga</kbd></dt>
-		    <dd>Alias for <kbd class="command">!giveaway</kbd>.</dd>
+		    <dd>Alias for <kbd class="command">giveaway</kbd>.</dd>
 
 		  </dl>
 
