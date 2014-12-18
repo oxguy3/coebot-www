@@ -110,7 +110,7 @@ printNav();
 		  </dl>
 
 
-		  <h3 id="repeat" class="commands-nav-heading">Repeat</h3>
+		  <h3 id="repeat" class="commands-nav-heading">Repeated commands</h3>
 
 		  <p>The repeat command will repeat a custom trigger every X amount of seconds passed. Message difference allows you to prevent spamming an inactive channel. It requires Y amount of messages have passed in the channel since the last iteration of the message. The default is 1 so at least one message will need to have been sent in the channel in order for the repeat to trigger.</p>
 
@@ -131,7 +131,7 @@ printNav();
 		  </dl>
 
 
-		  <h3 id="schedule" class="commands-nav-heading">Schedule</h3>
+		  <h3 id="scheduled" class="commands-nav-heading">Scheduled commands</h3>
 
 		  <p>Schedule is similar to repeat but is designed to repeat at specific times such as 5pm, hourly (on the hour), semihourly (on 0:30), etc. pattern accepts: hourly, semihourly, and crontab syntax**. Replace spaces in crontab syntax with _ (underscore)</p>
 
@@ -182,6 +182,28 @@ printNav();
 
 
 		  <h2 id="fun" class="commands-nav-heading">Fun</h2>
+
+		  <dl>
+
+		    <dt><kbd class="command">throw &lt;object&gt;</kbd></dt>
+		    <dd>Throws object</dd>
+
+		    <dt><kbd class="command">winner</kbd></dt>
+		    <dd>Chooses a random viewer</dd>
+
+		    <dt><kbd class="command">hug &lt;object&gt;</kbd></dt>
+		    <dd>Hugs object</dd>
+
+		    <dt><kbd class="command">conch &lt;question&gt;</kbd></dt>
+		    <dd>Magic 8 Ball functionality</dd>
+
+		    <dt><kbd class="command">define &lt;word/phrase&gt;</kbd></dt>
+		    <dd>Searches Merriam-Webster for definitions (Not a great API, but free and works, mostly)</dd>
+
+		    <dt><kbd class="command">urban &lt;word/phrase&gt;</kbd></dt>
+		    <dd>Searches Urban Dictionary for definitions. Limited to 140 character response.</dd> 
+
+		  </dl>
 
 
 		  <h3 id="quotes" class="commands-nav-heading">Quotes</h3>
@@ -268,31 +290,6 @@ printNav();
 
 		    <dt><kbd class="command">raffle winner</kbd></dt>
 		    <dd>Picks a winner.</dd>
-
-		  </dl>
-
-
-		  <h3 id="funmisc" class="commands-nav-heading">Miscellaneous</h3>
-
-		  <dl>
-
-		    <dt><kbd class="command">throw &lt;object&gt;</kbd></dt>
-		    <dd>Throws object</dd>
-
-		    <dt><kbd class="command">winner</kbd></dt>
-		    <dd>Chooses a random viewer</dd>
-
-		    <dt><kbd class="command">hug &lt;object&gt;</kbd></dt>
-		    <dd>Hugs object</dd>
-
-		    <dt><kbd class="command">conch &lt;question&gt;</kbd></dt>
-		    <dd>Magic 8 Ball functionality</dd>
-
-		    <dt><kbd class="command">define &lt;word/phrase&gt;</kbd></dt>
-		    <dd>Searches Merriam-Webster for definitions (Not a great API, but free and works, mostly)</dd>
-
-		    <dt><kbd class="command">urban &lt;word/phrase&gt;</kbd></dt>
-		    <dd>Searches Urban Dictionary for definitions. Limited to 140 character response.</dd> 
 
 		  </dl>
 
@@ -440,9 +437,6 @@ printNav();
 
 
 		  <h2 id="filters" class="commands-nav-heading">Filters</h2>
-
-
-		  <!-- <h3 id="filtersmain" class="commands-nav-heading">Main</h3> -->
 
 		  <dl>
 
@@ -689,8 +683,8 @@ printNav();
 				  	<a href="#custom">Custom</a>
 				  	<ul class="nav">
 				  		<li><a href="#triggers">Triggers</a></li>
-				  		<li><a href="#repeat">Repeat</a></li>
-				  		<li><a href="#schedule">Schedule</a></li>
+				  		<li><a href="#repeat">Repeated commands</a></li>
+				  		<li><a href="#scheduled">Scheduled commands</a></li>
 				  		<li><a href="#autoreplies">Auto-replies</a></li>
 				  	</ul>
 				  </li>
@@ -701,7 +695,6 @@ printNav();
 				  		<li><a href="#polls">Polls</a></li>
 				  		<li><a href="#giveaways">Giveaways</a></li>
 				  		<li><a href="#raffles">Raffles</a></li>
-				  		<li><a href="#funmisc">Miscellaneous</a></li>
 				  	</ul>
 				  </li>
 				  <li>
@@ -716,7 +709,6 @@ printNav();
 				  <li>
 				  	<a href="#filters">Filters</a>
 				  	<ul class="nav">
-				  		<!-- <li><a href="#filtersmain">Main</a></li> -->
 				  		<li><a href="#links">Links</a></li>
 				  		<li><a href="#caps">Capitals</a></li>
 				  		<li><a href="#banphrases">Banned phrases</a></li>
