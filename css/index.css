@@ -8,11 +8,17 @@
 }
 
 .whoslive-sidebar h4 {
-  margin-top:0;
+  margin-top: 0;
 }
 
 
 .infobox {
-  margin-top:50px;
-  margin-bottom:50px;
+  margin-top: 40px;
+  margin-bottom: 80px;
+}
+
+
+.footer-normal {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
