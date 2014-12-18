@@ -152,9 +152,9 @@ printNav();
 
 		  <h4>Examples</h4>
 		  <ul>
-		    <li><kbd class="command">schedule add youtube hourly 0 </kbd> This will repeat the <kbd class="command">!youtube</kbd> command every hour on the hour.</li>
-		    <li><kbd class="command">schedule add ip *_*_*_*_* 0 </kbd> This will repeat the <kbd class="command">!ip</kbd> command every minute.</li>
-		    <li><kbd class="command">schedule add texture *_5_*_*_* 0 </kbd> This will repeat the <kbd class="command">!texture</kbd> at 5am every day.</li>
+		    <li><kbd class="command">schedule add youtube hourly 0 </kbd> This will repeat the <kbd class="command">youtube</kbd> command every hour on the hour.</li>
+		    <li><kbd class="command">schedule add ip *_*_*_*_* 0 </kbd> This will repeat the <kbd class="command">ip</kbd> command every minute.</li>
+		    <li><kbd class="command">schedule add texture *_5_*_*_* 0 </kbd> This will repeat the <kbd class="command">texture</kbd> at 5am every day.</li>
 		  </ul>
 
 
@@ -167,7 +167,7 @@ printNav();
 		    <dd>Adds an autoreply triggered by *pattern* with the desired response. Use * to denote wildcards and _ to denote spaces in the pattern.</dd>
 
 		    <dt><kbd class="command">autoreply remove &lt;number&gt;</kbd></dt>
-		    <dd>Removes the autoreply with that index number. Do !autoreply list for those values.</dd>
+		    <dd>Removes the autoreply with that index number. Do <kbd class="command">autoreply list</kbd> for those values.</dd>
 
 		    <dt><kbd class="command">autoreply list</kbd></dt>
 		    <dd>Lists current autoreplies</dd>
