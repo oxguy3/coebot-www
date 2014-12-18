@@ -246,7 +246,7 @@ printNav();
 		    <dd>Displays winner(s).</dd>
 
 		    <dt><kbd class="command">ga</kbd></dt>
-		    <dd>Alias for !giveaway.</dd>
+		    <dd>Alias for <kbd class="command">!giveaway</kbd>.</dd>
 
 		  </dl>
 
@@ -303,7 +303,7 @@ printNav();
 		  <h2 id="moderation" class="commands-nav-heading">Moderation</h2>
 
 
-		  <h3 id="shortcuts" class="commands-nav-heading">Shortcuts</h3>
+		  <h3 id="modshortcuts" class="commands-nav-heading">Shortcuts</h3>
 
 		  <dl>
 		    <dt><kbd>+m</kbd></dt>
@@ -367,15 +367,17 @@ printNav();
 
 		  <h3 id="settings" class="commands-nav-heading">Settings</h3>
 
-		  <p><kbd class="command" class="commands-nav-heading">set &lt;option&gt;[parameters]</kbd></p>
+		  <p>Syntax: <kbd class="command" class="commands-nav-heading">set &lt;option&gt;[parameters]</kbd></p>
+
+		  <h4>Options</h4>
 
 		  <dl>
 
 		    <dt><kbd>topic on|off</kbd></dt>
-		    <dd>Enables the !topic command.</dd>
+		    <dd>Enables the <kbd class="command">topic</kbd> command.</dd>
 
 		    <dt><kbd>throw on|off</kbd></dt>
-		    <dd>Enables the !throw command</dd>
+		    <dd>Enables the <kbd class="command">throw</kbd> command</dd>
 
 		    <dt><kbd>lastfm &lt;username|off&gt;</kbd></dt>
 		    <dd>Sets username to use with the music related commands.</dd>
@@ -405,7 +407,7 @@ printNav();
 		    <dd>Toggle chat alert when a new user subscribes.</dd>
 
 		    <dt><kbd>subscriberalerts message &lt;message&gt;</kbd></dt>
-		    <dd>Message to be displayed when a new user subscribers. Use (_1_) to insert the new subscriber's name.</dd>
+		    <dd>Message to be displayed when a new user subscribers. Use <kbd>(_1_)</kbd> to insert the new subscriber's name.</dd>
 
 		    <dt><kbd>cooldown &lt;seconds&gt;</kbd></dt>
 		    <dd>Sets the cooldown for custom commands. Default is 5 seconds.</dd>
@@ -417,7 +419,7 @@ printNav();
 		    <dd>Sets your gamertag for Xbox Live.</dd>
 
 		    <dt><kbd>urban &lt;on|off&gt;</kbd></dt>
-		    <dd>Enables or disables the use of !urban</dd>
+		    <dd>Enables or disables the use of <kbd class="command">urban</kbd></dd>
 
 		  </dl>
 
@@ -441,7 +443,7 @@ printNav();
 		  <h2 id="filters" class="commands-nav-heading">Filters</h2>
 
 
-		  <h3 id="filtersmain" class="commands-nav-heading">Main</h3>
+		  <!-- <h3 id="filtersmain" class="commands-nav-heading">Main</h3> -->
 
 		  <dl>
 
@@ -609,7 +611,7 @@ printNav();
 		    <dd>Pulls the previous scrobbled Last.fm track name and artist.</dd>    
 
 		    <dt><kbd>(_BOT_HELP_)</kbd></dt>
-		    <dd>Bot's help message. See bothelpMessage in global.properites.</dd>
+		    <dd>Bot's help message. See bothelpMessage in global.properties.</dd>
 
 		    <dt><kbd>(_USER_)</kbd></dt>
 		    <dd>Nickname of the user requesting a command or triggering an autoreply.</dd>
@@ -618,7 +620,7 @@ printNav();
 		    <dd>A random quote from the quote database.</dd>
 
 		    <dt><kbd>(_COMMERCIAL_)</kbd></dt>
-		    <dd>Runs a commercial (mostly used for scheduling/repeating) -replaces the entire message that contains (_COMMERCIAL_) with "Running a commercial, thank you for supporting this channel."</dd>
+		    <dd>Runs a commercial (mostly used for scheduling/repeating) -replaces the entire message that contains <kbd>(_COMMERCIAL_)</kbd> with "Running a commercial, thank you for supporting this channel."</dd>
 
 		    <dt><kbd>(_PARAMETER_)</kbd></dt>
 		    <dd>This is replaced by the parameter after the command is called. Multiple parameters can be used in one command, and when calling it separate the individual parameters with ';'.</dd>
@@ -642,13 +644,13 @@ printNav();
 		    <dd>Returns the number of times the &lt;command&gt; has been called.</dd>
 
 		    <dt><kbd>(_PURGE_)</kbd></dt>
-		    <dd>This purges the user passed in, similar to (_PARAMETER_). Commands containing this are automatically restricted to moderator+. For autoreplies, the user that triggers the autoreply is the one affected.</dd>
+		    <dd>This purges the user passed in, similar to <kbd>(_PARAMETER_)</kbd>. Commands containing this are automatically restricted to moderator+. For autoreplies, the user that triggers the autoreply is the one affected.</dd>
 
 		    <dt><kbd>(_TIMEOUT_)</kbd></dt>
-		    <dd>This times out the user passed in, similar to (_PARAMETER_). Commands containing this are automatically restricted to moderator+. For autoreplies, the user that triggers the autoreply is the one affected.</dd>
+		    <dd>This times out the user passed in, similar to <kbd>(_PARAMETER_)</kbd>. Commands containing this are automatically restricted to moderator+. For autoreplies, the user that triggers the autoreply is the one affected.</dd>
 
 		    <dt><kbd>(_BAN_)</kbd></dt>
-		    <dd>This bans the user passed in, similar to (_PARAMETER_). Commands containing this are automatically restricted to moderator+. For autoreplies, the user that triggers the autoreply is the one affected.</dd>
+		    <dd>This bans the user passed in, similar to <kbd>(_PARAMETER_)</kbd>. Commands containing this are automatically restricted to moderator+. For autoreplies, the user that triggers the autoreply is the one affected.</dd>
 
 		  </dl>
 
@@ -715,7 +717,7 @@ printNav();
 				  <li>
 				  	<a href="#filters">Filters</a>
 				  	<ul class="nav">
-				  		<li><a href="#filtersmain">Main</a></li>
+				  		<!-- <li><a href="#filtersmain">Main</a></li> -->
 				  		<li><a href="#links">Links</a></li>
 				  		<li><a href="#caps">Capitals</a></li>
 				  		<li><a href="#banphrases">Banned phrases</a></li>
