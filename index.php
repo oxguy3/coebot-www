@@ -44,7 +44,7 @@ printNav();
             </a>
             <div class="carousel-caption">
               <h3>Coestar</h3>
-              <p><a href="http://twitch.tv/coestar">Space Enginerds #StreamADay (Day 378)</a></p>
+              <p><a href="http://twitch.tv/coestar" style="color:inherit">Space Enginerds #StreamADay (Day 378)</a></p>
             </div>
           </div>
           <div class="item">
@@ -53,7 +53,7 @@ printNav();
             </a>
             <div class="carousel-caption">
               <h3>CoeBot</h3>
-              <p><a href="http://twitch.tv/coebot">This is a placeholder status</a></p>
+              <p><a href="http://twitch.tv/coebot" style="color:inherit">This is a placeholder status</a></p>
             </div>
           </div>
           <div class="item">
@@ -62,7 +62,7 @@ printNav();
             </a>
             <div class="carousel-caption">
               <h3>endsgamer</h3>
-              <p><a href="http://twitch.tv/endsgamer">Get back to work, ends.</a></p>
+              <p><a href="http://twitch.tv/endsgamer" style="color:inherit">Get back to work, ends.</a></p>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@ printNav();
     <div class="col-md-4 col-lg-3">
       <h4 style="margin-top:0">Who's live?</h4>
       <div class="list-group">
-        <a href="#carousel-example-generic" data-slide-to="0" class="list-group-item active">Coestar</a>
+        <a href="#carousel-example-generic" data-slide-to="0" class="list-group-item">Coestar</a>
         <a href="#carousel-example-generic" data-slide-to="1" class="list-group-item">CoeBot</a>
         <a href="#carousel-example-generic" data-slide-to="2" class="list-group-item">endsgamer</a>
       </ol>
@@ -107,7 +107,7 @@ printNav();
 
     <div class="col-md-4">
       <h3>Open source</h3>
-      <p>Interested in how Coebot works? All our code is freely licensed; feel free to explore!</p>
+      <p>Interested in how Coebot works? All our code is freely licensed, so go ahead and explore!</p>
       <p><a class="btn btn-default" href="https://bitbucket.org/tucker_gardner/coebot" role="button">Bot source &raquo;</a> <a class="btn btn-default" href="https://github.com/oxguy3/coebot-www" role="button">Website source &raquo;</a></p>
     </div>
 
