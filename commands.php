@@ -2,10 +2,15 @@
 
 require_once("common.php");
 
+$DEFAULT_COMMAND_PREFIX = "!";
 
-$prefix = isset($_GET['prefix']) ? $_GET['prefix'] : "!";
+
+$prefix = isset($_GET['prefix']) ? $_GET['prefix'] : $DEFAULT_COMMAND_PREFIX;
 if ($prefix == "plus") {
 	$prefix = "+";
+}
+if (strlen($prefix) != 1) {
+	$prefix = $DEFAULT_COMMAND_PREFIX;
 }
 
 $extraHead = "<style>.command:before { content:\"$prefix\"; }</style>";
@@ -18,7 +23,7 @@ printNav();
 <div class="container">
   <div class="row">
 
-    <div class="col-sm-9">
+    <div class="col-sm-9 col-lg-10">
       <h1>Commands</h1>
 
       <h2 id="general" class="commands-nav-heading">General</h2>
@@ -667,13 +672,10 @@ printNav();
 		  </dl>
 
 
-
-
-
-
     </div>
 
-    <div class="col-sm-3">
+
+    <div class="col-sm-3 col-lg-2">
 			<div class="nav-commands-scroll" data-spy="affix"><!--  data-offset-top="60" data-offset-bottom="200" -->
 				<ul class="nav nav-commands">
 				  <li class="active">
