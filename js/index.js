@@ -85,7 +85,7 @@ function handleAllIsLive(json) {
             ci += '<a href="' + getUrlToChannel(chan.channel) + '">';
 
             var previewAspectRatio = 16/9;
-            var previewTemplate = stream.preview.template;
+            var previewTemplate = stream.preview.template + '?' + ((new Date).getTime());
             var preview1080p = getPreviewAtSize(previewTemplate, previewAspectRatio, 1080);
             var preview720p = getPreviewAtSize(previewTemplate, previewAspectRatio, 720);
             var preview480p = getPreviewAtSize(previewTemplate, previewAspectRatio, 480);
