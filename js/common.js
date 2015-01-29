@@ -115,6 +115,14 @@ function getLiveStatus(stream) {
     return liveStatus;
 }
 
+function stringifyChannels() {
+    var str = '';
+    for (var i = 0; i < coebotData.channels.length; i++) {
+        str += coebotData.channels[i].channel + ',';
+    }
+    return str;
+}
+
 // updates the indicator that shows if the channel is currently streaming
 function updateIsLive(streams) {
 
@@ -172,7 +180,7 @@ function findChannelInStreams(streams, channel) {
     return null;
 }
 
-
+// sorts a UL/OL
 function sortUnorderedList(selector) {
     var mylist = $(selector);
     var listitems = mylist.children('li').get();

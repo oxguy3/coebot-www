@@ -30,13 +30,6 @@ function displayListChannels() {
     // container.prepend(liveChannelLis);
 }
 
-function stringifyChannels() {
-    var str = '';
-    for (var i = 0; i < coebotData.channels.length; i++) {
-        str += coebotData.channels[i].channel + ',';
-    }
-    return str;
-}
 
 function checkIfLiveAll() {
     checkIfLive(channelsStr, handleAllIsLive);

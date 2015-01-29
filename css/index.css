@@ -7,6 +7,10 @@
   color: inherit;
 }
 
+.carousel-item-title a {
+  color: inherit;
+}
+
 .whoslive-sidebar h4 {
   margin-top: 0;
 }
