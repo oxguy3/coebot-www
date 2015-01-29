@@ -38,33 +38,6 @@ printNav();
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner js-whoslive-carousel" role="listbox">
-<!--           <div class="item active">
-            <a href="/channel/coestar">
-              <img src="http://static-cdn.jtvnw.net/previews-ttv/live_user_coestar-1280x720.jpg" alt="..." class="img-responsive">
-            </a>
-            <div class="carousel-caption">
-              <h3>Coestar</h3>
-              <p><a href="http://twitch.tv/coestar">Space Enginerds #StreamADay (Day 378)</a></p>
-            </div>
-          </div>
-          <div class="item">
-            <a href="/channels">
-              <img src="http://static-cdn.jtvnw.net/ttv-static/404_preview-1280x720.jpg" alt="..." class="img-responsive">
-            </a>
-            <div class="carousel-caption">
-              <h3>CoeBot</h3>
-              <p><a href="http://twitch.tv/coebot">This is a placeholder status</a></p>
-            </div>
-          </div>
-          <div class="item">
-            <a href="/channels">
-              <img src="http://static-cdn.jtvnw.net/ttv-static/404_preview-1280x720.jpg" alt="..." class="img-responsive">
-            </a>
-            <div class="carousel-caption">
-              <h3>endsgamer</h3>
-              <p><a href="http://twitch.tv/endsgamer">Get back to work, ends.</a></p>
-            </div>
-          </div> -->
         </div>
 
         <!-- Controls -->
@@ -82,10 +55,7 @@ printNav();
     <div class="col-md-4 col-lg-3 whoslive-sidebar js-whoslive-containers">
       <h4>Who's live?</h4>
       <div class="list-group js-whoslive-list">
-<!--         <a href="#carousel-whoslive" data-slide-to="0" class="list-group-item">Coestar</a>
-        <a href="#carousel-whoslive" data-slide-to="1" class="list-group-item">CoeBot</a>
-        <a href=" -->#carousel-whoslive" data-slide-to="2" class="list-group-item">endsgamer</a>
-      </ol>
+      </div>
     </div>
   </div>
 

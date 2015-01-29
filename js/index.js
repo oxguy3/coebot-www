@@ -2,34 +2,6 @@ downloadCoebotData();
 
 var channelsStr = false;
 
-function displayListChannels() {
-    //$('.js-islive').popover('hide');
-    var container = $('.js-list-channels');
-    var list = "";
-    for (var i = 0; i < coebotData.channels.length; i++) {
-        var chan = coebotData.channels[i];
-        if (chan.isActive) {
-            var li = '';
-            li += '<a href="' + getUrlToChannel(chan.channel);
-            li += '" class="list-group-item js-islive" data-placement="bottom" data-channel="';
-            li += chan.channel + '">';
-            
-            //li += '<span class="islive-indicator"><i class="js-islive-icon fa fa-fw"></i></span>';
-            li += chan.displayName;
-            
-            li += '</a>';
-            list += li;
-        }
-    }
-    if (list == "") {
-        list = '<h3>' + EMPTY_TABLE_PLACEHOLDER + '</h3>';
-    }
-    container.html(list);
-
-    // var liveChannelLis = container.children('.islive-live');
-    // container.prepend(liveChannelLis);
-}
-
 function checkIfLiveAll() {
     checkIfLive(channelsStr, handleAllIsLive);
 }
@@ -72,10 +44,13 @@ function handleAllIsLive(json) {
             ci += '<div class="item' + (carousel=="" ? ' active' : '') + '">';
             ci += '<a href="' + getUrlToChannel(chan.channel) + '">';
 
-            var streamImageUrl = stream.preview.template;
-            streamImageUrl = streamImageUrl.replace(/\{width\}/gi, "848");
-            streamImageUrl = streamImageUrl.replace(/\{height\}/gi, "477");
-            ci += '<img src="' + streamImageUrl + '" class="img-responsive"></a>';
+            var previewLg = stream.preview.template;
+            previewLg = previewLg.replace(/\{width\}/gi, "848");
+            previewLg = previewLg.replace(/\{height\}/gi, "477");
+            //617 347
+            ci += '<img src="' + previewLg + '" srcset="' 
+            ci += stream.preview.medium + ' 180w, ' + stream.preview.large + ' 360w, ' + previewLg + ' 848w'
+            ci += /*'" sizes="(min-width: 1200px) 75vw, (min-width: 992px) 66vw, 100vw"'*/ ' class="img-responsive"></a>';
 
             ci += '<div class="carousel-caption">';
             ci += '<h3 class="carousel-item-title">';
@@ -89,11 +64,6 @@ function handleAllIsLive(json) {
 
             carousel += ci;
 
-            // <div class="carousel-caption">
-            //   <h3>Coestar</h3>
-            //   <p><a href="http://twitch.tv/coestar">Space Enginerds #StreamADay (Day 378)</a></p>
-            // </div>
-
         }
     }
     var parent = $('.js-whoslive-containers');
@@ -104,17 +74,7 @@ function handleAllIsLive(json) {
     }
     listContainer.html(list);
     carouselContainer.html(carousel);
-
-    //updateIsLive(json.streams);
-    //moveLiveToTop();
 }
-
-// function moveLiveToTop() {
-//     sortUnorderedList('.js-list-channels');
-//     var container = $('.js-list-channels');
-//     var liveChannelLis = container.children('.islive-live');
-//     container.prepend(liveChannelLis);
-// }
 
 $(document).ready(function() {
 
@@ -122,3 +82,7 @@ $(document).ready(function() {
     checkIfLiveAll();
     setInterval(checkIfLiveAll, 30000);
 });
+
+$('#carousel-whoslive').on('slide.bs.carousel', function () {
+  // do something…
+})
