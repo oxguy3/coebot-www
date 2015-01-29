@@ -2,7 +2,7 @@
 
 require_once("common.php");
 
-printHead("Home", array("/css/index.css"), array("/js/index.js"));
+printHead("Home", array("/css/index.css"), array("/js/jquery-ui.custom.min.js", "/js/index.js"));
 printNav();
 
 ?>
@@ -20,7 +20,7 @@ printNav();
   <div class="row">
 
     <div class="col-md-8 col-lg-9 js-whoslive-containers">
-      <div id="carousel-whoslive" class="carousel slide" data-ride="carousel">
+      <div id="carousel-whoslive" class="carousel slide">
         <!-- Indicators -->
         <!-- <ol class="carousel-indicators">
           <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -30,7 +30,7 @@ printNav();
 
         <div class="carousel-inner js-whoslive-carousel" role="listbox">
         </div>
-        
+
         <a class="left carousel-control" href="#carousel-whoslive" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>

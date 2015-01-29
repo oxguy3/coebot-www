@@ -2,6 +2,45 @@ downloadCoebotData();
 
 var channelsStr = false;
 
+var isFirstUpdate = true;
+/*var lastItemChannel = "";
+
+
+function preserveStateAndCheckAll() {
+
+    var whoslive = $("#carousel-whoslive");
+    whoslive.carousel('pause');
+    console.log(whoslive.carousel('isPaused'));
+    //whoslive.carousel('destroy');
+
+    var lastItem = $('.js-whoslive-carousel>.item.active');
+    lastItemChannel = lastItem.attr("data-slide-channel");
+    //var itemIndex = lastItem.attr("data-slide-index");
+
+    console.log(lastItemChannel);
+
+    isFirstUpdate = false;
+
+    checkIfLiveAll();
+}*/
+
+function createWhosliveCarousel() {
+    $("#carousel-whoslive").html($("#carousel-whoslive").html()); // remove all js listeners and such
+    $("#carousel-whoslive").carousel();
+
+    $('#carousel-whoslive').on('slide.bs.carousel', function (e) {
+        var transitionOptions = {
+            duration: 400,
+            easing: "linear"
+        };
+
+        var targetIndex = $(e.relatedTarget).attr("data-slide-index");/*$('#carousel-whoslive').find(".item.active")*/
+
+        $('.js-whoslive-list .list-group-item.active').removeClass("active", transitionOptions);
+        $('.js-whoslive-list .list-group-item[data-slide-to=' + targetIndex + ']').addClass("active", transitionOptions);
+    });
+}
+
 function checkIfLiveAll() {
     checkIfLive(channelsStr, handleAllIsLive);
 }
@@ -31,8 +70,8 @@ function handleAllIsLive(json) {
 
         if (chan.isActive && liveStatus == isLiveOn) {
             var li = '';
-            li += '<a href="#carousel-whoslive" data-slide-to="' + (currLiveIndex++);
-            li += '" class="list-group-item">';
+            li += '<a href="#carousel-whoslive" data-slide-to="' + currLiveIndex;
+            li += '" class="list-group-item' + (list=="" ? ' active' : '') + '">';
             
             li += chan.displayName;
             
@@ -41,7 +80,8 @@ function handleAllIsLive(json) {
 
 
             var ci = '';
-            ci += '<div class="item' + (carousel=="" ? ' active' : '') + '">';
+            ci += '<div class="item' + (carousel=="" ? ' active' : '');
+            ci += '" data-slide-channel="' + chan.channel + '" data-slide-index="' + currLiveIndex + '">';
             ci += '<a href="' + getUrlToChannel(chan.channel) + '">';
 
             var previewAspectRatio = 16/9;
@@ -69,6 +109,8 @@ function handleAllIsLive(json) {
 
             carousel += ci;
 
+            currLiveIndex++;
+
         }
     }
     var parent = $('.js-whoslive-containers');
@@ -79,6 +121,20 @@ function handleAllIsLive(json) {
     }
     listContainer.html(list);
     carouselContainer.html(carousel);
+
+    // if (!isFirstUpdate) {
+    //     var whoslive = $("#carousel-whoslive");
+
+    //     var newItem = $('.js-whoslive-carousel>.item[data-slide-channel=' + lastItemChannel + ']');
+    //     var newIndex = 0;
+    //     if (newItem.length != 0) {
+    //         newIndex = parseInt(newItem.attr("data-slide-index"));
+    //     }
+    //     createWhosliveCarousel();
+    //     whoslive.removeClass("slide");
+    //     whoslive.carousel(newIndex);
+    //     whoslive.addClass("slide");
+    // }
 }
 
 // given a twitch preview image template url, gives you a url for a specified resolution
@@ -89,11 +145,9 @@ function getPreviewAtSize(template, aspectRatio, resolution) {
 
 $(document).ready(function() {
 
+    createWhosliveCarousel();
     channelsStr = stringifyChannels();
     checkIfLiveAll();
-    setInterval(checkIfLiveAll, 30000);
-});
+    //setInterval(preserveStateAndCheckAll, 5000);
 
-$('#carousel-whoslive').on('slide.bs.carousel', function () {
-  // do something…
-})
+});
