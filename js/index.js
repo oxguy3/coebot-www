@@ -102,8 +102,6 @@ function handleAllIsLive(json) {
     }
     listContainer.html(list);
     carouselContainer.html(carousel);
-
-    $(".nano").nanoScroller();
 }
 
 // given a twitch preview image template url, gives you a url for a specified resolution
