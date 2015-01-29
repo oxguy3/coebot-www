@@ -76,7 +76,7 @@ function handleAllIsLive(json) {
             ci += '<img src="' + preview720p + '" srcset="' ;
             ci += preview180p + ' 320w, ' + preview360p + ' 640w, ' + preview480p + ' 854w, ';
             ci += preview720p + ' 1280w, ' + preview1080p + ' 1920w';
-            ci += '" sizes="(min-width: 1200px) 848px, (min-width: 992px) 617px, (min-width: 768px) 405px, 100vw" class="img-responsive img-rounded"></a>';
+            ci += '" sizes="(min-width: 1200px) 848px, (min-width: 992px) 617px, (min-width: 768px) 720px, 100vw" class="img-responsive img-rounded"></a>';
 
             ci += '<div class="carousel-caption">';
             ci += '<h3 class="carousel-item-title">';
