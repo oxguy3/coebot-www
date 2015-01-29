@@ -13,14 +13,6 @@ printNav();
       <div class="alert alert-info" role="alert" id="home_placeholder">
         <strong>Welcome!</strong> We're working hard to build the new site. While we're still early in development, some things may not work quite right, so please pardon our dust!
       </div>
-      <!-- <div class="jumbotron" id="home_placeholder">
-        <h1>Welcome to the beta!</h1>
-        <p>We are working hard on making Coebot's new website. However, the new home page is still being designed! In the mean time, these other pages probably have whatever you might be looking for:</p>
-        <p>
-          <a class="btn btn-primary btn-lg" href="/channels" role="button">Channels</a>
-          <a class="btn btn-primary btn-lg" href="/commands" role="button">Commands</a>
-        </p>
-      </div> -->
     </div>
   </div>
 
@@ -36,11 +28,9 @@ printNav();
           <li data-target="#carousel-example-generic" data-slide-to="2"></li>
         </ol> -->
 
-        <!-- Wrapper for slides -->
         <div class="carousel-inner js-whoslive-carousel" role="listbox">
         </div>
-
-        <!-- Controls -->
+        
         <a class="left carousel-control" href="#carousel-whoslive" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>

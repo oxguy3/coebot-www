@@ -44,13 +44,18 @@ function handleAllIsLive(json) {
             ci += '<div class="item' + (carousel=="" ? ' active' : '') + '">';
             ci += '<a href="' + getUrlToChannel(chan.channel) + '">';
 
-            var previewLg = stream.preview.template;
-            previewLg = previewLg.replace(/\{width\}/gi, "848");
-            previewLg = previewLg.replace(/\{height\}/gi, "477");
-            //617 347
-            ci += '<img src="' + previewLg + '" srcset="' 
-            ci += stream.preview.medium + ' 180w, ' + stream.preview.large + ' 360w, ' + previewLg + ' 848w'
-            ci += /*'" sizes="(min-width: 1200px) 75vw, (min-width: 992px) 66vw, 100vw"'*/ ' class="img-responsive"></a>';
+            var previewAspectRatio = 16/9;
+            var previewTemplate = stream.preview.template;
+            var preview1080p = getPreviewAtSize(previewTemplate, previewAspectRatio, 1080);
+            var preview720p = getPreviewAtSize(previewTemplate, previewAspectRatio, 720);
+            var preview480p = getPreviewAtSize(previewTemplate, previewAspectRatio, 480);
+            var preview360p = stream.preview.large; // getPreviewAtSize(previewTemplate, previewAspectRatio, 360);
+            var preview180p = stream.preview.medium; // getPreviewAtSize(previewTemplate, previewAspectRatio, 180);
+            
+            ci += '<img src="' + preview720p + '" srcset="' ;
+            ci += preview180p + ' 320w, ' + preview360p + ' 640w, ' + preview480p + ' 854w, ';
+            ci += preview720p + ' 1280w, ' + preview1080p + ' 1920w';
+            ci += '" sizes="(min-width: 1200px) 848px, (min-width: 992px) 617px, (min-width: 768px) 405px, 100vw" class="img-responsive"></a>';
 
             ci += '<div class="carousel-caption">';
             ci += '<h3 class="carousel-item-title">';
@@ -74,6 +79,12 @@ function handleAllIsLive(json) {
     }
     listContainer.html(list);
     carouselContainer.html(carousel);
+}
+
+// given a twitch preview image template url, gives you a url for a specified resolution
+function getPreviewAtSize(template, aspectRatio, resolution) {
+    var width = Math.ceil(aspectRatio * resolution);
+    return template.replace(/\{width\}/gi, width).replace(/\{height\}/gi, resolution);
 }
 
 $(document).ready(function() {
