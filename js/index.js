@@ -3,26 +3,7 @@ downloadCoebotData();
 var channelsStr = false;
 
 var isFirstUpdate = true;
-/*var lastItemChannel = "";
 
-
-function preserveStateAndCheckAll() {
-
-    var whoslive = $("#carousel-whoslive");
-    whoslive.carousel('pause');
-    console.log(whoslive.carousel('isPaused'));
-    //whoslive.carousel('destroy');
-
-    var lastItem = $('.js-whoslive-carousel>.item.active');
-    lastItemChannel = lastItem.attr("data-slide-channel");
-    //var itemIndex = lastItem.attr("data-slide-index");
-
-    console.log(lastItemChannel);
-
-    isFirstUpdate = false;
-
-    checkIfLiveAll();
-}*/
 
 function createWhosliveCarousel() {
     $("#carousel-whoslive").html($("#carousel-whoslive").html()); // remove all js listeners and such
@@ -95,7 +76,7 @@ function handleAllIsLive(json) {
             ci += '<img src="' + preview720p + '" srcset="' ;
             ci += preview180p + ' 320w, ' + preview360p + ' 640w, ' + preview480p + ' 854w, ';
             ci += preview720p + ' 1280w, ' + preview1080p + ' 1920w';
-            ci += '" sizes="(min-width: 1200px) 848px, (min-width: 992px) 617px, (min-width: 768px) 405px, 100vw" class="img-responsive"></a>';
+            ci += '" sizes="(min-width: 1200px) 848px, (min-width: 992px) 617px, (min-width: 768px) 405px, 100vw" class="img-responsive img-rounded"></a>';
 
             ci += '<div class="carousel-caption">';
             ci += '<h3 class="carousel-item-title">';
@@ -122,19 +103,7 @@ function handleAllIsLive(json) {
     listContainer.html(list);
     carouselContainer.html(carousel);
 
-    // if (!isFirstUpdate) {
-    //     var whoslive = $("#carousel-whoslive");
-
-    //     var newItem = $('.js-whoslive-carousel>.item[data-slide-channel=' + lastItemChannel + ']');
-    //     var newIndex = 0;
-    //     if (newItem.length != 0) {
-    //         newIndex = parseInt(newItem.attr("data-slide-index"));
-    //     }
-    //     createWhosliveCarousel();
-    //     whoslive.removeClass("slide");
-    //     whoslive.carousel(newIndex);
-    //     whoslive.addClass("slide");
-    // }
+    $(".nano").nanoScroller();
 }
 
 // given a twitch preview image template url, gives you a url for a specified resolution

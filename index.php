@@ -21,15 +21,8 @@ printNav();
 
     <div class="col-md-8 col-lg-9 js-whoslive-containers">
       <div id="carousel-whoslive" class="carousel slide">
-        <!-- Indicators -->
-        <!-- <ol class="carousel-indicators">
-          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol> -->
 
-        <div class="carousel-inner js-whoslive-carousel" role="listbox">
-        </div>
+        <div class="carousel-inner js-whoslive-carousel" role="listbox"></div>
 
         <a class="left carousel-control" href="#carousel-whoslive" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -44,8 +37,7 @@ printNav();
 
     <div class="col-md-4 col-lg-3 whoslive-sidebar js-whoslive-containers">
       <h4>Who's live?</h4>
-      <div class="list-group js-whoslive-list">
-      </div>
+      <div class="list-group js-whoslive-list"></div>
     </div>
   </div>
 

@@ -11,8 +11,31 @@
   color: inherit;
 }
 
+.carousel-caption {
+  text-shadow: #000 0 0 10px;
+}
+
+.js-whoslive-list {
+  max-height: 329px; /* (41*8)+1 */
+  overflow-y: auto;
+}
+@media (min-width: 992px) {
+  .js-whoslive-list {
+    max-height: 288px; /* (41*7)+1 */
+  }
+}
+@media (min-width: 1200px) {
+  .js-whoslive-list {
+    max-height: 411px; /* (41*10)+1 */
+  }
+}
+
 .whoslive-sidebar h4 {
-  margin-top: 0;
+  margin-top: 2px;
+}
+
+.js-whoslive-containers {
+  display: none;
 }
 
 
