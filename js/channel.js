@@ -1,5 +1,6 @@
 downloadCoebotData();
 var channelCoebotData = getCoebotDataChannel(channel);
+var isHighlightsLoaded = false;
 
 function enableSidebar() {
 
@@ -21,6 +22,12 @@ function enableSidebar() {
         $(".js-channel-tab-icon").html(tabIconHtml);
         $(".js-channel-tab-title").html(tabTitleHtml);
 	});
+
+    $('#navSidebar a.js-sidebar-link[href="#tab_highlights"]').on('show.bs.tab', function (e) {
+        if (!isHighlightsLoaded) {
+            loadChannelHighlights();
+        }
+    })
 }
 
 function tabContentLoaded() {
@@ -35,6 +42,7 @@ var channelData = false;
 var channelTwitchData = false;
 var twitchEmotes = false;
 var channelStreamData = false;
+var highlightsStats = false;
 
 function downloadChannelData() {
 	$.ajax({
@@ -295,7 +303,7 @@ function displayChannelChatrules() {
         $('.js-chatrules_offensive').addClass("hidden");
     }
 
-    console.log(channelData.useFilters);
+    // console.log(channelData.useFilters);
 
     if (channelData.useFilters) {
 
@@ -330,6 +338,81 @@ function displayChannelChatrules() {
     // $(".js-chatrules-div").html(html);
 }
 
+
+function loadChannelHighlights() {
+
+    $.ajax({
+        dataType: "jsonp",
+        jsonp: false,
+        jsonpCallback: "loadChannelHighlightsCallback",
+        url: "http://coebot.tv/highlights/api/stats/" + channel + "&callback=loadChannelHighlightsCallback",
+        success: function(json) {
+            console.log("Loaded highlights stats");
+            highlightsStats = json;
+            isHighlightsLoaded = true;
+            showChannelHighlights();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Failed to load highlights!");
+        }
+    });
+}
+
+function showChannelHighlights() {
+
+    var tbody = $('.js-highlights-tbody');
+    var rows = "";
+    var shouldSortTable = true;
+    for (var i = 0; i < highlightsStats.streams.length; i++) {
+        var strm = highlightsStats.streams[i];
+        var row = '<tr>';
+        row += '<td>' + strm.title + '</td>';
+
+        var startMoment = moment.unix(strm.start);
+        row += '<td title="' + cleanHtmlAttr(startMoment.format('LLLL')) + '">' + startMoment.calendar() + '</td>';
+
+        var durationMoment = moment.duration(strm.duration, 'seconds');
+        row += '<td title="' + cleanHtmlAttr(stringifyDuration(durationMoment)) + '">' + durationMoment.humanize() + '</td>';
+        row += '<td>' + Humanize.intComma(strm.hlcount) + '</td>';
+        row += '</tr>';
+        rows += row;
+    }
+    if (rows == "") {
+        rows = '<tr><td colspan="4" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        shouldSortTable = false;
+    }
+
+    tbody.html(rows);
+
+    if (shouldSortTable) {
+        $('.js-highlights-table').dataTable({
+            "paging": false,
+            "info": false
+        });
+    }
+
+    $('.js-highlights-loading').addClass('hidden');
+    $('.js-highlights-table').removeClass('hidden');
+
+}
+
+
+// turns a Moment.js duration object into a totes professional string
+function stringifyDuration(duration) {
+    var str = "";
+
+    if (duration.asDays() >= 1) {
+        str += Math.floor(duration.asDays()) + " days, ";
+        str += duration.hours() + " hours, ";
+
+    } else if (duration.asHours() >= 1) {
+        str += Math.floor(duration.asHours()) + " hours, ";
+    }
+    str += duration.minutes() + " minutes, ";
+    str += duration.seconds() + " seconds";
+
+    return str;
+}
 
 
 function prettifyAccessLevel(access) {

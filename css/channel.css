@@ -140,6 +140,36 @@
 }
 
 
+.sorttable-icon {
+  padding-right: 6px;
+  color: #888;
+  display: inline; /*inline-block;*/
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 1.28571429em;
+  text-align: center;
+}
+
+.dataTable th.sorting .sorttable-icon:before {
+  content: '\f0dc';
+}
+
+.dataTable th.sorting_asc .sorttable-icon:before {
+  content: '\f0de';
+}
+
+.dataTable th.sorting_desc .sorttable-icon:before {
+  content: '\f0dd';
+}
+
+.dataTable th.sorting, .dataTable th.sorting_asc, .dataTable th.sorting_desc {
+  padding-right: 12px;
+}
+
+
 .row-command-access-0 .row-command-col-access {
   color: #bdc3c7;
 }

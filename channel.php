@@ -89,7 +89,7 @@ printNav();
                 <span class="sidebar-title">Chat rules</span>
               </a></li>
 
-              <li><a href="http://coebot.tv/highlights/<?php echo $channel; ?>" target="_blank">
+              <li><a href="#tab_highlights" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-star fa-fw"></i></span>
                 <span class="sidebar-title">Highlights</span>
               </a></li>
@@ -131,10 +131,10 @@ printNav();
             <table class="table table-striped js-commands-table">
               <thead>
                 <tr>
-                  <th>Command</th>
-                  <th class="row-command-col-access">Access</th>
-                  <th>Response</th>
-                  <th>Count</th>
+                  <th><i class="sorttable-icon"></i>Command</th>
+                  <th class="row-command-col-access"><i class="sorttable-icon"></i>Access</th>
+                  <th><i class="sorttable-icon"></i>Response</th>
+                  <th><i class="sorttable-icon"></i>Count</th>
                 </tr>
               </thead>
               <tbody class="js-commands-tbody"></tbody>
@@ -153,8 +153,8 @@ printNav();
             <table class="table table-striped js-quotes-table">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Quote</th>
+                  <th><i class="sorttable-icon"></i>#</th>
+                  <th><i class="sorttable-icon"></i>Quote</th>
                 </tr>
               </thead>
               <tbody class="js-quotes-tbody"></tbody>
@@ -172,9 +172,9 @@ printNav();
             <table class="table table-striped js-autoreplies-table">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Trigger</th>
-                  <th>Response</th>
+                  <th><i class="sorttable-icon"></i>#</th>
+                  <th><i class="sorttable-icon"></i>Trigger</th>
+                  <th><i class="sorttable-icon"></i>Response</th>
                 </tr>
               </thead>
               <tbody class="js-autoreplies-tbody"></tbody>
@@ -192,8 +192,8 @@ printNav();
             <table class="table table-striped js-scheduled-table">
               <thead>
                 <tr>
-                  <th>Command</th>
-                  <th>Frequency</th>
+                  <th><i class="sorttable-icon"></i>Command</th>
+                  <th><i class="sorttable-icon"></i>Frequency</th>
                 </tr>
               </thead>
               <tbody class="js-scheduled-tbody"></tbody>
@@ -212,7 +212,7 @@ printNav();
             <table class="table js-regulars-table">
               <thead>
                 <tr>
-                  <th>Twitch name</th>
+                  <th><i class="sorttable-icon"></i>Twitch name</th>
                 </tr>
               </thead>
               <tbody class="js-regulars-tbody"></tbody>
@@ -230,7 +230,7 @@ printNav();
               <table class="table js-chatrules_offensive-table">
                 <thead>
                   <tr>
-                    <th>Phrase</th>
+                    <th><i class="sorttable-icon"></i>Phrase</th>
                   </tr>
                 </thead>
                 <tbody class="js-chatrules_offensive-tbody"></tbody>
@@ -238,6 +238,33 @@ printNav();
             </div>
           </div>
           <script>displayChannelChatrules()</script>
+        </div><!--/.tab-pane -->
+
+
+        <div role="tabpanel" class="tab-pane fade" id="tab_highlights">
+          <div class="js-highlights-loading">
+            <h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3>
+          </div>
+          <p>
+            Highlights are still being moved over to the new site. 
+            For now, the highlights are still available 
+            <a href="http://coebot.tv/highlights/<?php echo $channel; ?>" target="_blank">here</a>.
+          </p>
+
+          <div class="">
+            <table class="table table-striped js-highlights-table hidden">
+              <thead>
+                <tr>
+                  <th><i class="sorttable-icon"></i>Title</th>
+                  <th><i class="sorttable-icon"></i>Date</th>
+                  <th><i class="sorttable-icon"></i>Duration</th>
+                  <th><i class="sorttable-icon"></i>Highlights</th>
+                </tr>
+              </thead>
+              <tbody class="js-highlights-tbody"></tbody>
+            </table>
+          </div>
+
         </div><!--/.tab-pane -->
 
       </div>
