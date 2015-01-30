@@ -369,11 +369,13 @@ function showChannelHighlights() {
         row += '<td>' + strm.title + '</td>';
 
         var startMoment = moment.unix(strm.start);
-        row += '<td title="' + cleanHtmlAttr(startMoment.format('LLLL')) + '">' + startMoment.calendar() + '</td>';
+        var cleanStart = cleanHtmlAttr(startMoment.format('LLLL'));
+        row += '<td title="' + cleanStart + '" data-order="' + strm.start + '">' + startMoment.calendar() + '</td>';
 
         var durationMoment = moment.duration(strm.duration, 'seconds');
-        row += '<td title="' + cleanHtmlAttr(stringifyDuration(durationMoment)) + '">' + durationMoment.humanize() + '</td>';
-        row += '<td>' + Humanize.intComma(strm.hlcount) + '</td>';
+        var cleanDuration = cleanHtmlAttr(stringifyDuration(durationMoment));
+        row += '<td title="' + cleanDuration + '" data-order="' + strm.duration + '">' + durationMoment.humanize() + '</td>';
+        row += '<td data-order="' + strm.hlcount + '">' + Humanize.intComma(strm.hlcount) + '</td>';
         row += '</tr>';
         rows += row;
     }
@@ -387,7 +389,8 @@ function showChannelHighlights() {
     if (shouldSortTable) {
         $('.js-highlights-table').dataTable({
             "paging": false,
-            "info": false
+            "info": false,
+            "order": [[ 1, "desc" ]]
         });
     }
 
@@ -402,14 +405,16 @@ function stringifyDuration(duration) {
     var str = "";
 
     if (duration.asDays() >= 1) {
-        str += Math.floor(duration.asDays()) + " days, ";
-        str += duration.hours() + " hours, ";
+        var days = Math.floor(duration.asDays());
+        str += days + " day" + (days == 1 ?"":"s") + ", ";
+        str += duration.hours() + " hour" + (duration.hours() == 1 ?"":"s") + ", ";
 
     } else if (duration.asHours() >= 1) {
-        str += Math.floor(duration.asHours()) + " hours, ";
+        var hrs = Math.floor(duration.asHours());
+        str += hrs + " hour" + (hrs == 1 ?"":"s") + ", ";
     }
-    str += duration.minutes() + " minutes, ";
-    str += duration.seconds() + " seconds";
+    str += duration.minutes() + " minute" + (duration.minutes() == 1 ?"":"s") + ", ";
+    str += duration.seconds() + " second" + (duration.seconds() == 1 ?"":"s");
 
     return str;
 }
@@ -493,6 +498,18 @@ function injectTwitchData() {
 }
 
 $(document).ready(function() {
+
+    moment.locale('en-custom', {
+        calendar : {
+            lastDay : '[Yesterday at] LT',
+            sameDay : '[Today at] LT',
+            nextDay : '[Tomorrow at] LT',
+            lastWeek : '[Last] dddd [at] LT',
+            nextWeek : 'dddd [at] LT',
+            sameElse : 'll [at] LT'
+        }
+    });
+
     $.ajax({
         dataType: "jsonp",
         jsonp: "callback",

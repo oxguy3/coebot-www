@@ -242,21 +242,21 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_highlights">
-          <div class="js-highlights-loading">
-            <h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3>
-          </div>
           <p>
             Highlights are still being moved over to the new site. 
             For now, the highlights are still available 
             <a href="http://coebot.tv/highlights/<?php echo $channel; ?>" target="_blank">here</a>.
           </p>
+          <div class="js-highlights-loading">
+            <h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3>
+          </div>
 
           <div class="">
             <table class="table table-striped js-highlights-table hidden">
               <thead>
                 <tr>
                   <th><i class="sorttable-icon"></i>Title</th>
-                  <th><i class="sorttable-icon"></i>Date</th>
+                  <th><i class="sorttable-icon"></i>Start time</th>
                   <th><i class="sorttable-icon"></i>Duration</th>
                   <th><i class="sorttable-icon"></i>Highlights</th>
                 </tr>
