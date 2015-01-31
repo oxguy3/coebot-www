@@ -466,7 +466,7 @@ function showHlstream() {
 
     $('.js-hlstream-title').html(currentHlstream.title);
 
-    $('.js-hlstream-twitchlink').attr("href", '//www.twitch.tv/' + channel + '/b/' + currentHlstream.id);
+    $('.js-hlstream-twitchlink').attr("href", getUrlForTwitchVod(channel, currentHlstream.id));
 
 
     var playerVars = "title=" + currentHlstream.title + "&amp;channel=" + channel 
@@ -644,6 +644,19 @@ function htmlifyEmote(emote) {
     html += '" title="' + emote.regex;
     html += '" class="twitch-emote">';
     return html;
+}
+
+// because twitch is too cool for consistency
+function getUrlForTwitchVod(channel, id) {
+    var prefix = id.substr(0,1);
+    if (prefix == "a") {
+        return "http://twitch.tv/" + channel + "/b/" + id.substr(1);
+    }
+    if (prefix == "v") {
+        return "http://twitch.tv/" + channel + "/v/" + id.substr(1);
+    }
+    console.log("ERROR: Failed to parse id: " + id);
+    return "http://twitch.tv/" + channel + "/" + id.substr(1);
 }
 
 // displays info about the Twitch channel on the overview page
