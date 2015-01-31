@@ -186,6 +186,17 @@
   color: #c0392b;
 }
 
+
+.fake-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.js-hlstream-loaded {
+  display: none;
+}
+
+
 /*@media (max-width: 767px) {
   .row-command-access-0 {
     color: #bdc3c7;

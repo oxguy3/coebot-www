@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule ^highlights/([^.]+)?$ highlight.php?arg=$1 [L]

@@ -1,4 +1,5 @@
 var EMPTY_TABLE_PLACEHOLDER = 'There\'s nothing here... <i class="fa fa-frown-o"></i>';
+var HASH_DELIMITER = "/";
 
 function prettifyStringVariables(str) {
     var pattern = /\(_(\w+)_\)/g;
@@ -45,7 +46,7 @@ function getCoebotDataChannel(chan) {
 }
 
 function getUrlToChannel(chan) {
-    return "/channel/" + chan + "/";
+    return "/c/" + chan + "/";
 }
 
 

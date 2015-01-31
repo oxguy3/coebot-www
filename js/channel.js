@@ -2,12 +2,18 @@ downloadCoebotData();
 var channelCoebotData = getCoebotDataChannel(channel);
 var isHighlightsLoaded = false;
 
+var hlstreamTable = false;
+
+var hashPostfix = "";
+
 function enableSidebar() {
 
 	$('#navSidebar a.js-sidebar-link').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
-        window.location.hash = "#" + $(this).attr("href").substr(5);
+        //var hashExtension = HASH_DELIMITER + window.location.hash.substr(1).split(HASH_DELIMITER).splice(0,1).join(HASH_DELIMITER);
+        window.location.hash = "#" + $(this).attr("href").substr(5) + hashPostfix;// + hashExtension;
+        hashPostfix = "";
 
         $('#channelSidebarCollapse').collapse('hide');
 	});
@@ -32,9 +38,18 @@ function enableSidebar() {
 
 function tabContentLoaded() {
     if (window.location.hash != "") {
-        var jumpToTab = window.location.hash.substr(1);
+        var explodedHash = window.location.hash.substr(1).split(HASH_DELIMITER);
+        var jumpToTab = explodedHash.splice(0,1);
+        if (explodedHash.length >= 1) {
+            hashPostfix = HASH_DELIMITER + explodedHash.join(HASH_DELIMITER);
+        }
+
         $('#navSidebar a[href="#tab_' + jumpToTab + '"]').click();
     }
+
+    $('#hlStreamModal').on('hidden.bs.modal', function (e) {
+        window.location.hash = window.location.hash.split(HASH_DELIMITER)[0];
+    });
 }
 
 // channel config data
@@ -43,6 +58,7 @@ var channelTwitchData = false;
 var twitchEmotes = false;
 var channelStreamData = false;
 var highlightsStats = false;
+var currentHlstream = false;
 
 function downloadChannelData() {
 	$.ajax({
@@ -341,11 +357,17 @@ function displayChannelChatrules() {
 
 function loadChannelHighlights() {
 
+    var explodedHash = window.location.hash.substr(0).split(HASH_DELIMITER);
+
+    if (explodedHash.length >= 2) {
+        loadHlstream(parseInt(explodedHash[1]));
+    }
+
     $.ajax({
         dataType: "jsonp",
         jsonp: false,
         jsonpCallback: "loadChannelHighlightsCallback",
-        url: "http://coebot.tv/highlights/api/stats/" + channel + "&callback=loadChannelHighlightsCallback",
+        url: "/oldhl/api/stats/" + channel + "&callback=loadChannelHighlightsCallback",
         success: function(json) {
             console.log("Loaded highlights stats");
             highlightsStats = json;
@@ -366,7 +388,8 @@ function showChannelHighlights() {
     for (var i = 0; i < highlightsStats.streams.length; i++) {
         var strm = highlightsStats.streams[i];
         var row = '<tr>';
-        row += '<td>' + strm.title + '</td>';
+
+        row += '<td><span class="fake-link js-highlight-btn" data-hlid="' + strm.id + '">' + strm.title + '</span></td>';
 
         var startMoment = moment.unix(strm.start);
         var cleanStart = cleanHtmlAttr(startMoment.format('LLLL'));
@@ -377,6 +400,8 @@ function showChannelHighlights() {
         row += '<td title="' + cleanDuration + '" data-order="' + strm.duration + '">' + durationMoment.humanize() + '</td>';
         row += '<td data-order="' + strm.hlcount + '">' + Humanize.intComma(strm.hlcount) + '</td>';
         row += '</tr>';
+
+
         rows += row;
     }
     if (rows == "") {
@@ -397,6 +422,119 @@ function showChannelHighlights() {
     $('.js-highlights-loading').addClass('hidden');
     $('.js-highlights-table').removeClass('hidden');
 
+    $('.js-highlight-btn').click(function() {
+        var hlid = $(this).attr('data-hlid');
+        loadHlstream(hlid);
+    });
+
+}
+
+
+function loadHlstream(id) {
+
+    $('.js-hlstream-loaded, .js-hlstream-loaded-inline').css('display', 'none');
+    $('.js-hlstream-loading').css('display', 'block');
+    $('.js-hlstream-loading-inline').css('display', 'inline');
+
+    $('#hlStreamModal').modal('show');
+
+    window.location.hash += HASH_DELIMITER + id;
+
+    $.ajax({
+        dataType: "jsonp",
+        jsonp: false,
+        jsonpCallback: "loadHlstreamCallback",
+        url: "/oldhl/api/hl/" + channel + "/" + id + "/&callback=loadHlstreamCallback",
+        success: function(json) {
+            console.log("Loaded hlstream #" + id);
+            currentHlstream = json;
+            showHlstream();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Failed to load highlight!");
+        }
+    });
+}
+
+function showHlstream() {
+
+    $('.js-hlstream-title').html(currentHlstream.title);
+
+    $('.js-hlstream-twitchlink').attr("href", '//www.twitch.tv/' + channel + '/b/' + currentHlstream.id);
+
+
+    var playerVars = "title=" + currentHlstream.title + "&amp;channel=" + channel 
+    playerVars += "&amp;auto_play=false&amp;start_volume=100&amp;archive_id=" + currentHlstream.id;
+
+    var playerHtml = "";
+    playerHtml += "<object bgcolor='#313131' data='http://www.twitch.tv/widgets/archive_embed_player.swf' height='472' id='player' type='application/x-shockwave-flash' width='775'>";
+    playerHtml += "<param name='movie' value='http://www.twitch.tv/widgets/archive_embed_player.swf' />";
+    playerHtml += "<param name='allowScriptAccess' value='always' />";
+    playerHtml += "<param name='allowNetworking' value='all' />";
+    playerHtml += "<param name='allowFullScreen' value='true' />";
+    playerHtml += "<param name='flashvars' value='" + playerVars + "' />";
+    playerHtml += "</object>";
+
+    var playerParent = $(".js-hlstream-player-parent");
+    playerParent.empty();
+    playerParent.html(playerHtml);
+
+
+    var tableTemplate = '';
+    tableTemplate += '<table class="table table-striped js-hlstream-table">';
+    tableTemplate += '<thead>';
+    tableTemplate += '<tr>';
+    tableTemplate += '<th><i class="sorttable-icon"></i>Time</th>';
+    tableTemplate += '<th><i class="sorttable-icon"></i>Hits</th>';
+    tableTemplate += '</tr>';
+    tableTemplate += '</thead>';
+    tableTemplate += '<tbody class="js-hlstream-tbody"></tbody>';
+    tableTemplate += '</table>';
+
+    var tableParent = $('.js-hlstream-table-parent');
+    tableParent.empty();
+    tableParent.html(tableTemplate);
+
+    var tbody = $('.js-hlstream-tbody');
+    var rows = "";
+    var shouldSortTable = true;
+    for (var i = 0; i < currentHlstream.highlights.length; i++) {
+        var hl = currentHlstream.highlights[i];
+        var row = '<tr>';
+
+        var durationMoment = moment.duration(hl.position, 'seconds');
+        var cleanDuration = cleanHtmlAttr(stringifyDurationShort(durationMoment, true));
+        row += '<td data-order="' + hl.position + '"><span onclick="jumpHlstreamTimestamp('
+        row += hl.position + ')" class="fake-link">' + cleanDuration + '</span></td>';
+
+        row += '<td data-order="' + hl.hits + '">' + Humanize.intComma(hl.hits) + '</td>';
+        row += '</tr>';
+
+        rows += row;
+    }
+    if (rows == "") {
+        rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        shouldSortTable = false;
+    }
+
+    tbody.html(rows);
+
+    if (shouldSortTable) {
+        hlstreamTable = $('.js-hlstream-table').dataTable({
+            "paging": false,
+            "info": false,
+            "searching": false
+        });
+    }
+
+    $('.js-hlstream-loading, .js-hlstream-loading-inline').css('display', 'none');
+    $('.js-hlstream-loaded').css('display', 'block');
+    $('.js-hlstream-loaded-inline').css('display', 'inline');
+
+}
+
+function jumpHlstreamTimestamp(timestamp) {
+    player.videoSeek(timestamp);
 }
 
 
@@ -415,6 +553,23 @@ function stringifyDuration(duration) {
     }
     str += duration.minutes() + " minute" + (duration.minutes() == 1 ?"":"s") + ", ";
     str += duration.seconds() + " second" + (duration.seconds() == 1 ?"":"s");
+
+    return str;
+}
+
+
+// turns a Moment.js duration object into a totes professional string, except shorter
+function stringifyDurationShort(duration, shouldAddSpaces) {
+    var str = "";
+
+    var maybeASpace = shouldAddSpaces ? " " : "";
+
+    if (duration.asHours() >= 1) {
+        var hrs = Math.floor(duration.asHours());
+        str += hrs + "h" + maybeASpace;
+    }
+    str += duration.minutes() + "m" + maybeASpace;
+    str += duration.seconds() + "s";
 
     return str;
 }
@@ -499,16 +654,16 @@ function injectTwitchData() {
 
 $(document).ready(function() {
 
-    moment.locale('en-custom', {
-        calendar : {
-            lastDay : '[Yesterday at] LT',
-            sameDay : '[Today at] LT',
-            nextDay : '[Tomorrow at] LT',
-            lastWeek : '[Last] dddd [at] LT',
-            nextWeek : 'dddd [at] LT',
-            sameElse : 'll [at] LT'
-        }
-    });
+    // moment.locale('en-custom', {
+    //     calendar : {
+    //         lastDay : '[Yesterday at] LT',
+    //         sameDay : '[Today at] LT',
+    //         nextDay : '[Tomorrow at] LT',
+    //         lastWeek : '[Last] dddd [at] LT',
+    //         nextWeek : 'dddd [at] LT',
+    //         sameElse : 'll [at] LT'
+    //     }
+    // });
 
     $.ajax({
         dataType: "jsonp",

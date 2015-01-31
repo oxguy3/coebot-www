@@ -40,6 +40,10 @@ if ($q[0] == "v1") {
 
 
 
+    } else if ($q[1] == 'channel' && $q[2] == 'update' && $q[3] == 'boir') {
+
+        channelUpdateBoir($q);
+
     } else {
         tellError("bad method", 400);
     }
@@ -72,6 +76,21 @@ function channelUpdateConfig($query) {
     }
 
     file_put_contents('configs/' . $channel . '.json', json_encode($json), LOCK_EX);
+
+    tellSuccess();
+}
+
+
+function channelUpdateBoir($query) {
+    authOrDie($query, true);
+    $channel = channelOrDie($query);
+
+    $json = json_decode(file_get_contents("php://input"));
+    if ($json === false) {
+        tellBadParam('json');
+    }
+
+    file_put_contents('configs/boir/' . $channel . '.json', json_encode($json), LOCK_EX);
 
     tellSuccess();
 }

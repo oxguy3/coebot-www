@@ -149,18 +149,16 @@ printNav();
           <p>
             To retrieve a particular quote, use <kbd class="command">quote get [number]</kbd>. You can also retrieve a random quote with <kbd class="command">quote random</kbd>.
           </p>
-          <div class="">
-            <table class="table table-striped js-quotes-table">
-              <thead>
-                <tr>
-                  <th><i class="sorttable-icon"></i>#</th>
-                  <th><i class="sorttable-icon"></i>Quote</th>
-                </tr>
-              </thead>
-              <tbody class="js-quotes-tbody"></tbody>
-            </table>
-            <script>displayChannelQuotes()</script>
-          </div>
+          <table class="table table-striped js-quotes-table">
+            <thead>
+              <tr>
+                <th><i class="sorttable-icon"></i>#</th>
+                <th><i class="sorttable-icon"></i>Quote</th>
+              </tr>
+            </thead>
+            <tbody class="js-quotes-tbody"></tbody>
+          </table>
+          <script>displayChannelQuotes()</script>
         </div><!--/.tab-pane -->
 
 
@@ -168,19 +166,17 @@ printNav();
           <p>
             Here are the auto-replies defined for this channel. Whenever Coebot sees anyone say any of these phrases, it will automatically give the appropriate reply. Asterisks (*) represent wildcards.
           </p>
-          <div class="">
-            <table class="table table-striped js-autoreplies-table">
-              <thead>
-                <tr>
-                  <th><i class="sorttable-icon"></i>#</th>
-                  <th><i class="sorttable-icon"></i>Trigger</th>
-                  <th><i class="sorttable-icon"></i>Response</th>
-                </tr>
-              </thead>
-              <tbody class="js-autoreplies-tbody"></tbody>
-            </table>
-            <script>displayChannelAutoreplies()</script>
-          </div>
+          <table class="table table-striped js-autoreplies-table">
+            <thead>
+              <tr>
+                <th><i class="sorttable-icon"></i>#</th>
+                <th><i class="sorttable-icon"></i>Trigger</th>
+                <th><i class="sorttable-icon"></i>Response</th>
+              </tr>
+            </thead>
+            <tbody class="js-autoreplies-tbody"></tbody>
+          </table>
+          <script>displayChannelAutoreplies()</script>
         </div><!--/.tab-pane -->
 
 
@@ -188,18 +184,16 @@ printNav();
           <p>
             Here are the scheduled and repeating commands defined for this channel. Coebot will automatically execute these commands according to the given time interval.
           </p>
-          <div class="">
-            <table class="table table-striped js-scheduled-table">
-              <thead>
-                <tr>
-                  <th><i class="sorttable-icon"></i>Command</th>
-                  <th><i class="sorttable-icon"></i>Frequency</th>
-                </tr>
-              </thead>
-              <tbody class="js-scheduled-tbody"></tbody>
-            </table>
-            <script>displayChannelScheduled()</script>
-          </div>
+          <table class="table table-striped js-scheduled-table">
+            <thead>
+              <tr>
+                <th><i class="sorttable-icon"></i>Command</th>
+                <th><i class="sorttable-icon"></i>Frequency</th>
+              </tr>
+            </thead>
+            <tbody class="js-scheduled-tbody"></tbody>
+          </table>
+          <script>displayChannelScheduled()</script>
         </div><!--/.tab-pane -->
 
 
@@ -242,6 +236,11 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_highlights">
+
+          <div class="alert alert-warning visible-xs-block">
+            <strong>Heads up.</strong> Due to limitations in Twitch's video player, highlights may not be playable on your device. 
+            Sorry for the inconvenience.
+          </div>
           <p>
             Highlights are still being moved over to the new site. 
             For now, the highlights are still available 
@@ -251,18 +250,37 @@ printNav();
             <h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3>
           </div>
 
-          <div class="">
-            <table class="table table-striped js-highlights-table hidden">
-              <thead>
-                <tr>
-                  <th><i class="sorttable-icon"></i>Title</th>
-                  <th><i class="sorttable-icon"></i>Start time</th>
-                  <th><i class="sorttable-icon"></i>Duration</th>
-                  <th><i class="sorttable-icon"></i>Highlights</th>
-                </tr>
-              </thead>
-              <tbody class="js-highlights-tbody"></tbody>
-            </table>
+          <table class="table table-striped js-highlights-table hidden">
+            <thead>
+              <tr>
+                <th><i class="sorttable-icon"></i>Title</th>
+                <th><i class="sorttable-icon"></i>Start time</th>
+                <th><i class="sorttable-icon"></i>Duration</th>
+                <th><i class="sorttable-icon"></i>Highlights</th>
+              </tr>
+            </thead>
+            <tbody class="js-highlights-tbody"></tbody>
+          </table>
+
+          <div class="modal fade" id="hlStreamModal" tabindex="-1" role="dialog" aria-labelledby="hlStreamModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="hlStreamModalLabel">
+                    <span class="js-hlstream-loaded-inline js-hlstream-title"></span>
+                    <span class="js-hlstream-loading-inline"><i class="fa fa-spinner fa-spin"></i> Loading...</span>
+                  </h4>
+                </div>
+                <div class="modal-body js-hlstream-loaded">
+                  <div class="js-hlstream-player-parent"></div>
+                  <p>
+                    <a target="_blank" class="btn btn-primary js-hlstream-twitchlink">View on Twitch <i class="fa fa-twitch"></i></a>
+                  </p>
+                  <div class="js-hlstream-table-parent"></div>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div><!--/.tab-pane -->
