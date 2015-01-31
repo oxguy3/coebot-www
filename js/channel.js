@@ -363,6 +363,12 @@ function loadChannelHighlights() {
         loadHlstream(parseInt(explodedHash[1]));
     }
 
+    Twitch.init({clientId: '1edbt02x273wfht9ad4goa4aabv00fw'}, function(error, status) {
+
+    // the sdk is now loaded
+
+    });
+
     $.ajax({
         dataType: "jsonp",
         jsonp: false,
@@ -464,7 +470,7 @@ function showHlstream() {
 
 
     var playerVars = "title=" + currentHlstream.title + "&amp;channel=" + channel 
-    playerVars += "&amp;auto_play=false&amp;start_volume=100&amp;archive_id=" + currentHlstream.id;
+    playerVars += "&amp;auto_play=false&amp;start_volume=100&amp;videoId=" + currentHlstream.id;
 
     var playerHtml = "";
     playerHtml += "<object bgcolor='#313131' data='http://www.twitch.tv/widgets/archive_embed_player.swf' height='472' id='player' type='application/x-shockwave-flash' width='775'>";

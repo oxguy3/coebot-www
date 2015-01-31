@@ -279,7 +279,7 @@
 			header('content-type: application/json; charset=utf-8');
 
 			//fetch stream
-			$stream = json_decode(file_get_contents('https://api.twitch.tv/kraken/videos/a'.$streamid.'?client_id=1edbt02x273wfht9ad4goa4aabv00fw'));
+			$stream = json_decode(file_get_contents('https://api.twitch.tv/kraken/videos/'.$streamid.'?client_id=1edbt02x273wfht9ad4goa4aabv00fw'));
 			// $tpl = new TemplatePower("templates/stream.html");
 			// $tpl->prepare();
 
@@ -436,7 +436,7 @@
 					$streamObj = array(); // $tpl->newBlock("streamrow");
 
 					$streamObj["title"] = $pastBroadcast["title"];
-					$streamObj["id"] = substr($pastBroadcast["_id"],1);
+					$streamObj["id"] = $pastBroadcast["_id"];
 					//$streamObj["channel"] = $channel;
 
 					$streamstart = strtotime($pastBroadcast["recorded_at"]);

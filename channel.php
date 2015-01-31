@@ -23,6 +23,7 @@ printHead(
     "//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js",
     "/js/later.min.js", 
     "/js/prettycron.js", 
+    "https://ttv-api.s3.amazonaws.com/twitch.min.js",
     "/js/channel.js"
   ), 
   $extraHeadCode
