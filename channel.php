@@ -242,9 +242,8 @@ printNav();
             Sorry for the inconvenience.
           </div>
           <p>
-            Highlights are still being moved over to the new site. 
-            For now, the highlights are still available 
-            <a href="http://coebot.tv/highlights/<?php echo $channel; ?>" target="_blank">here</a>.
+            CoeBot keeps track of highlights from every streamer's livestreams. Whenever someone types <kbd class="command">ht</kbd> (meaning "highlight that!") in chat, 
+            CoeBot records that as a highlight. Here you can view the highlights from the last 30 days of livestreams.
           </p>
           <div class="js-highlights-loading">
             <h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3>
