@@ -152,7 +152,7 @@ function updateIsLive(streams) {
             popover += '<img src="'+stream.preview.medium+'" class="img-responsive" height="180" width="320">';
             
             popover += '<i class="fa fa-gamepad"></i> ' + ((stream.channel.game) ? stream.channel.game : "Unknown") + '<br>';
-            popover += '<i class="fa fa-eye"></i> ' + Humanize.intComma(stream.viewers) + '';
+            popover += '<i class="fa fa-user"></i> ' + Humanize.intComma(stream.viewers) + '';
             popover += '</div>';
 
             current.attr("data-title", (stream.channel.status) ? stream.channel.status : "Unknown");
