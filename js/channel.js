@@ -274,7 +274,7 @@ function displayChannelRegulars() {
 
 
     var subsinfoText = 'On this channel, ';
-    if (channelData.subcriberRegulars) {
+    if (channelData.subscriberRegulars) {
         subsinfoText += 'subscribers are automatically given all the same privileges as regulars.';
     } else if (channelData.subsRegsMinusLinks) {
         subsinfoText += 'subscribers are automatically given the same privileges as regulars, except they cannot post links or use the <kbd class="command">urban</kbd> command.';
