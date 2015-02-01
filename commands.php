@@ -307,7 +307,7 @@ printNav();
 		  <dl>
 
 		    <dt><kbd class="command">boi wiki &lt;query&gt;</kbd></dt>
-		    <dd>Searches the Binding of Isaac wiki for a particular</dd>
+		    <dd>Searches the Binding of Isaac wiki for a particular query.</dd>
 
 		    <dt><kbd class="command">boi floor</kbd></dt>
 		    <dd>Shows what floor the streamer is currently on.</dd>
