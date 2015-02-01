@@ -299,6 +299,31 @@ printNav();
 		  </dl>
 
 
+		  <h3 id="boirebirth" class="commands-nav-heading">Binding of Isaac: Rebirth</h3>
+
+		  <p>
+		  	Using a special companion program, CoeBot can keep track of information about a streamer's BOI:R game.
+		  </p>
+		  <dl>
+
+		    <dt><kbd class="command">boi wiki &lt;query&gt;</kbd></dt>
+		    <dd>Searches the Binding of Isaac wiki for a particular</dd>
+
+		    <dt><kbd class="command">boi floor</kbd></dt>
+		    <dd>Shows what floor the streamer is currently on.</dd>
+
+		    <dt><kbd class="command">boi seed</kbd></dt>
+		    <dd>Gives the seed for the streamer's build.</dd>
+
+		    <dt><kbd class="command">boi items</kbd></dt>
+		    <dd>Lists all the items the streamer has.</dd>
+
+		    <dt><kbd class="command">boi transformations</kbd></dt>
+		    <dd>Shows the streamer's progress towards each of the transformations.</dd>
+
+		  </dl>
+
+
 
 
 		  <h2 id="moderation" class="commands-nav-heading">Moderation</h2>
@@ -623,6 +648,9 @@ printNav();
 		    <dt><kbd>(_PARAMETER_)</kbd></dt>
 		    <dd>This is replaced by the parameter after the command is called. Multiple parameters can be used in one command, and when calling it separate the individual parameters with ';'.</dd>
 
+		    <dt><kbd>(_PARAMETER_CAPS_)</kbd></dt>
+		    <dd>Does the same thing as <kbd>(_PARAMETER_)</kbd>, but converts the input to all capital letters.</dd>
+
 		    <dt><kbd>(_NUMCHANNELS_)</kbd></dt>
 		    <dd>Returns the number of channels that <?php echo $SITE_TITLE; ?> is currently active in.</dd>
 
@@ -697,6 +725,7 @@ printNav();
 				  		<li><a href="#polls">Polls</a></li>
 				  		<li><a href="#giveaways">Giveaways</a></li>
 				  		<li><a href="#raffles">Raffles</a></li>
+				  		<li><a href="#boirebirth">Binding of Isaac: Rebirth</a></li>
 				  	</ul>
 				  </li>
 				  <li>
