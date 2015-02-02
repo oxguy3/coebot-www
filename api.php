@@ -2,6 +2,9 @@
 
 require_once("common.php");
 
+define("AUTH_SHARED_SECRET", 2);
+define("AUTH_USER_OAUTH", 3);
+
 
 if (!isset($_GET['q']) || $_GET['q'] == '') {
     tellError("missing params", 400);
@@ -62,7 +65,7 @@ if ($q[0] == "v1") {
  **************/
 
 function channelUpdateConfig($query) {
-    authOrDie($query, true);
+    authOrDie($query, true, AUTH_SHARED_SECRET);
     $channel = channelOrDie($query);
     //requirePostParams(array('json'));
 
@@ -82,7 +85,7 @@ function channelUpdateConfig($query) {
 
 
 function channelUpdateBoir($query) {
-    authOrDie($query, true);
+    authOrDie($query, true, AUTH_USER_OAUTH);
     $channel = channelOrDie($query);
 
     $json = json_decode(file_get_contents("php://input"));
@@ -102,13 +105,21 @@ function channelUpdateBoir($query) {
  * AUTHENTICATION
  *****************/
 
-function authOrDie($query, $checkChannel) {
-    if (!checkAuthFromRaw($query, $checkChannel)) {
+function authOrDie($query, $checkChannel, $authMethod) {
+
+    if (!checkAuthFromRaw($query, $checkChannel, $authMethod)) {
         tellError("bad auth", 403);
     }
 }
 
-function checkAuthFromRaw($query, $checkChannel) {
+function checkAuthFromRaw($query, $checkChannel, $authMethod) {
+
+    // channel is required for oauth check, so force $checkChannel
+    if ($authMethod == AUTH_USER_OAUTH) {
+        $checkChannel = true;
+    }
+
+
     $authArr = getAuthArray($query);
     if (count($authArr) != 3) return false;
 
@@ -121,7 +132,15 @@ function checkAuthFromRaw($query, $checkChannel) {
         $chan = channelOrDie($query);
     }
 
-    return checkAuth($a, $cn, $chan);
+    if ($authMethod == AUTH_SHARED_SECRET) {
+        return checkAuth($a, $cn, $chan);
+
+    } else if ($authMethod == AUTH_USER_OAUTH) {
+        return checkOauthToken($a, $chan);
+
+    } else {
+        return false;
+    }
 }
 
 function checkAuth($auth, $cnonce, $channel) {
@@ -132,6 +151,26 @@ function checkAuth($auth, $cnonce, $channel) {
     if ($channel !== false) {
         // do some check to see if this client has access for this channel
     }
+}
+
+function checkOauthToken($auth, $channel) {
+    if (!validateOauthToken($auth)) {
+        return false;
+    }
+
+    $curlSession = curl_init();
+    curl_setopt($curlSession, CURLOPT_URL, 'https://api.twitch.tv/kraken/user?oauth_token=' . $auth);
+    curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
+    curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
+
+    $jsonData = json_decode(curl_exec($curlSession));
+    curl_close($curlSession);
+
+    return property_exists($jsonData, "name") && $channel == ($jsonData->name);
+}
+
+function validateOauthToken($token) {
+    return preg_match('/^[A-Z0-9]*$/i', $token);
 }
 
 

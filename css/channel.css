@@ -167,6 +167,7 @@
 
 .dataTable th.sorting, .dataTable th.sorting_asc, .dataTable th.sorting_desc {
   padding-right: 12px;
+  cursor: pointer;
 }
 
 
