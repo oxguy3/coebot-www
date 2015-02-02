@@ -1,3 +1,5 @@
+Options All -Indexes
+
 RewriteEngine on
 
 RewriteRule ^c/(\w+)/?$ /channel.php?channel=$1
