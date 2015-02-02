@@ -56,7 +56,7 @@ printNav();
                 <span class="sidebar-title">Overview</span>
               </a></li>
 
-              <!-- <li class="nav-sidebar-divider"></li> -->
+              <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_commands" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-terminal fa-fw"></i></span>
@@ -78,7 +78,7 @@ printNav();
                 <span class="sidebar-title">Scheduled commands</span>
               </a></li>
 
-              <!-- <li class="nav-sidebar-divider"></li> -->
+              <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_regulars" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-users fa-fw"></i></span>
@@ -90,9 +90,16 @@ printNav();
                 <span class="sidebar-title">Chat rules</span>
               </a></li>
 
+              <li class="nav-sidebar-divider"></li>
+
               <li><a href="#tab_highlights" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-star fa-fw"></i></span>
                 <span class="sidebar-title">Highlights</span>
+              </a></li>
+
+              <li><a href="#tab_games" class="js-sidebar-link">
+                <span class="sidebar-icon"><i class="fa fa-gamepad fa-fw"></i></span>
+                <span class="sidebar-title">Games</span>
               </a></li>
               
             </ul>
@@ -283,6 +290,15 @@ printNav();
             </div>
           </div>
 
+        </div><!--/.tab-pane -->
+
+
+        <div role="tabpanel" class="tab-pane fade" id="tab_games">
+          <p>
+            Coming soon....
+          </p>
+            <!-- <script>displayChannelRegulars()</script> -->
+          </div>
         </div><!--/.tab-pane -->
 
       </div>

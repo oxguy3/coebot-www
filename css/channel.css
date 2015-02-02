@@ -76,7 +76,9 @@
 }
 
 .nav-sidebar-divider {
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 2px;
 }
 
 
