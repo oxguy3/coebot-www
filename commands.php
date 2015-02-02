@@ -6,9 +6,20 @@ $DEFAULT_COMMAND_PREFIX = "!";
 
 
 $prefix = isset($_GET['prefix']) ? $_GET['prefix'] : $DEFAULT_COMMAND_PREFIX;
+
 if ($prefix == "plus") {
 	$prefix = "+";
 }
+if ($prefix == "hash") {
+	$prefix = "#";
+}
+if ($prefix == "amp") {
+	$prefix = "&";
+}
+if ($prefix == "qmark") {
+	$prefix = "?";
+}
+
 if (strlen($prefix) != 1) {
 	$prefix = $DEFAULT_COMMAND_PREFIX;
 }

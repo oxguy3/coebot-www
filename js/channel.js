@@ -719,7 +719,22 @@ $(document).ready(function() {
 
     $(".command").prepend('<span class="command-prefix">' + channelData.commandPrefix + '</span>');
 
-    var commandPrefixForUrl = channelData.commandPrefix == '+' ? 'plus' : channelData.commandPrefix;
+
+    var commandPrefixForUrl = channelData.commandPrefix;
+
+    if (commandPrefixForUrl == "+") {
+        $commandPrefixForUrl = "plus";
+    }
+    if (commandPrefixForUrl == "#") {
+        commandPrefixForUrl = "hash";
+    }
+    if (commandPrefixForUrl == "&") {
+        commandPrefixForUrl = "amp";
+    }
+    if (commandPrefixForUrl == "?") {
+        commandPrefixForUrl = "qmark";
+    }
+
     $(".js-link-commands").each(function() {
         var href = $(this).attr("href");
         $(this).attr("href", href + "/" + encodeURIComponent(commandPrefixForUrl));
