@@ -723,7 +723,7 @@ $(document).ready(function() {
     var commandPrefixForUrl = channelData.commandPrefix;
 
     if (commandPrefixForUrl == "+") {
-        $commandPrefixForUrl = "plus";
+        commandPrefixForUrl = "plus";
     }
     if (commandPrefixForUrl == "#") {
         commandPrefixForUrl = "hash";
