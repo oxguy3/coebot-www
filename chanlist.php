@@ -3,7 +3,7 @@
 require_once("common.php");
 
 printHead("Channels", array("/css/chanlist.css"), array("/js/chanlist.js"));
-printNav();
+printNav('channels');
 
 ?>
 <div class="container-fluid">

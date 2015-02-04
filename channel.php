@@ -97,7 +97,7 @@ printNav();
                 <span class="sidebar-title">Highlights</span>
               </a></li>
 
-              <li><a href="#tab_games" class="js-sidebar-link">
+              <li><a href="#tab_games" class="js-sidebar-link<?php if(!isCookieTrue("experimentalFeatures")) { echo " hidden"; } ?>">
                 <span class="sidebar-icon"><i class="fa fa-gamepad fa-fw"></i></span>
                 <span class="sidebar-title">Games</span>
               </a></li>

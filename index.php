@@ -52,26 +52,36 @@ printNav();
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>Need help?</h3>
-      <p>The commands list has all the information you need to learn to use <?php echo $SITE_TITLE; ?> like a pro.</p>
-      <p><a class="btn btn-default" href="/commands" role="button">View commands &raquo;</a></p>
+      <p>The commands list and FAQ have all the information you need to learn to use <?php echo $SITE_TITLE; ?> like a pro.</p>
+      <p>
+        <a class="btn btn-default" href="/commands" role="button">View commands &raquo;</a> 
+        <a class="btn btn-default" href="/faq" role="button">View FAQ &raquo;</a>
+      </p>
     </div>
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>Looking for someone?</h3>
       <p>If you're looking for information about a channel that isn't currently live, you can find them on the channels list.</p>
-      <p><a class="btn btn-default" href="/channels" role="button">View channels &raquo;</a></p>
+      <p>
+        <a class="btn btn-default" href="/channels" role="button">View channels &raquo;</a>
+      </p>
     </div>
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>Do you stream?</h3>
       <p>If you're a streamer and you want to use <?php echo $SITE_TITLE; ?> on your channel, drop us a line! We are always happy to welcome new streamers to the <?php echo $SITE_TITLE; ?> family.</p>
-      <p><a class="btn btn-default" href="https://twitter.com/endsgamer" role="button">Tweet @endsgamer &raquo;</a></p>
+      <p>
+        <a class="btn btn-default" href="https://twitter.com/endsgamer" role="button">Tweet @endsgamer &raquo;</a>
+      </p>
     </div>
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>We're open source!</h3>
       <p>Interested in how <?php echo $SITE_TITLE; ?> works? All our code is freely licensed, so go ahead and explore!</p>
-      <p><a class="btn btn-default" href="https://bitbucket.org/tucker_gardner/coebot" role="button">Bot source &raquo;</a> <a class="btn btn-default" href="https://github.com/oxguy3/coebot-www" role="button">Website source &raquo;</a></p>
+      <p>
+        <a class="btn btn-default" href="https://bitbucket.org/tucker_gardner/coebot" role="button">Bot source &raquo;</a> 
+        <a class="btn btn-default" href="https://github.com/oxguy3/coebot-www" role="button">Website source &raquo;</a>
+      </p>
     </div>
 
   </div>

@@ -1,0 +1,22 @@
+=== PART ONE ===
+==== FIND ====
+\n*\s*<p>&#8226;\s*(.*)\s*</p>\s*
+
+==== REPLACE ====
+"$1", 
+
+=== PART TWO ===
+==== FIND ====
+<li class="textbox" data-tid=".*" data-cid=".*" data-sid=".*">
+  <a(?:.*)><div onclick="" class='rebirth-item (r-itm\d*)'></div>
+    <span>
+    <p class="item-title">(.*)</p>(?:\n    <p class="r-special">Special item</p>)?
+    <p class="r-itemid">ItemID: (\d*)</p>\n?
+    <p class="pickup">"(.*)"</p>\n*\s*((?:".*",? ?)*), (?:\n*\s*<p(?: class="r-unlock")?>UNLOCK: (.*)</p>\s*\n*\s*)?<ul>(?:\n*\s*<p>Type: (.*)</p>\s*)(?:\n*\s*<p>Recharge Time: (.*)</p>\s*)?(?:\n*\s*<p>Item Pool: (.*)</p>\s*)</ul>
+    <p class="tags">\*\s*(.*),?\s*</p>\n*
+    </span>\n*
+    </a>\n*
+</(?:li|span)>\n*
+
+==== REPLACE ====
+"$2":{"class": "$1","title": "$2","id": $3,"pickup": "$4","info": [$5],"unlock": "$6","type": "$7","recharge": "$8","itempool": "$9","tags": "$10"},

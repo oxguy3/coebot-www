@@ -18,6 +18,10 @@ RewriteRule ^c/?$ /channels [R]
 RewriteRule ^channel/?$ /channels [R]
 
 
+RewriteRule ^faq/?$ /faq.php
+RewriteRule ^cookieman/?$ /cookieman.php
+
+
 RewriteRule ^oldhl/([^.]+)?$ highlights/highlight.php?arg=$1 [L]
 
 RewriteRule ^highlights/add/([^.]+)?$ http://oldhl.coebot.tv/highlights/add/$1 [L,R]

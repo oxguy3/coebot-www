@@ -17,7 +17,7 @@ body {
     content: "\f1fd" ! important;
 }
 
-*:not(i) {
+*:not(i):not(.glyphicon) {
     font-family: Comic Sans MS, Comic Sans, Marker Felt, sans-serif ! important;
 }
 

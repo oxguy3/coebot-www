@@ -13,6 +13,10 @@ body {
   border: 0;
 }
 
+/*#navbar li.active {
+  background-color: #111;
+}*/
+
 .sidebar-collapsed {
   display: none;
   visibility: hidden;

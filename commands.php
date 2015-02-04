@@ -28,7 +28,7 @@ $extraHead = "<style>.command:before { content:\"$prefix\"; }</style>";
 
 
 printHead("Commands", array("/css/commands.css"), array("/js/commands.js"), $extraHead);
-printNav();
+printNav('commands');
 
 ?>
 <div class="container">

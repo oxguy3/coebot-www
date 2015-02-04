@@ -59,7 +59,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
     	echo '<link href="' . $extraCss[$i] . '" rel="stylesheet">' . "\n";
     }
 
-    if (isset($_GET['birthday']) && $_GET['birthday']=="hellyeah") {
+    if (isCookieTrue("birthdayMode")) {
         echo '<link href="/css/birthday.css" rel="stylesheet">'."\n";
     }
 
@@ -93,8 +93,9 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 <?php
 }
 
-function printNav() {
+function printNav($activeTab="") {
 	global $SITE_TITLE;
+    $activeStr = ' class="active"';
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
@@ -114,8 +115,12 @@ function printNav() {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-left">
-        <li><a href="/channels">Channels</a></li>
-        <li><a href="/commands">Commands</a></li>
+        <li<?php if($activeTab=="channels") echo $activeStr; ?>><a href="/channels">Channels</a></li>
+        <li<?php if($activeTab=="commands") echo $activeStr; ?>><a href="/commands">Commands</a></li>
+        <li<?php if($activeTab=="faq") echo $activeStr; ?>><a href="/faq">FAQ</a></li>
+        <?php if(isCookieTrue("cookiemanShortcut")) {?>
+            <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="fa fa-cogs"></i></a></li>
+        <?php } ?>
       </ul>
 <!--       <form class="navbar-form navbar-right">
         <input type="text" class="form-control" placeholder="Search...">
@@ -165,6 +170,14 @@ function getUrlToChannel($chan) {
  */
 function validateChannel($channel) {
 	return preg_match('/^[A-Z0-9\-_]{4,25}$/i', $channel);
+}
+
+function checkCookieValue($key, $val) {
+    return isset($_COOKIE[$key]) && $_COOKIE[$key]==$val;
+}
+
+function isCookieTrue($key) {
+    return checkCookieValue($key, "true");
 }
 
 
