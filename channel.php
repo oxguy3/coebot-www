@@ -254,7 +254,7 @@ printNav();
             CoeBot records that as a highlight. Here you can view the highlights from the last 30 days of livestreams.
           </p>
           <div class="js-highlights-loading">
-            <h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3>
+            <h3><i class="fa fa-cog fa-spin"></i> Loading...</h3>
           </div>
 
           <table class="table table-striped js-highlights-table hidden">
@@ -276,7 +276,7 @@ printNav();
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="hlStreamModalLabel">
                     <span class="js-hlstream-loaded-inline js-hlstream-title"></span>
-                    <span class="js-hlstream-loading-inline"><i class="fa fa-spinner fa-spin"></i> Loading...</span>
+                    <span class="js-hlstream-loading-inline"><i class="fa fa-cog fa-spin"></i> Loading...</span>
                   </h4>
                 </div>
                 <div class="modal-body js-hlstream-loaded">
@@ -294,11 +294,14 @@ printNav();
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_games">
-          <p>
-            Coming soon....
-          </p>
-            <!-- <script>displayChannelRegulars()</script> -->
+          <h3>Binding of Isaac: Rebirth</h3>
+          <div class="js-boir-loading">
+            <h3><i class="fa fa-cog fa-spin"></i> Loading...</h3>
           </div>
+          <div class="js-boir-loaded hidden">
+            <div class="js-boir-container"></div>
+          </div>
+
         </div><!--/.tab-pane -->
 
       </div>

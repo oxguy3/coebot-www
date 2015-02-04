@@ -769,6 +769,14 @@
             "shouldShowOffensiveWords": true
         },
         {
+            "channel": "spydster",
+            "displayName": "Spydster",
+            "isActive": true,
+            "youtube": "thespydster",
+            "twitter": "spydster",
+            "shouldShowOffensiveWords": true
+        },
+        {
             "channel": "stormageddon_thedarklord",
             "displayName": "stormageddon_thedarklord",
             "isActive": true,
