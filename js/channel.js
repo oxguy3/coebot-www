@@ -9,6 +9,9 @@ var isBoirLoaded = false;
 
 var hlstreamTable = false;
 
+var hlstreamPlayMe = false;
+var highlightsWentBeepBeep = false;
+
 var hashPostfix = "";
 
 function enableSidebar() {
@@ -372,7 +375,11 @@ function loadChannelHighlights() {
     var explodedHash = window.location.hash.substr(0).split(HASH_DELIMITER);
 
     if (explodedHash.length >= 2) {
-        loadHlstream(parseInt(explodedHash[1]));
+        hlstreamPlayMe = explodedHash[1];
+        if (highlightsWentBeepBeep) {
+            loadHlstream(hlstreamPlayMe);
+            hlstreamPlayMe = false;
+        }
     }
 
     Twitch.init({clientId: '1edbt02x273wfht9ad4goa4aabv00fw'}, function(error, status) {
@@ -549,6 +556,14 @@ function showHlstream() {
     $('.js-hlstream-loaded').css('display', 'block');
     $('.js-hlstream-loaded-inline').css('display', 'inline');
 
+}
+
+function beepBeepHeresYourHighlights() {
+    if (hlstreamPlayMe !== false) {
+        loadHlstream(hlstreamPlayMe);
+        hlstreamPlayMe = false;
+    }
+    highlightsWentBeepBeep = true;
 }
 
 function jumpHlstreamTimestamp(timestamp) {

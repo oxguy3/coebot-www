@@ -291,6 +291,7 @@ printNav();
           </div>
 
         </div><!--/.tab-pane -->
+        <script>beepBeepHeresYourHighlights()</script>
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_games">

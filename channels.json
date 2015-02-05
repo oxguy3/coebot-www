@@ -155,7 +155,7 @@
         {
             "channel": "dagarath",
             "displayName": "Dagarath",
-            "isActive": true,
+            "isActive": false,
             "youtube": "",
             "twitter": "",
             "shouldShowOffensiveWords": true
@@ -220,8 +220,8 @@
             "channel": "diredwarf",
             "displayName": "DireDwarf",
             "isActive": true,
-            "youtube": "",
-            "twitter": "",
+            "youtube": "diredwarf",
+            "twitter": "diredwarf",
             "shouldShowOffensiveWords": true
         },
         {
@@ -398,6 +398,14 @@
             "isActive": true,
             "youtube": "",
             "twitter": "",
+            "shouldShowOffensiveWords": true
+        },
+        {
+            "channel": "itsoxguy3",
+            "displayName": "itsOxguy3",
+            "isActive": true,
+            "youtube": "",
+            "twitter": "oxguy3",
             "shouldShowOffensiveWords": true
         },
         {
