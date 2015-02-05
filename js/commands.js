@@ -3,6 +3,6 @@ $('body').scrollspy({ target: '.nav-commands-scroll' });
 
 // $('.nav-commands-scroll').scrollspy({ target: '.nav' });
 
-$('body').on('load', function() {
+$(document).ready(function() {
 	$('body').scrollspy('refresh');
 });

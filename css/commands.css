@@ -1,3 +1,7 @@
+body {
+  position: relative;
+}
+
 .nav-commands-scroll {
 	margin-top: 10px;
 }

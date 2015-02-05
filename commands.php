@@ -40,6 +40,9 @@ printNav('commands');
       <h2 id="general" class="commands-nav-heading">General</h2>
 
       <dl>
+			  <dt><kbd class="command">join</kbd></dt>
+			  <dd>Tells CoeBot to begin monitoring your channel.</dd>
+
 			  <dt><kbd class="command">topic [new topic]</kbd></dt>
 			  <dd>Sets and displays the topic. If no topic is provided, the channel title will be displayed.</dd>
 
@@ -65,7 +68,10 @@ printNav('commands');
 			  <dd>Displays the link to bot help documentation (this page).</dd>
 
 			  <dt><kbd class="command">commercial</kbd></dt>
-			  <dd>Runs a 30 second commercial. You must use <kbd class="command">followme</kbd> to get <?php echo $SITE_TITLE; ?> to follow your account and add the bot as a channel editor. </dd>
+			  <dd>Runs a 30 second commercial. You must use <kbd class="command">followme</kbd> to get <?php echo $SITE_TITLE; ?> to follow your account and add the bot as a channel editor.</dd>
+
+			  <dt><kbd class="command">cancel</kbd></dt>
+			  <dd>Cancels the running of a commercial if one was queued up.</dd>
 
 			  <dt><kbd class="command">game [new game]</kbd></dt>
 			  <dd>Displays the current Twitch game. Optional - specify a new game to set (must be channel editor).</dd>
@@ -708,6 +714,9 @@ printNav('commands');
 
 		    <dt><kbd class="command">admin part &lt;#channelname&gt;</kbd></dt>
 		    <dd>Leaves channelname</dd>
+
+		    <dt><kbd class="command">admin &lt;#channelname&gt; &lt;command...&gt;</kbd></dt>
+		    <dd>Executes a command as though it were run on channelname. This can modify configuration of other channel, so use it with care.</dd>
 		  </dl>
 
 
@@ -715,7 +724,7 @@ printNav('commands');
 
 
     <div class="col-sm-3 col-lg-2">
-			<div class="nav-commands-scroll" data-spy="affix"><!--  data-offset-top="60" data-offset-bottom="200" -->
+			<div class="nav-commands-scroll" id="navCommandsScroll" data-spy="affix"><!--  data-offset-top="60" data-offset-bottom="200" -->
 				<ul class="nav nav-commands">
 				  <li class="active">
 				  	<a href="#general"><i class="fa fa-fw fa-info-circle"></i>&nbsp; General</a>
