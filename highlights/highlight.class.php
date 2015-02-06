@@ -2,7 +2,7 @@
 
 	include_once("database.php");
 
-	include_once("safeconfig.php");
+	include_once("../safeconfig.php");
 
 	//include_once("templatePower/class.TemplatePower.inc.php");
 
@@ -30,8 +30,15 @@
 
 		{
 
-			$json_array = json_decode(file_get_contents('https://api.twitch.tv/kraken/streams/'.strtolower($twitchchannel).'?client_id=1edbt02x273wfht9ad4goa4aabv00fw'), true);
+			if (!validateChannel($twitchchannel) || !validateChannel($twitchuser)) {
+				die(json_encode("Invalid parameter",JSON_FORCE_OBJECT));
+			}
 
+			$json_array = json_decode(file_get_contents('https://api.twitch.tv/kraken/streams/'.strtolower($twitchchannel).'?client_id=1edbt02x273wfht9ad4goa4aabv00fw'), true);
+				
+			if (!is_array($json_array)) {
+				die(json_encode("Error with Twitch API",JSON_FORCE_OBJECT));
+			}
 
 
 			if(isset($_COOKIE[$twitchchannel.'_'.$twitchuser.'_highlight']))
@@ -278,10 +285,18 @@
 
 			header('content-type: application/json; charset=utf-8');
 
+			if (!validateChannel($channel) || !preg_match('/^[A-Z0-9]*$/i', $streamid)) {
+				die(json_encode("Invalid parameter",JSON_FORCE_OBJECT));
+			}
+
 			//fetch stream
 			$stream = json_decode(file_get_contents('https://api.twitch.tv/kraken/videos/'.$streamid.'?client_id=1edbt02x273wfht9ad4goa4aabv00fw'));
 			// $tpl = new TemplatePower("templates/stream.html");
-			// $tpl->prepare();
+			// $tpl->prepare();				
+
+			if (!is_object($stream)) {
+				die(json_encode("Error with Twitch API",JSON_FORCE_OBJECT));
+			}
 
 			$obj = array();
 
@@ -416,6 +431,10 @@
 
 			header('content-type: application/json; charset=utf-8');
 
+			if (!validateChannel($channel) || !preg_match('/^[0-9]*$/i', $limit)) {
+				die(json_encode("Invalid parameter",JSON_FORCE_OBJECT));
+			}
+
 			// $tpl = new TemplatePower("templates/stats.html");
 			// $tpl->prepare();
 
@@ -429,7 +448,12 @@
 				date_default_timezone_set('UTC');
 
 				$pastBroadcasts = json_decode(file_get_contents('https://api.twitch.tv/kraken/channels/'.$channel.'/videos?client_id=1edbt02x273wfht9ad4goa4aabv00fw&amp;broadcasts=true&amp;limit='.$limit), true);
-				$pastBroadcasts = $pastBroadcasts["videos"];				
+				
+				if (!is_array($pastBroadcasts)) {
+					die(json_encode("Error with Twitch API",JSON_FORCE_OBJECT));
+				}
+
+				$pastBroadcasts = $pastBroadcasts["videos"];
 
 				foreach($pastBroadcasts as $pastBroadcast) {
 
