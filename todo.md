@@ -32,6 +32,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 * If only one person is streaming, the "who's live" carousel on index.php probably shouldn't have left/right arrow keys? Or maybe just leave 'em be, I dunno.
 * The "who's live" carousel can get pretty overcrowded with text on small displays; maybe have the text appear below the image on XS viewport?
 * If no one is live, the "who's live" carousel in index.php just hides itself. That's confusing to the user, should instead display some sort of "no one's live right now" message.
+* The text overlayed on the "who's live" carousel is often hard to read, needs a better background to give it proper contrast.
 
 
 ## Major improvements
