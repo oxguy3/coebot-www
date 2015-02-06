@@ -29,27 +29,13 @@ if ($q[0] == "v1") {
 
         apiChannelList($q);
 
-    } else if ($q[1] == 'channel' && $q[2] == 'create') {
+    } else if ($q[1] == 'channel' && ($q[2] == 'join' || $q[2] == 'part')) {
 
-        apiChannelCreate($q);
+        apiChannelUpdate($q);
 
     } else if ($q[1] == 'channel' && $q[2] == 'update' && $q[3] == 'config') {
 
         apiChannelUpdateConfig($q);
-        // authOrDie($q, true);
-        // $channel = channelOrDie($q);
-        // requirePostParams(array('json'));
-
-        // $jsonRaw = $_POST['json'];
-
-        // $json = json_decode($jsonRaw);
-        // if (!$json) {
-        //     errorBadParam('json');
-        // }
-
-        // file_put_contents('configs/' . $channel . '.json', $jsonRaw, LOCK_EX);
-
-
 
     } else if ($q[1] == 'channel' && $q[2] == 'update' && $q[3] == 'boir') {
 
@@ -86,13 +72,22 @@ function apiChannelList($query) {
 }
 
 
-function apiChannelCreate($query) {
+function apiChannelUpdate($query) {
 
     authOrDie($query, AUTH_SHARED_SECRET);
     $channel = channelOrDie($query);
     // requirePostParams(array("displayName"));
 
     // $displayName = $_POST["displayName"];
+    $isActive = NULL;
+
+    if ($query[2] == "join") {
+        $isActive = true;
+    } else if ($query[2] == "part") {
+        $isActive = false;
+    } else {
+        tellError("unknown error", 500);
+    }
 
     $twitchObj = twitchGetChannel($channel);
 
@@ -105,7 +100,7 @@ function apiChannelCreate($query) {
 
     $displayName = $twitchObj->display_name;
 
-    $success = dbCreateChannel($channel, $displayName); // TODO eventually need to pass identifier of bot
+    $success = dbSetChannel($channel, $displayName, $isActive); // TODO eventually need to pass identifier of bot
 
     if ($success) {
         tellSuccess();

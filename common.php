@@ -197,7 +197,7 @@ function dbListChannels() {
     global $mysqli;
     initMysqli();
 
-    $sql = 'SELECT channel, displayName, isActive, youtube, twitter, shouldShowOffensiveWords, shouldShowBoir FROM ' . DB_PREF . 'channels WHERE isActive = 1';
+    $sql = 'SELECT channel, displayName, isActive, youtube, twitter, shouldShowOffensiveWords, shouldShowBoir FROM ' . DB_PREF . 'channels WHERE isActive = 1 ORDER BY channel ASC';
 
 
     $result = $mysqli->query($sql);
@@ -218,22 +218,25 @@ function dbListChannels() {
 }
 
 /**
- * Creates a row for a new channel in the database
+ * Creates or updates a row for a new channel in the database
  *
  * Returns true if successful, or false if an error occurred
  */
-function dbCreateChannel($channel, $displayName, $botChannel="coebot") {
+function dbSetChannel($channel, $displayName, $isActive, $botChannel="coebot") {
     global $mysqli;
     initMysqli();
 
-    $sql = 'INSERT INTO ' . DB_PREF . 'channels (channel, displayName, botChannel) VALUES (?, ?, ?)';
+    if ($isActive === true) $isActive = 1;
+    if ($isActive === false) $isActive = 0;
+
+    $sql = 'INSERT INTO ' . DB_PREF . 'channels (channel, displayName, isActive, botChannel) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE displayName=?, isActive=?, botChannel=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
         return false;
     }
 
     $botChannel = strtolower($botChannel);
-    $stmt->bind_param('sss', $channel, $displayName, $botChannel);
+    $stmt->bind_param('ssissis', $channel, $displayName, $isActive, $botChannel, $displayName, $isActive, $botChannel);
 
     $success = $stmt->execute();
     $stmt->close();
@@ -261,7 +264,7 @@ function twitchGetChannel($channel) {
 
     $jsonData = json_decode(curl_exec($curlSession));
     curl_close($curlSession);
-    
+
     return $jsonData;
 }
 

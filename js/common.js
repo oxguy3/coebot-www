@@ -25,7 +25,7 @@ function downloadCoebotData() {
     $.ajax({
         async: false, // it's my json and i want it NOW!
         dataType: "json",
-        url: "/channels.json",
+        url: "/api/v1/channel/list",
         success: function(json) {
             console.log("Loaded Coebot data");
             coebotData = json;
