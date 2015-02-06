@@ -25,9 +25,17 @@ if ($q[0] == "v1") {
     if ($q[1] == 'auth' && $q[2] == 'nonce') {
         tellError("unimplemented method", 400);
 
+    } else if ($q[1] == 'channel' && $q[2] == 'list') {
+
+        apiChannelList($q);
+
+    } else if ($q[1] == 'channel' && $q[2] == 'create') {
+
+        apiChannelCreate($q);
+
     } else if ($q[1] == 'channel' && $q[2] == 'update' && $q[3] == 'config') {
 
-        channelUpdateConfig($q);
+        apiChannelUpdateConfig($q);
         // authOrDie($q, true);
         // $channel = channelOrDie($q);
         // requirePostParams(array('json'));
@@ -45,7 +53,7 @@ if ($q[0] == "v1") {
 
     } else if ($q[1] == 'channel' && $q[2] == 'update' && $q[3] == 'boir') {
 
-        channelUpdateBoir($q);
+        apiChannelUpdateBoir($q);
 
     } else {
         tellError("bad method", 400);
@@ -64,16 +72,44 @@ if ($q[0] == "v1") {
  * API METHODS
  **************/
 
-function channelUpdateConfig($query) {
-    authOrDie($query, true, AUTH_SHARED_SECRET);
+function apiChannelList($query) {
+
+    $channels = dbListChannels();
+
+    if ($channels === NULL) {
+        tellError("database error", 500);
+    }
+
+    $response = array('channels' => $channels);
+
+    tellSuccess($response);
+}
+
+
+function apiChannelCreate($query) {
+
+    authOrDie($query, AUTH_SHARED_SECRET);
     $channel = channelOrDie($query);
-    //requirePostParams(array('json'));
+    requirePostParams(array("displayName"));
 
-    // $jsonRaw = $_POST['json'];
+    $displayName = $_POST["displayName"];
 
-    // die($jsonRaw);
+    $success = dbCreateChannel($channel, $displayName); // TODOeventually need to pass identifier of bot
 
-    $json = json_decode(file_get_contents("php://input"));//json_decode($jsonRaw);
+    if ($success) {
+        tellSuccess();
+    } else {
+        tellError("database error", 500);
+    }
+}
+
+
+function apiChannelUpdateConfig($query) {
+
+    authOrDie($query, AUTH_SHARED_SECRET);
+    $channel = channelOrDie($query);
+
+    $json = json_decode(file_get_contents("php://input"));
     if ($json === false) {
         tellBadParam('json');
     }
@@ -84,8 +120,9 @@ function channelUpdateConfig($query) {
 }
 
 
-function channelUpdateBoir($query) {
-    authOrDie($query, true, AUTH_USER_OAUTH);
+function apiChannelUpdateBoir($query) {
+
+    authOrDie($query, AUTH_USER_OAUTH);
     $channel = channelOrDie($query);
 
     $json = json_decode(file_get_contents("php://input"));
@@ -105,18 +142,21 @@ function channelUpdateBoir($query) {
  * AUTHENTICATION
  *****************/
 
-function authOrDie($query, $checkChannel, $authMethod) {
+function authOrDie($query, $authMethod) {
 
-    if (!checkAuthFromRaw($query, $checkChannel, $authMethod)) {
+    if (!checkAuthFromRaw($query, $authMethod)) {
         tellError("bad auth", 403);
     }
 }
 
-function checkAuthFromRaw($query, $checkChannel, $authMethod) {
-
+function checkAuthFromRaw($query, $authMethod) {
+    $checkChannel = NULL;
     // channel is required for oauth check, so force $checkChannel
     if ($authMethod == AUTH_USER_OAUTH) {
         $checkChannel = true;
+    }
+    if ($authMethod == AUTH_SHARED_SECRET) {
+        $checkChannel = false; // for now
     }
 
 
@@ -149,7 +189,7 @@ function checkAuth($auth, $cnonce, $channel) {
 
     // check that the auth token and cnonce are legit
     if ($channel !== false) {
-        // do some check to see if this client has access for this channel
+        // TODO do some check to see if this client has access for this channel
     }
 }
 
@@ -208,8 +248,9 @@ function getAuthArray($query) {
 // die if any of a list of POST params are missing
 function requirePostParams($params) {
     for ($i = 0; $i < count($params); $i++) {
-        if (!isset($_POST[$params[$i]]) || $_POST[$params[$i]] == '') {
-            tellError("missing params", 400);
+        $param = $params[$i];
+        if (!isset($_POST[$param]) || $_POST[$param] == '') {
+            tellBadParam($param);
         }
     }
 }

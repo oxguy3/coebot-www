@@ -3,6 +3,7 @@
 require_once("safeconfig.php");
 
 $SITE_TITLE = "CoeBot";
+$mysqli = false;
 
 
 // session_start();
@@ -13,20 +14,6 @@ $SITE_TITLE = "CoeBot";
 // REMOVE BEFORE GOING LIVE
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-
-
-/**
- * Creates a MySQLi object
- */
-function initMysqli() {
-  global $mysqli, $DB_HOST, $DB_USER, $DB_PASS, $DB_NAME;
-  $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
-  
-  if (mysqli_connect_errno()) { //if DB connection failed
-    die("Database connection failed, contact site administrator");
-  }
-  return $mysqli;
-}
 
 
 function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extraHeadCode="") {
@@ -181,6 +168,87 @@ function isCookieTrue($key) {
 }
 
 
+
+
+
+
+/*******************************
+ * DATABASE
+ *******************************/
+
+function initMysqli() {
+    global $mysqli;
+
+    if ($mysqli === false) {
+
+        $mysqli = new mysqli(DB_SERV, DB_USER, DB_PASS, DB_NAME);
+
+        if ($mysqli->connect_error) {
+            $mysqli = false;
+            die("Database connection failed");
+        }
+    }
+}
+
+/**
+ * Returns array of channels marked active in the database, or NULL if an error occurred
+ */
+function dbListChannels() {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT channel, displayName, isActive, youtube, twitter, shouldShowOffensiveWords, shouldShowBoir FROM ' . DB_PREF . 'channels WHERE isActive = 1';
+
+
+    $result = $mysqli->query($sql);
+    if ($result === false) {
+        return NULL;
+
+    } else {
+
+        $channels = array();
+        while ($row = $result->fetch_assoc()) {
+            $row['isActive'] = ($row['isActive'] == 1) ? true : false;
+            $row['shouldShowOffensiveWords'] = ($row['shouldShowOffensiveWords'] == 1) ? true : false;
+            $row['shouldShowBoir'] = ($row['shouldShowBoir'] == 1) ? true : false;
+            $channels[] = $row;
+        }
+        return $channels;
+    }
+}
+
+/**
+ * Creates a row for a new channel in the database
+ *
+ * Returns true if successful, or false if an error occurred
+ */
+function dbCreateChannel($channel, $displayName, $botChannel="coebot") {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'INSERT INTO ' . DB_PREF . 'channels (channel, displayName, botChannel) VALUES (?, ?, ?)';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $botChannel = strtolower($botChannel);
+    $stmt->bind_param('sss', $channel, $displayName, $botChannel);
+
+    $success = $stmt->execute();
+    $stmt->close();
+
+    return $success;
+}
+
+
+
+
+
+
+/*******************************
+ * SHIMS
+ *******************************/
 
 // workaround for PHP versions prior to 5.4.0
 // created by craig@craigfrancis.co.uk
