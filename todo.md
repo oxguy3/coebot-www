@@ -38,7 +38,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 * If commands.php offered some indication that you could change what command prefix to display, that'd be pretty nifty.
 * A nice airy parallax-esque homepage would really make CoeBot stand out.
 * BOIR build info page isn't finished.
-* Channels aren't loaded from database, and CoeBot doesn't have a way to automatically update channel data.
+* ~~Channels aren't loaded from database, and CoeBot doesn't have a way to automatically update channel data.~~
 * Need to have channels tied to the bot instance that controls them.
 * Need to put more info into channel.php#chatrules; it's really half-baked at present.
 * SuperMCGamer's "Highlight That!" button still uses the old highlights site. Button needs to be ported over so that the old site can be taken down.
