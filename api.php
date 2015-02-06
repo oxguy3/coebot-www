@@ -138,6 +138,8 @@ function apiChannelUpdateBoir($query) {
 
     file_put_contents('configs/boir/' . $channel . '.json', json_encode($json), LOCK_EX);
 
+    dbSetChannelShowBoir($channel, true);
+
     tellSuccess();
 }
 

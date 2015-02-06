@@ -30,7 +30,7 @@ printNav('faq');
           </div>
         </div>
 
-        <div class="panel panel-default">
+<!--         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingWhyNoWebsite">
             <h4 class="panel-title">
               <a class="collapsed" data-toggle="collapse" data-parent="#faqAccordion" href="#questionWhyNoWebsite" aria-expanded="false" aria-controls="questionWhyNoWebsite">
@@ -43,7 +43,7 @@ printNav('faq');
               The website is still fairly early in development, and unfortunately, the process for a new channel to show up on the website is not yet fully automated. Tweet <a href="http://twitter.com/oxguy3" target="_blank">@oxguy3</a> and he'll get you set up on the website in no time.
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingSetupBOICompanion">

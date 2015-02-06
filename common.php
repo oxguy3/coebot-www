@@ -244,6 +244,33 @@ function dbSetChannel($channel, $displayName, $isActive, $botChannel="coebot") {
     return $success;
 }
 
+/**
+ * Updates whether or not BOIR is shown for a given channel
+ *
+ * Returns true if successful, or false if an error occurred
+ */
+function dbSetChannelShowBoir($channel, $shouldShowBoir) {
+    global $mysqli;
+    initMysqli();
+
+    if ($shouldShowBoir === true) $shouldShowBoir = 1;
+    if ($shouldShowBoir === false) $shouldShowBoir = 0;
+
+    $sql = 'UPDATE ' . DB_PREF . 'channels SET shouldShowBoir=? WHERE channel=?';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('ss', $shouldShowBoir, $channel);
+
+    $success = $stmt->execute();
+    $stmt->close();
+
+    return $success;
+}
+
+
 
 
 
