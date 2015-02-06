@@ -21,7 +21,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 * DataTables is gross. Switch to HubSpot's [Sortable](http://github.hubspot.com/sortable/docs/welcome/).
 * Someone just needs to go through commands.php and fix all the typos and inconsistent formatting.
 * Automatically converting URLs to links in triggers/quotes/etc on channel.php would parallel the way those things actually appear in Twitch chat, and would thus greatly improve consistency and UX.
-* Add proper error pages for 404, 403, etc
+* ~~Add proper error pages for 404, 403, etc.~~
 
 ### The stupid "who's live" carousel
 * Click names on the "who's live" list in index.php fast enough, and it'll glitch out and sort of have two channels selected at once.

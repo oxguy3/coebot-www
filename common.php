@@ -109,9 +109,11 @@ function printNav($activeTab="") {
             <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="fa fa-cogs"></i><span class="visible-xs-inline"> Cookie Manager</span></a></li>
         <?php } ?>
       </ul>
-<!--       <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form> -->
+      <?php if(isCookieTrue("cookiemanShortcut")) {?>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Sign in <i class="fa fa-sign-in"></i></a></li>
+          </ul>
+      <?php } ?>
     </div>
   </div>
 </nav>
@@ -268,6 +270,34 @@ function dbSetChannelShowBoir($channel, $shouldShowBoir) {
     $stmt->close();
 
     return $success;
+}
+
+/**
+ * Checks if an API key for a bot is valid and active
+ *
+ * Returns true if bot is authenticated, or false if an error occurred
+ */
+function dbCheckBotAuth($botChannel, $apiKey) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT apiKey FROM ' . DB_PREF . 'bots WHERE channel=? AND isActive=?';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $isActive = 1;
+
+    $stmt->bind_param('si', $botChannel, $isActive);
+    $stmt->bind_result($savedKey);
+
+    $success = $stmt->execute();
+    $stmt->fetch();
+    
+    $stmt->close();
+
+    return $success && $savedKey == $apiKey;
 }
 
 

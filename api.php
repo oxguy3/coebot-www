@@ -172,7 +172,7 @@ function checkAuthFromRaw($query, $authMethod) {
     if (count($authArr) != 3) return false;
 
     $a = $authArr[1];
-    $cn = $authArr[2];
+    $botChannel = $authArr[2];
 
     $chan = false;
 
@@ -181,7 +181,7 @@ function checkAuthFromRaw($query, $authMethod) {
     }
 
     if ($authMethod == AUTH_SHARED_SECRET) {
-        return checkAuth($a, $cn, $chan);
+        return checkAuthApiKey($a, $botChannel, $chan);
 
     } else if ($authMethod == AUTH_USER_OAUTH) {
         return checkOauthToken($a, $chan);
@@ -191,9 +191,9 @@ function checkAuthFromRaw($query, $authMethod) {
     }
 }
 
-function checkAuth($auth, $cnonce, $channel) {
-    global $TEMP_AUTH_KEY;
-    return $auth == $TEMP_AUTH_KEY;
+function checkAuthApiKey($auth, $botChannel, $channel) {
+    //global $TEMP_AUTH_KEY;
+    return dbCheckBotAuth($botChannel, $auth);
 
     // check that the auth token and cnonce are legit
     if ($channel !== false) {

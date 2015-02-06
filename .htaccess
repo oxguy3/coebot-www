@@ -1,5 +1,8 @@
 Options All -Indexes
 
+ErrorDocument 404 /error.php?c=404
+ErrorDocument 403 /error.php?c=403
+
 RewriteEngine on
 
 RewriteRule ^c/(\w+)/?$ /channel.php?channel=$1
