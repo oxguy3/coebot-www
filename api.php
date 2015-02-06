@@ -90,11 +90,22 @@ function apiChannelCreate($query) {
 
     authOrDie($query, AUTH_SHARED_SECRET);
     $channel = channelOrDie($query);
-    requirePostParams(array("displayName"));
+    // requirePostParams(array("displayName"));
 
-    $displayName = $_POST["displayName"];
+    // $displayName = $_POST["displayName"];
 
-    $success = dbCreateChannel($channel, $displayName); // TODOeventually need to pass identifier of bot
+    $twitchObj = twitchGetChannel($channel);
+
+    if ($twitchObj === false || $twitchObj === NULL || !(property_exists($twitchObj, "display_name"))) {
+        tellError("twitch api unavailable", 503);
+
+    } else if (property_exists($twitchObj, "error")) {
+        tellError("twitch api error: " . $twitchObj->status . " " . $twitchObj->error, 400);
+    }
+
+    $displayName = $twitchObj->display_name;
+
+    $success = dbCreateChannel($channel, $displayName); // TODO eventually need to pass identifier of bot
 
     if ($success) {
         tellSuccess();

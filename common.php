@@ -245,6 +245,31 @@ function dbCreateChannel($channel, $displayName, $botChannel="coebot") {
 
 
 
+/*******************************
+ * TWITCH API
+ *******************************/
+
+function twitchGetChannel($channel) {
+    if (!validateChannel($channel)) {
+        return false;
+    }
+
+    $curlSession = curl_init();
+    curl_setopt($curlSession, CURLOPT_URL, 'https://api.twitch.tv/kraken/channels/' . $channel);
+    curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
+    curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
+
+    $jsonData = json_decode(curl_exec($curlSession));
+    curl_close($curlSession);
+    
+    return $jsonData;
+}
+
+
+
+
+
+
 
 /*******************************
  * SHIMS
