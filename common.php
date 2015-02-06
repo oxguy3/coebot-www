@@ -119,7 +119,7 @@ function printNav($activeTab="") {
         <li<?php if($activeTab=="commands") echo $activeStr; ?>><a href="/commands">Commands</a></li>
         <li<?php if($activeTab=="faq") echo $activeStr; ?>><a href="/faq">FAQ</a></li>
         <?php if(isCookieTrue("cookiemanShortcut")) {?>
-            <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="fa fa-cogs"></i></a></li>
+            <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="fa fa-cogs"></i><span class="visible-xs-inline"> Cookie Manager</span></a></li>
         <?php } ?>
       </ul>
 <!--       <form class="navbar-form navbar-right">
