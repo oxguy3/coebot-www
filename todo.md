@@ -19,7 +19,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 * Channel name in title of channel.php is always lowercase.
 * The "who's live" carousel doesn't have a height set, so it is very short for a brief moment before the first image loads in.
 * On channel.php, if filters are on but no filters are enabled, you end up with a dumb looking "Filter rules" title with nothing below it.
-* Commands on channel.php#scheduled don't have the nice <kbd> formatting.
+* Commands on channel.php#scheduled don't have the nice `<kbd>` formatting.
 * DataTables is gross. Switch to HubSpot's [Sortable](http://github.hubspot.com/sortable/docs/welcome/).
 * A nice airy parallax-esque homepage would really make CoeBot stand out.
 * If commands.php offered some indication that you could change what command prefix to display, that'd be pretty nifty.
