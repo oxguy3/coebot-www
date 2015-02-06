@@ -26,6 +26,17 @@ body {
 	white-space:nowrap;
 }*/
 
+.loading-text:after {
+  content: " Loading...";
+}
+.loading-text>i.fa {  
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+.loading-text>i.fa:before {
+  content: "\f006"; /*"\f013";*/ /* cog for loading thingies */
+}
+
 /**
  * Footer
  */

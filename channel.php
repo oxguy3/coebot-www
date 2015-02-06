@@ -60,7 +60,7 @@ printNav();
 
               <li><a href="#tab_commands" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-terminal fa-fw"></i></span>
-                <span class="sidebar-title">Commands</span>
+                <span class="sidebar-title">Triggers</span>
               </a></li>
 
               <li><a href="#tab_quotes" class="js-sidebar-link">
@@ -93,7 +93,7 @@ printNav();
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_highlights" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-star fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="fa fa-bookmark fa-fw"></i></span>
                 <span class="sidebar-title">Highlights</span>
               </a></li>
 
@@ -133,7 +133,7 @@ printNav();
 
         <div role="tabpanel" class="tab-pane fade" id="tab_commands">
           <p>
-            Here are the special commands defined for this channel. You can also use any of the universal/shared commands, listed <a href="/commands" class="js-link-commands">here</a>.
+            Here are the custom commands, or "triggers", defined for this channel. You can also use any of the universal/shared commands, listed <a href="/commands" class="js-link-commands">here</a>.
           </p>
           <div class="">
             <table class="table table-striped js-commands-table">
@@ -254,7 +254,7 @@ printNav();
             CoeBot records that as a highlight. Here you can view the highlights from the last 30 days of livestreams.
           </p>
           <div class="js-highlights-loading">
-            <h3><i class="fa fa-cog fa-spin"></i> Loading...</h3>
+            <h3 class="loading-text"><i class="fa"></i></h3>
           </div>
 
           <table class="table table-striped js-highlights-table hidden">
@@ -276,7 +276,7 @@ printNav();
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="hlStreamModalLabel">
                     <span class="js-hlstream-loaded-inline js-hlstream-title"></span>
-                    <span class="js-hlstream-loading-inline"><i class="fa fa-cog fa-spin"></i> Loading...</span>
+                    <span class="js-hlstream-loading-inline loading-text"><i class="fa"></i></span>
                   </h4>
                 </div>
                 <div class="modal-body js-hlstream-loaded">
@@ -297,7 +297,7 @@ printNav();
         <div role="tabpanel" class="tab-pane fade" id="tab_games">
           <h3>Binding of Isaac: Rebirth</h3>
           <div class="js-boir-loading">
-            <h3><i class="fa fa-cog fa-spin"></i> Loading...</h3>
+            <h4 class="loading-text"><i class="fa"></i></h4>
           </div>
           <div class="js-boir-loaded hidden">
             <div class="js-boir-container"></div>
