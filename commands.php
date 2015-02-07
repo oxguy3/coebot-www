@@ -191,6 +191,9 @@ printNav('commands');
 		    <dt><kbd class="command">autoreply remove &lt;number&gt;</kbd></dt>
 		    <dd>Removes the autoreply with that index number. Do <kbd class="command">autoreply list</kbd> for those values.</dd>
 
+		    <dt><kbd class="command">autoreply editresponse &lt;index&gt; &lt;response&gt;</kbd></dt>
+		    <dd>Edits the response for a pre-existing autoreply.</dd>
+
 		    <dt><kbd class="command">autoreply list</kbd></dt>
 		    <dd>Lists current autoreplies</dd>
 		  </dl>

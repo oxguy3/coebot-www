@@ -28,7 +28,7 @@ printHead(
   ), 
   $extraHeadCode
 );
-printNav();
+printNav('', true);
 
 ?>
 <div class="container-fluid">

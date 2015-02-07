@@ -80,12 +80,12 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 <?php
 }
 
-function printNav($activeTab="") {
+function printNav($activeTab="", $isFluid=false) {
 	global $SITE_TITLE;
     $activeStr = ' class="active"';
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
+  <div class="container<?php if ($isFluid){ echo "-fluid";}?>">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
