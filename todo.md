@@ -48,5 +48,6 @@ Since the site is still super early in development, it seems silly to use GitHub
 
 ## New features
 * Need a login system.
+* Use HTTPS (and use it EVERYWHERE).
 * Eventually want subscriber alert/follower alert/on-stream chat available for use with OBS.
 * Need ability to reconfigure CoeBot from the website.
