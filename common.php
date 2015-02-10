@@ -110,7 +110,7 @@ function printNav($activeTab="", $isFluid=false) {
       </ul>
       <?php if(isCookieTrue("experimentalFeatures")) {?>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Sign in <i class="icon-sign-in"></i></a></li>
+            <li><a href="#">Sign in <i class="icon-login"></i></a></li>
           </ul>
       <?php } ?>
     </div>

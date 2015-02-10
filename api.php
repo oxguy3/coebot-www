@@ -20,31 +20,49 @@ if (count($q) < 2) {
 
 
 // API VERSION 1
-if ($q[0] == "v1") {
+if (count($q) > 0 && $q[0] == "v1") {
 
-    if ($q[1] == 'auth' && $q[2] == 'nonce') {
-        tellError("unimplemented method", 400);
+    if (count($q) > 1 && $q[1] == 'auth') {
 
-    } else if ($q[1] == 'channel' && $q[2] == 'list') {
+        if (count($q) > 2 && $q[2] == 'nonce') {
+            tellError("unimplemented method", 400);
 
-        apiChannelList($q);
+        } else {
+            tellBadMethod();
+        }
 
-    } else if ($q[1] == 'channel' && ($q[2] == 'join' || $q[2] == 'part')) {
 
-        apiChannelUpdate($q);
+    } else if (count($q) > 1 && $q[1] == 'channel') {
 
-    } else if ($q[1] == 'channel' && $q[2] == 'update' && $q[3] == 'config') {
+        if (count($q) > 2 && $q[2] == 'list') {
+            apiChannelList($q);
 
-        apiChannelUpdateConfig($q);
+        } else if (count($q) > 2 && ($q[2] == 'join' || $q[2] == 'part')) {
+            apiChannelUpdate($q);
 
-    } else if ($q[1] == 'channel' && $q[2] == 'update' && $q[3] == 'boir') {
+        } else if (count($q) > 2 && $q[2] == 'update') {
 
-        apiChannelUpdateBoir($q);
+            if (count($q) > 3 && $q[3] == 'config') {
+                apiChannelUpdateConfig($q);
+
+            } else if (count($q) > 3 && $q[3] == 'boir') {
+                apiChannelUpdateBoir($q);
+
+            } else {
+                tellBadMethod();
+
+            }
+
+        } else {
+            tellBadMethod();
+
+        }
+
 
     } else {
-        tellError("bad method", 400);
+        tellBadMethod();
+        
     }
-
 
 
 } else {
@@ -272,6 +290,10 @@ function requirePostParams($params) {
 
 function tellSuccess($response=array()) {
     tellError("ok", 200, $response);
+}
+
+function tellBadMethod($response=array()) {
+    tellError("bad method", 400, $response);
 }
 
 function tellBadParam($param) {

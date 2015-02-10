@@ -11,7 +11,7 @@ RewriteRule ^c/(\w+)/(\w+)/?$ /channel.php?channel=$1&tab=$2 [L]
 RewriteRule ^channel/(.*)$ /c/$1 [L,R]
 RewriteRule ^channels/(.*)$ /c/$1 [L,R]
 
-RewriteRule ^api/(.*)$ /api.php?q=$1 [L]
+RewriteRule ^api/(.+)$ /api.php?q=$1 [L]
 
 RewriteRule ^commands/?$ /commands.php [L]
 RewriteRule ^commands/(.+)$ /commands.php?prefix=$1 [L]

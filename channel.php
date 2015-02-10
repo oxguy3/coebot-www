@@ -105,7 +105,7 @@ printNav('', true);
               </a></li>
 
               <li id="sidebarItemGames" class="hidden"><a href="#tab_boir" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="icon-bindingofisaac-alt icon-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-biblethump icon-fw"></i></span>
                 <span class="sidebar-title">Binding of Isaac: Rebirth</span>
               </a></li>
               

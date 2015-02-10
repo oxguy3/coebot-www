@@ -13,7 +13,7 @@ $responses = array(
   "403" => (object) array(
     "title" => "403!!",
     "heading" => "Begone, trespasser!",
-    "subheading" => "This page is restricted from public eyes. You best be headed back the way you came."
+    "subheading" => "This page is forbidden. You best be headed back the way you came."
   ),
   "200" => (object) array(
     "title" => "Not an error!",
@@ -31,9 +31,14 @@ printNav();
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <h3><?php echo $resp->heading; ?></h3>
 
-      <p class="lead"><?php echo $resp->subheading; ?></p>
+      <?php if ($code == 404) { ?>
+        <img src="/img/notfound_400.png" srcset="/img/notfound_800.png 2x" class="img-responsive center-block" alt="404 art by ryuski" title="Art by ryuski">
+      <?php } ?>
+
+      <h3 class="text-center"><?php echo $resp->heading; ?></h3>
+
+      <p class="lead text-center"><?php echo $resp->subheading; ?></p>
 
     </div>
   </div>
