@@ -330,6 +330,26 @@ function dbSetChannelShowBoir($channel, $shouldShowBoir) {
 }
 
 /**
+ * Returns the number of channels currently using CoeBot
+ */
+function dbCountChannels() {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT COUNT(*) FROM ' . DB_PREF . 'channels WHERE isActive = 1';
+
+
+    $result = $mysqli->query($sql);
+    if ($result === false) {
+        return NULL;
+
+    } else {
+        $row = $result->fetch_row();
+        return $row[0];
+    }
+}
+
+/**
  * Checks if an API key for a bot is valid and active
  *
  * Returns true if bot is authenticated, or false if an error occurred
@@ -357,6 +377,25 @@ function dbCheckBotAuth($botChannel, $apiKey) {
     return $success && $savedKey == $apiKey;
 }
 
+/**
+ * Returns the number of channels currently using CoeBot
+ */
+function dbCountBots() {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT COUNT(*) FROM ' . DB_PREF . 'bots WHERE isActive = 1';
+
+
+    $result = $mysqli->query($sql);
+    if ($result === false) {
+        return NULL;
+
+    } else {
+        $row = $result->fetch_row();
+        return $row[0];
+    }
+}
 
 
 

@@ -76,12 +76,31 @@ printNav();
     </div>
 
     <div class="col-md-4 col-sm-6 infobox">
-      <h3>We're open source!</h3>
-      <p>Interested in how <?php echo $SITE_TITLE; ?> works? All our code is freely licensed, so go ahead and explore!</p>
+      <h3>Keep in touch!</h3>
+      <p>To stay up to date on the latest CoeBot features and news, you can follow us on Twitter. We will also occasionally host cool channels on our Twitch page.</p>
       <p>
-        <a class="btn btn-default" href="https://bitbucket.org/tucker_gardner/coebot" role="button">Bot source &raquo;</a> 
-        <a class="btn btn-default" href="https://github.com/oxguy3/coebot-www" role="button">Website source &raquo;</a>
+        <a class="btn btn-default" href="https://twitter.com/coebottv" role="button"><i class="icon-twitter"></i> Twitter &raquo;</a> 
+        <a class="btn btn-default" href="https://twitch.tv/coebot" role="button"><i class="icon-twitch"></i> Twitch &raquo;</a> 
       </p>
+    </div>
+
+    <div class="col-sm-12 infobox">
+      <h3>Statistics</h3>
+
+      <div class="row">
+        
+        <div class="col-md-3 col-sm-4 col-xs-6 text-center">
+          <h2><?php echo dbCountChannels(); ?></h2>
+          <p class="lead">channels active</p>
+        </div>
+        
+        <div class="col-md-3 col-sm-4 col-xs-6 text-center">
+          <h2><?php echo dbCountBots(); ?></h2>
+          <p class="lead">bot(s) active</p>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
