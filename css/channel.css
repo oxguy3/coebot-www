@@ -22,7 +22,7 @@
 
   .main {
     width: auto;
-    width: calc(100% - 240px);
+    width: calc(100% - 230px);
     margin-left: 230px;
     float: left;
   }
@@ -34,7 +34,9 @@
 }
 
 
-.visible-a1000-inline { display: none; }
+.visible-a1000-inline {
+  display: none;
+}
 
 @media (min-width: 1000px) {
   .hidden-a1000 { display: none; }

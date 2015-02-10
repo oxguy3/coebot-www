@@ -82,7 +82,7 @@ printNav('', true);
 
               <li><a href="#tab_scheduled" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-calendar icon-fw"></i></span>
-                <span class="sidebar-title" data-bigtitle="Scheduled <span class='visible-a1000-inline'>commands</span><span class='hidden-a1000'>cmds.</span>">Scheduled commands</span>
+                <span class="sidebar-title" data-bigtitle="Scheduled <span class='visible-a1000-inline'>commands</span><span class='hidden-a1000'>cmds</span>">Scheduled commands</span>
               </a></li>
 
               <li class="nav-sidebar-divider"></li>
