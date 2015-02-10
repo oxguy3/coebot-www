@@ -31,7 +31,7 @@ function enableSidebar() {
 
         //TODO functionify tab updates!
         var tabIconHtml = $(tab).children('.sidebar-icon').html();
-        var tabTitleHtml = $(tab).children('.sidebar-title').html();
+        var tabTitleHtml = $(tab).children('.sidebar-title').attr("data-bigtitle");
 
         $(".js-channel-tab-icon").html(tabIconHtml);
         $(".js-channel-tab-title").html(tabTitleHtml);

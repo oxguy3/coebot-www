@@ -9,6 +9,7 @@ $responses = array(
     "title" => "404!!",
     "heading" => "Sorry dude, that page totally doesn't exist.",
     "subheading" => "Learn how to type better, I guess.",
+    "image_href" => "/img/notfound_800.png",
     "img_src" => "/img/notfound_400.png",
     "img_srcset" => "/img/notfound_800.png 2x",
     "img_alt" => "404 art by ryuski",
@@ -18,7 +19,11 @@ $responses = array(
     "title" => "403!!",
     "heading" => "Begone, trespasser!",
     "subheading" => "This page is forbidden. You best be headed back the way you came.",
-    "img_src" => "/img/coeicebucket_square.png"
+    "image_href" => "/img/coebotsketch_1080.png",
+    "img_src" => "/img/forbidden_400.png",
+    "img_srcset" => "/img/forbidden_800.png 2x",
+    "img_alt" => "Coebot GTFO sketch by Coestar",
+    "img_title" => "Sketch by Coestar"
   ),
   "200" => (object) array(
     "title" => "Not an error!",
@@ -41,12 +46,16 @@ printNav();
       <?php 
 
       if (property_exists($resp, "img_src")) {
+        if (property_exists($resp, "image_href")) { echo '<a href="' . $resp->image_href . '" target="_blank">'; }
+
         echo '<img class="center-block img-responsive"';
         if (property_exists($resp, "img_src"))      { echo ' src="'     . $resp->img_src    . '"'; }
         if (property_exists($resp, "img_srcset"))   { echo ' srcset="'  . $resp->img_srcset . '"'; }
         if (property_exists($resp, "img_alt"))      { echo ' alt="'     . $resp->img_alt    . '"'; }
         if (property_exists($resp, "img_title"))    { echo ' title="'   . $resp->img_title  . '"'; }
         echo '>';
+
+        if (property_exists($resp, "image_href")) { echo '</a>'; }
       }
       ?>
 

@@ -40,13 +40,13 @@ printNav('', true);
 ?>
 <div class="container-fluid">
   <div class="row" role="tabpanel">
-    <div class="col-sm-3 col-lg-2 sidebar">
+    <div class="sidebar">
 
       <div class="panel panel-default channel-sidebar-panel">
         <div class="panel-heading visible-xs-block" role="tab" id="channelSidebarHeading">
           <h4 class="panel-title">
             <div class="channel-sidebar-heading-title">
-              <span class="js-channel-title"></span>
+              <span class="js-channel-title channel-title-small"></span>
             </div>
             <div class="channel-sidebar-heading-toggle">
               <a data-toggle="collapse" href="#channelSidebarCollapse" aria-expanded="true" aria-controls="channelSidebarCollapse" class="btn btn-default btn-sm js-channel-tab-icon"></a>
@@ -60,53 +60,53 @@ printNav('', true);
 
               <li class="active"><a href="#tab_overview" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-user icon-fw"></i></span>
-                <span class="sidebar-title">Overview</span>
+                <span class="sidebar-title" data-bigtitle="Overview">Overview</span>
               </a></li>
 
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_commands" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-terminal icon-fw"></i></span>
-                <span class="sidebar-title">Commands</span>
+                <span class="sidebar-title" data-bigtitle="Commands">Commands</span>
               </a></li>
 
               <li><a href="#tab_quotes" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-quote-left icon-fw"></i></span>
-                <span class="sidebar-title">Quotes</span>
+                <span class="sidebar-title" data-bigtitle="Quotes">Quotes</span>
               </a></li>
 
               <li><a href="#tab_autoreplies" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-chat-empty icon-fw"></i></span>
-                <span class="sidebar-title">Auto-replies</span>
+                <span class="sidebar-title" data-bigtitle="Auto-replies">Auto-replies</span>
               </a></li>
 
               <li><a href="#tab_scheduled" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-calendar icon-fw"></i></span>
-                <span class="sidebar-title">Scheduled commands</span>
+                <span class="sidebar-title" data-bigtitle="Scheduled <span class='visible-a1000-inline'>commands</span><span class='hidden-a1000'>cmds.</span>">Scheduled commands</span>
               </a></li>
 
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_regulars" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-users icon-fw"></i></span>
-                <span class="sidebar-title">Regulars</span>
+                <span class="sidebar-title" data-bigtitle="Regulars">Regulars</span>
               </a></li>
 
               <li><a href="#tab_chatrules" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-hammer icon-fw"></i></span>
-                <span class="sidebar-title">Chat rules</span>
+                <span class="sidebar-title" data-bigtitle="Chat rules">Chat rules</span>
               </a></li>
 
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_highlights" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-bookmark icon-fw"></i></span>
-                <span class="sidebar-title">Highlights</span>
+                <span class="sidebar-title" data-bigtitle="Highlights">Highlights</span>
               </a></li>
 
               <li id="sidebarItemGames" class="hidden"><a href="#tab_boir" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-biblethump icon-fw"></i></span>
-                <span class="sidebar-title">Binding of Isaac: Rebirth</span>
+                <span class="sidebar-title" data-bigtitle="<span class='visible-a1000-inline'>Binding of Isaac</span><span class='hidden-a1000'>BOI</span>: Rebirth">Binding of Isaac: Rebirth</span>
               </a></li>
               
             </ul>
@@ -120,7 +120,7 @@ printNav('', true);
     <script>enableSidebar()</script>
 
 
-    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="main">
 
       <h2 class="page-header">
         <span class="js-islive islive-indicator small" data-placement="bottom"><i class="js-islive-icon icon-fw"></i></span>
