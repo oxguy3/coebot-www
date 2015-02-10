@@ -24,7 +24,7 @@ $extraHeadCode .= "var channelCoebotData = " . json_encode($channelCoebotData) .
 $extraHeadCode .= "</script>";
 
 printHead(
-  $channel, 
+  $channelCoebotData["displayName"], 
   array("/css/channel.css"), 
   array("//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js",
     "//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js",
