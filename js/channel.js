@@ -46,6 +46,7 @@ function enableSidebar() {
     $('#navSidebar a.js-sidebar-link[href="#tab_boir"]').on('show.bs.tab', function (e) {
         if (!isBoirLoaded) {
             loadChannelBoir();
+            loadBoirItemData();
         }
     });
 
@@ -78,6 +79,7 @@ var twitchEmotes = false;
 var channelStreamData = false;
 var highlightsStats = false;
 var currentHlstream = false;
+var boirItemData = false;
 
 function downloadChannelData() {
 	$.ajax({
@@ -616,14 +618,19 @@ function showChannelBoir() {
     html += '<div class="boir-character"><strong>Character:</strong> ' + channelBoirData.character + "</div>";
     html += '<div class="boir-floor"><strong>Floor:</strong> ' + channelBoirData.floor + "</div>";
     html += '<div class="boir-seed"><strong>Seed:</strong> ' + channelBoirData.seed + "</div>";
-    html += "<h3>Items</h3>";
+    html += '<h3>Items</h3>';
 
-    html += '<div class="well boir-items"><div class="row">';
+    html += '<div class="well boir-items items-container">';//<div class="row">';
     for (var i = 0; i < channelBoirData.items.length; i++) {
         var item = channelBoirData.items[i];
-        html += '<div class="col-xs-6 col-sm-3 col-md-2 boir-item">' + item + '</div>';
+        item = item.replace(/</gi, "&lt;");
+        html += '<div class="boir-item">';//html += '<div class="col-xs-6 col-sm-3 col-md-2 boir-item">';
+        html += '<div class="rebirth-item" data-item="' + cleanBoirNameForComparison(item) + '">' + item + '&nbsp;&nbsp;&nbsp;</div>';
+        //html += '<span class="boir-item-subtitle">' + item + '</span>';
+        html += '</div>';
     }
-    html += '</div></div>';
+    html += '</div>';//</div>';
+    html += '<p class="small">Item data from <a href="http://platinumgod.co.uk/rebirth" target="_blank">platinumgod.co.uk</a></em></p>'
 
     html += '<div class="col-md-6 text-center">';
     html += '<h3>Lord of the Flies</h3>';
@@ -653,6 +660,9 @@ function showChannelBoir() {
 
     boirContainer.html(html);
 
+    boiItemDataDomReady = true;
+    showBoirItemData();
+
     $(".js-boir-dial").knob({
         'min': 0,
         'max': 3,
@@ -668,6 +678,100 @@ function showChannelBoir() {
     $('.js-boir-loading').addClass('hidden');
     $('.js-boir-loaded').removeClass('hidden');
 
+}
+
+function loadBoirItemData() {
+
+    $.ajax({
+        cache: true,
+        dataType: "json",
+        url: "/boiitemsarray.json",
+        success: function(json) {
+            console.log("Loaded BOIR item data");
+            boirItemData = json;
+
+            for (var i = 0; i < boirItemData.length; i++) {
+                boirItemData[i].safename = cleanBoirNameForComparison(boirItemData[i].title);
+            }
+
+            boiItemDataAjaxReady = true;
+            showBoirItemData();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Failed to load BOIR items data!");
+        }
+    });
+}
+
+var boiItemDataDomReady = false;
+var boiItemDataAjaxReady = false;
+
+function showBoirItemData() {
+    if (!boiItemDataDomReady || !boiItemDataAjaxReady) {
+        return;
+    }
+
+    var itemSelector = $(".items-container .rebirth-item");
+
+    itemSelector.each(function() {
+        var div = $(this);
+        div.html(""); // remove the placeholder title
+        var item = div.attr("data-item");
+        var data = findItemInBoirData(item);
+
+        if (data != null) {
+            div.addClass(data.class);
+            div.attr("title", data.title);
+
+            var content = '';
+            content += '<div class="text-center text-primary"><em>&ldquo;' + data.pickup + '&rdquo;</em></div>';
+
+            if (data.info.length > 0) {
+                content += '<ul class="boir-item-infolist">';
+                for (var i = 0; i < data.info.length; i++) {
+                    content += '<li>' + data.info[i] + '</li>';
+                }
+                content += '</ul>';
+            }
+
+            if (data.unlock != "") {
+                content += '<div><strong>Unlock:</strong> ' + data.unlock + '</div>';
+            }
+
+            if (data.type != "") {
+                content += '<div><strong>Type:</strong> ' + data.type + '</div>';
+            }
+
+            if (data.recharge != "") {
+                content += '<div><strong>Recharge Time:</strong> ' + data.recharge + '</div>';
+            }
+
+            if (data.itempool != "") {
+                content += '<div><strong>Item Pool:</strong> ' + data.itempool + '</div>';
+            }
+
+            div.attr("data-content",content);
+        }
+    });
+
+    itemSelector.popover({
+        html: true,
+        placement: 'auto top',
+        trigger: 'hover'
+    });
+}
+
+function findItemInBoirData(name) {
+    for (var i = 0; i < boirItemData.length; i++) {
+         if (boirItemData[i].safename == name) {
+            return boirItemData[i];
+         }
+    }
+    return null;
+}
+
+function cleanBoirNameForComparison(name) {
+    return name.replace(/['\s]/g, "").toLowerCase();
 }
 
 
