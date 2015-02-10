@@ -14,7 +14,7 @@ function displayListChannels() {
             li += '" class="list-group-item js-islive" data-placement="bottom" data-channel="';
             li += chan.channel + '">';
             
-            li += '<span class="islive-indicator"><i class="js-islive-icon fa fa-fw"></i></span>';
+            li += '<span class="islive-indicator"><i class="js-islive-icon icon-fw"></i></span>';
             li += chan.displayName;
             
             li += '</a>';

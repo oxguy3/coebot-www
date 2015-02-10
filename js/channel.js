@@ -113,26 +113,26 @@ function displayChannelOverview() {
 
     html += '<p>';
     html += '<a class="btn btn-primary" href="http://www.twitch.tv/';
-    html += channel + '" target="_blank"><i class="fa fa-twitch"></i> Twitch</a>';
+    html += channel + '" target="_blank"><i class="icon-twitch"></i> Twitch</a>';
 
     if (channelCoebotData.youtube && channelCoebotData.youtube != "") {
         html += ' <a class="btn btn-default" href="http://www.youtube.com/user/';
-        html += channelCoebotData.youtube + '" target="_blank"><i class="fa fa-youtube-play"></i> YouTube</a>';
+        html += channelCoebotData.youtube + '" target="_blank"><i class="icon-youtube-play"></i> YouTube</a>';
     }
 
     if (channelCoebotData.twitter && channelCoebotData.twitter != "") {
         html += ' <a class="btn btn-default" href="http://twitter.com/';
-        html += channelCoebotData.twitter + '" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>';
+        html += channelCoebotData.twitter + '" target="_blank"><i class="icon-twitter"></i> Twitter</a>';
     }
 
     if (channelData.steamID && channelData.steamID != "") {
         html += ' <a class="btn btn-default" href="http://steamcommunity.com/profiles/';
-        html += channelData.steamID + '" target="_blank"><i class="fa fa-steam"></i> Steam</a>';
+        html += channelData.steamID + '" target="_blank"><i class="icon-steam"></i> Steam</a>';
     }
 
     if (channelData.lastfm && channelData.lastfm != "") {
         html += ' <a class="btn btn-default" href="http://www.last.fm/user/';
-        html += channelData.lastfm + '" target="_blank"><i class="fa fa-lastfm"></i> last.fm</a>';
+        html += channelData.lastfm + '" target="_blank"><i class="icon-lastfm"></i> last.fm</a>';
     }
 
     if (channelData.extraLifeID) {

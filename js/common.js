@@ -1,4 +1,4 @@
-var EMPTY_TABLE_PLACEHOLDER = 'There\'s nothing here... <i class="fa fa-frown-o"></i>';
+var EMPTY_TABLE_PLACEHOLDER = 'There\'s nothing here... <i class="icon-frown"></i>';
 var HASH_DELIMITER = "/";
 
 function prettifyStringVariables(str) {
@@ -64,10 +64,10 @@ var isLiveOn = 2;
 var isLiveLoad = 3;
 
 var isLiveClasses = [
-    "fa-exclamation-triangle text-warning",
-    "fa-toggle-off text-muted",
-    "fa-toggle-on text-primary",
-    "fa-refresh fa-spintext-muted"
+    "icon-attention text-warning",
+    "icon-toggle-off text-muted",
+    "icon-toggle-on text-primary",
+    "icon-arrows-cw icon-spin text-muted"
 ];
 var isLiveClassesAll = isLiveClasses.join(" ");
 
@@ -151,8 +151,8 @@ function updateIsLive(streams) {
             
             popover += '<img src="'+stream.preview.medium+'" class="img-responsive" height="180" width="320">';
             
-            popover += '<i class="fa fa-gamepad"></i> ' + ((stream.channel.game) ? stream.channel.game : "Unknown") + '<br>';
-            popover += '<i class="fa fa-user"></i> ' + Humanize.intComma(stream.viewers) + '';
+            popover += '<i class="icon-gamepad"></i> ' + ((stream.channel.game) ? stream.channel.game : "Unknown") + '<br>';
+            popover += '<i class="icon-user"></i> ' + Humanize.intComma(stream.viewers) + '';
             popover += '</div>';
 
             current.attr("data-title", (stream.channel.status) ? stream.channel.status : "Unknown");

@@ -733,10 +733,10 @@ printNav('commands');
 			<div class="nav-commands-scroll" id="navCommandsScroll" data-spy="affix"><!--  data-offset-top="60" data-offset-bottom="200" -->
 				<ul class="nav nav-commands">
 				  <li class="active">
-				  	<a href="#general"><i class="fa fa-fw fa-info-circle"></i>&nbsp; General</a>
+				  	<a href="#general"><i class="icon-fw icon-info-circled"></i>&nbsp; General</a>
 				  </li>
 				  <li>
-				  	<a href="#custom"><i class="fa fa-fw fa-paint-brush"></i>&nbsp; Custom commands</a>
+				  	<a href="#custom"><i class="icon-fw icon-brush"></i>&nbsp; Custom commands</a>
 				  	<ul class="nav">
 				  		<li><a href="#triggers">Triggers</a></li>
 				  		<li><a href="#repeat">Repeats</a></li>
@@ -745,7 +745,7 @@ printNav('commands');
 				  	</ul>
 				  </li>
 				  <li>
-				  	<a href="#fun"><i class="fa fa-fw fa-smile-o"></i>&nbsp; Fun</a>
+				  	<a href="#fun"><i class="icon-fw icon-smile"></i>&nbsp; Fun</a>
 				  	<ul class="nav">
 				  		<li><a href="#quotes">Quotes</a></li>
 				  		<li><a href="#polls">Polls</a></li>
@@ -755,7 +755,7 @@ printNav('commands');
 				  	</ul>
 				  </li>
 				  <li>
-				  	<a href="#moderation"><i class="fa fa-fw fa-gavel"></i>&nbsp; Moderation</a>
+				  	<a href="#moderation"><i class="icon-fw icon-hammer"></i>&nbsp; Moderation</a>
 				  	<ul class="nav">
 				  		<li><a href="#modshortcuts">Shortcuts</a></li>
 				  		<li><a href="#raids">Raids</a></li>
@@ -764,7 +764,7 @@ printNav('commands');
 				  	</ul>
 				  </li>
 				  <li>
-				  	<a href="#filters"><i class="fa fa-fw fa-filter"></i>&nbsp; Filters</a>
+				  	<a href="#filters"><i class="icon-fw icon-filter"></i>&nbsp; Filters</a>
 				  	<ul class="nav">
 				  		<li><a href="#links">Links</a></li>
 				  		<li><a href="#caps">Capitals</a></li>
@@ -774,7 +774,7 @@ printNav('commands');
 				  	</ul>
 				  </li>
 				  <li>
-				  	<a href="#miscellaneous"><i class="fa fa-fw fa-puzzle-piece"></i>&nbsp; Miscellaneous</a>
+				  	<a href="#miscellaneous"><i class="icon-fw icon-puzzle"></i>&nbsp; Miscellaneous</a>
 				  	<ul class="nav">
 				  		<li><a href="#stringreplacement">String replacement</a></li>
 				  		<li><a href="#admin">Administration</a></li>

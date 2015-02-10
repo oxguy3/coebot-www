@@ -39,7 +39,6 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/cyborg.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/common.css">
     <?php
     for ($i = 0; $i < count($extraCss); $i++) {
@@ -106,12 +105,12 @@ function printNav($activeTab="", $isFluid=false) {
         <li<?php if($activeTab=="commands") echo $activeStr; ?>><a href="/commands">Commands</a></li>
         <li<?php if($activeTab=="help") echo $activeStr; ?>><a href="/help">Help</a></li>
         <?php if(isCookieTrue("cookiemanShortcut")) {?>
-            <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="fa fa-cogs"></i><span class="visible-xs-inline"> Cookie Manager</span></a></li>
+            <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="icon-cog-alt"></i><span class="visible-xs-inline"> Cookie Manager</span></a></li>
         <?php } ?>
       </ul>
       <?php if(isCookieTrue("experimentalFeatures")) {?>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Sign in <i class="fa fa-sign-in"></i></a></li>
+            <li><a href="#">Sign in <i class="icon-sign-in"></i></a></li>
           </ul>
       <?php } ?>
     </div>
@@ -127,14 +126,14 @@ function printFooter() {
         Site by <a class="footer-link" href="http://haydenschiff.me" target="_blank" title="Hayden Schiff">oxguy3</a> 
         <a href="https://github.com/oxguy3/coebot-www" class="btn btn-xs btn-default footer-srccodelink"
         data-toggle="tooltip" title="Source on GitHub" target="_blank">
-            <i class="fa fa-github"></i>
+            <i class="icon-github-circled"></i>
         </a> 
     </span>
     <span class="footer-section">
         Bot by <a class="footer-link" href="https://twitter.com/endsgamer" target="_blank">endsgamer</a>
         <a href="https://bitbucket.org/tucker_gardner/coebot" class="btn btn-xs btn-default footer-srccodelink"
         data-toggle="tooltip" title="Source on Bitbucket" target="_blank">
-            <i class="fa fa-bitbucket"></i>
+            <i class="icon-bitbucket"></i>
         </a> 
     </span>
     <script>$('.footer-srccodelink').tooltip()</script>

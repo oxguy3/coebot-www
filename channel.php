@@ -59,53 +59,53 @@ printNav('', true);
             <ul class="nav nav-sidebar" role="tablist">
 
               <li class="active"><a href="#tab_overview" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-user fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-user icon-fw"></i></span>
                 <span class="sidebar-title">Overview</span>
               </a></li>
 
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_commands" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-terminal fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-terminal icon-fw"></i></span>
                 <span class="sidebar-title">Commands</span>
               </a></li>
 
               <li><a href="#tab_quotes" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-quote-left fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-quote-left icon-fw"></i></span>
                 <span class="sidebar-title">Quotes</span>
               </a></li>
 
               <li><a href="#tab_autoreplies" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-comments-o fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-chat-empty icon-fw"></i></span>
                 <span class="sidebar-title">Auto-replies</span>
               </a></li>
 
               <li><a href="#tab_scheduled" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-calendar fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-calendar icon-fw"></i></span>
                 <span class="sidebar-title">Scheduled commands</span>
               </a></li>
 
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_regulars" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-users fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-users icon-fw"></i></span>
                 <span class="sidebar-title">Regulars</span>
               </a></li>
 
               <li><a href="#tab_chatrules" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-gavel fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-hammer icon-fw"></i></span>
                 <span class="sidebar-title">Chat rules</span>
               </a></li>
 
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_highlights" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-bookmark fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-bookmark icon-fw"></i></span>
                 <span class="sidebar-title">Highlights</span>
               </a></li>
 
               <li id="sidebarItemGames" class="hidden"><a href="#tab_boir" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="fa fa-gamepad fa-fw"></i></span>
+                <span class="sidebar-icon"><i class="icon-bindingofisaac-alt icon-fw"></i></span>
                 <span class="sidebar-title">Binding of Isaac: Rebirth</span>
               </a></li>
               
@@ -123,7 +123,7 @@ printNav('', true);
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
       <h2 class="page-header">
-        <span class="js-islive islive-indicator small" data-placement="bottom"><i class="js-islive-icon fa fa-fw"></i></span>
+        <span class="js-islive islive-indicator small" data-placement="bottom"><i class="js-islive-icon icon-fw"></i></span>
         <span class="js-channel-title channel-title hidden-xs"></span>
         <span class="js-channel-tab-title channel-tab-title"><span>
       </h2>
@@ -262,7 +262,7 @@ printNav('', true);
             CoeBot records that as a highlight. Here you can view the highlights from the last 30 days of livestreams.
           </p>
           <div class="js-highlights-loading">
-            <h3 class="loading-text"><i class="fa"></i></h3>
+            <h3 class="loading-text"><i></i></h3>
           </div>
 
           <table class="table table-striped js-highlights-table hidden">
@@ -284,13 +284,13 @@ printNav('', true);
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="hlStreamModalLabel">
                     <span class="js-hlstream-loaded-inline js-hlstream-title"></span>
-                    <span class="js-hlstream-loading-inline loading-text"><i class="fa"></i></span>
+                    <span class="js-hlstream-loading-inline loading-text"><i></i></span>
                   </h4>
                 </div>
                 <div class="modal-body js-hlstream-loaded">
                   <div class="js-hlstream-player-parent"></div>
                   <p>
-                    <a target="_blank" class="btn btn-primary js-hlstream-twitchlink">View on Twitch <i class="fa fa-twitch"></i></a>
+                    <a target="_blank" class="btn btn-primary js-hlstream-twitchlink">View on Twitch <i class="icon-twitch"></i></a>
                   </p>
                   <div class="js-hlstream-table-parent"></div>
                 </div>
@@ -304,7 +304,7 @@ printNav('', true);
 
         <div role="tabpanel" class="tab-pane fade" id="tab_boir">
           <div class="js-boir-loading">
-            <h3 class="loading-text"><i class="fa"></i></h3>
+            <h3 class="loading-text"><i></i></h3>
           </div>
           <div class="js-boir-loaded hidden">
             <div class="js-boir-container"></div>

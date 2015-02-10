@@ -14,7 +14,8 @@ body {
 }
 
 .fa:before {
-    content: "\f1fd" ! important;
+    content: "\e81a" ! important;
+    /*content: "\f1fd" ! important;*/
 }
 
 *:not(i):not(.glyphicon) {
