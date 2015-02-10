@@ -2,7 +2,7 @@
 
 require_once("common.php");
 
-$code = $_ENV['REDIRECT_STATUS'];
+$code = isset($httpStatusCode) ? $httpStatusCode : $_ENV['REDIRECT_STATUS'];
 
 $responses = array(
   "404" => (object) array(

@@ -5,24 +5,25 @@ ErrorDocument 403 /error.php?c=403
 
 RewriteEngine on
 
-RewriteRule ^c/(\w+)/?$ /channel.php?channel=$1
-RewriteRule ^c/(\w+)/(\w+)/?$ /channel.php?channel=$1&tab=$2
+RewriteRule ^c/(\w+)/?$ /channel.php?channel=$1 [L]
+RewriteRule ^c/(\w+)/(\w+)/?$ /channel.php?channel=$1&tab=$2 [L]
 
-RewriteRule ^channel/(.*)$ /c/$1 [R]
-RewriteRule ^channels/(.*)$ /c/$1 [R]
+RewriteRule ^channel/(.*)$ /c/$1 [L,R]
+RewriteRule ^channels/(.*)$ /c/$1 [L,R]
 
-RewriteRule ^api/(.*)$ /api.php?q=$1
+RewriteRule ^api/(.*)$ /api.php?q=$1 [L]
 
-RewriteRule ^commands/?$ /commands.php
-RewriteRule ^commands/(.+)$ /commands.php?prefix=$1
+RewriteRule ^commands/?$ /commands.php [L]
+RewriteRule ^commands/(.+)$ /commands.php?prefix=$1 [L]
 
-RewriteRule ^channels/?$ /chanlist.php
-RewriteRule ^c/?$ /channels [R]
-RewriteRule ^channel/?$ /channels [R]
+RewriteRule ^channels/?$ /chanlist.php [L]
+RewriteRule ^c/?$ /channels [L,R]
+RewriteRule ^channel/?$ /channels [L,R]
 
 
-RewriteRule ^faq/?$ /faq.php
-RewriteRule ^cookieman/?$ /cookieman.php
+RewriteRule ^help/?$ /help.php [L]
+RewriteRule ^faq/?$ /help#faq [L,R,NE]
+RewriteRule ^cookieman/?$ /cookieman.php [L]
 
 
 RewriteRule ^oldhl/([^.]+)?$ highlights/highlight.php?arg=$1 [L]

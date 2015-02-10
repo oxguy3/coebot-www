@@ -3,15 +3,17 @@
 require_once("common.php");
 
 
-printHead("FAQ", array("/css/faq.css"), array("/js/faq.js"));
-printNav('faq');
+printHead("Help", array("/css/help.css"), array("/js/help.js"));
+printNav('help');
 
 ?>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>Frequently Asked Questions</h1>
+      <h1>Help</h1>
 
+
+      <h2 id="faq">Frequently Asked Questions</h2>
 
       <div class="panel-group" id="faqAccordion" role="tablist" aria-multiselectable="true">
 

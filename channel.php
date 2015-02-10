@@ -3,17 +3,24 @@
 require_once("common.php");
 
 if (!isset($_GET['channel'])) {
-  header("Location: /");
-  die("Missing channel");
+  throw404();
 }
+
 $channel = $_GET['channel'];
+
 if (!validateChannel($channel)) {
-  header("Location: /");
-  die("Invalid channel");
+  throw404();
+}
+
+$channelCoebotData = dbGetChannel($channel);
+
+if (!$channelCoebotData) {
+  throw404();
 }
 
 $extraHeadCode = "<script>";
 $extraHeadCode .= "var channel = \"$channel\";";
+$extraHeadCode .= "var channelCoebotData = " . json_encode($channelCoebotData) . ";";
 $extraHeadCode .= "</script>";
 
 printHead(
@@ -60,7 +67,7 @@ printNav('', true);
 
               <li><a href="#tab_commands" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-terminal fa-fw"></i></span>
-                <span class="sidebar-title">Triggers</span>
+                <span class="sidebar-title">Commands</span>
               </a></li>
 
               <li><a href="#tab_quotes" class="js-sidebar-link">
@@ -97,9 +104,9 @@ printNav('', true);
                 <span class="sidebar-title">Highlights</span>
               </a></li>
 
-              <li><a href="#tab_games" class="js-sidebar-link<?php if(!isCookieTrue("experimentalFeatures")) { echo " hidden"; } ?>">
+              <li id="sidebarItemGames" class="hidden"><a href="#tab_boir" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="fa fa-gamepad fa-fw"></i></span>
-                <span class="sidebar-title">Games</span>
+                <span class="sidebar-title">Binding of Isaac: Rebirth</span>
               </a></li>
               
             </ul>
@@ -162,6 +169,7 @@ printNav('', true);
               <tr>
                 <th><i class="sorttable-icon"></i>#</th>
                 <th><i class="sorttable-icon"></i>Quote</th>
+                <th><i class="sorttable-icon"></i>Date added</th>
               </tr>
             </thead>
             <tbody class="js-quotes-tbody"></tbody>
@@ -294,10 +302,9 @@ printNav('', true);
         <script>beepBeepHeresYourHighlights()</script>
 
 
-        <div role="tabpanel" class="tab-pane fade" id="tab_games">
-          <h3>Binding of Isaac: Rebirth</h3>
+        <div role="tabpanel" class="tab-pane fade" id="tab_boir">
           <div class="js-boir-loading">
-            <h4 class="loading-text"><i class="fa"></i></h4>
+            <h3 class="loading-text"><i class="fa"></i></h3>
           </div>
           <div class="js-boir-loaded hidden">
             <div class="js-boir-container"></div>

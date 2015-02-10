@@ -104,12 +104,12 @@ function printNav($activeTab="", $isFluid=false) {
       <ul class="nav navbar-nav navbar-left">
         <li<?php if($activeTab=="channels") echo $activeStr; ?>><a href="/channels">Channels</a></li>
         <li<?php if($activeTab=="commands") echo $activeStr; ?>><a href="/commands">Commands</a></li>
-        <li<?php if($activeTab=="faq") echo $activeStr; ?>><a href="/faq">FAQ</a></li>
+        <li<?php if($activeTab=="help") echo $activeStr; ?>><a href="/help">Help</a></li>
         <?php if(isCookieTrue("cookiemanShortcut")) {?>
             <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="fa fa-cogs"></i><span class="visible-xs-inline"> Cookie Manager</span></a></li>
         <?php } ?>
       </ul>
-      <?php if(isCookieTrue("cookiemanShortcut")) {?>
+      <?php if(isCookieTrue("experimentalFeatures")) {?>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Sign in <i class="fa fa-sign-in"></i></a></li>
           </ul>
@@ -169,6 +169,13 @@ function isCookieTrue($key) {
     return checkCookieValue($key, "true");
 }
 
+function throw404() {
+  header("HTTP/1.0 404 Not Found");
+  $httpStatusCode = 404;
+  include_once("error.php");
+  die();
+}
+
 
 
 
@@ -217,6 +224,57 @@ function dbListChannels() {
         }
         return $channels;
     }
+}
+
+/**
+ * Returns the row for a given channel, or false if an error occurred, or NULL if channel doesn't exist
+ */
+function dbGetChannel($channel) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT displayName, isActive, botChannel, youtube, twitter, shouldShowOffensiveWords, shouldShowBoir FROM ' . DB_PREF . 'channels WHERE channel = ?';
+
+
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('s', $channel);
+    $stmt->bind_result($displayName, $isActive, $botChannel, $youtube, $twitter, $shouldShowOffensiveWords, $shouldShowBoir);
+
+
+    $success = $stmt->execute();
+
+    if (!$success) {
+        $stmt->close();
+        return false;
+    }
+    if ($stmt->fetch() !== true) {
+        $stmt->close();
+        return NULL;
+    }
+
+    //$stmt->fetch();
+    $stmt->close();
+
+    $row = array(
+        "channel" => $channel,
+        "displayName" => $displayName,
+        "isActive" => $isActive,
+        "botChannel" => $botChannel,
+        "youtube" => $youtube,
+        "twitter" => $twitter,
+        "shouldShowOffensiveWords" => $shouldShowOffensiveWords,
+        "shouldShowBoir" => $shouldShowBoir
+    );
+
+    $row['isActive'] = ($row['isActive'] == 1) ? true : false;
+    $row['shouldShowOffensiveWords'] = ($row['shouldShowOffensiveWords'] == 1) ? true : false;
+    $row['shouldShowBoir'] = ($row['shouldShowBoir'] == 1) ? true : false;
+
+    return $row;
 }
 
 /**

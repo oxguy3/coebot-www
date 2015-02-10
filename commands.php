@@ -43,6 +43,9 @@ printNav('commands');
 			  <dt><kbd class="command">join</kbd></dt>
 			  <dd>Tells CoeBot to begin monitoring your channel.</dd>
 
+			  <dt><kbd class="command">part</kbd></dt>
+			  <dd>Tells CoeBot to stop monitoring your channel.</dd>
+
 			  <dt><kbd class="command">topic [new topic]</kbd></dt>
 			  <dd>Sets and displays the topic. If no topic is provided, the channel title will be displayed.</dd>
 
