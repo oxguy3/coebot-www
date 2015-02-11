@@ -851,8 +851,8 @@ function injectEmoticons(html) {
     for (var i = 0; i < twitchEmotes.length; i++) {
         var emote = twitchEmotes[i];
         if (emote.state == "active") {
-            var pattern = new RegExp(emote.regex);
-            html = html.replace(pattern, htmlifyEmote(emote), 'g');
+            var pattern = new RegExp("\\b(" + emote.regex + ")\\b", 'gm');
+            html = html.replace(pattern, htmlifyEmote(emote));
         }
     }
     return html;
@@ -872,8 +872,7 @@ function htmlifyEmote(emote) {
     html += '<img src="' + emote.url;
     html += '" height="' + emote.height;
     html += '" width="' + emote.width;
-    html += '" title="' + emote.regex;
-    html += '" class="twitch-emote">';
+    html += '" title="$1" class="twitch-emote">';
     return html;
 }
 
