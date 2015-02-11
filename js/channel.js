@@ -247,7 +247,7 @@ function displayChannelScheduled() {
         var cmd = channelData.scheduledCommands[i];
         if (cmd.active) {
             var row = '<tr>';
-            row += '<td>' + channelData.commandPrefix + cmd.name + '</td>';
+            row += '<td><kbd class="command">' + cmd.name + '</kbd></td>';
             row += '<td><span title="Cron command: ' + cmd.pattern + '">'
             row += prettyCron.toString(cmd.pattern) + '</td>';
             row += '</tr>';
@@ -258,7 +258,7 @@ function displayChannelScheduled() {
         var cmd = channelData.repeatedCommands[i];
         if (cmd.active) {
             var row = '<tr>';
-            row += '<td>' + channelData.commandPrefix + cmd.name + '</td>';
+            row += '<td><kbd class="command">' + cmd.name + '</kbd></td>';
             row += '<td><span title="Every ' + cmd.delay + ' seconds">Every '
             row += moment().subtract(cmd.delay, 'seconds').fromNow(true) + '</span></td>';
             row += '</tr>';
