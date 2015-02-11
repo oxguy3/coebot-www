@@ -10,7 +10,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 * If you access a specific hlstream on channel.php directly via URL, the page won't dim behind the hlstream modal.
 * If an hlstream on channel.php has enough highlights that the user has to scroll, the dimming behind the modal won't extend below the screen.
 * If the sidebar on channel.php is narrow enough, the tooltip for the Bitbucket link will get cut off by the edge.
-* Emotes are pretty freaking broken, and rely on a deprecated API that doesn't really do much good. Should pull emotes from CoeBot's list of available emotes rather than from channel-specific lists of emotes.
+* ~~Emotes are pretty freaking broken~~ Emotes are less broken than they used to be, but they still rely on a deprecated API that doesn't really do much good. Should pull emotes from CoeBot's list of available emotes rather than from channel-specific lists of emotes.
 * Synchronous HTTP requests are bad practice and now considered deprecated, should change everything that requires them to work differently.
 
 
@@ -38,7 +38,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 ## Major improvements
 * If commands.php offered some indication that you could change what command prefix to display, that'd be pretty nifty.
 * A nice airy parallax-esque homepage would really make CoeBot stand out.
-* BOIR build info page isn't finished.
+* ~~BOIR build info page isn't finished.~~
 * ~~Channels aren't loaded from database, and CoeBot doesn't have a way to automatically update channel data.~~
 * Need to have channels tied to the bot instance that controls them.
 * Need to put more info into channel.php#chatrules; it's really half-baked at present.
