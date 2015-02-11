@@ -16,14 +16,14 @@
     /*background-color: #444;*/
     border-right: 1px solid #777;
 
-    width: 230px;
+    width: 240px;
     float: left;
   }
 
   .main {
     width: auto;
-    width: calc(100% - 230px);
-    margin-left: 230px;
+    width: calc(100% - 240px);
+    margin-left: 240px;
     float: left;
   }
 

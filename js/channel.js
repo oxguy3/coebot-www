@@ -851,7 +851,12 @@ function injectEmoticons(html) {
     for (var i = 0; i < twitchEmotes.length; i++) {
         var emote = twitchEmotes[i];
         if (emote.state == "active") {
-            var pattern = new RegExp("\\b(" + emote.regex + ")\\b", 'gm');
+            var pattern = null;
+            if (emote.regex.search(/\W/g) == -1) {
+                var pattern = new RegExp('\\b(' + emote.regex + ')\\b', 'gm');
+            } else {
+                var pattern = new RegExp('(' + emote.regex + ')', 'gm');
+            }
             html = html.replace(pattern, htmlifyEmote(emote));
         }
     }
