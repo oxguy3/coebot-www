@@ -42,7 +42,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
     <link rel="stylesheet" href="/css/common.css">
     <?php
     for ($i = 0; $i < count($extraCss); $i++) {
-    	echo '<link href="' . $extraCss[$i] . '" rel="stylesheet">' . "\n";
+    	echo '<link href="' . $extraCss[$i] . '" rel="stylesheet">' . "\n    ";
     }
 
     if (isCookieTrue("birthdayMode")) {

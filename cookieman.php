@@ -3,7 +3,7 @@
 require_once("common.php");
 
 
-printHead("Cookie Manager", array(), array("/js/moment.min.js", "/js/cookieman.js"));
+printHead("Cookie Manager", array(), array("/js/cookieman.js"));
 printNav();
 
 ?>

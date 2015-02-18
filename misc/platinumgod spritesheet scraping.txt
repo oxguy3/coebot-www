@@ -19,4 +19,4 @@
 </(?:li|span)>\n*
 
 ==== REPLACE ====
-"$2":{"class": "$1","title": "$2","id": $3,"pickup": "$4","info": [$5],"unlock": "$6","type": "$7","recharge": "$8","itempool": "$9","tags": "$10"},
+{"class": "$1","title": "$2","id": $3,"pickup": "$4","info": [$5],"unlock": "$6","type": "$7","recharge": "$8","itempool": "$9","tags": "$10"},
