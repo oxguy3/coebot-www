@@ -171,7 +171,17 @@
 
 
 .islive-indicator {
-  margin-right: 6px;
+  margin-right: 2px;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 50%;
+}
+
+.islive-indicator-small {
+  margin-right: 2px;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 65%;
 }
 
 
@@ -179,7 +189,7 @@
   padding-right: 6px;
   color: #888;
   display: inline; /*inline-block;*/
-  font: normal normal normal 14px/1 FontAwesome;
+  /*font: normal normal normal 14px/1 FontAwesome;*/
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -189,15 +199,15 @@
 }
 
 .dataTable th.sorting .sorttable-icon:before {
-  content: '\f0dc';
+  content: '\e821';
 }
 
 .dataTable th.sorting_asc .sorttable-icon:before {
-  content: '\f0de';
+  content: '\e820';
 }
 
 .dataTable th.sorting_desc .sorttable-icon:before {
-  content: '\f0dd';
+  content: '\e822';
 }
 
 .dataTable th.sorting, .dataTable th.sorting_asc, .dataTable th.sorting_desc {

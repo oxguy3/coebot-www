@@ -65,8 +65,8 @@ var isLiveLoad = 3;
 
 var isLiveClasses = [
     "icon-attention text-warning",
-    "icon-toggle-off text-muted",
-    "icon-toggle-on text-primary",
+    "icon-circle-empty text-muted",
+    "icon-circle text-primary",
     "icon-arrows-cw icon-spin text-muted"
 ];
 var isLiveClassesAll = isLiveClasses.join(" ");

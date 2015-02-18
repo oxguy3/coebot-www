@@ -632,31 +632,35 @@ function showChannelBoir() {
     html += '</div>';//</div>';
     html += '<p class="small">Item data from <a href="http://platinumgod.co.uk/rebirth" target="_blank">platinumgod.co.uk</a></em></p>'
 
-    html += '<div class="col-md-6 text-center">';
-    html += '<h3>Lord of the Flies</h3>';
-    html += '<input type="text" class="dial js-boir-dial js-boir-dial-fly" value="' + channelBoirData.flyProgress + '">';
+    if (typeof channelBoirData.flyItems !== 'undefined' && typeof channelBoirData.flyProgress !== 'undefined') {
+        html += '<div class="col-md-6 text-center">';
+        html += '<h3>Lord of the Flies</h3>';
+        html += '<input type="text" class="dial js-boir-dial js-boir-dial-fly" value="' + channelBoirData.flyProgress + '">';
 
-    // html += '<h4>Items</h4>';
-    html += '<div class="row"><div class="col-sm-8 col-sm-offset-2"><ul class="list-group">'
-    for (var i = 0; i < channelBoirData.flyItems.length; i++) {
-        var item = channelBoirData.flyItems[i];
-        html += '<li class="list-group-item">' + item + '</li>';
+        // html += '<h4>Items</h4>';
+        html += '<div class="row"><div class="col-sm-8 col-sm-offset-2"><ul class="list-group">'
+        for (var i = 0; i < channelBoirData.flyItems.length; i++) {
+            var item = channelBoirData.flyItems[i];
+            html += '<li class="list-group-item">' + item + '</li>';
+        }
+        html += '</ul></div></div>';
+        html += '</div>';
     }
-    html += '</ul></div></div>';
-    html += '</div>';
 
-    html += '<div class="col-md-6 text-center">';
-    html += '<h3>Guppy</h3>';
-    html += '<input type="text" class="dial js-boir-dial js-boir-dial-guppy" value="' + channelBoirData.guppyProgress + '">';
+    if (typeof channelBoirData.guppyItems !== 'undefined' && typeof channelBoirData.guppyProgress !== 'undefined') {
+        html += '<div class="col-md-6 text-center">';
+        html += '<h3>Guppy</h3>';
+        html += '<input type="text" class="dial js-boir-dial js-boir-dial-guppy" value="' + channelBoirData.guppyProgress + '">';
 
-    // html += '<h4>Items</h4>';
-    html += '<div class="row"><div class="col-sm-8 col-sm-offset-2"><ul class="list-group">'
-    for (var i = 0; i < channelBoirData.guppyItems.length; i++) {
-        var item = channelBoirData.guppyItems[i];
-        html += '<li class="list-group-item">' + item + '</li>';
+        // html += '<h4>Items</h4>';
+        html += '<div class="row"><div class="col-sm-8 col-sm-offset-2"><ul class="list-group">'
+        for (var i = 0; i < channelBoirData.guppyItems.length; i++) {
+            var item = channelBoirData.guppyItems[i];
+            html += '<li class="list-group-item">' + item + '</li>';
+        }
+        html += '</ul></div></div>';
     }
-    html += '</ul></div></div>';
-    html += '</div>';
+        html += '</div>';
 
     boirContainer.html(html);
 
@@ -833,7 +837,7 @@ function prettifyAccessLevel(access) {
 
 function colorifyAccessLevel(access) {
     if (access == 0) {
-        return "#bdc3c7";
+        return "#616b72"; //return "#bdc3c7";
     }
     if (access == 1) {
         return "#8e44ad";

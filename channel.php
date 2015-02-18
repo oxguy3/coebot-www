@@ -46,6 +46,7 @@ printNav('', true);
         <div class="panel-heading visible-xs-block" role="tab" id="channelSidebarHeading">
           <h4 class="panel-title">
             <div class="channel-sidebar-heading-title">
+              <span class="js-islive islive-indicator-small" data-placement="bottom"><i class="js-islive-icon icon-fw"></i></span>
               <span class="js-channel-title channel-title-small"></span>
             </div>
             <div class="channel-sidebar-heading-toggle">
@@ -123,7 +124,7 @@ printNav('', true);
     <div class="main">
 
       <h2 class="page-header">
-        <span class="js-islive islive-indicator small" data-placement="bottom"><i class="js-islive-icon icon-fw"></i></span>
+        <span class="js-islive islive-indicator hidden-xs" data-placement="bottom"><i class="js-islive-icon icon-fw"></i></span>
         <span class="js-channel-title channel-title hidden-xs"></span>
         <span class="js-channel-tab-title channel-tab-title"><span>
       </h2>
