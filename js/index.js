@@ -43,6 +43,8 @@ function handleAllIsLive(json) {
 
     var currLiveIndex = 0;
 
+    var totalViewers = 0;
+
     for (var i = 0; i < coebotData.channels.length; i++) {
         var chan = coebotData.channels[i];
 
@@ -90,6 +92,10 @@ function handleAllIsLive(json) {
 
             carousel += ci;
 
+            if (typeof stream.viewers !== 'undefined') {
+                totalViewers += stream.viewers;
+            }
+
             currLiveIndex++;
 
         }
@@ -102,6 +108,9 @@ function handleAllIsLive(json) {
     }
     listContainer.html(list);
     carouselContainer.html(carousel);
+
+    $('.js-totalChannels').html(Humanize.intComma(currLiveIndex));
+    $('.js-totalViewers').html(Humanize.intComma(totalViewers));
 }
 
 // given a twitch preview image template url, gives you a url for a specified resolution
