@@ -85,7 +85,7 @@ function handleAllIsLive(json) {
             ci += '<a href="' + getUrlToChannel(chan.channel) +'">' + chan.displayName + '</a> ';
             ci += '<a href="http://www.twitch.tv/' + chan.channel +'" target="_blank"><i class="icon-twitch"></i></a>';
             ci += '</h3>';
-            ci += '<p>' + stream.channel.status + '</p>';
+            ci += '<p class="hidden-xs">' + stream.channel.status + '</p>';
             ci += '</div>';
 
             ci += '</div>';
