@@ -59,3 +59,23 @@ dd {
 	margin-left: 30px;
 	margin-bottom: 5px;
 }
+
+.access-level {
+	margin-left: 6px;
+}
+
+.access-level-0 {
+  background-color: #616b72;
+}
+.access-level-1 {
+  background-color: #8e44ad;
+}
+.access-level-2 {
+  background-color: #27ae60;
+}
+.access-level-3 {
+  background-color: #c0392b;
+}
+.access-level-99 {
+  background-color: #f39c12;
+}

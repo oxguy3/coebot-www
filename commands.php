@@ -2,6 +2,27 @@
 
 require_once("common.php");
 
+function printAccessLabel($level) {
+	$name = "???";
+  if ($level == 0) {
+      $name = "Everyone";
+  }
+  if ($level == 1) {
+      $name = "Regulars";
+  }
+  if ($level == 2) {
+      $name = "Mods";
+  }
+  if ($level == 3) {
+      $name = "Owners";
+  }
+  if ($level == 99) {
+      $name = "Admins";
+  }
+
+  echo '<span class="label label-default access-level access-level-' . $level . '">' . $name . '</span>';
+}
+
 $DEFAULT_COMMAND_PREFIX = "!";
 
 
@@ -37,23 +58,30 @@ printNav('commands');
     <div class="col-sm-9 col-lg-10">
       <h1>Commands</h1>
 
+      <div class="alert alert-info" role="alert">
+        <strong>Under revision!</strong> I have been starting to add permission levels next to all the commands on this page, but for the time being, only some of them have permission levels noted. Apologies for the mess; I hope to have this task finished soon.
+      </div>
+
       <h2 id="general" class="commands-nav-heading">General</h2>
 
       <dl>
 			  <dt><kbd class="command">join</kbd></dt>
-			  <dd>Tells CoeBot to begin monitoring your channel.</dd>
+			  <dd>Tells CoeBot to begin monitoring your channel. Must be executed from the bot's channel. <?php printAccessLabel(0); ?></dd>
 
 			  <dt><kbd class="command">part</kbd></dt>
-			  <dd>Tells CoeBot to stop monitoring your channel.</dd>
+			  <dd>Tells CoeBot to stop monitoring your channel. <?php printAccessLabel(3); ?></dd>
+
+			  <dt><kbd class="command">topic</kbd></dt>
+			  <dd>Displays the topic. If no topic is provided, the channel title will be displayed. <?php printAccessLabel(0); ?></dd>
 
 			  <dt><kbd class="command">topic [new topic]</kbd></dt>
-			  <dd>Sets and displays the topic. If no topic is provided, the channel title will be displayed.</dd>
+			  <dd>Changes the topic. <?php printAccessLabel(2); ?></dd>
 
 			  <dt><kbd class="command">viewers</kbd></dt>
-			  <dd>Displays the current number of stream viewers</dd>
+			  <dd>Displays the current number of stream viewers <?php printAccessLabel(0); ?>.</dd>
 
 			  <dt><kbd class="command">chatters</kbd></dt>
-			  <dd>Displays the number of people connected to chat.</dd>
+			  <dd>Displays the number of people connected to chat. <?php printAccessLabel(0); ?></dd>
 
 			  <dt><kbd class="command">uptime</kbd></dt>
 			  <dd>Displays the time that the stream started at, and the amount of time since then.</dd>
@@ -68,31 +96,37 @@ printNav('commands');
 			  <dd>Links to the currently playing song on lastfm</dd>
 
 			  <dt><kbd class="command">bothelp</kbd></dt>
-			  <dd>Displays the link to bot help documentation (this page).</dd>
+			  <dd>Displays the link to bot help documentation (this page). <?php printAccessLabel(0); ?></dd>
 
 			  <dt><kbd class="command">commercial</kbd></dt>
-			  <dd>Runs a 30 second commercial. You must use <kbd class="command">followme</kbd> to get <?php echo $SITE_TITLE; ?> to follow your account and add the bot as a channel editor.</dd>
+			  <dd>Runs a 30 second commercial. You must use <kbd class="command">followme</kbd> to get <?php echo $SITE_TITLE; ?> to follow your account and add the bot as a channel editor. <?php printAccessLabel(2); ?></dd>
 
 			  <dt><kbd class="command">cancel</kbd></dt>
-			  <dd>Cancels the running of a commercial if one was queued up.</dd>
+			  <dd>Cancels the running of a commercial if one was queued up. <?php printAccessLabel(2); ?></dd>
+
+			  <dt><kbd class="command">game</kbd></dt>
+			  <dd>Displays the current Twitch game. <?php printAccessLabel(0); ?></dd>
 
 			  <dt><kbd class="command">game [new game]</kbd></dt>
-			  <dd>Displays the current Twitch game. Optional - specify a new game to set (must be channel editor).</dd>
+			  <dd>Sets the current Twitch game (bot must be channel editor).<?php printAccessLabel(2); ?></dd>
+
+			  <dt><kbd class="command">status</kbd></dt>
+			  <dd>Displays the current Twitch status. <?php printAccessLabel(0); ?></dd>
 
 			  <dt><kbd class="command">status [new status] </kbd></dt>
-			  <dd>Displays the current Twitch status. Optional - specify a new status to set (must be channel editor).</dd>
+			  <dd>Sets the current Twitch status (bot must be channel editor). <?php printAccessLabel(2); ?></dd>
 
 			  <dt><kbd class="command">statusgame &lt;new game&gt;</kbd></dt>
 			  <dd>Sets the stream title and pulls the current game from Steam. If not a Steam game, sets the game to "Not Playing"</dd>
 
-			  <dt><kbd class="command">steamgame</kbd></dt>
+			  <dt><kbd class="command">steamgame</kbd> <?php printAccessLabel(0); ?></dt>
 			  <dd>Updates the game to the steam game currently being played. If steam game is unavailable, sets the game to "Not Playing"</dd>
 
 			  <dt><kbd class="command">xboxgame</kbd></dt>
 			  <dd>Updates the game to the last played game on Xbox Live</dd>
 
 			  <dt><kbd class="command">followme</kbd></dt>
-			  <dd> Request the bot to follow your Twitch account. Can only be done in your own channel.</dd>
+			  <dd> Request the bot to follow your Twitch account. Can only be done in your own channel. <?php printAccessLabel(3); ?></dd>
 
 			  <dt><kbd class="command">viewerstats</kbd></dt>
 			  <dd>Returns the max concurrent viewers of all time  for this channel and also the average maximum viewer count per stream. Averages may not be accurate until a few streams are is one stream behind.</dd>
@@ -101,16 +135,24 @@ printNav('commands');
 			  <dd>Resets the max viewer count for <kbd class="command">viewerstats</kbd> to the new int passed in. Useful for correcting false numbers from viewbots.</dd>
 
 			  <dt><kbd class="command">punishstats</kbd></dt>
-			  <dd>Returns the number of times a punishment has been applied and how long since a punishment has happened</dd>
+			  <dd>Returns the number of times a punishment (e.g. purge, ban, timeout) has been applied and how long since a punishment has happened</dd>
 
 			  <dt><kbd class="command">whatshouldiplay</kbd></dt>
-			  <dd>Chooses a random game from the Steam games associated with your profile. (Requires Steam ID to be set, see <kbd class="command">set steam</kbd>)</dd>
+			  <dd>Chooses a random game from the Steam games associated with your profile. (Requires Steam ID to be set, see <kbd class="command">set steam</kbd>) <?php printAccessLabel(3); ?></dd>
 
-			  <dt><kbd class="command">wiki &lt;article name&gt;</kbd></dt>
-			  <dd>Gives the snippet associated with that Wikipedia article, might return nothing based on the style of the WikiText</dd>
+			  <dt><kbd class="command">google &lt;query...&gt;</kbd></dt>
+			  <dd>Links to a google search for a particular topic <?php printAccessLabel(1); ?></dd>
+
+			  <dt><kbd class="command">wiki &lt;query...&gt;</kbd></dt>
+			  <dd>Gives the snippet associated with that Wikipedia article, might return nothing based on the style of the WikiText <?php printAccessLabel(1); ?></dd>
+
+			  <dt><kbd class="command">islive [channel]</kbd></dt>
+			  <dd>Tells whether or not a particular channel is live. <?php printAccessLabel(2); ?></dd>
+
+			  <dt><kbd class="command">ishere &lt;username&gt;</kbd></dt>
+			  <dd>Tells whether or not a particular user is present in chat. <?php printAccessLabel(2); ?></dd>
+
 		  </dl>
-
-
 
 
 		  <h2 id="custom" class="commands-nav-heading">Custom commands</h2>
@@ -121,16 +163,16 @@ printNav('commands');
 		  <dl>
 
 		    <dt><kbd class="command">command add &lt;name&gt; &lt;text&gt;</kbd></dt>
-		    <dd>Creates a command (<kbd class="command">name</kbd>)</dd>
+		    <dd>Creates a command (<kbd class="command">name</kbd>) <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">command delete &lt;name&gt;</kbd></dt>
-		    <dd>Removes command "name"</dd>
+		    <dd>Removes command "name" <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">command restrict &lt;name&gt; &lt;everyone|regulars|mods|owner&gt;</kbd></dt>
-		    <dd>Restricts commands to different access levels</dd>
+		    <dd>Restricts commands to different access levels <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">commands</kbd></dt>
-		    <dd>Lists all custom command names</dd>
+		    <dd>Links to the list of custom commands for a channel <?php printAccessLabel(1); ?></dd>
 
 		  </dl>
 
@@ -142,16 +184,16 @@ printNav('commands');
 		  <dl>
 
 		    <dt><kbd class="command">repeat add &lt;name&gt; &lt;delay in seconds&gt; [message difference]</kbd></dt>
-		    <dd>Sets a command to repeat.</dd>
+		    <dd>Sets a command to repeat. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">repeat delete &lt;name&gt;</kbd></dt>
-		    <dd>Stops repetition and discards repetition info.</dd>
+		    <dd>Stops repetition and discards repetition info. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">repeat on|off &lt;name&gt; </kbd></dt>
-		    <dd>Enables/disables repetition of a command, but keeps info.</dd>
+		    <dd>Enables/disables repetition of a command, but keeps info. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">repeat list</kbd></dt>
-		    <dd>Lists commands that will be repeated.</dd>
+		    <dd>Lists commands that will be repeated. <?php printAccessLabel(2); ?></dd>
 
 		  </dl>
 
@@ -163,16 +205,16 @@ printNav('commands');
 		  <dl>
 
 		    <dt><kbd class="command">schedule add &lt;name&gt; &lt;pattern&gt; [message difference]</kbd></dt>
-		    <dd>Schedules a command.</dd>
+		    <dd>Schedules a command. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">schedule delete &lt;name&gt;</kbd></dt>
-		    <dd>Removes a scheduled command and discards scheduling info</dd>
+		    <dd>Removes a scheduled command and discards scheduling info. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">schedule on|off &lt;name&gt;</kbd></dt>
-		    <dd>Enables/disabled a scheduled command, but keeps info.</dd>
+		    <dd>Enables/disabled a scheduled command, but keeps info. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">schedule list</kbd></dt>
-		    <dd>Lists scheduled commands</dd>
+		    <dd>Lists scheduled commands. <?php printAccessLabel(2); ?></dd>
 		  </dl>
 
 		  <h4>Examples</h4>
@@ -189,16 +231,16 @@ printNav('commands');
 		  <dl>
 
 		    <dt><kbd class="command">autoreply add &lt;pattern&gt; &lt;response&gt;</kbd></dt>
-		    <dd>Adds an autoreply triggered by *pattern* with the desired response. Use * to denote wildcards and _ to denote spaces in the pattern.</dd>
+		    <dd>Adds an autoreply triggered by *pattern* with the desired response. Use * to denote wildcards and _ to denote spaces in the pattern. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">autoreply remove &lt;number&gt;</kbd></dt>
-		    <dd>Removes the autoreply with that index number. Do <kbd class="command">autoreply list</kbd> for those values.</dd>
+		    <dd>Removes the autoreply with that index number. Do <kbd class="command">autoreply list</kbd> for those values. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">autoreply editresponse &lt;index&gt; &lt;response&gt;</kbd></dt>
-		    <dd>Edits the response for a pre-existing autoreply.</dd>
+		    <dd>Edits the response for a pre-existing autoreply. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">autoreply list</kbd></dt>
-		    <dd>Lists current autoreplies</dd>
+		    <dd>Lists current autoreplies. <?php printAccessLabel(2); ?></dd>
 		  </dl>
 
 			<h4>Example</h4>
@@ -213,46 +255,61 @@ printNav('commands');
 
 		  <dl>
 
-		    <dt><kbd class="command">throw &lt;object&gt;</kbd></dt>
-		    <dd>Throws object</dd>
+		    <dt><kbd class="command">throw &lt;object...&gt;</kbd></dt>
+		    <dd>Throws object. <?php printAccessLabel(1); ?></dd>
 
 		    <dt><kbd class="command">winner</kbd></dt>
-		    <dd>Chooses a random viewer</dd>
+		    <dd>Chooses a random viewer. <?php printAccessLabel(2); ?></dd>
 
-		    <dt><kbd class="command">hug &lt;object&gt;</kbd></dt>
+		    <dt><kbd class="command">random coin</kbd></dt>
+		    <dd>Gives the result of a <?php printAccessLabel(1); ?></dd>
+
+		    <dt><kbd class="command">random &lt;integer&gt;</kbd></dt>
+		    <dd>Picks a random number between 0 and a given integer. <?php printAccessLabel(1); ?></dd>
+
+		    <dt><kbd class="command">random regular</kbd></dt>
+		    <dd>Picks a random online regular. <?php printAccessLabel(2); ?></dd>
+
+		    <dt><kbd class="command">hug &lt;object...&gt;</kbd></dt>
 		    <dd>Hugs object</dd>
 
-		    <dt><kbd class="command">conch &lt;question&gt;</kbd></dt>
-		    <dd>Magic 8 Ball functionality</dd>
+		    <dt><kbd class="command">conch &lt;question...&gt;</kbd></dt>
+		    <dd>Magic 8 Ball functionality <?php printAccessLabel(1); ?></dd>
 
-		    <dt><kbd class="command">define &lt;word/phrase&gt;</kbd></dt>
-		    <dd>Searches Merriam-Webster for definitions (Not a great API, but free and works, mostly)</dd>
+<!-- 		    <dt><kbd class="command">define &lt;word/phrase...&gt;</kbd></dt>
+		    <dd>Searches Merriam-Webster for definitions (Not a great API, but free and works, mostly)</dd> -->
 
-		    <dt><kbd class="command">urban &lt;word/phrase&gt;</kbd></dt>
-		    <dd>Searches Urban Dictionary for definitions. Limited to 140 character response.</dd> 
+		    <dt><kbd class="command">urban &lt;word/phrase...&gt;</kbd></dt>
+		    <dd>Searches Urban Dictionary for definitions. Limited to 140 character response. <?php printAccessLabel(1); ?></dd>
+
+		    <dt><kbd class="command">me &lt;phrase...&gt;</kbd></dt>
+		    <dd>Sends a status message (i.e. "/me...") as CoeBot <?php printAccessLabel(2); ?></dd>
+
+		    <dt><kbd class="command">race </kbd></dt>
+		    <dd>Gives a link to the speedrunning race the streamer is currently participating in <?php printAccessLabel(0); ?></dd>
 
 		  </dl>
 
 
 		  <h3 id="quotes" class="commands-nav-heading">Quotes</h3>
 		  <dl>
-		    <dt><kbd class="command">quote add &lt;"Quote"&gt;</kbd></dt>
-		    <dd>Adds a new quote.</dd>
+		    <dt><kbd class="command">quote add &lt;"quote..."&gt;</kbd></dt>
+		    <dd>Adds a new quote. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">quote delete|remove &lt;int index of quote&gt;</kbd></dt>
-		    <dd>Deletes the quote at the specified index.</dd>
+		    <dd>Deletes the quote at the specified index. <?php printAccessLabel(2); ?></dd>
 
-		    <dt><kbd class="command">quote getindex &lt;Exact Quote&gt;</kbd></dt>
-		    <dd>Gives the index of the quote passed in.</dd>
+		    <dt><kbd class="command">quote getindex &lt;exact quote...&gt;</kbd></dt>
+		    <dd>Gives the index of the quote passed in. <?php printAccessLabel(1); ?></dd>
 
 		    <dt><kbd class="command">quote get &lt;int index of quote&gt;</kbd></dt>
-		    <dd>Returns the quote of the requested index.</dd>
+		    <dd>Returns the quote of the requested index. <?php printAccessLabel(1); ?></dd>
 
 		    <dt><kbd class="command">quote random</kbd></dt>
-		    <dd>Returns a random quote from the quote database.</dd>
+		    <dd>Returns a random quote from the quote database. <?php printAccessLabel(1); ?></dd>
 
-		    <dt><kbd class="command">quote search &lt;phrase to search&gt;</kbd></dt>
-		    <dd>Searches the quote database and returns indicies of matching quotes.</dd>    
+		    <dt><kbd class="command">quote search &lt;phrase to search...&gt;</kbd></dt>
+		    <dd>Searches the quote database and returns indicies of matching quotes. <?php printAccessLabel(2); ?></dd>    
 
 		  </dl>
 
@@ -262,22 +319,22 @@ printNav('commands');
 		  <dl>
 
 		    <dt><kbd class="command">poll create &lt;option 1&gt; &lt;option 2&gt;... [option n]</kbd></dt>
-		    <dd>Creates a new poll with the specified options.</dd>
+		    <dd>Creates a new poll with the specified options. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">poll start|stop</kbd></dt>
-		    <dd>Starts or stops the poll.</dd>
+		    <dd>Starts or stops the poll. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">poll results</kbd></dt>
-		    <dd>Displays the poll's results.</dd>
+		    <dd>Displays the poll's results. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">vote &lt;option&gt;</kbd></dt>
 		    <dd>Votes for &lt;option&gt; in the poll.</dd>
 
-		    <dt><kbd class="command">strawpoll &lt;question&gt;; &lt;first choice&gt;, &lt;second choice&gt;, &lt;nth choice&gt;</kbd></dt>
+<!-- 		    <dt><kbd class="command">strawpoll &lt;question&gt;; &lt;first choice&gt;, &lt;second choice&gt;, &lt;nth choice&gt;</kbd></dt>
 		    <dd>Posts a strawpoll with the given question and choices.</dd>    
 
 		    <dt><kbd class="command">strawpoll results</kbd></dt>
-		    <dd>Retrieves the results of the last strawpoll.</dd>   
+		    <dd>Retrieves the results of the last strawpoll.</dd>   --> 
 		  </dl>
 
 
@@ -286,16 +343,16 @@ printNav('commands');
 		  <dl>
 
 		    <dt><kbd class="command">giveaway create &lt;max-number&gt; [duration]</kbd></dt>
-		    <dd>Creates a number-selection based giveaway with numbers from 1 - max. Duration is an optional value in seconds after which the giveaway will stop. Specifying a duration will auto-start the giveaway and stop will not need to be executed.</dd>
+		    <dd>Creates a number-selection based giveaway with numbers from 1 - max. Duration is an optional value in seconds after which the giveaway will stop. Specifying a duration will auto-start the giveaway and stop will not need to be executed. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">giveaway start|stop</kbd></dt>
-		    <dd>Starts or stops the giveaway.</dd>
+		    <dd>Starts or stops the giveaway. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">giveaway results</kbd></dt>
-		    <dd>Displays winner(s).</dd>
+		    <dd>Displays winner(s). <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">ga</kbd></dt>
-		    <dd>Alias for <kbd class="command">giveaway</kbd>.</dd>
+		    <dd>Alias for <kbd class="command">giveaway</kbd>. <?php printAccessLabel(2); ?></dd>
 
 		  </dl>
 
@@ -305,19 +362,32 @@ printNav('commands');
 		  <dl>
 
 		    <dt><kbd class="command">raffle</kbd></dt>
-		    <dd>Enters the raffle.</dd>
+		    <dd>Enters the raffle. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">raffle enable|disable</kbd></dt>
-		    <dd>Enables entries in the raffle.</dd>
+		    <dd>Enables entries in the raffle. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">raffle reset</kbd></dt>
-		    <dd>Clears entries.</dd>
+		    <dd>Clears entries. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">raffle count</kbd></dt>
-		    <dd>Displays number of entries.</dd>
+		    <dd>Displays number of entries. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">raffle winner</kbd></dt>
-		    <dd>Picks a winner.</dd>
+		    <dd>Picks a winner. <?php printAccessLabel(2); ?></dd>
+
+		  </dl>
+
+
+		  <h3 id="highlights" class="commands-nav-heading">Highlights</h3>
+
+		  <dl>
+
+		    <dt><kbd class="command">ht</kbd></dt>
+		    <dd>Short for "highlight that!". Marks a highlight in the stream. <?php printAccessLabel(0); ?></dd>
+
+		    <dt><kbd class="command">highlights</kbd></dt>
+		    <dd>Provides a link to the list of highlights for this channel. <?php printAccessLabel(0); ?></dd>
 
 		  </dl>
 
@@ -330,19 +400,19 @@ printNav('commands');
 		  <dl>
 
 		    <dt><kbd class="command">boi wiki &lt;query&gt;</kbd></dt>
-		    <dd>Searches the Binding of Isaac wiki for a particular query.</dd>
+		    <dd>Searches the Binding of Isaac wiki for a particular query. <?php printAccessLabel(1); ?></dd>
 
 		    <dt><kbd class="command">boi floor</kbd></dt>
-		    <dd>Shows what floor the streamer is currently on.</dd>
+		    <dd>Shows what floor the streamer is currently on. <?php printAccessLabel(1); ?></dd>
 
 		    <dt><kbd class="command">boi seed</kbd></dt>
-		    <dd>Gives the seed for the streamer's build.</dd>
+		    <dd>Gives the seed for the streamer's build. <?php printAccessLabel(1); ?></dd>
 
 		    <dt><kbd class="command">boi items</kbd></dt>
-		    <dd>Lists all the items the streamer has.</dd>
+		    <dd>Lists all the items the streamer has. <?php printAccessLabel(1); ?></dd>
 
 		    <dt><kbd class="command">boi transformations</kbd></dt>
-		    <dd>Shows the streamer's progress towards each of the transformations.</dd>
+		    <dd>Shows the streamer's progress towards each of the transformations. <?php printAccessLabel(1); ?></dd>
 
 		  </dl>
 
@@ -356,37 +426,52 @@ printNav('commands');
 
 		  <dl>
 		    <dt><kbd>+m</kbd></dt>
-		    <dd>Turns slow mode on.</dd>
+		    <dd>Turns slow mode on. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd>-m</kbd></dt>
-		    <dd>Turns slow mode off.</dd>
+		    <dd>Turns slow mode off. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd>+s</kbd></dt>
-		    <dd>Turns subscribers only mode on.</dd>
+		    <dd>Turns subscribers only mode on. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd>-s</kbd></dt>
-		    <dd>Turns subscribers only mode off.</dd>
+		    <dd>Turns subscribers only mode off. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd>+b &lt;user&gt;</kbd></dt>
-		    <dd>Bans a user.</dd>
+		    <dd>Bans a user. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd>-b &lt;user&gt;</kbd></dt>
-		    <dd>Unbans a user.</dd>
+		    <dd>Unbans a user. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd>+t &lt;user&gt;</kbd></dt>
-		    <dd>Times out a user.</dd>
+		    <dd>Times out a user. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd>-t &lt;user&gt;</kbd></dt>
-		    <dd>Pardons a user's timeout.</dd>
+		    <dd>Pardons a user's timeout. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd>+p &lt;user&gt;</kbd></dt>
-		    <dd>Purges a user's chat history.</dd>
+		    <dd>Purges a user's chat history. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">permit &lt;user&gt;</kbd></dt>
-		    <dd>Permits a user to post one link.</dd>
+		    <dd>Permits a user to post one link. <?php printAccessLabel(2); ?></dd>
 
 		    <dt><kbd class="command">clear</kbd></dt>
-		    <dd>Clears chat.</dd>
+		    <dd>Clears chat. <?php printAccessLabel(2); ?></dd>
+
+		  </dl>
+
+
+		  <h3 id="ignore" class="commands-nav-heading">Ignores</h3>
+
+		  <p>CoeBot can be set to ignore users who moderators do not want to have access to CoeBot.</p>
+
+		  <dl>
+		  	
+		    <dt><kbd class="command">ignore add|delete &lt;channel name&gt;</kbd></dt>
+		    <dd>Adds or removes a user on the ignore list. <?php printAccessLabel(2); ?></dd>
+
+		    <dt><kbd class="command">ignore list</kbd></dt>
+		    <dd>Lists all of the users on the ignore list. <?php printAccessLabel(2); ?></dd>
 
 		  </dl>
 
@@ -397,20 +482,32 @@ printNav('commands');
 
 		  <dl>
 
-		    <dt><kbd class="command">raid &lt;Channel Name&gt;</kbd></dt>
-		    <dd>Tells the viewers to go raid the provided channel name (provides a link).</dd>
+		    <dt><kbd class="command">raid &lt;channel name&gt;</kbd></dt>
+		    <dd>Tells the viewers to go raid the provided channel name (provides a link). <?php printAccessLabel(3); ?></dd>
 
 		    <dt><kbd class="command">raid list</kbd></dt>
-		    <dd>Lists all of the channels on the raid whitelist.</dd>
+		    <dd>Lists all of the channels on the raid whitelist. <?php printAccessLabel(3); ?></dd>
 
-		    <dt><kbd class="command">raid whitelist add|delete &lt;Channel Name&gt;</kbd></dt>
-		    <dd>Adds or removes a channel from the raid whitelist.</dd>
+		    <dt><kbd class="command">raid whitelist add|delete &lt;channel name&gt;</kbd></dt>
+		    <dd>Adds or removes a channel from the raid whitelist. <?php printAccessLabel(3); ?></dd>
 
 		    <dt><kbd class="command">raid random</kbd></dt>
-		    <dd>Tells the viewers to raid a random channel from the whitelist that is currently streaming.</dd>
+		    <dd>Tells the viewers to raid a random channel from the whitelist that is currently streaming. <?php printAccessLabel(3); ?></dd>
 
 		    <dt><kbd class="command">raid samegame</kbd></dt>
-		    <dd>Chooses a random streamer that is currently playing the same game as the current streamer.</dd>
+		    <dd>Chooses a random streamer that is currently playing the same game as the current streamer. <?php printAccessLabel(3); ?></dd>
+
+		    <dt><kbd class="command">host random</kbd></dt>
+		    <dd>Sets this channel to host a random channel from the raid whitelist. <?php printAccessLabel(3); ?></dd>
+
+		    <dt><kbd class="command">host samegame</kbd></dt>
+		    <dd>Sets this channel to host another channel that is playing the same game. <?php printAccessLabel(3); ?></dd>
+
+		    <dt><kbd class="command">host &lt;channel name&gt;</kbd></dt>
+		    <dd>Sets this channel to host a particular other channel. <?php printAccessLabel(3); ?></dd>
+
+		    <dt><kbd class="command">unhost</kbd></dt>
+		    <dd>Sets this channel to stop hosting anyone. <?php printAccessLabel(3); ?></dd>
 		  </dl>
 
 
@@ -712,17 +809,27 @@ printNav('commands');
 
 		  <h3 id="admin" class="commands-nav-heading">Administration</h3>
 
-		  <p>Admin nicks are defined in global.properties. Twitch Admins and Staff also have access.</p>
+		  <p>These commands are only available to administrators of a bot instance. Admin usernames are defined in global.properties. Twitch Admins and Staff also have access.</p>
 		  <dl>
 
 		    <dt><kbd class="command">admin join &lt;#channelname&gt;</kbd></dt>
-		    <dd>Joins channelname. (Note: Forces mode -1).</dd>
+		    <dd>Joins channelname. (Note: Forces mode -1). <?php printAccessLabel(99); ?></dd>
 
 		    <dt><kbd class="command">admin part &lt;#channelname&gt;</kbd></dt>
-		    <dd>Leaves channelname</dd>
+		    <dd>Leaves channelname. <?php printAccessLabel(99); ?></dd>
 
 		    <dt><kbd class="command">admin &lt;#channelname&gt; &lt;command...&gt;</kbd></dt>
-		    <dd>Executes a command as though it were run on channelname. This can modify configuration of other channel, so use it with care.</dd>
+		    <dd>Executes a command as though it were run on channelname. This can modify the configuration of the other channel, so use it with care. <?php printAccessLabel(99); ?></dd>
+
+		    <dt><kbd class="command">verboselogging &lt;true|false&gt;</kbd></dt>
+		    <dd>Enables/disables very detailed logging for the bot. <?php printAccessLabel(99); ?></dd>
+
+		    <dt><kbd class="command">imp &lt;channelname&gt; &lt;command...&gt;</kbd></dt>
+		    <dd>Executes a given command as though it were sent by channelname. <?php printAccessLabel(99); ?></dd>
+
+		    <dt><kbd class="command">sendupdate</kbd></dt>
+		    <dd>Forces the channel's config file to be uploaded to the website. <?php printAccessLabel(99); ?></dd>
+
 		  </dl>
 
 
@@ -751,6 +858,7 @@ printNav('commands');
 				  		<li><a href="#polls">Polls</a></li>
 				  		<li><a href="#giveaways">Giveaways</a></li>
 				  		<li><a href="#raffles">Raffles</a></li>
+				  		<li><a href="#highlights">Highlights</a></li>
 				  		<li><a href="#boirebirth">Binding of Isaac: Rebirth</a></li>
 				  	</ul>
 				  </li>
@@ -758,6 +866,7 @@ printNav('commands');
 				  	<a href="#moderation"><i class="icon-fw icon-hammer"></i>&nbsp; Moderation</a>
 				  	<ul class="nav">
 				  		<li><a href="#modshortcuts">Shortcuts</a></li>
+				  		<li><a href="#ignores">Ignores</a></li>
 				  		<li><a href="#raids">Raids</a></li>
 				  		<li><a href="#settings">Settings</a></li>
 				  		<li><a href="#userlevels">User levels</a></li>
