@@ -17,7 +17,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 ## Minor improvements
 * ~~Channel name in title of channel.php is always lowercase.~~
 * On channel.php, if filters are on but no filters are enabled, you end up with a dumb looking "Filter rules" title with nothing below it.
-* Commands on channel.php#scheduled don't have the nice `<kbd>` formatting.
+* ~~Commands on channel.php#scheduled don't have the nice `<kbd>` formatting.~~
 * DataTables is gross. Switch to HubSpot's [Sortable](http://github.hubspot.com/sortable/docs/welcome/).
 * Someone just needs to go through commands.php and fix all the typos and inconsistent formatting.
 * Automatically converting URLs to links in triggers/quotes/etc on channel.php would parallel the way those things actually appear in Twitch chat, and would thus greatly improve consistency and UX.
