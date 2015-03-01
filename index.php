@@ -22,6 +22,8 @@ printNav();
     <div class="col-md-8 col-lg-9 js-whoslive-containers">
       <div id="carousel-whoslive" class="carousel slide">
 
+        <div class="carousel-whoslive-padding"></div>
+
         <div class="carousel-inner js-whoslive-carousel" role="listbox"></div>
 
         <a class="left carousel-control" href="#carousel-whoslive" role="button" data-slide="prev">

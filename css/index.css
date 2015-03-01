@@ -63,6 +63,18 @@
 }
 
 
+.carousel-whoslive-padding {
+  padding-top: 56.25%;
+}
+
+.js-whoslive-carousel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 #carousel-whoslive .carousel-caption>p a {
   color: inherit;
 }
@@ -94,9 +106,9 @@
   margin-top: 2px;
 }
 
-.js-whoslive-containers {
+/*.js-whoslive-containers {
   display: none;
-}
+}*/
 
 
 .infobox {
