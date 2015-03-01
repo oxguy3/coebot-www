@@ -9,7 +9,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 * Link buttons on channel.php#overview don't have any vertical padding, and thus look really dumb if they have to break onto two lines.
 * If you access a specific hlstream on channel.php directly via URL, the page won't dim behind the hlstream modal.
 * If an hlstream on channel.php has enough highlights that the user has to scroll, the dimming behind the modal won't extend below the screen.
-* If the sidebar on channel.php is narrow enough, the tooltip for the Bitbucket link will get cut off by the edge.
+* ~~If the sidebar on channel.php is narrow enough, the tooltip for the Bitbucket link will get cut off by the edge.~~ didn't fix but isn't relevant anymore becaused the sidebar is fixed width
 * ~~Emotes are pretty freaking broken~~ Emotes are less broken than they used to be, but they still rely on a deprecated API that doesn't really do much good. Should pull emotes from CoeBot's list of available emotes rather than from channel-specific lists of emotes.
 * Synchronous HTTP requests are bad practice and now considered deprecated, should change everything that requires them to work differently.
 
