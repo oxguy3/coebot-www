@@ -155,7 +155,7 @@ function updateIsLive(streams) {
             popover += '<i class="icon-user"></i> ' + Humanize.intComma(stream.viewers) + '';
             popover += '</div>';
 
-            current.attr("data-title", (stream.channel.status) ? stream.channel.status : "Unknown");
+            current.attr("data-title", (stream.channel.status) ? stream.channel.status : "Untitled Broadcast");
             current.addClass("islive-live");
         } else {
             current.removeAttr("data-title");
