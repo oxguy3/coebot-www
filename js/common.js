@@ -159,6 +159,8 @@ function updateIsLive(streams) {
             current.addClass("islive-live");
         } else {
             current.removeAttr("data-title");
+            current.removeAttr("title");
+            current.removeAttr("data-original-title");
             current.removeClass("islive-live");
         }
 

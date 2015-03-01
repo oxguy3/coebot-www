@@ -144,7 +144,8 @@ function displayChannelOverview() {
 
     html += '</p>';
 
-    $(".js-channel-overview").html(html);
+    var ref = $(".js-channel-overview");
+    ref.html(html);
 }
 
 function displayChannelCommands() {
@@ -156,7 +157,7 @@ function displayChannelCommands() {
 		var row = '<tr class="row-command row-command-access-' + cmd.restriction +'">';
 		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
         row += '<td class="row-command-col-access" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
-        row += '<td>' + prettifyStringVariables(cmd.value) + '</td>';
+        row += '<td class="should-be-linkified">' + prettifyStringVariables(cmd.value) + '</td>';
 		row += '<td>' + Humanize.intComma(cmd.count) + '</td>';
 		row += '</tr>';
 		rows += row;
@@ -166,6 +167,7 @@ function displayChannelCommands() {
         shouldSortTable = false;
     }
 	tbody.html(rows);
+    tbody.find(".should-be-linkified").linkify();
 
     if (shouldSortTable) {
         $('.js-commands-table').dataTable({
