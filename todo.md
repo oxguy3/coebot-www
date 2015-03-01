@@ -6,7 +6,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 * Scrollspy on commands.php doesn't update until user starts scrolling.
 * The refresh icon doesn't show up on chanlist.php while the Twitch stream status is loading.
 * Sometimes the Twitch API likes to just, not include all the details about someone's stream. On index.php, this isn't handled very gracefully; the user ends up seeing "undefined" as the stream status. Make failures less ugly.
-* Link buttons on channel.php#overview don't have any vertical padding, and thus look really dumb if they have to break onto two lines.
+* ~~Link buttons on channel.php#overview don't have any vertical padding, and thus look really dumb if they have to break onto two lines.~~
 * If you access a specific hlstream on channel.php directly via URL, the page won't dim behind the hlstream modal.
 * If an hlstream on channel.php has enough highlights that the user has to scroll, the dimming behind the modal won't extend below the screen.
 * ~~If the sidebar on channel.php is narrow enough, the tooltip for the Bitbucket link will get cut off by the edge.~~ didn't fix but isn't relevant anymore becaused the sidebar is fixed width
