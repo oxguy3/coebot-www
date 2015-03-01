@@ -111,6 +111,8 @@ function handleAllIsLive(json) {
 
     $('.js-totalChannels').html(Humanize.intComma(currLiveIndex));
     $('.js-totalViewers').html(Humanize.intComma(totalViewers));
+
+    $(".nano").nanoScroller({ preventPageScrolling: true });
 }
 
 // given a twitch preview image template url, gives you a url for a specified resolution
@@ -125,5 +127,4 @@ $(document).ready(function() {
     channelsStr = stringifyChannels();
     checkIfLiveAll();
     //setInterval(preserveStateAndCheckAll, 5000);
-
 });

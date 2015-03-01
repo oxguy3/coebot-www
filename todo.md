@@ -26,7 +26,7 @@ Since the site is still super early in development, it seems silly to use GitHub
 ### The stupid "who's live" carousel
 * Click names on the "who's live" list in index.php fast enough, and it'll glitch out and sort of have two channels selected at once.
 * The "who's live" carousel doesn't have a height set, so it is very short for a brief moment before the first image loads in.
-* If the "who's live" list in index.php gets long enough to need a scrollbar, that scrollbar is buttugly. Need to add in nanoScoller or something similar.
+* ~~If the "who's live" list in index.php gets long enough to need a scrollbar, that scrollbar is buttugly. Need to add in nanoScoller or something similar.~~
 * The "who's live" carousel in index.php doesn't show the game currently being played or the number of viewers watching.
 * The "who's live" carousel in index.php never updates after page load.
 * If only one person is streaming, the "who's live" carousel on index.php probably shouldn't have left/right arrow keys? Or maybe just leave 'em be, I dunno.

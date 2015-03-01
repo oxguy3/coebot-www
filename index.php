@@ -2,7 +2,7 @@
 
 require_once("common.php");
 
-printHead("Home", array("/css/index.css"), array("/js/jquery-ui.custom.min.js", "/js/index.js"));
+printHead("Home", array("/css/index.css"), array("/js/jquery-ui.custom.min.js", "/js/jquery.nanoscroller.js", "/js/index.js"));
 printNav();
 
 ?>
@@ -37,7 +37,9 @@ printNav();
 
     <div class="col-md-4 col-lg-3 whoslive-sidebar js-whoslive-containers">
       <h4>Who's live?</h4>
-      <div class="list-group js-whoslive-list"></div>
+      <div class="nano">
+        <div class="js-whoslive-list list-group nano-content"></div>
+      </div>
     </div>
   </div>
 
@@ -117,6 +119,10 @@ printNav();
 
 
 </div>
+
+<script type="text/javascript">var _cd_options = { animation: 'bottomBar' };</script>
+<script src="//fightforthefuture.github.io/countdown-widget/widget.min.js"></script>
+
 <?php
 printFooter();
 printFoot();
