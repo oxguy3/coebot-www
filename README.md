@@ -32,6 +32,7 @@ This site uses a private API to communicate with Coebot. This API is still in pl
 
 ## License
 CoeBot.tv: A website for CoeBot, the Twitch chat moderation bot
+
 Copyright (C) 2014-2015 Hayden Schiff
 
 This program is free software; you can redistribute it and/or
