@@ -27,13 +27,15 @@ $TEMP_AUTH_KEY = "<a very confidential string of characters>";
 ?>
 ```
 
+The site is in pretty rapid development right now and this version of the file is going to become outdated (in fact, it already is); please contact me if you need help with this.
+
 ## Private API
-This site uses a private API to communicate with Coebot. This API is still in planning, but the specification so far is available [here](https://docs.google.com/document/d/1tQNETtRvTuSdGKEep57yuO_8J_YfjS5J3--Q6vH0Rcc/edit?usp=sharing).
+This site uses a private API to communicate with Coebot. This API is still in planning and is rapidly evolving (do not assume currently existing endpoints will exist indefinitely), but the specification so far is available [here](https://docs.google.com/document/d/1tQNETtRvTuSdGKEep57yuO_8J_YfjS5J3--Q6vH0Rcc/edit?usp=sharing).
 
 ## License
 CoeBot.tv: A website for CoeBot, the Twitch chat moderation bot
 
-Copyright (C) 2014-2015 Hayden Schiff
+Copyright (C) 2014-2015 Hayden Schiff ("Highlight That" code copyright Stinus Meret)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -49,4 +51,4 @@ The full text of the license can be found in the file LICENSE,
 or at [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html).
 
 ## Issue tracker
-Since I'm the only person working on this project for the most part, I have opted to use [this Trello board](https://trello.com/b/7hVc2TY1) to track my issues, as I tend to lose patience for GitHub issues. However, I will also keep an eye on GitHub's issue tracker, so you can submit bugs/suggestions/etc via GitHub.
+Since I'm the only person working on this project for the most part, I have opted to use todo.md to track my issues, as I tend to lose patience for GitHub issues. However, I will also keep an eye on GitHub's issue tracker, so you can submit bugs/suggestions/etc via GitHub.
