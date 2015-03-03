@@ -35,7 +35,7 @@ This site uses a private API to communicate with Coebot. This API is still in pl
 ## License
 CoeBot.tv: A website for CoeBot, the Twitch chat moderation bot
 
-Copyright (C) 2014-2015 Hayden Schiff ("Highlight That" code copyright Stinus Meret)
+Copyright (C) 2014-2015 Hayden Schiff*
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -49,6 +49,8 @@ GNU General Public License for more details.
 
 The full text of the license can be found in the file LICENSE,
 or at [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html).
+
+*The original code for the "highlight that" functionality is Copyright (C) 2014 Stijn Van Baekel (stinusmeret)
 
 ## Issue tracker
 Since I'm the only person working on this project for the most part, I have opted to use todo.md to track my issues, as I tend to lose patience for GitHub issues. However, I will also keep an eye on GitHub's issue tracker, so you can submit bugs/suggestions/etc via GitHub.
