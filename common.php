@@ -15,6 +15,8 @@ $mysqli = false;
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+session_start();
+
 
 function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extraHeadCode="") {
 	global $SITE_TITLE;
@@ -109,15 +111,42 @@ function printNav($activeTab="", $isFluid=false) {
             <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="icon-cog-alt"></i><span class="visible-xs-inline"> Cookie Manager</span></a></li>
         <?php } ?>
       </ul>
-      <?php if(isCookieTrue("experimentalFeatures")) {?>
+      <?php if(isLoggedIn()) {?>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Sign in <i class="icon-login"></i></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="icon-user"></i> <?php echo $_SESSION['channel']; ?> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="<?php echo getUrlToChannel($_SESSION['channel']); ?>">Channel</a></li>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/logout">Log out</a></li>
+              </ul>
+            </li>
+          </ul>
+      <?php } else { ?>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&amp;client_id=<?php echo TWITCH_CLIENT_ID; ?>&amp;redirect_uri=<?php echo TWITCH_REDIRECT_URI; ?>&amp;scope=<?php echo TWITCH_REQUIRED_SCOPES; ?>">Sign in <i class="icon-login"></i></a>
+            </li>
           </ul>
       <?php } ?>
     </div>
   </div>
 </nav>
+<?php if (isset($_SESSION['loggedOut'])) { 
+    unset($_SESSION['loggedOut']);
+
+    ?>
+<div class="container loggedout-alert-container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="alert alert-success" role="alert">
+                <strong>Success!</strong> You have been logged out.
+            </div>
+        </div>
+    </div>
+</div>
 <?php
+    }
 }
 
 function printFooter() {
@@ -151,14 +180,22 @@ function printFoot() {
 
 
 function getUrlToChannel($chan) {
-	return "/channel/" . $chan . "/";
+	return "/c/" . $chan . "/";
 }
 
 /**
  * Verifies that a string is a valid Twitch username
  */
 function validateChannel($channel) {
-	return preg_match('/^[A-Z0-9\-_]{4,25}$/i', $channel);
+    return preg_match('/^[A-Z0-9\-_]{4,25}$/i', $channel);
+}
+
+function validateYoutubeUsername($username) {
+    return preg_match('/^[A-Z0-9\-_\'\.]{6,20}$/i', $username);
+}
+
+function validateTwitterUsername($username) {
+    return preg_match('/^[A-Z0-9_]{1,15}$/i', $username);
 }
 
 function checkCookieValue($key, $val) {
@@ -169,6 +206,17 @@ function isCookieTrue($key) {
     return checkCookieValue($key, "true");
 }
 
+// taken from http://stackoverflow.com/a/853870/992504
+function randString($length, $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
+{
+    $str = '';
+    $count = strlen($charset);
+    while ($length--) {
+        $str .= $charset[mt_rand(0, $count-1)];
+    }
+    return $str;
+}
+
 function throw404() {
   header("HTTP/1.0 404 Not Found");
   $httpStatusCode = 404;
@@ -176,6 +224,31 @@ function throw404() {
   die();
 }
 
+// lovingly stolen from http://hayageek.com/php-curl-post-get/#curl-post
+function httpPost($url,$params)
+{
+  $postData = '';
+   //create name value pairs seperated by &
+   foreach($params as $k => $v) 
+   { 
+      $postData .= $k . '='.$v.'&'; 
+   }
+   rtrim($postData, '&');
+ 
+    $ch = curl_init();  
+ 
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch,CURLOPT_HEADER, false); 
+    curl_setopt($ch, CURLOPT_POST, count($postData));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);    
+ 
+    $output=curl_exec($ch);
+ 
+    curl_close($ch);
+    return $output;
+ 
+}
 
 
 
@@ -305,6 +378,29 @@ function dbSetChannel($channel, $displayName, $isActive, $botChannel="coebot") {
 }
 
 /**
+ * Updates misc data about a channel
+ *
+ * Returns true if successful, or false if an error occurred
+ */
+function dbUpdateChannel($channel, $youtube, $twitter, $shouldShowOffensiveWords, $shouldShowBoir) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'UPDATE ' . DB_PREF . 'channels SET youtube=?, twitter=?, shouldShowOffensiveWords=?, shouldShowBoir=? WHERE channel=?';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('ssiis', $youtube, $twitter, $shouldShowOffensiveWords, $shouldShowBoir, $channel);
+
+    $success = $stmt->execute();
+    $stmt->close();
+
+    return $success;
+}
+
+/**
  * Updates whether or not BOIR is shown for a given channel
  *
  * Returns true if successful, or false if an error occurred
@@ -398,6 +494,34 @@ function dbCountBots() {
     }
 }
 
+/**
+ * Creates or updates a row for a new user in the database
+ *
+ * Returns row ID if successful, or false if an error occurred (should use === when checking return value)
+ */
+function dbSetUser($channel, $isActive, $twitchAccessToken) {
+    global $mysqli;
+    initMysqli();
+
+    if ($isActive === true) $isActive = 1;
+    if ($isActive === false) $isActive = 0;
+
+    $lastLogin = time();
+
+    $sql = 'INSERT INTO ' . DB_PREF . 'users (channel, isActive, twitchAccessToken, lastLogin) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE isActive=?, twitchAccessToken=?, lastLogin=?';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('sisiisi', $channel, $isActive, $twitchAccessToken, $lastLogin, $isActive, $twitchAccessToken, $lastLogin);
+
+    $success = $stmt->execute();
+    $stmt->close();
+
+    return $mysqli->insert_id;
+}
+
 
 
 
@@ -420,6 +544,100 @@ function twitchGetChannel($channel) {
     curl_close($curlSession);
 
     return $jsonData;
+}
+
+function twitchGetAccessToken($code) {
+
+    $paramsTwitch = array(
+      'client_id' => TWITCH_CLIENT_ID,
+      'client_secret' => TWITCH_CLIENT_SECRET,
+      'grant_type' => "authorization_code",
+      'redirect_uri' => TWITCH_REDIRECT_URI,
+      'code' => $code
+    );
+
+    $loginResponse = httpPost("https://api.twitch.tv/kraken/oauth2/token", $paramsTwitch);
+
+    return json_decode($loginResponse);
+}
+
+function twitchGetUser($accessToken) {
+
+    $curlSession = curl_init();
+    curl_setopt($curlSession, CURLOPT_URL, 'https://api.twitch.tv/kraken/user');
+    curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
+    curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curlSession, CURLOPT_HTTPHEADER, array(
+        'Accept: application/vnd.twitchtv.v3+json',
+        'Authorization: OAuth ' . $accessToken
+    ));
+
+    $jsonData = json_decode(curl_exec($curlSession));
+    curl_close($curlSession);
+
+    return $jsonData;
+}
+
+
+
+
+
+/*******************************
+ * SESSIONS
+ *******************************/
+
+function logUserIn($channel, $uid) {
+    if (!validateChannel($channel)) {
+        return false;
+    }
+    $_SESSION['loggedIn'] = true;
+    $_SESSION['channel'] = $channel;
+    $_SESSION['uid'] = $uid;
+    return true;
+}
+
+function logUserOut() {
+    $_SESSION['loggedIn'] = false;
+    unset($_SESSION['channel']);
+    unset($_SESSION['uid']);
+
+    // session_unset();
+    // session_destroy();
+    // session_start();
+}
+
+function isLoggedIn() {
+    return isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true;
+}
+
+// N.B. should always match up with the same list in common.js!!!
+$USER_ACCESS_LEVEL_NA = -1;
+$USER_ACCESS_LEVEL_NONE = 0;
+$USER_ACCESS_LEVEL_MOD = 2;
+$USER_ACCESS_LEVEL_EDITOR = 3;
+$USER_ACCESS_LEVEL_OWNER = 4;
+$USER_ACCESS_LEVEL_OP = 99;
+
+// returns the logged in user's access level on a particular channel
+function getUserAccessLevel($channel) {
+    global $USER_ACCESS_LEVEL_NA, 
+    $USER_ACCESS_LEVEL_NONE, 
+    $USER_ACCESS_LEVEL_MOD, 
+    $USER_ACCESS_LEVEL_EDITOR, 
+    $USER_ACCESS_LEVEL_OWNER, 
+    $USER_ACCESS_LEVEL_OP;
+
+    if (!isLoggedIn()) {
+        return $USER_ACCESS_LEVEL_NA;
+    }
+
+    if ($_SESSION['channel'] == $channel) {
+        return $USER_ACCESS_LEVEL_OWNER;
+    }
+
+    // TODO check if editor or mod or op
+
+    return $USER_ACCESS_LEVEL_NONE;
 }
 
 

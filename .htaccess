@@ -24,6 +24,8 @@ RewriteRule ^channel/?$ /channels [L,R]
 RewriteRule ^help/?$ /help.php [L]
 RewriteRule ^faq/?$ /help#faq [L,R,NE]
 RewriteRule ^cookieman/?$ /cookieman.php [L]
+RewriteRule ^logout/?$ /twitchconnect.php?logout=1 [L]
+RewriteRule ^settings/?$ /settings.php [L]
 
 
 RewriteRule ^oldhl/([^.]+)?$ highlights/highlight.php?arg=$1 [L]

@@ -1,6 +1,14 @@
 var EMPTY_TABLE_PLACEHOLDER = 'There\'s nothing here... <i class="icon-frown"></i>';
 var HASH_DELIMITER = "/";
 
+// N.B. should always match up with the same list in common.php!!!
+var USER_ACCESS_LEVEL_NA = -1;
+var USER_ACCESS_LEVEL_NONE = 0;
+var USER_ACCESS_LEVEL_MOD = 2;
+var USER_ACCESS_LEVEL_EDITOR = 3;
+var USER_ACCESS_LEVEL_OWNER = 4;
+var USER_ACCESS_LEVEL_OP = 99;
+
 function prettifyStringVariables(str) {
     var pattern = /\(_(\w+)_\)/g;
     var replacement = '<span class="label label-default command-variable">$1</span>';

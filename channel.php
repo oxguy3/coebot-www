@@ -21,6 +21,7 @@ if (!$channelCoebotData) {
 $extraHeadCode = "<script>";
 $extraHeadCode .= "var channel = \"$channel\";";
 $extraHeadCode .= "var channelCoebotData = " . json_encode($channelCoebotData) . ";";
+$extraHeadCode .= "var userAccessLevel = " . getUserAccessLevel($channel) . ";";
 $extraHeadCode .= "</script>";
 
 printHead(

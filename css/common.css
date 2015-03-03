@@ -13,6 +13,10 @@ body {
   border: 0;
 }
 
+.loggedout-alert-container {
+  margin-top: 20px;
+}
+
 /*#navbar li.active {
   background-color: #111;
 }*/

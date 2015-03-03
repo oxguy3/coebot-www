@@ -81,10 +81,10 @@ printNav();
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>Keep in touch!</h3>
-      <p>To stay up to date on the latest CoeBot features and news, you can follow us on Twitter. We will also occasionally host cool channels on our Twitch page.</p>
+      <p>To stay up to date on the latest CoeBot features and news, you can follow us on Twitter and check out our development blog.</p>
       <p>
         <a class="btn btn-default" href="https://twitter.com/coebottv" role="button"><i class="icon-twitter"></i> Twitter &raquo;</a> 
-        <a class="btn btn-default" href="https://twitch.tv/coebot" role="button"><i class="icon-twitch"></i> Twitch &raquo;</a> 
+        <a class="btn btn-default" href="http://blog.coebot.tv" role="button"><i class="icon-edit"></i> Blog &raquo;</a> 
       </p>
     </div>
 
@@ -121,9 +121,6 @@ printNav();
 
 
 </div>
-
-<script type="text/javascript">var _cd_options = { animation: 'bottomBar' };</script>
-<script src="//fightforthefuture.github.io/countdown-widget/widget.min.js"></script>
 
 <?php
 printFooter();
