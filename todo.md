@@ -32,6 +32,8 @@ Since the site is still super early in development, it seems silly to use GitHub
 * The signed in indicator should have the dropdown separate from the channel link probably.
 * The sign in button looks silly being so far right on channel.php. Maybe put a max width on all the containers of like 1600px?
 * On channel.php, "Highlights" is a rather misleading title for the "highlight that" tab; maybe should be changed to "past broadcasts" or something?
+* Eliminate glyphicons from site entirely.
+* Concatenate JS files.
 * ~~Add proper error pages for 404, 403, etc.~~
 * ~~Channel name in title of channel.php is always lowercase.~~
 * ~~Commands on channel.php#scheduled don't have the nice `<kbd>` formatting.~~
