@@ -31,7 +31,21 @@ $TEMP_AUTH_KEY = "<a very confidential string of characters>";
 This site uses a private API to communicate with Coebot. This API is still in planning, but the specification so far is available [here](https://docs.google.com/document/d/1tQNETtRvTuSdGKEep57yuO_8J_YfjS5J3--Q6vH0Rcc/edit?usp=sharing).
 
 ## License
-Copyright 2014-2015 Hayden Schiff, licensed under MIT License
+CoeBot.tv: A website for CoeBot, the Twitch chat moderation bot
+Copyright (C) 2014-2015 Hayden Schiff
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+The full text of the license can be found in the file LICENSE,
+or at [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html).
 
 ## Issue tracker
 Since I'm the only person working on this project for the most part, I have opted to use [this Trello board](https://trello.com/b/7hVc2TY1) to track my issues, as I tend to lose patience for GitHub issues. However, I will also keep an eye on GitHub's issue tracker, so you can submit bugs/suggestions/etc via GitHub.
