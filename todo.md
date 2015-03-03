@@ -27,6 +27,11 @@ Since the site is still super early in development, it seems silly to use GitHub
 * The Help page is woefully lacking in content.
 * It should be possible to link to specific questions in the FAQ on help.php by changing the hash on the URL.
 * The Commands page is the middle of a revision that I never finished...
+* Clicking the 'is live' indicator on chanlist.php/channel.php should force it to refresh.
+* The "you have been logged out" alert has butt-ugly margins.
+* The signed in indicator should have the dropdown separate from the channel link probably.
+* The sign in button looks silly being so far right on channel.php. Maybe put a max width on all the containers of like 1600px?
+* On channel.php, "Highlights" is a rather misleading title for the "highlight that" tab; maybe should be changed to "past broadcasts" or something?
 * ~~Add proper error pages for 404, 403, etc.~~
 * ~~Channel name in title of channel.php is always lowercase.~~
 * ~~Commands on channel.php#scheduled don't have the nice `<kbd>` formatting.~~
@@ -40,6 +45,8 @@ Since the site is still super early in development, it seems silly to use GitHub
 * If only one person is streaming, the "who's live" carousel on index.php probably shouldn't have left/right arrow keys? Or maybe just leave 'em be, I dunno.
 * If no one is live, the "who's live" carousel in index.php just hides itself. That's confusing to the user, should instead display some sort of "no one's live right now" message.
 * The text overlayed on the "who's live" carousel is often hard to read, needs a better background to give it proper contrast.
+* Maybe it'd be cool if the "who's live" list was in a random order instead of alphabetical so that everyone gets a bit of promotion. Or maybe just have the carousel start at a random point in the alphabetical list.
+* As the selected channel in the who's live list changes, the list should scroll so the active channel is visible.
 * ~~The "who's live" carousel can get pretty overcrowded with text on small displays; maybe have the text appear below the image on XS viewport?~~ nah, just got rid of the text altogether
 * ~~If the "who's live" list in index.php gets long enough to need a scrollbar, that scrollbar is buttugly. Need to add in nanoScoller or something similar.~~
 * ~~The "who's live" carousel doesn't have a height set, so it is very short for a brief moment before the first image loads in.~~
@@ -54,6 +61,8 @@ Since the site is still super early in development, it seems silly to use GitHub
 * Highlights player is not responsive, and there are few options for people without Flash. Need to add HTML5 player support and links to timestamps on Twitch for each highlight.
 * chanlist.php should be a neato sortable table instead of just a static list (and a static list with alphabetization bugs at that).
 * Need a proper tutorial on how to join CoeBot; index.php just tells you to tweet @endsgamer, and the FAQ for joining isn't much better.
+* Channel owners should be able to hide/show any sidebar tab they please on channel.php.
+* Suggestions for common uses of CoeBot features when a channel owner is signed in seems like a solid idea (i.e. hug/throw commands, "hey chat" autoreplies.
 * ~~BOIR build info page isn't finished.~~
 * ~~Channels aren't loaded from database, and CoeBot doesn't have a way to automatically update channel data.~~
 
@@ -63,4 +72,5 @@ Since the site is still super early in development, it seems silly to use GitHub
 * Need ability to reconfigure CoeBot from the website.
 * Add more bot instances.
 * Add support for users to run their own bot instances.
+* Ability to import settings from Nightbot/moobot? Or would that be too much work? (also, would this be considered overly hostile towards those bots?)
 * ~~Need a login system.~~
