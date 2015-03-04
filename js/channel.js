@@ -400,12 +400,6 @@ function loadChannelHighlights() {
         }
     }
 
-    Twitch.init({clientId: '1edbt02x273wfht9ad4goa4aabv00fw'}, function(error, status) {
-
-    // the sdk is now loaded
-
-    });
-
     $.ajax({
         dataType: "jsonp",
         jsonp: false,
