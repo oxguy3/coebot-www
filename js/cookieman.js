@@ -9,6 +9,16 @@ var cookieList = [
     type: 'boolean'
   },
   {
+    name: "exzentiaShareMode",
+    description: "Exzentia mode (warning: incredibly pointless)",
+    type: 'boolean'
+  },
+  {
+    name: "oxSpamMode",
+    description: "Ox spam mode (warning: even more pointless)",
+    type: 'boolean'
+  },
+  {
     name: "cookiemanShortcut",
     description: "Show shortcut to Cookie Manager",
     type: 'boolean'

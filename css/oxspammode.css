@@ -1,0 +1,6 @@
+* {
+  background-color: red !important;
+}
+*:after {
+  content: ' ox';
+}

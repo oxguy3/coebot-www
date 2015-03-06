@@ -6,7 +6,7 @@ if (!isset($_GET['channel'])) {
   throw404();
 }
 
-$channel = $_GET['channel'];
+$channel = strtolower($_GET['channel']);
 
 if (!validateChannel($channel)) {
   throw404();
@@ -23,6 +23,10 @@ $extraHeadCode .= "var channel = \"$channel\";";
 $extraHeadCode .= "var channelCoebotData = " . json_encode($channelCoebotData) . ";";
 $extraHeadCode .= "var userAccessLevel = " . getUserAccessLevel($channel) . ";";
 $extraHeadCode .= "</script>";
+
+if (!isCookieTrue("experimentalFeatures")) {
+  $extraHeadCode .= "<style>.js-commands-addbtn, .js-commands-editcolumn { display: none!important; }</style>";
+}
 
 printHead(
   $channelCoebotData["displayName"], 
@@ -143,10 +147,68 @@ printNav('', true);
           <p>
             Here are the custom commands, or "triggers", defined for this channel. You can also use any of the universal/shared commands, listed <a href="/commands" class="js-link-commands">here</a>.
           </p>
+          <div class="js-commands-addbtn">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commandAddModal" data-command="" data-accesslevel="1" data-response="" data-modaltitle="Add command"><i class="icon-plus"></i> Add command</button>
+          </div>
+
+          <!-- add command modal -->
+          <div class="modal fade" id="commandAddModal" tabindex="-1" role="dialog" aria-labelledby="commandAddModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="commandAddModalLabel">Set command</h4>
+                </div>
+                <form action="/crap.php?a=post" method="post">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="commandAddModalCommand">Command</label>
+                      <div class="input-group">
+                        <span class="input-group-addon command"></span>
+                        <input type="text" class="form-control" id="commandAddModalCommand" name="command">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label style="display:block">Access level</label>
+                      <div class="btn-group js-commands-addmodal-accesslevel" data-toggle="buttons">
+                        <label class="btn btn-default level0">
+                          <input type="radio" name="accessLevel" value="0" autocomplete="off"> Everyone
+                        </label>
+                        <label class="btn btn-default level1">
+                          <input type="radio" name="accessLevel" value="1" autocomplete="off"> Regs <!-- TODO: Dynamically replace with "Subs" if necessary -->
+                        </label>
+                        <label class="btn btn-default level2">
+                          <input type="radio" name="accessLevel" value="2" autocomplete="off"> Mods
+                        </label>
+                        <label class="btn btn-default level3">
+                          <input type="radio" name="accessLevel" value="3" autocomplete="off"> Owners
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="commandAddModalResponse">Response</label>
+                      <input type="text" class="form-control" id="commandAddModalResponse" name="response">
+                    </div>
+<!--                     <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="isVisible" checked> Should command be publicly listed?
+                      </label>
+                    </div> -->
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
           <div class="">
             <table class="table table-striped js-commands-table">
               <thead>
                 <tr>
+                  <th class="js-commands-editcolumn"></th>
                   <th><i class="sorttable-icon"></i>Command</th>
                   <th class="row-command-col-access"><i class="sorttable-icon"></i>Access</th>
                   <th><i class="sorttable-icon"></i>Response</th>

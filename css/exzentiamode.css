@@ -1,0 +1,3 @@
+*:not(i):after {
+  content: " [share this!]";
+}

@@ -51,6 +51,14 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
         echo '<link href="/css/birthday.css" rel="stylesheet">'."\n";
     }
 
+    if (isCookieTrue("exzentiaShareMode")) {
+        echo '<link href="/css/exzentiamode.css" rel="stylesheet">'."\n";
+    }
+
+    if (isCookieTrue("oxSpamMode")) {
+        echo '<link href="/css/oxspammode.css" rel="stylesheet">'."\n";
+    }
+
     echo $extraHeadCode;
     ?>
 
