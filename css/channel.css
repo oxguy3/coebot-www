@@ -233,6 +233,20 @@
 }
 
 
+.js-commands-addbtn, .js-commands-editcolumn {
+  display: none;
+}
+
+
+.table-edit-btn {
+  cursor: pointer;
+}
+
+.table-edit-btn:hover {
+  color: #2A9FD6;
+}
+
+
 .fake-link:hover {
   text-decoration: underline;
   cursor: pointer;

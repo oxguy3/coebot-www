@@ -155,6 +155,7 @@ function displayChannelCommands() {
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
 		var row = '<tr class="row-command row-command-access-' + cmd.restriction +'">';
+        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + cmd.value + '" data-modaltitle="Edit command"><i class="icon-pencil"></i></span></td>';
 		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
         row += '<td class="row-command-col-access" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
         row += '<td class="should-be-linkified">' + prettifyStringVariables(cmd.value) + '</td>';
@@ -172,9 +173,34 @@ function displayChannelCommands() {
     if (shouldSortTable) {
         $('.js-commands-table').dataTable({
             "paging": false,
-            "info": false
+            "info": false,
+            "order": [[ 1, "asc" ]],
+            "columnDefs": [
+                { "orderable": false, "targets": 0 }
+              ]
         });
     }
+
+    if (userAccessLevel >= USER_ACCESS_LEVEL_MOD) {
+        $('.js-commands-addbtn').css('display', 'block');
+        $('.js-commands-editcolumn').css('display', 'table-cell');
+    }
+
+    $('#commandAddModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var command = button.data('command');
+        var accessLevel = button.data('accesslevel');
+        var response = button.data('response');
+        var modalTitle = button.data('modaltitle');
+
+        var modal = $(this);
+        $('#commandAddModalCommand').val(command);
+        var accessLevelLabel = $('.js-commands-addmodal-accesslevel label.level' + accessLevel);
+        accessLevelLabel.addClass('active');
+        accessLevelLabel.find('input').attr("checked", true);
+        $('#commandAddModalResponse').val(response);
+        $('#commandAddModalLabel').text(modalTitle);
+    })
 }
 
 function displayChannelQuotes() {
