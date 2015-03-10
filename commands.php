@@ -461,9 +461,9 @@ printNav('commands');
 		  </dl>
 
 
-		  <h3 id="ignore" class="commands-nav-heading">Ignores</h3>
+		  <h3 id="ignores" class="commands-nav-heading">Ignores</h3>
 
-		  <p>CoeBot can be set to ignore users who moderators do not want to have access to CoeBot.</p>
+		  <p>CoeBot can be set to ignore users whom moderators do not want to have access to CoeBot.</p>
 
 		  <dl>
 		  	
