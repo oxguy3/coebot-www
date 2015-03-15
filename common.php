@@ -116,7 +116,7 @@ function printNav($activeTab="", $isFluid=false) {
         <li<?php if($activeTab=="commands") echo $activeStr; ?>><a href="/commands">Commands</a></li>
         <li<?php if($activeTab=="help") echo $activeStr; ?>><a href="/help">Help</a></li>
         <?php if(isCookieTrue("cookiemanShortcut")) {?>
-            <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager"><i class="icon-cog-alt"></i><span class="visible-xs-inline"> Cookie Manager</span></a></li>
+            <li<?php if($activeTab=="cookieman") echo $activeStr; ?>><a href="/cookieman" title="Cookie Manager" id="cookieMonsterLink"><img src="/img/cookiemonster.png" height="21" width="24"><span class="visible-xs-inline"> Cookie Manager</span></a></li>
         <?php } ?>
       </ul>
       <?php if(isLoggedIn()) {?>
@@ -624,7 +624,7 @@ $USER_ACCESS_LEVEL_NONE = 0;
 $USER_ACCESS_LEVEL_MOD = 2;
 $USER_ACCESS_LEVEL_EDITOR = 3;
 $USER_ACCESS_LEVEL_OWNER = 4;
-$USER_ACCESS_LEVEL_OP = 99;
+$USER_ACCESS_LEVEL_ADMIN = 99;
 
 // returns the logged in user's access level on a particular channel
 function getUserAccessLevel($channel) {

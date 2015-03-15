@@ -7,7 +7,7 @@ var USER_ACCESS_LEVEL_NONE = 0;
 var USER_ACCESS_LEVEL_MOD = 2;
 var USER_ACCESS_LEVEL_EDITOR = 3;
 var USER_ACCESS_LEVEL_OWNER = 4;
-var USER_ACCESS_LEVEL_OP = 99;
+var USER_ACCESS_LEVEL_ADMIN = 99;
 
 function prettifyStringVariables(str) {
     var pattern = /\(_(\w+)_\)/g;

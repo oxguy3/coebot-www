@@ -68,6 +68,11 @@ printNav('', true);
                 <span class="sidebar-title" data-bigtitle="Overview">Overview</span>
               </a></li>
 
+              <li id="sidebarItemSettings" class="hidden"><a href="#tab_settings" class="js-sidebar-link">
+                <span class="sidebar-icon"><i class="icon-cog-alt icon-fw"></i></span>
+                <span class="sidebar-title" data-bigtitle="Settings">Settings</span>
+              </a></li>
+
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_commands" class="js-sidebar-link">
@@ -141,6 +146,37 @@ printNav('', true);
           <div class="js-channel-overview"></div>
         </div><!--/.tab-pane -->
         <script>displayChannelOverview()</script>
+
+
+        <div role="tabpanel" class="tab-pane fade" id="tab_settings">
+          <h4>This page doesn't work yet, sorry!</h4>
+          <div class="js-channel-settings">
+
+            <div class="settings-form-box">
+              <div class="form-group">
+                <!-- TODO: Will want to have a thingy that converts any steam ID to a STEAM64 ID to make things simpler for the user -->
+                <label for="settingsFormSetSteam">Steam64 ID</label>
+                <input type="text" class="form-control" id="settingsFormSetSteam" placeholder="e.g. 76561197996608666">
+              </div>
+            </div>
+
+            <div class="settings-form-box">
+              <div class="form-group">
+                <label for="settingsFormSetGamertag">Xbox Live Gamertag</label>
+                <input type="text" class="form-control" id="settingsFormSetGamertag" placeholder="e.g. Oxguy3">
+              </div>
+            </div>
+
+            <div class="settings-form-box">
+              <div class="form-group">
+                <label for="settingsFormSetLastfm">Last.fm username</label>
+                <input type="text" class="form-control" id="settingsFormSetLastfm" placeholder="e.g. oxguy3">
+              </div>
+            </div>
+
+          </div>
+        </div><!--/.tab-pane -->
+        <script>displayChannelSettings()</script>
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_commands">

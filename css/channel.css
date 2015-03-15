@@ -261,6 +261,29 @@
 }
 
 
+/*****************
+ * SETTINGS FORM
+ *****************/
+
+.settings-form-box {
+  position: relative;
+  min-height: 1px;
+}
+
+@media (min-width: 768px) {
+  .settings-form-box {
+    float: left;
+    width: 50%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .settings-form-box {
+    width: 33.33333333%;
+  }
+}
 
 
 /*********************

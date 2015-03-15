@@ -148,6 +148,51 @@ function displayChannelOverview() {
     ref.html(html);
 }
 
+function displayChannelSettings() {
+
+    if (userAccessLevel >= USER_ACCESS_LEVEL_MOD) {
+        $('#sidebarItemSettings').removeClass('hidden');
+    }
+    return;
+    var html = "";
+
+    html += '<p>Bot name: ' + channelCoebotData.botChannel + '</p>';
+
+    html += '<p class="">';
+    html += '<a class="btn btn-primary overview-socialbtn" href="http://www.twitch.tv/';
+    html += channel + '" target="_blank"><i class="icon-twitch"></i> Twitch</a>';
+
+    if (channelCoebotData.youtube && channelCoebotData.youtube != "") {
+        html += ' <a class="btn btn-default overview-socialbtn" href="http://www.youtube.com/user/';
+        html += channelCoebotData.youtube + '" target="_blank"><i class="icon-youtube-play"></i> YouTube</a>';
+    }
+
+    if (channelCoebotData.twitter && channelCoebotData.twitter != "") {
+        html += ' <a class="btn btn-default overview-socialbtn" href="http://twitter.com/';
+        html += channelCoebotData.twitter + '" target="_blank"><i class="icon-twitter"></i> Twitter</a>';
+    }
+
+    if (channelData.steamID && channelData.steamID != "") {
+        html += ' <a class="btn btn-default overview-socialbtn" href="http://steamcommunity.com/profiles/';
+        html += channelData.steamID + '" target="_blank"><i class="icon-steam"></i> Steam</a>';
+    }
+
+    if (channelData.lastfm && channelData.lastfm != "") {
+        html += ' <a class="btn btn-default overview-socialbtn" href="http://www.last.fm/user/';
+        html += channelData.lastfm + '" target="_blank"><i class="icon-lastfm"></i> last.fm</a>';
+    }
+
+    if (channelData.extraLifeID) {
+        html += ' <a class="btn btn-default overview-socialbtn" href="http://www.extra-life.org/index.cfm?fuseaction=donorDrive.participant&participantID=';
+        html += channelData.extraLifeID + '" target="_blank">Extra Life</a>';
+    }
+
+    html += '</p>';
+
+    var ref = $(".js-channel-overview");
+    ref.html(html);
+}
+
 function displayChannelCommands() {
 	var tbody = $('.js-commands-tbody');
 	var rows = "";
@@ -155,10 +200,10 @@ function displayChannelCommands() {
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
 		var row = '<tr class="row-command row-command-access-' + cmd.restriction +'">';
-        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + cmd.value + '" data-modaltitle="Edit command"><i class="icon-pencil"></i></span></td>';
+        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + (cmd.value).replace(/'/g, "&#39;") + '" data-modaltitle="Edit command"><i class="icon-pencil"></i></span></td>';
 		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
         row += '<td class="row-command-col-access" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
-        row += '<td class="should-be-linkified">' + prettifyStringVariables(cmd.value) + '</td>';
+        row += '<td class="should-be-linkified should-be-emotified">' + prettifyStringVariables(cmd.value) + '</td>';
 		row += '<td>' + Humanize.intComma(cmd.count) + '</td>';
 		row += '</tr>';
 		rows += row;
@@ -967,8 +1012,11 @@ $(document).ready(function() {
         success: function(json) {
             console.log("Loaded Twitch emotes");
             twitchEmotes = json.emoticons;
-            var commandsTbody = $('.js-commands-tbody');
-            commandsTbody.html(injectEmoticons(commandsTbody.html()));
+            //var commandsTbody = $('.js-commands-tbody');
+            $('.should-be-emotified').each(function () {
+                var diss = $(this);
+                diss.html(injectEmoticons(diss.html()));
+            });
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert("Failed to load Twitch emotes!");
