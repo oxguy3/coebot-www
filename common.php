@@ -162,7 +162,7 @@ function printNav($activeTab="", $isFluid=false) {
       <?php } else { ?>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="<?php echo getSignInUrl() ?>">Sign in <i class="icon-login"></i></a>
+              <a href="<?php echo getSignInUrl() ?>">Log in <i class="icon-login"></i></a>
             </li>
           </ul>
       <?php } ?>

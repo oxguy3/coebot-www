@@ -174,7 +174,7 @@ function displayChannelCommands() {
 		rows += row;
 	}
     if (rows == "") {
-        rows = '<tr><td colspan="4" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        rows = '<tr><td colspan="5" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
         shouldSortTable = false;
     }
 	tbody.html(rows);
