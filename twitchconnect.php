@@ -8,7 +8,7 @@ require_once("common.php");
 
 if (isset($_GET["logout"])) {
   header('Location: /');
-  $_SESSION['loggedOut'] = true;
+  $_SESSION['showLoggedOut'] = true;
   logUserOut();
   die('logged out');
 }
@@ -38,6 +38,11 @@ if ($uid === false) {
 logUserIn($userData->name, $uid);
 
 
+header('Location: ' . getUrlToChannel($_SESSION['channel']));
+$_SESSION['showLoggedIn'] = true;
+die('logged in');
+
+/*
 printHead("Logged in");
 printNav();
 ?>
@@ -52,4 +57,5 @@ printNav();
 <?php
 printFooter();
 printFoot();
+*/
 ?>

@@ -17,7 +17,7 @@ body {
   opacity: 0.8;
 }
 
-.loggedout-alert-container {
+.loggedout-alert-container, .loggedin-alert-container {
   margin-top: 20px;
 }
 
@@ -37,13 +37,13 @@ body {
 .loading-text:after {
   content: " Loading...";
 }
-.loading-text>i {  
+.loading-text>i, .loading-generic>i {  
   -moz-animation: iconspin 2s infinite linear;
   -o-animation: iconspin 2s infinite linear;
   -webkit-animation: iconspin 2s infinite linear;
   animation: iconspin 2s infinite linear;
 }
-.loading-text>i:before {
+.loading-text>i:before, .loading-generic>i:before {
   content: "\e806";
   /*content: "\f006";*/ /*"\f013";*/ /* cog for loading thingies */
 }
@@ -69,6 +69,23 @@ body {
     background-color: transparent;
     border-color: transparent;
 }
+
+/**
+ * RegEx prettifcation
+ */
+/*.prettyregex-wildcard {
+  display: inline;
+  border: 0 solid transparent;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  width: 2em;
+  padding: 0 10px;
+  margin: 0 1px;
+}*/
+/*.prettyregex-wildcard:before {
+  content: '___';
+}*/
 
 
 /*

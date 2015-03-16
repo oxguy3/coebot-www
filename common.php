@@ -41,6 +41,8 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/cyborg.min.css">
+    <link rel="stylesheet" href="/css/messenger.css">
+    <link rel="stylesheet" href="/css/messenger-theme-flat.css">
     <link rel="stylesheet" href="/css/common.css">
     <?php
     for ($i = 0; $i < count($extraCss); $i++) {
@@ -76,10 +78,37 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
     <script src="/js/livestamp.min.js"></script>
     <script src="/js/humanize.min.js"></script>
     <script src="/js/jquery.linkify.min.js"></script>
+    <script src="/js/messenger.min.js"></script>
+    <script src="/js/messenger-theme-flat.js"></script>
     <script src="/js/common.js"></script>
     <?php
+
+    if (isset($_SESSION['showLoggedOut'])) { 
+        unset($_SESSION['showLoggedOut']);
+        ?>
+        <script>
+        Messenger().post({
+          message: 'You have been logged out!',
+          type: 'success'
+        });
+        </script>
+        <?php
+    }
+
+    if (isset($_SESSION['showLoggedIn'])) { 
+        unset($_SESSION['showLoggedIn']);
+        ?>
+        <script>
+        Messenger().post({
+          message: 'Welcome <?php echo $_SESSION['channel']; ?>!',
+          type: 'success'
+        });
+        </script>
+        <?php
+    }
+
     for ($i = 0; $i < count($extraJs); $i++) {
-    	echo '<script src="' . $extraJs[$i] . '"></script>' . "\n";
+        echo '<script src="' . $extraJs[$i] . '"></script>' . "\n";
     }
     ?>
 
@@ -133,28 +162,18 @@ function printNav($activeTab="", $isFluid=false) {
       <?php } else { ?>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&amp;client_id=<?php echo TWITCH_CLIENT_ID; ?>&amp;redirect_uri=<?php echo TWITCH_REDIRECT_URI; ?>&amp;scope=<?php echo TWITCH_REQUIRED_SCOPES; ?>">Sign in <i class="icon-login"></i></a>
+              <a href="<?php echo getSignInUrl() ?>">Sign in <i class="icon-login"></i></a>
             </li>
           </ul>
       <?php } ?>
     </div>
   </div>
 </nav>
-<?php if (isset($_SESSION['loggedOut'])) { 
-    unset($_SESSION['loggedOut']);
-
-    ?>
-<div class="container loggedout-alert-container">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="alert alert-success" role="alert">
-                <strong>Success!</strong> You have been logged out.
-            </div>
-        </div>
-    </div>
-</div>
 <?php
-    }
+}
+
+function getSignInUrl() {
+    return "https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&amp;client_id=" . TWITCH_CLIENT_ID . "&amp;redirect_uri=" . TWITCH_REDIRECT_URI . "&amp;scope=". TWITCH_REQUIRED_SCOPES;
 }
 
 function printFooter() {
@@ -455,6 +474,77 @@ function dbCountChannels() {
 }
 
 /**
+ * Returns the row for a given bot, or false if an error occurred, or NULL if channel doesn't exist
+ */
+function dbGetBotById($botId) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT id, channel, apiKey, isActive, pusherAppId, pusherAppKey, pusherAppSecret, accessType FROM ' . DB_PREF . 'bots WHERE id = ?';
+
+
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('i', $botId);
+
+    return dbExecuteGetBot($stmt);
+}
+
+/**
+ * Returns the row for a given bot, or false if an error occurred, or NULL if channel doesn't exist
+ */
+function dbGetBotByChannel($channel) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT id, channel, apiKey, isActive, pusherAppId, pusherAppKey, pusherAppSecret, accessType FROM ' . DB_PREF . 'bots WHERE channel = ?';
+
+
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('s', $channel);
+
+    return dbExecuteGetBot($stmt);
+}
+
+function dbExecuteGetBot($stmt) {
+
+    $stmt->bind_result($id, $channel, $apiKey, $isActive, $pusherAppId, $pusherAppKey, $pusherAppSecret, $accessType);
+
+    $success = $stmt->execute();
+
+    if (!$success) {
+        $stmt->close();
+        return false;
+    }
+    if ($stmt->fetch() !== true) {
+        $stmt->close();
+        return NULL;
+    }
+
+    $stmt->close();
+
+    $row = array(
+        "id" => $id,
+        "channel" => $channel,
+        "apiKey" => $apiKey,
+        "isActive" => $isActive,
+        "pusherAppId" => $pusherAppId,
+        "pusherAppKey" => $pusherAppKey,
+        "pusherAppSecret" => $pusherAppSecret,
+        "accessType" => $accessType
+    );
+
+    return $row;
+}
+
+/**
  * Checks if an API key for a bot is valid and active
  *
  * Returns true if bot is authenticated, or false if an error occurred
@@ -633,17 +723,22 @@ function getUserAccessLevel($channel) {
     $USER_ACCESS_LEVEL_MOD, 
     $USER_ACCESS_LEVEL_EDITOR, 
     $USER_ACCESS_LEVEL_OWNER, 
-    $USER_ACCESS_LEVEL_OP;
+    $USER_ACCESS_LEVEL_ADMIN, 
+    $GLOBAL_ADMINS;
 
     if (!isLoggedIn()) {
         return $USER_ACCESS_LEVEL_NA;
+    }
+
+    if (in_array($_SESSION['channel'], $GLOBAL_ADMINS)) {
+        return $USER_ACCESS_LEVEL_ADMIN;
     }
 
     if ($_SESSION['channel'] == $channel) {
         return $USER_ACCESS_LEVEL_OWNER;
     }
 
-    // TODO check if editor or mod or op
+    // TODO check if editor or mod
 
     return $USER_ACCESS_LEVEL_NONE;
 }

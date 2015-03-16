@@ -14,8 +14,38 @@ if (!validateChannel($channel)) {
 
 $channelCoebotData = dbGetChannel($channel);
 
-if (!$channelCoebotData) {
-  throw404();
+if (!$channelCoebotData || $channelCoebotData['isActive'] == false) {
+  if (isLoggedIn() && getUserAccessLevel($_SESSION['channel']) >= $USER_ACCESS_LEVEL_OWNER) {
+
+    printHead("Join CoeBot?");
+    printNav('', true);
+
+    ?>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <h2 class="text-center">Join CoeBot?</h2>
+          <p class="lead text-center">You haven't joined CoeBot yet! Care to change that?</p>
+          <p class="text-center">Already hit the join button? Your request may still be processing; wait a few seconds and refresh the page.</p>
+          <p class="text-center">
+            <a class="btn btn-primary btn-lg" href="/botaction.php?a=join&amp;bot=coebot&amp;channel=<?php echo $channel; ?>">
+              Join <?php echo $channel; ?>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <?php
+
+    printFooter();
+    printFoot();
+    die();
+
+  } else {
+    throw404();
+  }
 }
 
 $extraHeadCode = "<script>";
@@ -279,7 +309,7 @@ printNav('', true);
 
         <div role="tabpanel" class="tab-pane fade" id="tab_autoreplies">
           <p>
-            Here are the auto-replies defined for this channel. Whenever Coebot sees anyone say any of these phrases, it will automatically give the appropriate reply. Asterisks (*) represent wildcards.
+            Here are the auto-replies defined for this channel. Whenever Coebot sees anyone say any of these phrases, it will automatically give the appropriate reply. Asterisks (<span class="text-info">*</span>) represent wildcards for any character and ellipses (<span class="text-info">&hellip;</span>) represent any "word" character (i.e. letters, numbers, and underscores).
           </p>
           <table class="table table-striped js-autoreplies-table">
             <thead>

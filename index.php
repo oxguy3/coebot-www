@@ -73,9 +73,9 @@ printNav();
 
     <div class="col-md-4 col-sm-6 infobox">
       <h3>Do you stream?</h3>
-      <p>If you're a streamer and you want to use <?php echo $SITE_TITLE; ?> on your channel, drop us a line! We are always happy to welcome new streamers to the <?php echo $SITE_TITLE; ?> family.</p>
+      <p>If you want to use <?php echo $SITE_TITLE; ?> on your channel, just sign in with your Twitch account and join! We are always happy to welcome new streamers to the <?php echo $SITE_TITLE; ?> family.</p>
       <p>
-        <a class="btn btn-default" href="https://twitter.com/endsgamer" role="button">Tweet @endsgamer &raquo;</a>
+        <a class="btn btn-default" href="<?php echo getSignInUrl(); ?>" role="button">Get started &raquo;</a>
       </p>
     </div>
 

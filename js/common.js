@@ -17,8 +17,10 @@ function prettifyStringVariables(str) {
 }
 
 function prettifyRegex(pattern) {
-    pattern = pattern.replace(/\.\*/g, '*');
-    pattern = pattern.replace(/(\\Q|\\E)/g, "");
+    pattern = pattern.replace(/\.\*/g, '<span class="text-info">*</span>');
+    pattern = pattern.replace(/\\w\*/g, '<span class="text-info">&hellip;</span>');
+    pattern = pattern.replace(/(\\Q|\\E|\\b)/g, "");
+    pattern = pattern.replace(/\\s/g, " ");
     return pattern;
 }
 
