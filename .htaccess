@@ -9,7 +9,7 @@ RewriteRule ^c/(\w+)/?$ /channel.php?channel=$1 [L]
 RewriteRule ^c/(\w+)/(\w+)/?$ /channel.php?channel=$1&tab=$2 [L]
 
 RewriteRule ^channel/(.*)$ /c/$1 [L,R]
-RewriteRule ^channels/(.*)$ /c/$1 [L,R]
+# RewriteRule ^channels/(.*)$ /c/$1 [L,R]
 
 RewriteRule ^api/(.+)$ /api.php?q=$1 [L]
 
@@ -17,7 +17,7 @@ RewriteRule ^commands/?$ /commands.php [L]
 RewriteRule ^commands/(.+)$ /commands.php?prefix=$1 [L]
 
 RewriteRule ^channels/?$ /chanlist.php [L]
-RewriteRule ^c/?$ /channels [L,R]
+# RewriteRule ^c/?$ /channels [L,R]
 RewriteRule ^channel/?$ /channels [L,R]
 
 
