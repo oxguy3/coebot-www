@@ -2,6 +2,9 @@
 
 require_once("common.php");
 
+@ini_set( 'upload_max_size' , '1M' );
+@ini_set( 'post_max_size', '1M');
+
 define("AUTH_SHARED_SECRET", 2);
 define("AUTH_USER_OAUTH", 3);
 
