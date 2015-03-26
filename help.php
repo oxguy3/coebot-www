@@ -21,43 +21,30 @@ printNav('help');
           <div class="panel-heading" role="tab" id="headingHowToJoin">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#faqAccordion" href="#questionHowToJoin" aria-expanded="false" aria-controls="questionHowToJoin">
-                Q: How can I get <?php echo $SITE_TITLE; ?> on my channel?
+                Q: How can I get CoeBot on my channel?
               </a>
             </h4>
           </div>
           <div id="questionHowToJoin" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingHowToJoin">
             <div class="panel-body">
-              Go to <a href="http://twitch.tv/coebot" target="_blank">CoeBot's Twitch channel</a> and send <kbd>+join</kbd> in chat, and <?php echo $SITE_TITLE; ?> will start monitoring your channel. Setting up <?php echo $SITE_TITLE; ?> on a new channel can be tricky sometimes, so feel free to tweet <a href="http://twitter.com/endsgamer" target="_blank">@endsgamer</a> if you need assistance.
+              Click the "Log in" button at the top right corner of this website and sign in with your Twitch account, then click the join button to have CoeBot enter your channel. If you would rather not sign in with Twitch, you can also join by typing <kbd>+join</kbd> in <a href="http://twitch.tv/coebot" target="_blank">CoeBot's Twitch chat</a>.
+              <br><br>
+              Getting everything set up for the first time may seem daunting, so feel free to tweet <a href="http://twitter.com/coebottv" target="_blank">@coebottv</a> if you need any help or have any questions.
             </div>
           </div>
         </div>
-
-<!--         <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingWhyNoWebsite">
-            <h4 class="panel-title">
-              <a class="collapsed" data-toggle="collapse" data-parent="#faqAccordion" href="#questionWhyNoWebsite" aria-expanded="false" aria-controls="questionWhyNoWebsite">
-                Q: Why isn't my channel showing up on the <?php echo $SITE_TITLE; ?> website?
-              </a>
-            </h4>
-          </div>
-          <div id="questionWhyNoWebsite" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingWhyNoWebsite">
-            <div class="panel-body">
-              The website is still fairly early in development, and unfortunately, the process for a new channel to show up on the website is not yet fully automated. Tweet <a href="http://twitter.com/oxguy3" target="_blank">@oxguy3</a> and he'll get you set up on the website in no time.
-            </div>
-          </div>
-        </div> -->
 
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingSetupBOICompanion">
             <h4 class="panel-title">
               <a class="collapsed" data-toggle="collapse" data-parent="#faqAccordion" href="#questionSetupBOICompanion" aria-expanded="false" aria-controls="questionSetupBOICompanion">
-                Q: How do I enable <?php echo $SITE_TITLE; ?>'s special features for Binding of Isaac: Rebirth?
+                Q: How do I enable CoeBot's special features for Binding of Isaac: Rebirth?
               </a>
             </h4>
           </div>
           <div id="questionSetupBOICompanion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSetupBOICompanion">
             <div class="panel-body">
-              <?php echo $SITE_TITLE; ?>'s BOI features require the use of a special companion app, which you can download <a href="http://coebot.tv/files/isaac_build_updater.zip">here</a>.
+              CoeBot's BOI features require the use of a special companion app, which you can download <a href="http://coebot.tv/files/isaac_build_updater.zip">here</a>.
             </div>
           </div>
         </div>
@@ -66,13 +53,28 @@ printNav('help');
           <div class="panel-heading" role="tab" id="headingIsOpenSource">
             <h4 class="panel-title">
               <a class="collapsed" data-toggle="collapse" data-parent="#faqAccordion" href="#questionIsOpenSource" aria-expanded="false" aria-controls="questionIsOpenSource">
-                Q: Is <?php echo $SITE_TITLE; ?> open source?
+                Q: Is CoeBot open source?
               </a>
             </h4>
           </div>
           <div id="questionIsOpenSource" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingIsOpenSource">
             <div class="panel-body">
-              Absolutely it is! <?php echo $SITE_TITLE; ?>, a fork of <a href="https://bitbucket.org/bashtech/geobot" target="_blank">bashtech's Geobot</a>, is maintained primarily by endsgamer and is freely available <a href="https://bitbucket.org/tucker_gardner/coebot" target="_blank">on Bitbucket</a>. The website is maintained by oxguy3 and is available <a href="https://github.com/oxguy3/coebot-www" target="_blank">on GitHub</a>.
+              Absolutely it is! CoeBot, a fork of <a href="https://bitbucket.org/bashtech/geobot" target="_blank">bashtech's Geobot</a>, is maintained primarily by endsgamer and is freely available <a href="https://bitbucket.org/tucker_gardner/coebot" target="_blank">on Bitbucket</a>. The website is maintained by oxguy3 and is available <a href="https://github.com/oxguy3/coebot-www" target="_blank">on GitHub</a>.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingLomCoebotRelated">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#faqAccordion" href="#questionLomCoebotRelated" aria-expanded="false" aria-controls="questionLomCoebotRelated">
+                Q: Who roleplays as CoeBot on the Lords of Minecraft server?
+              </a>
+            </h4>
+          </div>
+          <div id="questionLomCoebotRelated" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLomCoebotRelated">
+            <div class="panel-body">
+              The CoeBot account is managed by our friends <a href="https://twitter.com/hanhula" target="_blank">Hanhula</a> and <a href="https://twitter.com/vrisvi" target="_blank">Vrisvi</a>.
             </div>
           </div>
         </div>
