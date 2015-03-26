@@ -115,6 +115,11 @@ function displayChannelOverview() {
 
     html += '<p>Bot name: ' + channelCoebotData.botChannel + '</p>';
 
+
+    var wpMoment = (channelData.sinceWp !== null) ? moment(channelData.sinceWp) : null;
+    html += '<p class="whale-penis">Whale penis was last mentioned ' + wpMoment.fromNow() + '. It has been mentioned ' + Humanize.intComma(channelData.wpCount) + ' times.';
+
+
     html += '<p class="">';
     html += '<a class="btn btn-primary overview-socialbtn" href="http://www.twitch.tv/';
     html += channel + '" target="_blank"><i class="icon-twitch"></i> Twitch</a>';
@@ -145,7 +150,6 @@ function displayChannelOverview() {
     }
 
     html += '</p>';
-
     var ref = $(".js-channel-overview");
     ref.html(html);
 }
@@ -155,7 +159,40 @@ function displayChannelSettings() {
     if (userAccessLevel >= USER_ACCESS_LEVEL_MOD) {
         $('#sidebarItemSettings').removeClass('hidden');
     }
-    return;
+
+    if (userAccessLevel >= USER_ACCESS_LEVEL_OWNER) {
+        $('#settingsPartModalBtn').removeClass('hidden');
+    }
+
+    $('#settingsPartConfirmBtn').click(function(e) {
+
+        var $btn = $(this).button('loading');
+
+        $.ajax({
+            data: {
+                a: "part",
+                channel: channel
+            },
+            dataType: "text",
+            url: "/botaction.php",
+            success: function(txt) {
+                if (txt == "success") {
+                    $btn.button('reset');
+                    Messenger().post({
+                      message: 'Sent leave request! Page will refresh in 3 seconds...',
+                      type: 'success'
+                    });
+                    setTimeout(function() { location.reload();}, 3000);
+                } else {
+                    alert(txt);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Failed to leave!");
+            }
+        });
+
+    });
 }
 
 function displayChannelCommands() {
@@ -165,7 +202,7 @@ function displayChannelCommands() {
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
 		var row = '<tr class="row-command row-command-access-' + cmd.restriction +'">';
-        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + (cmd.value).replace(/"/g, "&quot;") + '" data-modaltitle="Edit command"><i class="icon-pencil"></i></span></td>';
+        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + cleanHtmlAttr(cmd.value) + '" data-modaltitle="Edit command"><i class="icon-pencil"></i></span></td>';
 		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
         row += '<td class="row-command-col-access" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
         row += '<td class="should-be-linkified should-be-emotified">' + prettifyStringVariables(cmd.value) + '</td>';
@@ -209,7 +246,7 @@ function displayChannelCommands() {
         accessLevelLabel.find('input').attr("checked", true);
         $('#commandAddModalResponse').val(response);
         $('#commandAddModalLabel').text(modalTitle);
-    })
+    });
 }
 
 function displayChannelQuotes() {
@@ -219,6 +256,8 @@ function displayChannelQuotes() {
 	for (var i = 0; i < channelData.quotes.length; i++) {
 		var quote = channelData.quotes[i];
 		var row = '<tr>';
+        row += '<td class="js-quotes-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#quoteAddModal" data-quote="' + cleanHtmlAttr(quote.quote) + '" data-quoteid="' + (i+1) + '" data-modaltitle="Edit quote"><i class="icon-pencil"></i></span></td>';
+
 		row += '<td>' + (i+1) + '</td>';
         row += '<td>' + quote.quote + '</td>';
 
@@ -232,7 +271,7 @@ function displayChannelQuotes() {
 		rows += row;
 	}
     if (rows == "") {
-        rows = '<tr><td colspan="3" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        rows = '<tr><td colspan="4" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
         shouldSortTable = false;
     }
 
@@ -242,9 +281,31 @@ function displayChannelQuotes() {
     if (shouldSortTable) {
         $('.js-quotes-table').dataTable({
             "paging": false,
-            "info": false
+            "info": false,
+            "order": [[ 1, "asc" ]],
+            "columnDefs": [
+                { "orderable": false, "targets": 0 }
+              ]
         });
     }
+
+    if (userAccessLevel >= USER_ACCESS_LEVEL_MOD) {
+        $('.js-quotes-addbtn').css('display', 'block');
+        $('.js-quotes-editcolumn').css('display', 'table-cell');
+    }
+
+    $('#quoteAddModal').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget);
+        var quoteStr = button.data('quote');
+        var quoteId = button.data('quoteid');
+        var modalTitle = button.data('modaltitle');
+
+        var modal = $(this);
+        $('#quoteAddModalQuote').val(quoteStr);
+        $('#quoteAddModalId').val(quoteId);
+        $('#quoteAddModalLabel').text(modalTitle);
+    });
 }
 
 function displayChannelAutoreplies() {
@@ -254,6 +315,7 @@ function displayChannelAutoreplies() {
     for (var i = 0; i < channelData.autoReplies.length; i++) {
         var reply = channelData.autoReplies[i];
         var row = '<tr>';
+        row += '<td class="js-autoreplies-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#autoreplyAddModal" data-trigger="' + cleanHtmlAttr(reply.trigger) + '" data-response="' + cleanHtmlAttr(reply.response) + '" data-arid="' + (i+1) + '" data-modaltitle="Edit auto-reply"><i class="icon-pencil"></i></span></td>';
         row += '<td>' + (i+1) + '</td>';
         row += '<td title="RegEx: ' + cleanHtmlAttr(reply.trigger) + '">' + prettifyRegex(reply.trigger) + '</td>';
         row += '<td>' + prettifyStringVariables(reply.response) + '</td>';
@@ -271,9 +333,33 @@ function displayChannelAutoreplies() {
         $('.js-autoreplies-table').dataTable({
             "paging": false,
             "info": false,
-            "searching": false
+            "searching": false,
+            "order": [[ 1, "asc" ]],
+            "columnDefs": [
+                { "orderable": false, "targets": 0 }
+              ]
         });
     }
+
+    if (userAccessLevel >= USER_ACCESS_LEVEL_MOD) {
+        $('.js-autoreplies-addbtn').css('display', 'block');
+        $('.js-autoreplies-editcolumn').css('display', 'table-cell');
+    }
+
+    $('#autoreplyAddModal').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget);
+        var arid = button.data('arid');
+        var trigger = button.data('trigger');
+        var response = button.data('response');
+        var modalTitle = button.data('modaltitle');
+
+        var modal = $(this);
+        $('#autoreplyAddModalArid').val(arid);
+        $('#autoreplyAddModalTrigger').val(trigger);
+        $('#autoreplyAddModalResponse').val(response);
+        $('#autoreplyAddModalLabel').text(modalTitle);
+    });
 }
 
 function displayChannelScheduled() {

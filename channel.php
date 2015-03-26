@@ -55,7 +55,11 @@ $extraHeadCode .= "var userAccessLevel = " . getUserAccessLevel($channel) . ";";
 $extraHeadCode .= "</script>";
 
 if (!isCookieTrue("experimentalFeatures")) {
-  $extraHeadCode .= "<style>.js-commands-addbtn, .js-commands-editcolumn { display: none!important; }</style>";
+  $extraHeadCode .= "<style>.js-commands-addbtn, .js-commands-editcolumn, .js-quotes-addbtn, .js-quotes-editcolumn, .js-autoreplies-addbtn, .js-autoreplies-editcolumn { display: none!important; }</style>";
+}
+
+if (!isCookieTrue("showWhalePenis")) {
+  $extraHeadCode .= "<style>.whale-penis { display: none!important; }</style>";
 }
 
 printHead(
@@ -179,7 +183,28 @@ printNav('', true);
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_settings">
-          <h4>This page doesn't work yet, sorry!</h4>
+
+          <p><button id="settingsPartModalBtn" class="btn btn-danger" data-toggle="modal" data-target="#settingsPartModal">Leave</button></p>
+
+          <div class="modal fade" id="settingsPartModal" tabindex="-1" role="dialog" aria-labelledby="settingsPartModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="settingsPartModalLabel">Wait, don't go!</h4>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to remove CoeBot from your channel? You can always re-add CoeBot later, and all your settings will be saved.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="settingsPartConfirmBtn" data-loading-text="Submitting...">Yes</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4>The rest of this page doesn't work yet, sorry!</h4>
           <div class="js-channel-settings">
 
             <div class="settings-form-box">
@@ -293,9 +318,39 @@ printNav('', true);
           <p>
             To retrieve a particular quote, use <kbd class="command">quote get [number]</kbd>. You can also retrieve a random quote with <kbd class="command">quote random</kbd>.
           </p>
+          <div class="js-quotes-addbtn">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#quoteAddModal" data-quote="" data-quoteid="@" data-modaltitle="Add quote"><i class="icon-plus"></i> Add quote</button>
+          </div>
+
+          <!-- add quote modal -->
+          <div class="modal fade" id="quoteAddModal" tabindex="-1" role="dialog" aria-labelledby="quoteAddModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="quoteAddModalLabel">Set quote</h4>
+                </div>
+                <form action="/crap.php?a=post" method="post">
+                  <input type="hidden" name="id" id="quoteAddModalId">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="quoteAddModalQuote">Quote</label>
+                      <input type="text" class="form-control" id="quoteAddModalQuote" name="quote">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
           <table class="table table-striped js-quotes-table">
             <thead>
               <tr>
+                <th class="js-quotes-editcolumn"></th>
                 <th><i class="sorttable-icon"></i>#</th>
                 <th><i class="sorttable-icon"></i>Quote</th>
                 <th><i class="sorttable-icon"></i>Date added</th>
@@ -311,9 +366,43 @@ printNav('', true);
           <p>
             Here are the auto-replies defined for this channel. Whenever Coebot sees anyone say any of these phrases, it will automatically give the appropriate reply. Asterisks (<span class="text-info">*</span>) represent wildcards for any character and ellipses (<span class="text-info">&hellip;</span>) represent any "word" character (i.e. letters, numbers, and underscores).
           </p>
+          <div class="js-autoreplies-addbtn">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#autoreplyAddModal" data-trigger="" data-response="" data-arid="@" data-modaltitle="Add auto-reply"><i class="icon-plus"></i> Add auto-reply</button>
+          </div>
+
+          <!-- add autoreplies modal -->
+          <div class="modal fade" id="autoreplyAddModal" tabindex="-1" role="dialog" aria-labelledby="autoreplyAddModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="autoreplyAddModalLabel">Set auto-reply</h4>
+                </div>
+                <form action="/crap.php?a=post" method="post">
+                  <input type="hidden" name="id" id="autoreplyAddModalArid">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="autoreplyAddModalTrigger">Trigger</label>
+                      <input type="text" class="form-control" id="autoreplyAddModalTrigger" name="trigger">
+                    </div>
+                    <div class="form-group">
+                      <label for="autoreplyAddModalResponse">Response</label>
+                      <input type="text" class="form-control" id="autoreplyAddModalResponse" name="response">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
           <table class="table table-striped js-autoreplies-table">
             <thead>
               <tr>
+                <th class="js-autoreplies-editcolumn"></th>
                 <th><i class="sorttable-icon"></i>#</th>
                 <th><i class="sorttable-icon"></i>Trigger</th>
                 <th><i class="sorttable-icon"></i>Response</th>

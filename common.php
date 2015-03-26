@@ -22,6 +22,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 	global $SITE_TITLE;
 ?>
 <!DOCTYPE html>
+<!-- mephwins wanted me to put secrets in the html source, so this is a secret -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -51,14 +52,6 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 
     if (isCookieTrue("birthdayMode")) {
         echo '<link href="/css/birthday.css" rel="stylesheet">'."\n";
-    }
-
-    if (isCookieTrue("exzentiaShareMode")) {
-        echo '<link href="/css/exzentiamode.css" rel="stylesheet">'."\n";
-    }
-
-    if (isCookieTrue("oxSpamMode")) {
-        echo '<link href="/css/oxspammode.css" rel="stylesheet">'."\n";
     }
 
     echo $extraHeadCode;
@@ -454,6 +447,29 @@ function dbSetChannelShowBoir($channel, $shouldShowBoir) {
 }
 
 /**
+ * Updates the bot username for a given channel
+ *
+ * Returns true if successful, or false if an error occurred
+ */
+function dbSetChannelBot($channel, $botChannel) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'UPDATE ' . DB_PREF . 'channels SET botChannel=? WHERE channel=?';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('ss', $botChannel, $channel);
+
+    $success = $stmt->execute();
+    $stmt->close();
+
+    return $success;
+}
+
+/**
  * Returns the number of channels currently using CoeBot
  */
 function dbCountChannels() {
@@ -674,6 +690,31 @@ function twitchGetUser($accessToken) {
     curl_close($curlSession);
 
     return $jsonData;
+}
+
+
+
+
+
+/*******************************
+ * PUSHER
+ *******************************/
+
+function getPusherForBotRow($data) {
+    $pusher = new Pusher($data['pusherAppKey'], $data['pusherAppSecret'], $data['pusherAppId']);
+    return $pusher;
+}
+
+function sendPusherEvent(&$pusher, $botName, $target, $actions, $channel) {
+    if (!is_array($actions)) {
+        $actions = array(array("action" => $actions));
+    }
+    $message = array();
+    $message['target'] = $target;
+    $message['actions'] = $actions;
+    $message['channel'] = $channel;
+
+    return $pusher->trigger( $botName, 'e', $message );
 }
 
 

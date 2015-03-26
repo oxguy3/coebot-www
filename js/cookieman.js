@@ -9,13 +9,8 @@ var cookieList = [
     type: 'boolean'
   },
   {
-    name: "exzentiaShareMode",
-    description: "Exzentia mode (warning: incredibly pointless)",
-    type: 'boolean'
-  },
-  {
-    name: "oxSpamMode",
-    description: "Ox spam mode (warning: even more pointless)",
+    name: "showWhalePenis",
+    description: "Show whale penis statistics",
     type: 'boolean'
   },
   {

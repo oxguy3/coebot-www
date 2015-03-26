@@ -233,7 +233,9 @@
 }
 
 
-.js-commands-addbtn, .js-commands-editcolumn {
+.js-commands-addbtn, .js-commands-editcolumn,
+.js-quotes-addbtn, .js-quotes-editcolumn,
+.js-autoreplies-addbtn, .js-autoreplies-editcolumn {
   display: none;
 }
 

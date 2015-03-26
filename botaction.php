@@ -28,14 +28,10 @@ if ($_GET['a'] == "join" && isset($_GET['channel']) && isset($_GET['bot'])) {
     if ($botData == false || $botData == NULL || $botData['accessType'] == "PRIVATE") die("error: that bot not available");
 
 
-    $pusher = new Pusher($botData['pusherAppKey'], $botData['pusherAppSecret'], $botData['pusherAppId']);
+    $pusher = getPusherForBotRow($botData);
 
-    $message = array();
-    $message['target'] = $channel;
-    $message['action'] = 'join';
-    $message['channel'] = $channel;
-
-    $pusher->trigger( $botData['channel'], 'e', $message );
+    sendPusherEvent($pusher, $botData['channel'], $channel, 'join', $channel);
+    dbSetChannelBot($channel, $botData['channel']);
 
     header('refresh: 3;url=' . getUrlToChannel($channel));
     printHead("Processing...");
@@ -61,6 +57,37 @@ if ($_GET['a'] == "join" && isset($_GET['channel']) && isset($_GET['bot'])) {
   } else {
     die("error: unauthorized");
   }
+
+
+
+} else if ($_GET['a'] == "part" && isset($_GET['channel'])) {
+
+  $channel = $_GET['channel'];
+
+  if (!validateChannel($channel)) die("error: bad param");
+
+  if (getUserAccessLevel($channel) >= $USER_ACCESS_LEVEL_OWNER) {
+
+    $channelCoebotData = dbGetChannel($channel);
+
+    if ($channelCoebotData['isActive'] == false) die("error: already left");
+    $bot = $channelCoebotData['botChannel'];
+
+    $botData = dbGetBotByChannel($bot);
+    if ($botData == false || $botData == NULL) die("error: that bot not available");
+
+
+    $pusher = getPusherForBotRow($botData);
+
+    sendPusherEvent($pusher, $botData['channel'], $channel, 'part', $channel);
+
+    die("success");
+
+  } else {
+    die("error: unauthorized");
+  }
+
+
 
 } else {
   die("error: bad action");
