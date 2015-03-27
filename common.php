@@ -636,6 +636,137 @@ function dbSetUser($channel, $isActive, $twitchAccessToken) {
     return $mysqli->insert_id;
 }
 
+/**
+ * Returns the row for a given var, or false if an error occurred, or NULL if var doesn't exist
+ */
+function dbGetVar($channel, $varName) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT value, description, lastModified FROM ' . DB_PREF . 'vars WHERE channel=? AND var=?';
+
+
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('ss', $channel, $varName);
+    $stmt->bind_result($value, $description, $lastModified);
+
+
+    $success = $stmt->execute();
+
+    if (!$success) {
+        $stmt->close();
+        return false;
+    }
+    if ($stmt->fetch() !== true) {
+        $stmt->close();
+        return NULL;
+    }
+
+    //$stmt->fetch();
+    $stmt->close();
+
+    $row = array(
+        "value" => $value,
+        "description" => $description,
+        "lastModified" => $lastModified
+    );
+
+    return $row;
+}
+
+/**
+ * Creates or updates a row for a new var in the database
+ *
+ * Returns true if successful, or false if an error occurred (should use === when checking return value)
+ */
+function dbSetVar($channel, $varName, $value, $description="") {
+    global $mysqli;
+    initMysqli();
+
+    $lastModified = time();
+
+    $sql = 'INSERT INTO ' . DB_PREF . 'vars (channel, var, value, description, lastModified) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE value=?, description=?, lastModified=?';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('ssssissi', $channel, $varName, $value, $description, $lastModified, $value, $description, $lastModified);
+
+    $success = $stmt->execute();
+    $stmt->close();
+
+    return $success;
+}
+
+/**
+ * Deletes a var from the database
+ *
+ * Returns true if successful, or false if an error occurred (should use === when checking return value)
+ */
+function dbDeleteVar($channel, $varName) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'DELETE FROM ' . DB_PREF . 'vars WHERE channel=? AND var=?';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        return false;
+    }
+
+    $stmt->bind_param('ss', $channel, $varName);
+
+    $success = $stmt->execute();
+    $retValue = ($success && $stmt->affected_rows == 0) ? NULL : $success;
+
+    $stmt->close();
+
+    return $retValue;
+}
+
+/**
+ * Increments the value of a var, or creates a new row for that var in the database
+ *
+ * Returns new value if successful, or false if an error occurred (should use === when checking return value)
+ */
+function dbIncrementVar($channel, $varName, $incAmount=0) {
+    global $mysqli;
+    initMysqli();
+
+    $row = dbGetVar($channel, $varName);
+
+    if ($row === false || $row === NULL) {
+        $dbAction = dbSetVar($channel, $varName, $incAmount);
+        if ($dbAction === false) return $dbAction;
+        return strval($incAmount);
+
+    } else {
+
+        $oldValue = $row['value'];
+
+        if (is_numeric($oldValue)) {
+            if (intval($oldValue) == floatval($oldValue)) {
+                $newValue = intval($oldValue) + $incAmount;
+            } else {
+                $newValue = floatval($oldValue) + $incAmount;
+            }
+
+            $newValueStr = strval($newValue);
+            $dbAction = dbSetVar($channel, $varName, $newValueStr);
+            if ($dbAction === false) return $dbAction;
+
+            return $newValueStr;
+
+        } else {
+            return $oldValue;
+        }
+    }
+}
+
 
 
 

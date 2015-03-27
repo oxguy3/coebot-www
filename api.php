@@ -62,6 +62,16 @@ if (count($q) > 0 && $q[0] == "v1") {
         }
 
 
+    } else if (count($q) > 1 && $q[1] == 'vars') {
+
+        if (count($q) > 3) {
+            apiVars($q);
+        } else {
+            tellBadMethod();
+
+        }
+
+
     } else {
         tellBadMethod();
         
@@ -78,6 +88,105 @@ if (count($q) > 0 && $q[0] == "v1") {
 /***************
  * API METHODS
  **************/
+
+function apiVars($query) {
+
+    $channel = channelOrDie($query);
+    $varName = $query[3];
+    if (!preg_match('/^[A-Z0-9\-_]{1,64}$/i', $varName)) {
+        tellError("bad varname", 400);
+    }
+
+
+    if ($query[2] == 'set') {
+
+        authOrDie($query, AUTH_SHARED_SECRET);
+
+        $json = json_decode(file_get_contents("php://input"));
+        if ($json == false || !property_exists($json, "value")) {
+            tellBadParam('json');
+        }
+
+        $value = $json->value;
+        if (strlen($value) > 255) {
+            tellBadParam('value');
+        }
+
+        // if (property_exists($json, "description")) {
+        //     $description = $json->description;
+        //     if (strlen($description) > 255) {
+        //         tellBadParam('description');
+        //     }
+        //     $success = dbSetVar($channel, $varName, $value, $description);
+
+        // } else {
+            $success = dbSetVar($channel, $varName, $value);
+        // }
+
+        if ($success) {
+            tellSuccess();
+        } else {
+            tellError("database error", 500);
+        }
+
+
+    } else if ($query[2] == 'increment') {
+
+        authOrDie($query, AUTH_SHARED_SECRET);
+
+        $json = json_decode(file_get_contents("php://input"));
+        if ($json == false || !property_exists($json, "incAmount")) {
+            tellBadParam('json');
+        }
+
+        $incAmount = $json->incAmount;
+        if (!is_int($incAmount) && !is_float($incAmount)) {
+            tellBadParam('incAmount');
+        }
+
+        $result = dbIncrementVar($channel, $varName, $incAmount);
+
+        if ($result !== false) {
+            $response = array("newValue" => $result);
+            tellSuccess($response);
+        } else {
+            tellError("database error", 500);
+        }
+
+
+    } else if ($query[2] == 'unset') {
+
+        authOrDie($query, AUTH_SHARED_SECRET);
+
+        $success = dbDeleteVar($channel, $varName);
+
+        if ($success === false) {
+            tellError("database error", 500);
+        } else if ($success === NULL) {
+            tellError("var not found", 404);
+        }
+
+        tellSuccess();
+
+
+    } else if ($query[2] == 'get') {
+
+        $row = dbGetVar($channel, $varName);
+
+        if ($row === false) {
+            tellError("database error", 500);
+        } else if ($row === NULL) {
+            tellError("var not found", 404);
+        }
+
+        tellSuccess($row);
+
+
+    } else {
+        tellBadMethod();
+
+    }
+}
 
 function apiChannelList($query) {
 
