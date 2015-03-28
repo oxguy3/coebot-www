@@ -93,7 +93,7 @@ function apiVars($query) {
 
     $channel = channelOrDie($query);
     $varName = $query[3];
-    if (!preg_match('/^[A-Z0-9\-_]{1,64}$/i', $varName)) {
+    if (!preg_match('/^[A-Z0-9\-]{1,64}$/i', $varName)) {
         tellError("bad varname", 400);
     }
 

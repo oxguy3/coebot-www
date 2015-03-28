@@ -32,7 +32,7 @@ $devMode = isset($_GET['dev']);
 setcookie("lastcmdct_" . $command, $ct);
 
 header('Content-type: text/html');
-header('refresh: 5');
+header('refresh: 5; url=http://coebot.tv/showvar.php?channel=coestar&var=rip-uncharted2&themes=blood+guude&label=deaths');
 ?>
 <html>
 <head>
