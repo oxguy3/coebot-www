@@ -39,7 +39,7 @@ function printOptionalParam($param, $format="%s") {
 	}
 	?>
 	<?php
-	if (preg_match('/^.*\bplumbers\b.*$/i', $_GET['themes'])) {
+	if (preg_match('/^.*\b(plumbers|arcade)\b.*$/i', $_GET['themes'])) {
 		echo "<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>";
 	}
 	?>
@@ -164,6 +164,43 @@ function printOptionalParam($param, $format="%s") {
     50%  {opacity: 1;}
     100% {opacity: 0;}
   }
+
+
+
+
+
+	/******************
+	 * THEME: ARCADE
+	 ******************/
+	html.arcade * {
+		font-weight: bold;
+		color: black;
+		text-align:center;
+		font-family: 'Press Start 2P', monospace;
+	}
+
+	html.arcade #value {
+		font-size: 72px;
+	}
+
+	html.arcade #value:empty:after {
+		content: '...';
+	}
+
+	html.arcade #label {
+		font-size: 24px;
+	}
+
+
+
+
+
+	/******************
+	 * THEME: EXZENTIA_BLOOD
+	 ******************/
+	html.exzentia_blood body.updated {
+		background: url(http://i.imgur.com/AzMrQg7.gif) no-repeat fixed center top;
+	}
 
 
 
