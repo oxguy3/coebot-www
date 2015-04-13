@@ -323,7 +323,7 @@ function displayChannelAutoreplies() {
         rows += row;
     }
     if (rows == "") {
-        rows = '<tr><td colspan="3" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+        rows = '<tr><td colspan="4" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
         shouldSortTable = false;
     }
 

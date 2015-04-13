@@ -10,7 +10,7 @@ var USER_ACCESS_LEVEL_OWNER = 4;
 var USER_ACCESS_LEVEL_ADMIN = 99;
 
 function prettifyStringVariables(str) {
-    var pattern = /\(_(\w+)_\)/g;
+    var pattern = /\(_([\w\-:]+)_\)/g;
     var replacement = '<span class="label label-default command-variable">$1</span>';
     str = str.replace(pattern, replacement);
     return str;
