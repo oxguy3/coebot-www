@@ -30,7 +30,12 @@ if (!$channelCoebotData || $channelCoebotData['isActive'] == false) {
           <p class="text-center">Already hit the join button? Your request may still be processing; wait a few seconds and refresh the page.</p>
           <p class="text-center">
             <a class="btn btn-primary btn-lg" href="/botaction.php?a=join&amp;bot=coebot&amp;channel=<?php echo $channel; ?>">
-              Join <?php echo $channel; ?>
+              Join <?php echo $channel; ?> with CoeBot
+            </a>
+          </p>
+          <p class="text-center">
+            <a class="btn btn-primary btn-lg" href="/botaction.php?a=join&amp;bot=automodbot&amp;channel=<?php echo $channel; ?>">
+              Join <?php echo $channel; ?> with AutoModBot
             </a>
           </p>
         </div>

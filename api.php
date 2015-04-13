@@ -230,7 +230,10 @@ function apiChannelUpdate($query) {
 
     $displayName = $twitchObj->display_name;
 
-    $success = dbSetChannel($channel, $displayName, $isActive); // TODO eventually need to pass identifier of bot
+    $authArray = getAuthArray($query);
+    $botChannel = $authArray[2];
+
+    $success = dbSetChannel($channel, $displayName, $isActive, $authArray[2]); // TODO eventually need to pass identifier of bot
 
     if ($success) {
         tellSuccess();
@@ -294,7 +297,7 @@ function checkAuthFromRaw($query, $authMethod) {
         $checkChannel = true;
     }
     if ($authMethod == AUTH_SHARED_SECRET) {
-        $checkChannel = false; // for now
+        $checkChannel = true; // for now
     }
 
 
@@ -302,7 +305,7 @@ function checkAuthFromRaw($query, $authMethod) {
     if (count($authArr) != 3) return false;
 
     $a = $authArr[1];
-    $botChannel = $authArr[2];
+    $botChannel = strtolower($authArr[2]);
 
     $chan = false;
 
@@ -323,12 +326,14 @@ function checkAuthFromRaw($query, $authMethod) {
 
 function checkAuthApiKey($auth, $botChannel, $channel) {
     //global $TEMP_AUTH_KEY;
-    return dbCheckBotAuth($botChannel, $auth);
+    if (!dbCheckBotAuth($botChannel, $auth)) return false;
 
-    // check that the auth token and cnonce are legit
-    if ($channel !== false) {
-        // TODO do some check to see if this client has access for this channel
-    }
+    if ($channel === false) return false;
+
+    $channelData = dbGetChannel($channel);
+    if ($channelData === false) return false;
+
+    return ($channelData === NULL || !$channelData['isActive'] || $channelData['botChannel'] == $botChannel);
 }
 
 function checkOauthToken($auth, $channel) {
