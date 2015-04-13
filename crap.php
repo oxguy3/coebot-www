@@ -2,6 +2,8 @@
 
 require_once('common.php');
 
+header('Content-type: text/plain');
+
 $action = $_GET['a'];
 
 if ($action == "session") {
