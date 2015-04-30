@@ -25,6 +25,11 @@ $responses = array(
     "img_alt" => "Coebot GTFO sketch by Coestar",
     "img_title" => "Sketch by Coestar"
   ),
+  "500" => (object) array(
+    "title" => "Uh oh...",
+    "heading" => "Internal server error",
+    "subheading" => "Something's not working quite right, hopefully we'll have it fixed ASAP!",
+  ),
   "200" => (object) array(
     "title" => "Not an error!",
     "heading" => "Oh, wise guy eh?",

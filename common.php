@@ -244,6 +244,13 @@ function throw404() {
   die();
 }
 
+function throw500() {
+  header("HTTP/1.0 500 Internal Server Error");
+  $httpStatusCode = 500;
+  include_once("error.php");
+  die();
+}
+
 // lovingly stolen from http://hayageek.com/php-curl-post-get/#curl-post
 function httpPost($url,$params)
 {
@@ -331,6 +338,7 @@ function dbGetChannel($channel) {
 
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -341,7 +349,11 @@ function dbGetChannel($channel) {
     $success = $stmt->execute();
 
     if (!$success) {
+      header("Content-type: text/plain");
+      var_dump($stmt);
+      die("INTERNAL SERVER ERROR");
         $stmt->close();
+        throw500();
         return false;
     }
     if ($stmt->fetch() !== true) {
@@ -385,6 +397,7 @@ function dbSetChannel($channel, $displayName, $isActive, $botChannel="coebot") {
     $sql = 'INSERT INTO ' . DB_PREF . 'channels (channel, displayName, isActive, botChannel) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE displayName=?, isActive=?, botChannel=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -409,6 +422,7 @@ function dbUpdateChannel($channel, $youtube, $twitter, $shouldShowOffensiveWords
     $sql = 'UPDATE ' . DB_PREF . 'channels SET youtube=?, twitter=?, shouldShowOffensiveWords=?, shouldShowBoir=? WHERE channel=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -435,6 +449,7 @@ function dbSetChannelShowBoir($channel, $shouldShowBoir) {
     $sql = 'UPDATE ' . DB_PREF . 'channels SET shouldShowBoir=? WHERE channel=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -458,12 +473,16 @@ function dbSetChannelBot($channel, $botChannel) {
     $sql = 'UPDATE ' . DB_PREF . 'channels SET botChannel=? WHERE channel=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
     $stmt->bind_param('ss', $botChannel, $channel);
 
     $success = $stmt->execute();
+
+    error_log($stmt->affected_rows);
+
     $stmt->close();
 
     return $success;
@@ -481,6 +500,7 @@ function dbCountChannels() {
 
     $result = $mysqli->query($sql);
     if ($result === false) {
+        throw500();
         return NULL;
 
     } else {
@@ -501,6 +521,7 @@ function dbGetBotById($botId) {
 
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -521,6 +542,7 @@ function dbGetBotByChannel($channel) {
 
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -537,6 +559,7 @@ function dbExecuteGetBot($stmt) {
 
     if (!$success) {
         $stmt->close();
+        throw500();
         return false;
     }
     if ($stmt->fetch() !== true) {
@@ -572,6 +595,7 @@ function dbCheckBotAuth($botChannel, $apiKey) {
     $sql = 'SELECT apiKey FROM ' . DB_PREF . 'bots WHERE channel=? AND isActive=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -625,6 +649,7 @@ function dbSetUser($channel, $isActive, $twitchAccessToken) {
     $sql = 'INSERT INTO ' . DB_PREF . 'users (channel, isActive, twitchAccessToken, lastLogin) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE isActive=?, twitchAccessToken=?, lastLogin=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -632,6 +657,11 @@ function dbSetUser($channel, $isActive, $twitchAccessToken) {
 
     $success = $stmt->execute();
     $stmt->close();
+
+    if (!$success) {
+        throw500();
+        return false;
+    }
 
     return $mysqli->insert_id;
 }
@@ -659,6 +689,7 @@ function dbGetVar($channel, $varName) {
 
     if (!$success) {
         $stmt->close();
+        throw500();
         return false;
     }
     if ($stmt->fetch() !== true) {
@@ -692,6 +723,7 @@ function dbSetVar($channel, $varName, $value, $description="") {
     $sql = 'INSERT INTO ' . DB_PREF . 'vars (channel, var, value, description, lastModified) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE value=?, description=?, lastModified=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -715,6 +747,7 @@ function dbDeleteVar($channel, $varName) {
     $sql = 'DELETE FROM ' . DB_PREF . 'vars WHERE channel=? AND var=?';
     $stmt = $mysqli->prepare($sql);
     if ($stmt === false) {
+        throw500();
         return false;
     }
 
@@ -831,23 +864,110 @@ function twitchGetUser($accessToken) {
  * PUSHER
  *******************************/
 
-function getPusherForBotRow($data) {
-    $pusher = new Pusher($data['pusherAppKey'], $data['pusherAppSecret'], $data['pusherAppId']);
-    return $pusher;
-}
+// represents a message to be sent to the bot via Pusher
+class BotSession {
 
-function sendPusherEvent(&$pusher, $botName, $target, $actions, $channel) {
-    if (!is_array($actions)) {
-        $actions = array(array("action" => $actions));
+    public $botChannel;
+    public $appKey;
+    public $appSecret;
+    public $appId;
+
+    public $channel;
+    public $editor;
+
+    public $pusher;
+    public $actions;
+
+    function __construct($botChannel, $appKey, $appSecret, $appId, $channel, $editor)  {
+        $this->botChannel = $botChannel;
+        $this->appKey = $appKey;
+        $this->appSecret = $appSecret;
+        $this->appId = $appId;
+
+        $this->channel = $channel;
+        $this->editor = $editor;
+
+        $this->pusher = new Pusher($appKey, $appSecret, $appId);
+        $this->actions = array();
     }
-    $message = array();
-    $message['target'] = $target;
-    $message['actions'] = $actions;
-    $message['channel'] = $channel;
 
-    return $pusher->trigger( $botName, 'e', $message );
+    static function getBotSession($botChannel, $channel, $editor) {
+        $botData = dbGetBotByChannel($botChannel);
+        if ($botData === false || $botData === NULL) {
+            return NULL;
+        }
+
+        return new BotSession(
+            $botChannel,
+            $botData['pusherAppKey'],
+            $botData['pusherAppSecret'],
+            $botData['pusherAppId'],
+            $channel,
+            $editor
+            );
+    }
+
+    function finalize() {
+        if (count($this->actions) == 0) {
+            return false;
+        }
+        $message = array(
+            "channel" => $this->channel,
+            "editor" => $this->editor,
+            "actions" => $this->actions
+            );
+
+        $pusherObj = $this->pusher;
+
+        return $pusherObj->trigger(
+            $this->botChannel,
+            'e',
+            $message
+            );
+    }
+
+    function addAction($actionName, $data) {
+        $data['action'] = $actionName;
+        array_push($this->actions, $data);
+        return $this;
+    }
+
+    function doJoin() {
+        return $this->addAction("join", array());
+    }
+
+    function doPart() {
+        return $this->addAction("part", array());
+    }
+
+    function doCommandAdd($name, $value) {
+        return $this->addAction("add command", array(
+            "key" => $name,
+            "value" => $value
+            ));
+    }
+
+    function doCommandRename($oldName, $newName) {
+        return $this->addAction("rename command", array(
+            "oldName" => $oldName,
+            "newName" => $newName
+            ));
+    }
+
+    function doCommandDelete($name) {
+        return $this->addAction("delete command", array(
+            "key" => $name
+            ));
+    }
+
+    function doCommandRestrict($name, $restriction) {
+        return $this->addAction("restrict command", array(
+            "key" => $name,
+            "restriction" => $restriction
+            ));
+    }
+
 }
-
 
 
 

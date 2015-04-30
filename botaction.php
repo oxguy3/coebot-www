@@ -24,14 +24,9 @@ if ($_GET['a'] == "join" && isset($_GET['channel']) && isset($_GET['bot'])) {
 
     if ($channelCoebotData['isActive'] == true) die("error: already joined");
 
-    $botData = dbGetBotByChannel($bot);
-    if ($botData == false || $botData == NULL || $botData['accessType'] == "PRIVATE") die("error: that bot not available");
-
-
-    $pusher = getPusherForBotRow($botData);
-
-    sendPusherEvent($pusher, $botData['channel'], $channel, 'join', $channel);
-    dbSetChannelBot($channel, $botData['channel']);
+    $botSession = BotSession::getBotSession($bot, $channel, $_SESSION['channel']);
+    $botSession->doJoin();
+    $botSession->finalize();
 
     header('refresh: 3;url=' . getUrlToChannel($channel));
     printHead("Processing...");
@@ -73,13 +68,9 @@ if ($_GET['a'] == "join" && isset($_GET['channel']) && isset($_GET['bot'])) {
     if ($channelCoebotData['isActive'] == false) die("error: already left");
     $bot = $channelCoebotData['botChannel'];
 
-    $botData = dbGetBotByChannel($bot);
-    if ($botData == false || $botData == NULL) die("error: that bot not available");
-
-
-    $pusher = getPusherForBotRow($botData);
-
-    sendPusherEvent($pusher, $botData['channel'], $channel, 'part', $channel);
+    $botSession = BotSession::getBotSession($bot, $channel, $_SESSION['channel']);
+    $botSession->doPart();
+    $botSession->finalize();
 
     die("success");
 
