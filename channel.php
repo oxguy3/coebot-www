@@ -60,7 +60,7 @@ $extraHeadCode .= "var userAccessLevel = " . getUserAccessLevel($channel) . ";";
 $extraHeadCode .= "</script>";
 
 if (!isCookieTrue("experimentalFeatures")) {
-  $extraHeadCode .= "<style>.js-commands-addbtn, .js-commands-editcolumn, .js-quotes-addbtn, .js-quotes-editcolumn, .js-autoreplies-addbtn, .js-autoreplies-editcolumn { display: none!important; }</style>";
+  $extraHeadCode .= "<style>.js-commands-addbtn, .js-commands-editcolumn, .js-quotes-addbtn, .js-quotes-editcolumn, .js-autoreplies-addbtn, .js-autoreplies-editcolumn, .hidden-if-experimental { display: none!important; }</style>";
 }
 
 if (!isCookieTrue("showWhalePenis")) {
@@ -124,6 +124,13 @@ printNav('', true);
                 <span class="sidebar-title" data-bigtitle="Quotes">Quotes</span>
               </a></li>
 
+              <li class="hidden-if-experimental"><a href="#tab_vars" class="js-sidebar-link">
+                <span class="sidebar-icon"><i class="icon-chart-bar icon-fw"></i></span>
+                <span class="sidebar-title" data-bigtitle="Variables">Variables</span>
+              </a></li>
+              
+              <li class="nav-sidebar-divider"></li>
+
               <li><a href="#tab_autoreplies" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-chat-empty icon-fw"></i></span>
                 <span class="sidebar-title" data-bigtitle="Auto-replies">Auto-replies</span>
@@ -150,7 +157,7 @@ printNav('', true);
 
               <li><a href="#tab_highlights" class="js-sidebar-link">
                 <span class="sidebar-icon"><i class="icon-bookmark icon-fw"></i></span>
-                <span class="sidebar-title" data-bigtitle="Highlights">Highlights</span>
+                <span class="sidebar-title" data-bigtitle="Past broadcasts">Past broadcasts</span>
               </a></li>
 
               <li id="sidebarItemGames" class="hidden"><a href="#tab_boir" class="js-sidebar-link">
@@ -364,6 +371,24 @@ printNav('', true);
             <tbody class="js-quotes-tbody"></tbody>
           </table>
           <script>displayChannelQuotes()</script>
+        </div><!--/.tab-pane -->
+
+
+        <div role="tabpanel" class="tab-pane fade" id="tab_vars">
+          <p>
+            Here are the variables for this channel. Variables can hold any sort of data that a channel owner wants to use them for; they might be used for running tallies, information about the current game, or just about anything else!
+          </p>
+          <table class="table table-striped js-variables-table">
+            <thead>
+              <tr>
+                <th><i class="sorttable-icon"></i>Name</th>
+                <th><i class="sorttable-icon"></i>Value</th>
+                <th><i class="sorttable-icon"></i>Last modified</th>
+              </tr>
+            </thead>
+            <tbody class="js-variables-tbody"></tbody>
+          </table>
+          <script>/*displayChannelVariables()*/</script>
         </div><!--/.tab-pane -->
 
 

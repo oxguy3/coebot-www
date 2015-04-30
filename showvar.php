@@ -15,7 +15,7 @@ if (!validateChannel($channel)
 }
 
 function printOptionalParam($param, $format="%s") {
-	if (isset($_GET[$param])) {
+	if (isset($_GET[$param]) && $_GET[$param] != "") {
 		printf($format, htmlspecialchars($_GET[$param])); 
 	}
 }
@@ -110,6 +110,29 @@ function printOptionalParam($param, $format="%s") {
 
 
 	/******************
+	 * THEME: POOSE
+	 ******************/
+	html.poose #poose {
+		position: fixed;
+		left: 50%;
+		height: 100px;
+		width: 87px;
+		margin-left: -43px;
+		display: none;
+	}
+
+	html.poose .updated #poose {
+		display: inline;
+		opacity: 0;
+		animation: blood_fadeInOut 3s 1 ease-out;
+		-webkit-animation: blood_fadeInOut 3s 1 ease-out;
+	}
+
+
+
+
+
+	/******************
 	 * THEME: BLOOD
 	 ******************/
 	html.blood * {
@@ -174,7 +197,8 @@ function printOptionalParam($param, $format="%s") {
 	 ******************/
 	html.arcade * {
 		font-weight: bold;
-		color: black;
+		color: white;
+		text-shadow: 2px 2px 10px black;
 		text-align:center;
 		font-family: 'Press Start 2P', monospace;
 	}
@@ -297,6 +321,10 @@ updateNumber();
 
 if ($('#html').hasClass("guude")) {
 	$('body').prepend('<img id="guude" src="/img/guude.png">');
+}
+
+if ($('#html').hasClass("poose")) {
+	$('body').prepend('<img id="poose" src="/img/poose.png">');
 }
 
 if ($('#html').hasClass("plumbers")) {
