@@ -2,18 +2,19 @@
 
 require_once("common.php");
 
-$code = isset($httpStatusCode) ? $httpStatusCode : $_ENV['REDIRECT_STATUS'];
+$code = strval(isset($httpStatusCode) ? $httpStatusCode : $_ENV['REDIRECT_STATUS']);
 
 $responses = array(
-  "404" => (object) array(
-    "title" => "404!!",
-    "heading" => "Sorry dude, that page totally doesn't exist.",
-    "subheading" => "Learn how to type better, I guess.",
-    "image_href" => "/img/notfound_800.png",
-    "img_src" => "/img/notfound_400.png",
-    "img_srcset" => "/img/notfound_800.png 2x",
-    "img_alt" => "404 art by ryuski",
-    "img_title" => "Art by ryuski"
+  "200" => (object) array(
+    "title" => "Not an error!",
+    "heading" => "Oh, wise guy eh?",
+    "subheading" => "Thought you could break the error page by accessing the PHP script directly, huh? Well, it looks like I'm one step ahead of you.",
+    "img_src" => "/img/coeicebucket_square.png"
+  ),
+  "400" => (object) array(
+    "title" => "Bad request",
+    "heading" => "Bad request",
+    "subheading" => (isset($httpStatusMessage)) ? $httpStatusMessage : "The request you made was invalid somehow.",
   ),
   "403" => (object) array(
     "title" => "403!!",
@@ -25,20 +26,36 @@ $responses = array(
     "img_alt" => "Coebot GTFO sketch by Coestar",
     "img_title" => "Sketch by Coestar"
   ),
+  "404" => (object) array(
+    "title" => "404!!",
+    "heading" => "Sorry dude, that page totally doesn't exist.",
+    "subheading" => "Learn how to type better, I guess.",
+    "image_href" => "/img/notfound_800.png",
+    "img_src" => "/img/notfound_400.png",
+    "img_srcset" => "/img/notfound_800.png 2x",
+    "img_alt" => "404 art by ryuski",
+    "img_title" => "Art by ryuski"
+  ),
   "500" => (object) array(
     "title" => "Uh oh...",
     "heading" => "Internal server error",
     "subheading" => "Something's not working quite right, hopefully we'll have it fixed ASAP!",
-  ),
-  "200" => (object) array(
-    "title" => "Not an error!",
-    "heading" => "Oh, wise guy eh?",
-    "subheading" => "Thought you could break the error page by accessing the PHP script directly, huh? Well, it looks like I'm one step ahead of you.",
-    "img_src" => "/img/coeicebucket_square.png"
   )
 );
 
-$resp = $responses[$code];
+$resp = false;
+
+if (isset($responses[$code])) {
+  $resp = $responses[$code];
+
+} else {
+  $resp = (object) array(
+    "title" => $code . " error",
+    "heading" => "Error: " . $code,
+    "subheading" => "A " . $code . " error has occurred.",
+  );
+}
+
 
 printHead($resp->title);
 printNav();

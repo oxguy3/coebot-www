@@ -1,7 +1,9 @@
 Options All -Indexes
 
-ErrorDocument 404 /error.php?c=404
+ErrorDocument 400 /error.php?c=400
 ErrorDocument 403 /error.php?c=403
+ErrorDocument 404 /error.php?c=404
+ErrorDocument 500 /error.php?c=500
 
 RewriteEngine on
 
