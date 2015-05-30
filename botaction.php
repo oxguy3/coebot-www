@@ -3,36 +3,48 @@
 require_once('common.php');
 require_once('Pusher.php');
 
-if (!isLoggedIn()) {
-  die("error: not logged in");
+requireLoggedIn();
+
+$action = false;
+$httpMethod = false;
+
+if (isset($_GET['a'])) {
+  $action = $_GET['a'];
+  $httpMethod = "GET";
+
+} else if (isset($_POST['a'])) {
+  $action = $_POST['a'];
+  $httpMethod = "POST";
+
+} else {
+  throw400("Your request did not specify an action to perform.");
 }
 
-if (!isset($_GET['a'])) {
-  throw404();
-}
+$action = $_GET['a'];
 
-if ($_GET['a'] == "join" && isset($_GET['channel']) && isset($_GET['bot'])) {
 
-  $channel = $_GET['channel'];
-  $bot = $_GET['bot'];
 
-  if (!validateChannel($channel) || !validateChannel($bot)) die("error: bad param");
+if ($action == "join") {
 
-  if (getUserAccessLevel($channel) >= $USER_ACCESS_LEVEL_OWNER) {
+  $channel = getChannelWithAuthOrDie($USER_ACCESS_LEVEL_OWNER);
+  $bot = getParamOrDie('bot');
 
-    $channelCoebotData = dbGetChannel($channel);
+  $channelCoebotData = dbGetChannel($channel);
 
-    if ($channelCoebotData['isActive'] == true) die("error: already joined");
+  if ($channelCoebotData['isActive'] == true) {
+    throw400("That channel is already joined by " . $channelCoebotData['botChannel']
+      . "! Only one instance of CoeBot can be in a channel at a time.");
+  }
 
-    $botSession = BotSession::getBotSession($bot, $channel, $_SESSION['channel']);
-    $botSession->doJoin();
-    $botSession->finalize();
+  $botSession = BotSession::getBotSessionCurrentUser($bot, $channel);
+  $botSession->doJoin();
+  $botSession->finalize();
 
-    header('refresh: 3;url=' . getUrlToChannel($channel));
-    printHead("Processing...");
-    printNav('', true);
+  header('refresh: 3;url=' . getUrlToChannel($channel));
+  printHead("Processing...");
+  printNav('', true);
 
-    ?>
+  ?>
 
     <div class="container">
       <div class="row">
@@ -43,45 +55,125 @@ if ($_GET['a'] == "join" && isset($_GET['channel']) && isset($_GET['bot'])) {
       </div>
     </div>
 
-    <?php
+  <?php
 
-    printFooter();
-    printFoot();
-    die();
+  printFooter();
+  printFoot();
+  die();
 
-  } else {
-    die("error: unauthorized");
+
+
+} else if ($action == "part") {
+
+  $channel = getChannelWithAuthOrDie($USER_ACCESS_LEVEL_OWNER);
+
+  $channelCoebotData = dbGetChannel($channel);
+
+  if ($channelCoebotData['isActive'] == false) {
+    die("Channel was already parted");
+  }
+  $bot = $channelCoebotData['botChannel'];
+
+  $botSession = BotSession::getBotSessionCurrentUser($bot, $channel);
+  $botSession->doPart();
+  $botSession->finalize();
+
+  die("success");
+
+
+
+} else if ($action == "setCommand") {
+
+  $channel = getChannelWithAuthOrDie($USER_ACCESS_LEVEL_MOD);
+  $name = getParamOrDie('name');
+  $oldName = getParam('oldName');
+  $response = getParamOrDie('response');
+  $restriction = getParamOrDie('restriction');
+
+  if ($restriction != "everyone"
+      && $restriction != "regular"
+      && $restriction != "mod"
+      && $restriction != "owner") {
+    die("invalid parameter (restriction)");
   }
 
+  $channelCoebotData = dbGetChannel($channel);
 
+  $bot = $channelCoebotData['botChannel'];
 
-} else if ($_GET['a'] == "part" && isset($_GET['channel'])) {
+  $botSession = BotSession::getBotSessionCurrentUser($bot, $channel);
 
-  $channel = $_GET['channel'];
-
-  if (!validateChannel($channel)) die("error: bad param");
-
-  if (getUserAccessLevel($channel) >= $USER_ACCESS_LEVEL_OWNER) {
-
-    $channelCoebotData = dbGetChannel($channel);
-
-    if ($channelCoebotData['isActive'] == false) die("error: already left");
-    $bot = $channelCoebotData['botChannel'];
-
-    $botSession = BotSession::getBotSession($bot, $channel, $_SESSION['channel']);
-    $botSession->doPart();
-    $botSession->finalize();
-
-    die("success");
-
-  } else {
-    die("error: unauthorized");
+  if ($oldName != NULL && $oldName != "" && $oldName != $name) {
+    $botSession->doCommandRename($oldName, $name);
   }
+
+  $botSession->doCommandAdd($name, $response);
+  $botSession->doCommandRestrict($name, $restriction);
+
+  $botSession->finalize();
+
+  die("success");
 
 
 
 } else {
-  die("error: bad action");
+  die("bad action");
+}
+
+
+
+
+
+
+function getChannelWithAuthOrDie($userAccessLevel) {
+
+  $channel = $_GET['channel'];
+
+  if (!validateChannel($channel)) {
+    die("invalid parameter (channel)");
+    return NULL;
+  }
+
+  if (getUserAccessLevel($channel) < $userAccessLevel) {
+    die("you are not authorized to edit this channel");
+    return NULL;
+  }
+
+  return $channel;
+}
+
+
+function getParam($name) {
+  global $httpMethod;
+
+  if ($httpMethod == "GET") {
+
+    if (!isset($_GET[$name])) {
+      return NULL;
+    }
+
+    return $_GET[$name];
+
+  } else if ($httpMethod == "POST") {
+
+    if (!isset($_POST[$name])) {
+      return NULL;
+    }
+
+    return $_POST[$name];
+  }
+
+  return NULL;
+}
+
+function getParamOrDie($name) {
+  $param = getParam($name);
+
+  if ($param === NULL) {
+    die("Missing parameter");
+  }
+
+  return $param;
 }
 
 ?>

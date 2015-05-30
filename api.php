@@ -72,6 +72,20 @@ if (count($q) > 0 && $q[0] == "v1") {
         }
 
 
+    } else if (count($q) > 1 && $q[1] == 'reqsongs') {
+
+        if (count($q) > 3 && $q[2] == 'list') {
+            apiReqsongsList($q);
+
+        } else if (count($q) > 3 && $q[2] == 'add') {
+            apiReqsongsAdd($q);
+
+        } else {
+            tellBadMethod();
+
+        }
+
+
     } else {
         tellBadMethod();
         
@@ -88,6 +102,63 @@ if (count($q) > 0 && $q[0] == "v1") {
 /***************
  * API METHODS
  **************/
+
+function apiReqsongsAdd($query) {
+
+    authOrDie($query, AUTH_SHARED_SECRET);
+
+    $channel = channelOrDie($query);
+    requirePostParams(array("url", "requestedBy"));
+
+    $url = $_POST['url'];
+    $requestedBy = $_POST['requestedBy'];
+
+    // weakish url checking
+    $parsedUrl = parse_url($url);
+
+    if (!$parsedUrl
+        || !array_key_exists("scheme", $parsedUrl)
+        || !array_key_exists("host", $parsedUrl)
+        || !array_key_exists("path", $parsedUrl)) {
+        tellBadParam("url");
+    }
+    $parsedUrl["host"] = strtolower($parsedUrl["host"]);
+
+    if (stripos(strrev($parsedUrl["host"]), "moc.ebutuoy") !== 0
+        && stripos(strrev($parsedUrl["host"]), "eb.utuoy") !== 0) {
+        tellBadParam("url");
+    }
+
+    // validate the requestedBy twitch name
+    if (!validateChannel($requestedBy)) {
+        tellBadParam("requestedBy");
+    }
+
+    $reqsong = dbCreateReqsong($channel, $url, $requestedBy);
+
+    if (!$reqsong) {
+        tellError("database error", 500);
+    }
+
+    //$response = array('reqsongs' => $reqsongs);
+
+    tellSuccess();
+}
+
+function apiReqsongsList($query) {
+
+    $channel = channelOrDie($query);
+
+    $reqsongs = dbListReqsongs($channel);
+
+    if ($reqsongs === NULL) {
+        tellError("database error", 500);
+    }
+
+    $response = array('reqsongs' => $reqsongs);
+
+    tellSuccess($response);
+}
 
 function apiVars($query) {
 

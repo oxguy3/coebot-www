@@ -237,9 +237,26 @@ function randString($length, $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmno
     return $str;
 }
 
+function throw400($message = NULL) {
+  header("HTTP/1.0 400 Bad Request");
+  $httpStatusCode = 400;
+  if ($messsage !== NULL) {
+    $httpStatusMessage = $message;
+  }
+  include_once("error.php");
+  die();
+}
+
 function throw404() {
   header("HTTP/1.0 404 Not Found");
   $httpStatusCode = 404;
+  include_once("error.php");
+  die();
+}
+
+function throw403() {
+  header("HTTP/1.0 403 Forbidden");
+  $httpStatusCode = 403;
   include_once("error.php");
   die();
 }
@@ -800,6 +817,71 @@ function dbIncrementVar($channel, $varName, $incAmount=0) {
     }
 }
 
+/**
+ * Creates a row for a new reqsong in the database
+ *
+ * Returns true if successful, or false if an error occurred
+ */
+function dbCreateReqsong($channel, $url, $requestedBy) {
+    global $mysqli;
+    initMysqli();
+
+    $dateAdded = time();
+
+    $sql = 'INSERT INTO ' . DB_PREF . 'reqsongs (channel, url, requestedBy, dateAdded) VALUES (?, ?, ?, ?)';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        throw500();
+        return false;
+    }
+
+    $stmt->bind_param('sssi', $channel, $url, $requestedBy, $dateAdded);
+
+    $success = $stmt->execute();
+    $stmt->close();
+
+    return $success;
+}
+
+/**
+ * Returns array of reqsongs for a channel, or NULL if an error occurred
+ */
+function dbListReqsongs($channel, $limit=10) {
+    global $mysqli;
+    initMysqli();
+
+    $sql = 'SELECT id, url, requestedBy, dateAdded FROM ' . DB_PREF . 'reqsongs WHERE channel=? LIMIT ?';
+
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        throw500();
+        return false;
+    }
+
+    $stmt->bind_param('si', $channel, $limit);
+
+    $success = $stmt->execute();
+
+    if ($success === false) {
+        throw500();
+        return false;
+    }
+
+    $stmt->bind_result($id, $url, $requestedBy, $dateAdded);
+
+    $reqsongs = array();
+    while ($stmt->fetch()) {
+        $rs = (object) array();
+        $rs->id = $id;
+        $rs->url = $url;
+        $rs->requestedBy = $requestedBy;
+        $rs->dateAdded = $dateAdded;
+        $reqsongs[] = $rs;
+    }
+
+    return $reqsongs;
+}
+
 
 
 
@@ -907,6 +989,16 @@ class BotSession {
             );
     }
 
+    // gets a bot session with the logged in user as editor
+    static function getBotSessionCurrentUser($botChannel, $channel) {
+
+        if (!isLoggedIn()) {
+            return NULL;
+        }
+
+        return BotSession::getBotSession($botChannel, $channel, $_SESSION['channel']);
+    }
+
     function finalize() {
         if (count($this->actions) == 0) {
             return false;
@@ -940,10 +1032,10 @@ class BotSession {
         return $this->addAction("part", array());
     }
 
-    function doCommandAdd($name, $value) {
+    function doCommandAdd($name, $response) {
         return $this->addAction("add command", array(
             "key" => $name,
-            "value" => $value
+            "value" => $response
             ));
     }
 
@@ -998,6 +1090,12 @@ function logUserOut() {
 
 function isLoggedIn() {
     return isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true;
+}
+
+function requireLoggedIn() {
+    if (!isLoggedIn()) {
+      throw400("You must be logged in to do that.");
+    }
 }
 
 // N.B. should always match up with the same list in common.js!!!
