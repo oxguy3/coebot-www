@@ -184,11 +184,20 @@ function displayChannelSettings() {
                     });
                     setTimeout(function() { location.reload();}, 3000);
                 } else {
-                    alert(txt);
+                    Messenger().post({
+                      message: "Error: " + txt,
+                      type: 'error'
+                    });
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                alert("Failed to leave!");
+                Messenger().post({
+                  message: "A connection error occurred.",
+                  type: 'error'
+                });
+            },
+            complete: function(jqXHR, textStatus) {
+                $btn.button('reset');
             }
         });
 
@@ -240,12 +249,55 @@ function displayChannelCommands() {
         var modalTitle = button.data('modaltitle');
 
         var modal = $(this);
-        $('#commandAddModalCommand').val(command);
+        $('#commandAddModalName').val(command);
+        $('#commandAddModalOldName').val(command);
         var accessLevelLabel = $('.js-commands-addmodal-accesslevel label.level' + accessLevel);
         accessLevelLabel.addClass('active');
         accessLevelLabel.find('input').attr("checked", true);
         $('#commandAddModalResponse').val(response);
         $('#commandAddModalLabel').text(modalTitle);
+    });
+
+    $('#commandAddModalSave').click(function(e) {
+
+        var $btn = $(this).button('loading');
+
+        $.ajax({
+            data: {
+                a: "setCommand",
+                channel: channel,
+                name: $('#commandAddModalName').val(),
+                oldName: $('#commandAddModalOldName').val(),
+                response: $('#commandAddModalResponse').val(),
+                restriction: $('input:checked', '#commandAddModalAccessLevel').val()
+            },
+            dataType: "text",
+            url: "/botaction.php",
+            success: function(txt) {
+                if (txt == "success") {
+                    $btn.button('reset');
+                    Messenger().post({
+                      message: 'Command successfully modified!',
+                      type: 'success'
+                    });
+                } else {
+                    Messenger().post({
+                      message: "Error: " + txt,
+                      type: 'error'
+                    });
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                Messenger().post({
+                  message: "A connection error occurred.",
+                  type: 'error'
+                });
+            },
+            complete: function(jqXHR, textStatus) {
+                $btn.button('reset');
+            }
+        });
+
     });
 }
 
@@ -968,6 +1020,7 @@ function colorifyAccessLevel(access) {
 }
 
 function injectEmoticons(html) {
+    return html; //TEMP FIX BECAUSE EVERYTHING BROKE
     html = htmlDecode(html);
     for (var i = 0; i < twitchEmotes.length; i++) {
         var emote = twitchEmotes[i];

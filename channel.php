@@ -12,10 +12,14 @@ if (!validateChannel($channel)) {
   throw404();
 }
 
+
+//if (getUserAccessLevel($_SESSION['channel']) > $USER_ACCESS_LEVEL_NONE) 
+
+
 $channelCoebotData = dbGetChannel($channel);
 
 if (!$channelCoebotData || $channelCoebotData['isActive'] == false) {
-  if (isLoggedIn() && getUserAccessLevel($_SESSION['channel']) >= $USER_ACCESS_LEVEL_OWNER) {
+  if (getUserAccessLevel($channel) >= $USER_ACCESS_LEVEL_OWNER) {
 
     printHead("Join CoeBot?");
     printNav('', true);
@@ -49,7 +53,7 @@ if (!$channelCoebotData || $channelCoebotData['isActive'] == false) {
     die();
 
   } else {
-    throw404();
+    throw403();
   }
 }
 
@@ -261,48 +265,47 @@ printNav('', true);
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="commandAddModalLabel">Set command</h4>
-                </div>
-                <form action="/crap.php?a=post" method="post">
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="commandAddModalCommand">Command</label>
-                      <div class="input-group">
-                        <span class="input-group-addon command"></span>
-                        <input type="text" class="form-control" id="commandAddModalCommand" name="command">
-                      </div>
+              </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="commandAddModalCommand">Command</label>
+                    <div class="input-group">
+                      <span class="input-group-addon command"></span>
+                      <input type="text" class="form-control" id="commandAddModalName">
+                      <input type="hidden" class="form-control" id="commandAddModalOldName">
                     </div>
-                    <div class="form-group">
-                      <label style="display:block">Access level</label>
-                      <div class="btn-group js-commands-addmodal-accesslevel" data-toggle="buttons">
-                        <label class="btn btn-default level0">
-                          <input type="radio" name="accessLevel" value="0" autocomplete="off"> Everyone
-                        </label>
-                        <label class="btn btn-default level1">
-                          <input type="radio" name="accessLevel" value="1" autocomplete="off"> Regs <!-- TODO: Dynamically replace with "Subs" if necessary -->
-                        </label>
-                        <label class="btn btn-default level2">
-                          <input type="radio" name="accessLevel" value="2" autocomplete="off"> Mods
-                        </label>
-                        <label class="btn btn-default level3">
-                          <input type="radio" name="accessLevel" value="3" autocomplete="off"> Owners
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="commandAddModalResponse">Response</label>
-                      <input type="text" class="form-control" id="commandAddModalResponse" name="response">
-                    </div>
-<!--                     <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="isVisible" checked> Should command be publicly listed?
+                  </div>
+                  <div class="form-group">
+                    <label style="display:block">Access level</label>
+                    <div class="btn-group js-commands-addmodal-accesslevel" id="commandAddModalAccessLevel" data-toggle="buttons">
+                      <label class="btn btn-default level0">
+                        <input type="radio" name="accessLevel" value="everyone" autocomplete="off"> Everyone
                       </label>
-                    </div> -->
+                      <label class="btn btn-default level1">
+                        <input type="radio" name="accessLevel" value="regular" autocomplete="off"> Regs <!-- TODO: Dynamically replace with "Subs" if necessary -->
+                      </label>
+                      <label class="btn btn-default level2">
+                        <input type="radio" name="accessLevel" value="mod" autocomplete="off"> Mods
+                      </label>
+                      <label class="btn btn-default level3">
+                        <input type="radio" name="accessLevel" value="owner" autocomplete="off"> Owners
+                      </label>
+                    </div>
                   </div>
-                  <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <div class="form-group">
+                    <label for="commandAddModalResponse">Response</label>
+                    <input type="text" class="form-control" id="commandAddModalResponse" name="response">
                   </div>
-                </form>
+<!--                   <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="isVisible" checked> Should command be publicly listed?
+                    </label>
+                  </div> -->
+                </div>
+                <div class="modal-footer">
+                  <button id="commandAddModalSave" class="btn btn-primary">Save</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
               </div>
             </div>
           </div>
