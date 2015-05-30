@@ -108,11 +108,11 @@ function queryTwitchStreams(channels, callback) {
         url: "https://api.twitch.tv/kraken/streams",
         success: function(json) {
             console.log("Loaded Twitch streams: " + channels);
-            callback(json);
+            callback(json, channels);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Failed to load Twitch streams: " + channels);
-            callback(false);
+            callback(false, channels);
         }
     });
 
@@ -127,15 +127,19 @@ function getLiveStatus(stream) {
 }
 
 function stringifyChannels() {
-    var str = '';
+    var str = [];
+    var CHANCT = 200;
     for (var i = 0; i < coebotData.channels.length; i++) {
-        str += coebotData.channels[i].channel + ',';
+        if (i % CHANCT == 0) {
+            str[i/CHANCT] = "";
+        }
+        str[(i-(i%CHANCT))/CHANCT] += coebotData.channels[i].channel + ',';
     }
     return str;
 }
 
 // updates the indicator that shows if the channel is currently streaming
-function updateIsLive(streams) {
+function updateIsLive(streams, channels) {
 
     $('.js-islive').each(function(index){
         var current = $(this);
@@ -144,6 +148,8 @@ function updateIsLive(streams) {
         if (typeof currChannel === 'undefined' && typeof channel !== 'undefined') {
             currChannel = channel;
         }
+
+        if (typeof channels === 'string' && !channels.includes(currChannel + ",")) return;
 
         var stream = findChannelInStreams(streams, currChannel);
         var liveStatus = getLiveStatus(stream);

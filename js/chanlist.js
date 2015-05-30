@@ -32,17 +32,19 @@ function displayListChannels() {
 
 
 function checkIfLiveAll() {
-    checkIfLive(channelsStr, handleAllIsLive);
+    for (var i = 0; i < channelsStr.length; i++) {
+        checkIfLive(channelsStr[i], handleAllIsLive);
+    }
 }
 
-function handleAllIsLive(json) {
+function handleAllIsLive(json, channels) {
     if (!json) {
         alert("Failed to load Twitch stream data!");
         allStreamData = false;
     } else {
         allStreamData = json.streams;
     }
-    updateIsLive(json.streams);
+    updateIsLive(json.streams, channels);
     moveLiveToTop();
 }
 

@@ -4,6 +4,11 @@ var channelsStr = false;
 
 var isFirstUpdate = true;
 
+var totalLive = 0;
+var totalViewers = 0;
+
+var currLiveIndex = 0;
+
 
 function createWhosliveCarousel() {
     $("#carousel-whoslive").html($("#carousel-whoslive").html()); // remove all js listeners and such
@@ -23,7 +28,10 @@ function createWhosliveCarousel() {
 }
 
 function checkIfLiveAll() {
-    checkIfLive(channelsStr, handleAllIsLive);
+    for (var i = 0; i < channelsStr.length; i++) {
+        checkIfLive(channelsStr[i], handleAllIsLive);
+    }
+    
 }
 
 function handleAllIsLive(json) {
@@ -41,9 +49,9 @@ function handleAllIsLive(json) {
     var carouselContainer = $('.js-whoslive-carousel');
     var carousel = "";
 
-    var currLiveIndex = 0;
+    //var currLiveIndex = 0;
 
-    var totalViewers = 0;
+    var cumulViewers = 0;
 
     for (var i = 0; i < coebotData.channels.length; i++) {
         var chan = coebotData.channels[i];
@@ -54,7 +62,7 @@ function handleAllIsLive(json) {
         if (chan.isActive && liveStatus == isLiveOn) {
             var li = '';
             li += '<a href="#carousel-whoslive" data-slide-to="' + currLiveIndex;
-            li += '" class="list-group-item' + (list=="" ? ' active' : '') + '">';
+            li += '" class="list-group-item' + (currLiveIndex == 0 ? ' active' : '') + '">';
             
             li += chan.displayName;
             
@@ -93,7 +101,7 @@ function handleAllIsLive(json) {
             carousel += ci;
 
             if (typeof stream.viewers !== 'undefined') {
-                totalViewers += stream.viewers;
+                cumulViewers += stream.viewers;
             }
 
             currLiveIndex++;
@@ -106,9 +114,11 @@ function handleAllIsLive(json) {
     } else {
         parent.css("display", "block");
     }
-    listContainer.html(list);
-    carouselContainer.html(carousel);
+    listContainer.append(list);
+    carouselContainer.append(carousel);
 
+    //totalLive += currLiveIndex;
+    totalViewers += cumulViewers;
     $('.js-totalChannels').html(Humanize.intComma(currLiveIndex));
     $('.js-totalViewers').html(Humanize.intComma(totalViewers));
 
