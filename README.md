@@ -1,5 +1,5 @@
 # coebot-www
-A web interface for [Coebot](https://bitbucket.org/tucker_gardner/coebot), a Twitch.tv chat moderation bot.
+A web interface for [CoeBot](https://bitbucket.org/tucker_gardner/coebot), a Twitch.tv chat moderation bot.
 
 ## Installation
 This site is still very early in development so I'm not gonna bother writing detailed install instructions that might change dramatically later, but it's mostly just a standard AMP (Apache/MySQL/PHP) application. Put the files on an Apache server with PHP and enable .htaccess files or copy the contents of the .htaccess file to your Apache config file.
@@ -22,15 +22,13 @@ define(DB_HIGHLIGHTS_USER, "<mysql username>");
 define(DB_HIGHLIGHTS_PASS, "<mysql password>");
 define(DB_HIGHLIGHTS_DATA, "<mysql database name>");
 
-$TEMP_AUTH_KEY = "<a very confidential string of characters>";
-
 ?>
 ```
 
 The site is in pretty rapid development right now and this version of the file is going to become outdated (in fact, it already is); please contact me if you need help with this.
 
 ## Private API
-This site uses a private API to communicate with Coebot. This API is still in planning and is rapidly evolving (do not assume currently existing endpoints will exist indefinitely), but the specification so far is available [here](https://docs.google.com/document/d/1tQNETtRvTuSdGKEep57yuO_8J_YfjS5J3--Q6vH0Rcc/edit?usp=sharing).
+This site uses a private API to communicate with CoeBot. This API is still in planning and is rapidly evolving (do not assume currently existing endpoints will exist indefinitely), but the specification so far is available [here](https://docs.google.com/document/d/1tQNETtRvTuSdGKEep57yuO_8J_YfjS5J3--Q6vH0Rcc/edit?usp=sharing). The source code of api.php is considered more canonical than this document for the time being however.
 
 ## License
 CoeBot.tv: A website for CoeBot, the Twitch chat moderation bot
@@ -51,6 +49,3 @@ The full text of the license can be found in the file LICENSE,
 or at [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html).
 
 *The original code for the "highlight that" functionality is Copyright (C) 2014 Stijn Van Baekel (stinusmeret)
-
-## Issue tracker
-Since I'm the only person working on this project for the most part, I have opted to use todo.md to track my issues, as I tend to lose patience for GitHub issues. However, I will also keep an eye on GitHub's issue tracker, so you can submit bugs/suggestions/etc via GitHub.
