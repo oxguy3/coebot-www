@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `site_bots` (
   `accessType` enum('OFFICIAL','PUBLIC','PRIVATE') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `channel` (`channel`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `site_channels` (
   `shouldShowBoir` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `channel` (`channel`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1275 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `site_reqsongs` (
   `requestedBy` varchar(32) NOT NULL,
   `dateAdded` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 -- --------------------------------------------------------
 
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `site_users` (
   `lastLogin` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `channel` (`channel`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1211 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `site_vars` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `channel_2` (`channel`,`var`),
   FULLTEXT KEY `channel` (`channel`,`var`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 --
 -- Database: `coebrmei_highlights`
 --
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `highlights` (
   `comment` text NOT NULL,
   `type` enum('stream started','highlight','stream ended') NOT NULL DEFAULT 'highlight',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54676 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
