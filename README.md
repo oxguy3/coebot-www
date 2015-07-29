@@ -2,7 +2,7 @@
 A web interface for [CoeBot](https://bitbucket.org/tucker_gardner/coebot), a Twitch.tv chat moderation bot.
 
 ## Installation
-This site is still very early in development so I'm not gonna bother writing detailed install instructions that might change dramatically later, but it's mostly just a standard AMP (Apache/MySQL/PHP) application. Put the files on an Apache server with PHP and enable .htaccess files or copy the contents of the .htaccess file to your Apache config file.
+This site is still very early in development so I'm not gonna bother writing detailed install instructions that might change dramatically later, but it's mostly just a standard AMP (Apache/MySQL/PHP) application. Put the files on an Apache server with PHP and enable .htaccess files or copy the contents of the .htaccess file to your Apache config file. The database structure can be rebuilt using the file dbstructure.sql (which I will do my best to keep up to date).
 
 You might notice that one particular file is missing. To keep secret data safe, I put confidential details in a file called safeconfig.php that isn't posted to GitHub. Here's what that file looks like so that you can recreate it:
 
