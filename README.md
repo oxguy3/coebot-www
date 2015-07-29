@@ -22,6 +22,15 @@ define(DB_HIGHLIGHTS_USER, "<mysql username>");
 define(DB_HIGHLIGHTS_PASS, "<mysql password>");
 define(DB_HIGHLIGHTS_DATA, "<mysql database name>");
 
+// twitch api keys
+define(TWITCH_CLIENT_SECRET, "<twitch api client secret>");
+define(TWITCH_CLIENT_ID, "<twitch api client id>");
+define(TWITCH_REDIRECT_URI, "http://coebot.tv/twitchconnect.php"); // change "coebot.tv" to your domain name
+define(TWITCH_REQUIRED_SCOPES, "user_read"); // shouldn't need to change this
+
+// twitch usernames (all lowercase) of anyone who should have admin powers on the website
+$GLOBAL_ADMINS = array('itsoxguy3', 'endsgamer');
+
 ?>
 ```
 
