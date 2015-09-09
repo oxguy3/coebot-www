@@ -100,7 +100,7 @@ printNav();
         
         <div class="col-md-3 col-sm-4 col-xs-6 text-center">
           <h2><?php echo dbCountBots(); ?></h2>
-          <p class="lead">bot(s) active</p>
+          <p class="lead">bots active</p>
         </div>
         
         <div class="col-md-3 col-sm-4 col-xs-6 text-center">

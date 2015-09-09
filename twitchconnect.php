@@ -13,6 +13,10 @@ if (isset($_GET["logout"])) {
   die('logged out');
 }
 
+if (!isset($_GET['code'])) {
+  throw400();
+}
+
 $code = $_GET['code'];
 
 $loginResult = twitchGetAccessToken($code);
@@ -32,7 +36,7 @@ if (!$userData) {
 $uid = dbSetUser($userData->name, true, $twitchAccessToken);
 
 if ($uid === false) {
-  die("Database error, contact site administrator");
+  throw500("Database error, contact site administrator");
 }
 
 logUserIn($userData->name, $uid);

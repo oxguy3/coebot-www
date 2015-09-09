@@ -37,3 +37,4 @@ RewriteRule ^highlights/add/([^.]+)?$ http://oldhl.coebot.tv/highlights/add/$1 [
 RewriteRule ^highlights/view/(\w+)/([^.]+)?$ /c/$1#highlights/$2 [L,R,NE]
 
 RewriteRule ^highlights/(\w+)/?$ /c/$1#highlights [L,R,NE]
+
