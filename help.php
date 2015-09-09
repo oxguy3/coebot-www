@@ -79,6 +79,21 @@ printNav('help');
           </div>
         </div>
 
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingArtCredit">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#faqAccordion" href="#questionArtCredit" aria-expanded="false" aria-controls="questionArtCredit">
+                Q: Who makes your art?
+              </a>
+            </h4>
+          </div>
+          <div id="questionArtCredit" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingArtCredit">
+            <div class="panel-body">
+              The original imagery of CoeBot as a robot was conceived by the marvelous <a href="https://twitter.com/ertzyl" target="_blank">ertzyl</a>, who incidentally also designed our Twitter profile picture. Our <a href="http://coebot.tv/img/coebotsketch_1080.png">403 forbidden page art</a> was created by the dastardly <a href="https://twitter.com/coestar" target="_blank">Coestar</a>, during one of <a href="https://twitch.tv/coestar" target="_blank">his #SketchADay streams</a>. Coestar also made the <a href="https://twitchemotes.com/emote/17242" target="_blank">coeBot emote</a>, which is used for CoeBot's message bullet and for the favicon on this site. Our <a href="http://ryuski.deviantart.com/art/Coebot-tv-404-Art-512992689">404 page art</a> was created by the stupendous <a href="https://twitter.com/xxryuskixx" target="_blank">ryuski</a>. Lots of love as well to everyone else who has made fan art of CoeBot over the years; you guys are the best! &lt;3
+            </div>
+          </div>
+        </div>
+
 <!--         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingDifferentTwitchName">
             <h4 class="panel-title">
