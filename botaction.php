@@ -1,7 +1,6 @@
 <?php
 
 require_once('common.php');
-require_once('Pusher.php');
 
 requireLoggedIn();
 
@@ -19,8 +18,6 @@ if (isset($_GET['a'])) {
 } else {
   throw400("Your request did not specify an action to perform.");
 }
-
-$action = $_GET['a'];
 
 
 
@@ -70,7 +67,7 @@ if ($action == "join") {
   $channelCoebotData = dbGetChannel($channel);
 
   if ($channelCoebotData['isActive'] == false) {
-    die("Channel was already parted");
+    respondMessage("Channel was already parted");
   }
   $bot = $channelCoebotData['botChannel'];
 
@@ -94,7 +91,7 @@ if ($action == "join") {
       && $restriction != "regular"
       && $restriction != "mod"
       && $restriction != "owner") {
-    die("invalid parameter (restriction)");
+    respondMessage("invalid parameter (restriction)");
   }
 
   $channelCoebotData = dbGetChannel($channel);
@@ -116,8 +113,64 @@ if ($action == "join") {
 
 
 
+} else if ($action == "delReqsong") {
+
+  $channel = getChannelWithAuthOrDie($USER_ACCESS_LEVEL_OWNER);
+  $id = getParamOrDie('id');
+
+  if (!is_numeric($id)) {
+    respondMessage("invalid parameter (id)");
+  }
+
+  if (!dbDeleteReqsong($channel, $id)) {
+    respondMessage("database error");
+  }
+
+  $response = array('status' => 'success');
+  $response['reqsongs'] = getReqsongsOrDie($channel);
+  respondJson($response);
+
+
+
+} else if ($action == "listReqsong") {
+
+  $channel = getChannelWithAuthOrDie($USER_ACCESS_LEVEL_OWNER);
+
+  $response = array('status' => 'success');
+  $response['reqsongs'] = getReqsongsOrDie($channel);
+  respondJson($response);
+
+
+
 } else {
-  die("bad action");
+  respondMessage("bad action");
+}
+
+
+
+
+
+function getReqsongsOrDie($channel) {
+
+  $reqsongs = dbListReqsongs($channel);
+
+  if ($reqsongs === NULL) {
+    respondMessage("database error");
+    return NULL;
+  } else {
+    return $reqsongs;
+  }
+}
+
+
+function respondJson($response) {
+  header('Content-type: application/json');
+  die(json_encode($response));
+}
+
+function respondMessage($message) {
+  $response = array('status' => $message);
+  respondJson($response);
 }
 
 
@@ -125,17 +178,17 @@ if ($action == "join") {
 
 
 
-function getChannelWithAuthOrDie($userAccessLevel) {
+function getChannelWithAuthOrDie($userAccessLevel, $useJson=false) {
 
-  $channel = $_GET['channel'];
+  $channel = getParam('channel');
 
   if (!validateChannel($channel)) {
-    die("invalid parameter (channel)");
+    respondMessage("invalid parameter (channel)");
     return NULL;
   }
 
   if (getUserAccessLevel($channel) < $userAccessLevel) {
-    die("you are not authorized to edit this channel");
+    respondMessage("not authorized");
     return NULL;
   }
 
@@ -170,7 +223,7 @@ function getParamOrDie($name) {
   $param = getParam($name);
 
   if ($param === NULL) {
-    die("Missing parameter");
+    respondMessage("missing parameter");
   }
 
   return $param;

@@ -111,11 +111,6 @@ printNav('', true);
                 <span class="sidebar-title" data-bigtitle="Overview">Overview</span>
               </a></li>
 
-              <li id="sidebarItemSettings" class="hidden"><a href="#tab_settings" class="js-sidebar-link">
-                <span class="sidebar-icon"><i class="icon-cog-alt icon-fw"></i></span>
-                <span class="sidebar-title" data-bigtitle="Settings">Settings</span>
-              </a></li>
-
               <li class="nav-sidebar-divider"></li>
 
               <li><a href="#tab_commands" class="js-sidebar-link">
@@ -168,6 +163,18 @@ printNav('', true);
                 <span class="sidebar-icon"><i class="icon-biblethump icon-fw"></i></span>
                 <span class="sidebar-title" data-bigtitle="<span class='visible-a1000-inline'>Binding of Isaac</span><span class='hidden-a1000'>BOI</span>: Rebirth">Binding of Isaac: Rebirth</span>
               </a></li>
+
+              <li class="nav-sidebar-divider"></li>
+
+              <li id="sidebarItemSettings" class="hidden"><a href="#tab_settings" class="js-sidebar-link">
+                <span class="sidebar-icon"><i class="icon-cog-alt icon-fw"></i></span>
+                <span class="sidebar-title" data-bigtitle="Settings">Settings</span>
+              </a></li>
+
+              <li id="sidebarItemReqsongs" class="hidden-if-experimental hidden"><a href="#tab_reqsongs" class="js-sidebar-link">
+                <span class="sidebar-icon"><i class="icon-music icon-fw"></i></span>
+                <span class="sidebar-title" data-bigtitle="Song requests">Song requests</span>
+              </a></li>
               
             </ul>
             <?php printFooter(); ?>
@@ -196,58 +203,6 @@ printNav('', true);
           <div class="js-channel-overview"></div>
         </div><!--/.tab-pane -->
         <script>displayChannelOverview()</script>
-
-
-        <div role="tabpanel" class="tab-pane fade" id="tab_settings">
-
-          <p><button id="settingsPartModalBtn" class="btn btn-danger" data-toggle="modal" data-target="#settingsPartModal">Leave</button></p>
-
-          <div class="modal fade" id="settingsPartModal" tabindex="-1" role="dialog" aria-labelledby="settingsPartModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="settingsPartModalLabel">Wait, don't go!</h4>
-                </div>
-                <div class="modal-body">
-                  Are you sure you want to remove CoeBot from your channel? You can always re-add CoeBot later, and all your settings will be saved.
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" id="settingsPartConfirmBtn" data-loading-text="Submitting...">Yes</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h4>The rest of this page doesn't work yet, sorry!</h4>
-          <div class="js-channel-settings">
-
-            <div class="settings-form-box">
-              <div class="form-group">
-                <!-- TODO: Will want to have a thingy that converts any steam ID to a STEAM64 ID to make things simpler for the user -->
-                <label for="settingsFormSetSteam">Steam64 ID</label>
-                <input type="text" class="form-control" id="settingsFormSetSteam" placeholder="e.g. 76561197996608666">
-              </div>
-            </div>
-
-            <div class="settings-form-box">
-              <div class="form-group">
-                <label for="settingsFormSetGamertag">Xbox Live Gamertag</label>
-                <input type="text" class="form-control" id="settingsFormSetGamertag" placeholder="e.g. Oxguy3">
-              </div>
-            </div>
-
-            <div class="settings-form-box">
-              <div class="form-group">
-                <label for="settingsFormSetLastfm">Last.fm username</label>
-                <input type="text" class="form-control" id="settingsFormSetLastfm" placeholder="e.g. oxguy3">
-              </div>
-            </div>
-
-          </div>
-        </div><!--/.tab-pane -->
-        <script>displayChannelSettings()</script>
 
 
         <div role="tabpanel" class="tab-pane fade" id="tab_commands">
@@ -562,6 +517,85 @@ printNav('', true);
           </div>
 
         </div><!--/.tab-pane -->
+
+
+
+        <div role="tabpanel" class="tab-pane fade" id="tab_settings">
+
+          <p><button id="settingsPartModalBtn" class="btn btn-danger" data-toggle="modal" data-target="#settingsPartModal">Leave</button></p>
+
+          <div class="modal fade" id="settingsPartModal" tabindex="-1" role="dialog" aria-labelledby="settingsPartModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="settingsPartModalLabel">Wait, don't go!</h4>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to remove CoeBot from your channel? You can always re-add CoeBot later, and all your settings will be saved.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="settingsPartConfirmBtn" data-loading-text="Submitting...">Yes</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4>More options coming soon...</h4>
+          <div class="js-channel-settings hidden">
+
+            <div class="settings-form-box">
+              <div class="form-group">
+                <!-- TODO: Will want to have a thingy that converts any steam ID to a STEAM64 ID to make things simpler for the user -->
+                <label for="settingsFormSetSteam">Steam64 ID</label>
+                <input type="text" class="form-control" id="settingsFormSetSteam" placeholder="e.g. 76561197996608666">
+              </div>
+            </div>
+
+            <div class="settings-form-box">
+              <div class="form-group">
+                <label for="settingsFormSetGamertag">Xbox Live Gamertag</label>
+                <input type="text" class="form-control" id="settingsFormSetGamertag" placeholder="e.g. Oxguy3">
+              </div>
+            </div>
+
+            <div class="settings-form-box">
+              <div class="form-group">
+                <label for="settingsFormSetLastfm">Last.fm username</label>
+                <input type="text" class="form-control" id="settingsFormSetLastfm" placeholder="e.g. oxguy3">
+              </div>
+            </div>
+
+          </div>
+        </div><!--/.tab-pane -->
+        <script>displayChannelSettings()</script>
+
+
+
+        <div role="tabpanel" class="tab-pane fade" id="tab_reqsongs">
+
+          <div class="col-md-4">
+            <div id="ytplayer-songreqs"></div>
+          </div>
+
+          <div class="col-md-8">
+            <table class="table table-striped js-reqsongs-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Duration</th>
+                  <th>Requested by</th>
+                  <th class="js-reqsongs-deletecol"></th>
+                </tr>
+              </thead>
+              <tbody class="js-reqsongs-tbody"></tbody>
+            </table>
+          </div>
+        </div><!--/.tab-pane -->
+        <script>displayChannelReqsongs()</script>
+
+
 
       </div>
       <script>tabContentLoaded();</script>

@@ -88,7 +88,7 @@ if (count($q) > 0 && $q[0] == "v1") {
 
     } else {
         tellBadMethod();
-        
+
     }
 
 
@@ -397,14 +397,18 @@ function checkAuthFromRaw($query, $authMethod) {
 
 function checkAuthApiKey($auth, $botChannel, $channel) {
     //global $TEMP_AUTH_KEY;
-    if (!dbCheckBotAuth($botChannel, $auth)) return false;
+    if (isset($botChannel) && $botChannel != "*") {
+      if (!dbCheckBotAuth($botChannel, $auth)) return false;
+    } else {
+      if (!dbCheckApiuserAuth($auth, $channel)) return false;
+    }
 
     if ($channel === false) return false;
 
     $channelData = dbGetChannel($channel);
     if ($channelData === false) return false;
 
-    return ($channelData === NULL || !$channelData['isActive'] || $channelData['botChannel'] == $botChannel);
+    return $channelData === NULL || !$channelData['isActive'] || ($botChannel == "*" || $botChannel == $channelData['botChannel']);
 }
 
 function checkOauthToken($auth, $channel) {

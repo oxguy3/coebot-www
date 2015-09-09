@@ -1,6 +1,7 @@
 <?php
 
 require_once("safeconfig.php");
+require_once('Pusher.php');
 
 $SITE_TITLE = "CoeBot";
 $mysqli = false;
@@ -29,12 +30,12 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php 
+    <title><?php
 
     echo $SITE_TITLE;
-    if ($pageTitle) { 
+    if ($pageTitle) {
       echo " &bull; " . $pageTitle;
-    } 
+    }
 
     ?></title>
 
@@ -64,7 +65,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 
   </head>
   <body>
-    
+
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/moment.min.js"></script>
@@ -76,7 +77,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
     <script src="/js/common.js"></script>
     <?php
 
-    if (isset($_SESSION['showLoggedOut'])) { 
+    if (isset($_SESSION['showLoggedOut'])) {
         unset($_SESSION['showLoggedOut']);
         ?>
         <script>
@@ -88,7 +89,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
         <?php
     }
 
-    if (isset($_SESSION['showLoggedIn'])) { 
+    if (isset($_SESSION['showLoggedIn'])) {
         unset($_SESSION['showLoggedIn']);
         ?>
         <script>
@@ -107,7 +108,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 
   	<noscript>
       <h1>This site requires JavaScript!</h1>
-      <h2 class="text-muted">Please enable JavaScript in your web browser to view this site 
+      <h2 class="text-muted">Please enable JavaScript in your web browser to view this site
     </noscript>
 <?php
 }
@@ -173,18 +174,18 @@ function printFooter() {
 ?>
 <footer class="footer-normal text-muted">
     <span class="footer-section">
-        Site by <a class="footer-link" href="http://haydenschiff.me" target="_blank" title="Hayden Schiff">oxguy3</a> 
+        Site by <a class="footer-link" href="http://haydenschiff.me" target="_blank" title="Hayden Schiff">oxguy3</a>
         <a href="https://github.com/oxguy3/coebot-www" class="btn btn-xs btn-default footer-srccodelink"
         data-toggle="tooltip" title="Source on GitHub" target="_blank">
             <i class="icon-github-circled"></i>
-        </a> 
+        </a>
     </span>
     <span class="footer-section">
         Bot by <a class="footer-link" href="https://twitter.com/endsgamer" target="_blank">endsgamer</a>
         <a href="https://bitbucket.org/tucker_gardner/coebot" class="btn btn-xs btn-default footer-srccodelink"
         data-toggle="tooltip" title="Source on Bitbucket" target="_blank">
             <i class="icon-bitbucket"></i>
-        </a> 
+        </a>
     </span>
     <script>$('.footer-srccodelink').tooltip()</script>
 </footer>
@@ -240,7 +241,7 @@ function randString($length, $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmno
 function throw400($message = NULL) {
   header("HTTP/1.0 400 Bad Request");
   $httpStatusCode = 400;
-  if ($messsage !== NULL) {
+  if ($message !== NULL) {
     $httpStatusMessage = $message;
   }
   include_once("error.php");
@@ -273,25 +274,25 @@ function httpPost($url,$params)
 {
   $postData = '';
    //create name value pairs seperated by &
-   foreach($params as $k => $v) 
-   { 
-      $postData .= $k . '='.$v.'&'; 
+   foreach($params as $k => $v)
+   {
+      $postData .= $k . '='.$v.'&';
    }
    rtrim($postData, '&');
- 
-    $ch = curl_init();  
- 
+
+    $ch = curl_init();
+
     curl_setopt($ch,CURLOPT_URL,$url);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch,CURLOPT_HEADER, false); 
+    curl_setopt($ch,CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_POST, count($postData));
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);    
- 
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
     $output=curl_exec($ch);
- 
+
     curl_close($ch);
     return $output;
- 
+
 }
 
 
@@ -623,7 +624,39 @@ function dbCheckBotAuth($botChannel, $apiKey) {
 
     $success = $stmt->execute();
     $stmt->fetch();
-    
+
+    $stmt->close();
+
+    return $success && $savedKey == $apiKey;
+}
+
+/**
+ * Checks if an APIuser key is valid for a given channel and active
+ *
+ * Returns true if key is authenticated, or false if an error occurred
+ */
+function dbCheckApiuserAuth($apiKey, $channel) {
+    global $mysqli;
+    initMysqli();
+
+		$tblApiusers = DB_PREF . 'apiusers';
+		$tblApichannels = DB_PREF . 'apichannels';
+
+    $sql = "SELECT $tblApiusers.apiKey FROM $tblApiusers INNER JOIN $tblApichannels ON $tblApiusers.id=$tblApichannels.apiuserId WHERE $tblApiusers.apiKey=? AND $tblApichannels.channel=? AND $tblApiusers.isActive=?";
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        throw500();
+        return false;
+    }
+
+    $isActive = 1;
+
+    $stmt->bind_param('ssi', $apiKey, $channel, $isActive);
+    $stmt->bind_result($savedKey);
+
+    $success = $stmt->execute();
+    $stmt->fetch();
+
     $stmt->close();
 
     return $success && $savedKey == $apiKey;
@@ -844,6 +877,27 @@ function dbCreateReqsong($channel, $url, $requestedBy) {
 }
 
 /**
+ * Deletes a reqsong from the database
+ *
+ * Returns true if successful, or false if an error occurred (should use === when checking return value)
+ */
+function dbDeleteReqsong($channel, $id) {
+    global $mysqli;
+    initMysqli();
+    $sql = 'DELETE FROM ' . DB_PREF . 'reqsongs WHERE channel=? AND id=?';
+    $stmt = $mysqli->prepare($sql);
+    if ($stmt === false) {
+        throw500();
+        return false;
+    }
+    $stmt->bind_param('si', $channel, $id);
+    $success = $stmt->execute();
+    $retValue = ($success && $stmt->affected_rows == 0) ? NULL : $success;
+    $stmt->close();
+    return $retValue;
+}
+
+/**
  * Returns array of reqsongs for a channel, or NULL if an error occurred
  */
 function dbListReqsongs($channel, $limit=10) {
@@ -1032,6 +1086,13 @@ class BotSession {
         return $this->addAction("part", array());
     }
 
+		function doSay($message) {
+			 return $this->addAction("say", array(
+					 "message" => $message
+			  ));
+		}
+
+
     function doCommandAdd($name, $response) {
         return $this->addAction("add command", array(
             "key" => $name,
@@ -1108,12 +1169,12 @@ $USER_ACCESS_LEVEL_ADMIN = 99;
 
 // returns the logged in user's access level on a particular channel
 function getUserAccessLevel($channel) {
-    global $USER_ACCESS_LEVEL_NA, 
-    $USER_ACCESS_LEVEL_NONE, 
-    $USER_ACCESS_LEVEL_MOD, 
-    $USER_ACCESS_LEVEL_EDITOR, 
-    $USER_ACCESS_LEVEL_OWNER, 
-    $USER_ACCESS_LEVEL_ADMIN, 
+    global $USER_ACCESS_LEVEL_NA,
+    $USER_ACCESS_LEVEL_NONE,
+    $USER_ACCESS_LEVEL_MOD,
+    $USER_ACCESS_LEVEL_EDITOR,
+    $USER_ACCESS_LEVEL_OWNER,
+    $USER_ACCESS_LEVEL_ADMIN,
     $GLOBAL_ADMINS;
 
     if (!isLoggedIn()) {
