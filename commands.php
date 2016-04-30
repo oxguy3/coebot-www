@@ -330,11 +330,11 @@ printNav('commands');
 		    <dt><kbd class="command">vote &lt;option&gt;</kbd></dt>
 		    <dd>Votes for &lt;option&gt; in the poll.</dd>
 
-<!-- 		    <dt><kbd class="command">strawpoll &lt;question&gt;; &lt;first choice&gt;, &lt;second choice&gt;, &lt;nth choice&gt;</kbd></dt>
+ 		    <dt><kbd class="command">strawpoll &lt;question&gt;; &lt;first choice&gt;, &lt;second choice&gt;, &lt;nth choice&gt;</kbd></dt>
 		    <dd>Posts a strawpoll with the given question and choices.</dd>    
 
 		    <dt><kbd class="command">strawpoll results</kbd></dt>
-		    <dd>Retrieves the results of the last strawpoll.</dd>   --> 
+		    <dd>Retrieves the results of the last strawpoll.</dd>
 		  </dl>
 
 
@@ -785,6 +785,30 @@ printNav('commands');
 
 		    <dt><kbd>(_ONLINE_CHECK_)</kbd></dt>
 		    <dd>Adding this to any command will prevent the command from running if the streamer isn't live.</dd>
+
+		    <dt><kbd>(_SUBMODE_ON_)</kbd></dt>
+        	    <dd>Puts the chat into subscribers-only mode.</dd>
+
+        	    <dt><kbd>(_SUBMODE_OFF_)</kbd></dt>
+        	    <dd>Takes the chat out of subscribers-only mode.</dd>
+
+        	    <dt><kbd>(_GAME_IS_&lt;GAME&gt;_)</kbd></dt>
+        	    <dd>Only runs the command when the Twitch game title is set to &lt;GAME&gt;. Use hyphens in place of spaces. e.g. <kbd>(_GAME_IS_Rocket-League_)</kbd></dd>
+
+        	    <dt><kbd>(_GAME_IS_NOT_&lt;GAME&gt;_)</kbd></dt>
+        	    <dd>Only runs the command when the Twitch game title is not set to &lt;GAME&gt;. Use hyphens in place of spaces. e.g. <kbd>(_GAME_IS_NOT_League-of-Legends_)</kbd></dd>
+
+		    <dt><kbd>(_HOST_&lt;CHANNEL&gt;_)</kbd></dt>
+        	    <dd>Host the channel given by &lt;CHANNEL&gt;</dd>        
+
+        	    <dt><kbd>(_UNHOST_)</kbd></dt>
+        	    <dd>Exits host mode.</dd>
+
+        	    <dt><kbd>(_RANDOM_&lt;MIN&gt;_&lt;MAX&gt;_)</kbd></dt>
+        	    <dd>Returns a random number between &lt;MIN&gt; and &lt;MAX&gt; with up to one decimal place</dd>     
+
+        	    <dt><kbd>(_RANDOM_INT_&lt;MIN&gt;_&lt;MAX&gt;_)</kbd></dt>
+        	    <dd>Returns a random integer (whole number) between &lt;MIN&gt; and &lt;MAX&gt;</dd>     
 
 		    <dt><kbd>(_&lt;COMMANDNAME&gt;_COUNT_)</kbd></dt>
 		    <dd>Returns the number of times the &lt;command&gt; has been called.</dd>
