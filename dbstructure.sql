@@ -1,37 +1,18 @@
--- phpMyAdmin SQL Dump
--- version 4.0.10.7
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Sep 09, 2015 at 05:52 PM
--- Server version: 5.5.32-cll-lve
--- PHP Version: 5.4.23
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
---
--- Database: `coebrmei_coebotsite`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `site_apichannels`
---
 
 CREATE TABLE IF NOT EXISTS `site_apichannels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `apiuserId` int(11) NOT NULL,
   `channel` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `site_apiusers`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `site_apiusers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -39,13 +20,7 @@ CREATE TABLE IF NOT EXISTS `site_apiusers` (
   `isActive` bit(1) NOT NULL,
   `description` tinytext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `site_bots`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `site_bots` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -58,13 +33,7 @@ CREATE TABLE IF NOT EXISTS `site_bots` (
   `accessType` enum('OFFICIAL','PUBLIC','PRIVATE') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `channel` (`channel`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `site_channels`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `site_channels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -78,13 +47,7 @@ CREATE TABLE IF NOT EXISTS `site_channels` (
   `shouldShowBoir` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `channel` (`channel`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1737 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `site_reqsongs`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `site_reqsongs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -93,13 +56,7 @@ CREATE TABLE IF NOT EXISTS `site_reqsongs` (
   `requestedBy` varchar(32) NOT NULL,
   `dateAdded` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `site_users`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `site_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -109,13 +66,7 @@ CREATE TABLE IF NOT EXISTS `site_users` (
   `lastLogin` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `channel` (`channel`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1771 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `site_vars`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `site_vars` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -127,16 +78,7 @@ CREATE TABLE IF NOT EXISTS `site_vars` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `channel_2` (`channel`,`var`),
   FULLTEXT KEY `channel` (`channel`,`var`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=143 ;
---
--- Database: `coebrmei_highlights`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `highlights`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `highlights` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -145,4 +87,8 @@ CREATE TABLE IF NOT EXISTS `highlights` (
   `comment` text NOT NULL,
   `type` enum('stream started','highlight','stream ended') NOT NULL DEFAULT 'highlight',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58452 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
