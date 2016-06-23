@@ -154,56 +154,6 @@ function displayChannelOverview() {
     ref.html(html);
 }
 
-function displayChannelSettings() {
-
-    if (userAccessLevel >= USER_ACCESS_LEVEL_MOD) {
-        $('#sidebarItemSettings').removeClass('hidden');
-    }
-
-    if (userAccessLevel >= USER_ACCESS_LEVEL_OWNER) {
-        $('#settingsPartModalBtn').removeClass('hidden');
-    }
-
-    $('#settingsPartConfirmBtn').click(function(e) {
-
-        var $btn = $(this).button('loading');
-
-        $.ajax({
-            data: {
-                a: "part",
-                channel: channel
-            },
-            dataType: "text",
-            url: "/botaction.php",
-            success: function(txt) {
-                if (txt == "success") {
-                    $btn.button('reset');
-                    Messenger().post({
-                      message: 'Sent leave request! Page will refresh in 3 seconds...',
-                      type: 'success'
-                    });
-                    setTimeout(function() { location.reload();}, 3000);
-                } else {
-                    Messenger().post({
-                      message: "Error: " + txt,
-                      type: 'error'
-                    });
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                Messenger().post({
-                  message: "A connection error occurred.",
-                  type: 'error'
-                });
-            },
-            complete: function(jqXHR, textStatus) {
-                $btn.button('reset');
-            }
-        });
-
-    });
-}
-
 function displayChannelCommands() {
 	var tbody = $('.js-commands-tbody');
 	var rows = "";
@@ -211,7 +161,7 @@ function displayChannelCommands() {
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
 		var row = '<tr class="row-command row-command-access-' + cmd.restriction +'">';
-        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + cleanHtmlAttr(cmd.value) + '" data-modaltitle="Edit command"><i class="icon-pencil"></i></span></td>';
+        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + cleanHtmlAttr(cmd.value) + '" data-modaltitle="Edit command"><i class="icon-pencil"></i><span class="sr-only">Edit</span></span></td>';
 		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
         row += '<td class="row-command-col-access" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
         row += '<td class="should-be-linkified should-be-emotified">' + prettifyStringVariables(cmd.value) + '</td>';
@@ -444,7 +394,7 @@ function displayChannelScheduled() {
         rows = '<tr><td colspan="2" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
         shouldSortTable = false;
     }
-    
+
     tbody.html(rows);
 
     if (shouldSortTable) {
@@ -496,7 +446,7 @@ function displayChannelChatrules() {
     // html += '<h3>Banned phrases</h3>'
 
     if (channelCoebotData.shouldShowOffensiveWords && channelData.filterOffensive) {
-    
+
         var tbody = $('.js-chatrules_offensive-tbody');
         var rows = "";
         var shouldSortTable = true;
@@ -511,9 +461,9 @@ function displayChannelChatrules() {
             rows = '<tr><td colspan="1" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
             shouldSortTable = false;
         }
-    
+
         tbody.html(rows);
-    
+
         if (shouldSortTable) {
             $('.js-chatrules_offensive-table').dataTable({
                 "paging": false,
@@ -673,7 +623,7 @@ function showHlstream() {
     $('.js-hlstream-twitchlink').attr("href", getUrlForTwitchVod(channel, currentHlstream.id));
 
 
-    var playerVars = "title=" + currentHlstream.title + "&amp;channel=" + channel 
+    var playerVars = "title=" + currentHlstream.title + "&amp;channel=" + channel
     playerVars += "&amp;auto_play=false&amp;start_volume=100&amp;videoId=" + currentHlstream.id;
 
     var playerHtml = "";
@@ -947,6 +897,129 @@ function cleanBoirNameForComparison(name) {
     return name.replace(/['\s]/g, "").toLowerCase();
 }
 
+function displayChannelSettings() {
+
+    if (userAccessLevel >= USER_ACCESS_LEVEL_MOD) {
+        $('#sidebarItemSettings').removeClass('hidden');
+    }
+
+    if (userAccessLevel >= USER_ACCESS_LEVEL_OWNER) {
+        $('#settingsPartModalBtn').removeClass('hidden');
+    }
+
+    $('#settingsPartConfirmBtn').click(function(e) {
+
+        var $btn = $(this).button('loading');
+
+        $.ajax({
+            data: {
+                a: "part",
+                channel: channel
+            },
+            dataType: "json",
+            url: "/botaction.php",
+            success: function(data) {
+                if (data.status == "success") {
+                    $btn.button('reset');
+                    Messenger().post({
+                      message: 'Sent leave request! Page will refresh in 3 seconds...',
+                      type: 'success'
+                    });
+                    setTimeout(function() { location.reload();}, 3000);
+                } else {
+                    var errMsg = (typeof data.status !== 'undefined') ? data.status : data;
+                    Messenger().post({
+                      message: "Error: " + data.status,
+                      type: 'error'
+                    });
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                Messenger().post({
+                  message: "A connection error occurred.",
+                  type: 'error'
+                });
+            },
+            complete: function(jqXHR, textStatus) {
+                $btn.button('reset');
+            }
+        });
+
+    });
+}
+
+
+function displayChannelReqsongs() {
+
+    // if they aren't owner, they don't need to run this code
+    if (userAccessLevel < USER_ACCESS_LEVEL_OWNER) {
+        return;
+    }
+
+    $('#sidebarItemReqsongs').removeClass('hidden');
+
+    setInterval(updateReqsongs, 5000);
+
+
+
+}
+
+function updateReqsongs() {
+    $.ajax({
+        data: {
+            a: "listReqsong",
+            channel: channel
+        },
+        dataType: "json",
+        url: "/botaction.php",
+        success: function(data) {
+            if (data.status == "success") {
+                var reqsongs = data.reqsongs;
+
+                var tbody = $('.js-reqsongs-tbody');
+                var rows = "";
+
+                for (var i = 0; i < reqsongs.length; i++) {
+                    var rs = reqsongs[i];
+                    var row = '<tr class="row-reqsong">';
+                    row += '<td><a href="' + rs.url + '">' +  rs.url + '</a></td>';
+                    row += '<td>00:00</td>';
+                    row += '<td>' + rs.requestedBy + '</td>';
+                    row += '<td class="js-reqsongs-deletecol"><span class="js-reqsongs-deletebtn" data-reqsong-id="' + rs.id  + '"><i class="icon-trash"></i><span class="sr-only">Delete</span></span></td>';
+                    row += '</tr>';
+                    rows += row;
+                }
+                if (rows == "") {
+                    rows = '<tr><td colspan="5" class="text-center">' + EMPTY_TABLE_PLACEHOLDER + '</td></tr>';
+                    shouldSortTable = false;
+                }
+                tbody.html(rows);
+
+
+            } else {
+                var errMsg = (typeof data.status !== 'undefined') ? data.status : data;
+                Messenger().post({
+                  message: "Error: " + data.status,
+                  type: 'error'
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            Messenger().post({
+              message: "Failed to connect to server...",
+              type: 'error'
+            });
+        },
+        complete: function(jqXHR, textStatus) {
+            //$btn.button('reset');
+        }
+    });
+}
+
+
+
+
+
 
 // turns a Moment.js duration object into a totes professional string
 function stringifyDuration(duration) {
@@ -1087,7 +1160,7 @@ function injectTwitchData() {
     html += '<p>Followers: ' + Humanize.intComma(channelTwitchData.followers) + '</p>';
     html += '<p>Joined Twitch on ' + moment(channelTwitchData.created_at).format('LL') + '</p>';
     html += oldHtml;
-    
+
     $('.js-channel-overview').html(html);
 }
 
