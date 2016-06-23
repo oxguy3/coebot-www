@@ -31,3 +31,4 @@ google*.html
 safeconfig.php
 files/*
 configs/*
+deploy.php
