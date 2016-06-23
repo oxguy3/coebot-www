@@ -27,7 +27,7 @@ printNav('help');
           </div>
           <div id="questionHowToJoin" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingHowToJoin">
             <div class="panel-body">
-              Click the "Log in" button at the top right corner of this website and sign in with your Twitch account, then click the join button to have CoeBot enter your channel. If you would rather not sign in with Twitch, you can also join by typing <kbd>+join</kbd> in <a href="http://twitch.tv/coebot" target="_blank">CoeBot's Twitch chat</a>.
+              Click the "Log in" button at the top right corner of this website and sign in with your Twitch account, then click the join button to have CoeBot enter your channel. If you would rather not sign in with Twitch, you can also join by typing <kbd>!join</kbd> in <a href="http://twitch.tv/coebot" target="_blank">CoeBot's Twitch chat</a>.
               <br><br>
               Getting everything set up for the first time may seem daunting, so feel free to tweet <a href="http://twitter.com/coebottv" target="_blank">@coebottv</a> if you need any help or have any questions.
             </div>
