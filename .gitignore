@@ -1,5 +1,7 @@
 safeconfig.php
 highlights/safeconfig.php
 files/*
+configs/*
 ftpsync.settings
 img/Thumbs.db
+.com.apple.timemachine.supported
