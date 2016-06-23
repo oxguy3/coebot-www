@@ -13,8 +13,10 @@ $mysqli = false;
 
 // DEBUG OPTIONS
 // REMOVE BEFORE GOING LIVE
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+if (SITE_ENV == "TEST") {
+	error_reporting(E_ALL);
+	ini_set("display_errors", 1);
+}
 
 session_start();
 
@@ -108,7 +110,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
 
   	<noscript>
       <h1>This site requires JavaScript!</h1>
-      <h2 class="text-muted">Please enable JavaScript in your web browser to view this site
+      <h2 class="text-muted">Please enable JavaScript in your web browser to view this site</h2>
     </noscript>
 <?php
 }
@@ -174,7 +176,7 @@ function printFooter() {
 ?>
 <footer class="footer-normal text-muted">
     <span class="footer-section">
-        Site by <a class="footer-link" href="http://haydenschiff.me" target="_blank" title="Hayden Schiff">oxguy3</a>
+        Site by <a class="footer-link" href="http://schiff.io" target="_blank" title="Hayden Schiff">oxguy3</a>
         <a href="https://github.com/oxguy3/coebot-www" class="btn btn-xs btn-default footer-srccodelink"
         data-toggle="tooltip" title="Source on GitHub" target="_blank">
             <i class="icon-github-circled"></i>

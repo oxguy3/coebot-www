@@ -9,7 +9,8 @@ You might notice that one particular file is missing. To keep secret data safe, 
 ```php
 <?php
 
-define(SITE_DOMAIN, "example.com");
+define(SITE_DOMAIN, "coebot.tv"); // change to your domain name
+define(SITE_ENV, "PROD"); // set to "PROD" or "TEST" depending on if the site is live or not
 
 // mysql details for new site
 define(DB_SERV, "<ip/hostname of mysql server>");
