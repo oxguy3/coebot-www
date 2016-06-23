@@ -8,14 +8,6 @@ printNav();
 ?>
 <div class="container">
 
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="alert alert-info" role="alert" id="home_placeholder">
-        <strong>Welcome!</strong> We're working hard to build the new site. While we're still early in development, some things may not work quite right, so please pardon our dust!
-      </div>
-    </div>
-  </div>
-
 
   <div class="row">
 
@@ -66,7 +58,7 @@ printNav();
       <h3>Need help?</h3>
       <p>The commands list and FAQ have all the information you need to learn to use <?php echo $SITE_TITLE; ?> like a pro.</p>
       <p>
-        <a class="btn btn-default" href="/commands" role="button">View commands &raquo;</a> 
+        <a class="btn btn-default" href="/commands" role="button">View commands &raquo;</a>
         <a class="btn btn-default" href="/faq" role="button">View FAQ &raquo;</a>
       </p>
     </div>
@@ -83,8 +75,8 @@ printNav();
       <h3>Keep in touch!</h3>
       <p>To stay up to date on the latest CoeBot features and news, you can follow us on Twitter and check out our development blog.</p>
       <p>
-        <a class="btn btn-default" href="https://twitter.com/coebottv" role="button"><i class="icon-twitter"></i> Twitter &raquo;</a> 
-        <a class="btn btn-default" href="http://blog.coebot.tv" role="button"><i class="icon-edit"></i> Blog &raquo;</a> 
+        <a class="btn btn-default" href="https://twitter.com/coebottv" role="button"><i class="icon-twitter"></i> Twitter &raquo;</a>
+        <a class="btn btn-default" href="http://blog.coebot.tv" role="button"><i class="icon-edit"></i> Blog &raquo;</a>
       </p>
     </div>
 
@@ -92,22 +84,22 @@ printNav();
       <h3>Statistics</h3>
 
       <div class="row">
-        
+
         <div class="col-md-3 col-sm-4 col-xs-6 text-center">
           <h2><?php echo dbCountChannels(); ?></h2>
           <p class="lead">channels active</p>
         </div>
-        
+
         <div class="col-md-3 col-sm-4 col-xs-6 text-center">
           <h2><?php echo dbCountBots(); ?></h2>
           <p class="lead">bots active</p>
         </div>
-        
+
         <div class="col-md-3 col-sm-4 col-xs-6 text-center">
           <h2 class="js-totalChannels">...</h2>
           <p class="lead">channels live</p>
         </div>
-        
+
         <div class="col-md-3 col-sm-4 col-xs-6 text-center">
           <h2 class="js-totalViewers">...</h2>
           <p class="lead">viewers watching</p>
