@@ -9,6 +9,8 @@ You might notice that one particular file is missing. To keep secret data safe, 
 ```php
 <?php
 
+define(SITE_DOMAIN, "example.com");
+
 // mysql details for new site
 define(DB_SERV, "<ip/hostname of mysql server>");
 define(DB_USER, "<mysql username>");
