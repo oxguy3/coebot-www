@@ -9,7 +9,7 @@ printNav();
 <div class="container">
 
 
-  <div class="row">
+  <div class="row" id="home_placeholder">
 
     <div class="col-md-8 col-lg-9 js-whoslive-containers">
       <div id="carousel-whoslive" class="carousel slide">
