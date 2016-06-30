@@ -113,6 +113,23 @@ if ($action == "join") {
 
 
 
+} else if ($action == "deleteCommand") {
+
+  $channel = getChannelWithAuthOrDie($USER_ACCESS_LEVEL_MOD);
+  $name = getParamOrDie('name');
+
+  $channelCoebotData = dbGetChannel($channel);
+
+  $bot = $channelCoebotData['botChannel'];
+
+  $botSession = BotSession::getBotSessionCurrentUser($bot, $channel);
+  $botSession->doCommandDelete($name);
+  $botSession->finalize();
+
+  die("success");
+
+
+
 } else if ($action == "delReqsong") {
 
   $channel = getChannelWithAuthOrDie($USER_ACCESS_LEVEL_OWNER);

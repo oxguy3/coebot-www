@@ -240,11 +240,11 @@
 }
 
 
-.table-edit-btn {
+.table-edit-btn, .table-delete-btn {
   cursor: pointer;
 }
 
-.table-edit-btn:hover {
+.table-edit-btn:hover, .table-delete-btn:hover {
   color: #2A9FD6;
 }
 

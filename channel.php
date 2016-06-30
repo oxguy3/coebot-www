@@ -64,7 +64,7 @@ $extraHeadCode .= "var userAccessLevel = " . getUserAccessLevel($channel) . ";";
 $extraHeadCode .= "</script>";
 
 if (!isCookieTrue("experimentalFeatures")) {
-  $extraHeadCode .= "<style>.js-commands-addbtn, .js-commands-editcolumn, .js-quotes-addbtn, .js-quotes-editcolumn, .js-autoreplies-addbtn, .js-autoreplies-editcolumn, .hidden-if-experimental { display: none!important; }</style>";
+  $extraHeadCode .= "<style>.js-quotes-addbtn, .js-quotes-editcolumn, .js-autoreplies-addbtn, .js-autoreplies-editcolumn, .hidden-if-experimental { display: none!important; }</style>";
 }
 
 if (!isCookieTrue("showWhalePenis")) {
@@ -220,7 +220,7 @@ printNav('', true);
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="commandAddModalLabel">Set command</h4>
-              </div>
+                </div>
                 <div class="modal-body">
                   <div class="form-group">
                     <label for="commandAddModalCommand">Command</label>
@@ -260,6 +260,26 @@ printNav('', true);
                 <div class="modal-footer">
                   <button id="commandAddModalSave" class="btn btn-primary">Save</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- delete command modal -->
+          <div class="modal fade" id="commandDeleteModal" tabindex="-1" role="dialog" aria-labelledby="commandDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="commandDeleteModalLabel">Delete command</h4>
+                </div>
+                <div class="modal-body">
+                   Are you sure you want to delete the '<span class="js-command-delete-modal-name"></span>' command?
+                </div>
+                <div class="modal-footer">
+                  <input type="hidden" class="form-control" id="commandDeleteModalName">
+                  <button type="button" class="btn btn-primary" id="commandDeleteModalConfirm" data-loading-text="Submitting...">Yes</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                 </div>
               </div>
             </div>

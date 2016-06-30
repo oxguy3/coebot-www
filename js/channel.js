@@ -73,6 +73,41 @@ function tabContentLoaded() {
     linkifyEverything();
 }
 
+function handleBotActionButton(button, data, successMessage) {
+    var $btn = $(button).button('loading');
+
+    $.ajax({
+        data: data,
+        dataType: "text",
+		method: "post",
+        url: "/botaction.php",
+        success: function(txt) {
+            if (txt == "success") {
+                $btn.button('reset');
+                Messenger().post({
+                  message: successMessage,
+                  type: 'success'
+                });
+				$btn.parents(".modal").modal('hide');
+            } else {
+                Messenger().post({
+                  message: "Error: " + txt,
+                  type: 'error'
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            Messenger().post({
+              message: "A connection error occurred.",
+              type: 'error'
+            });
+        },
+        complete: function(jqXHR, textStatus) {
+            $btn.button('reset');
+        }
+    });
+}
+
 // channel config data
 var channelData = false;
 var channelBoirData = false;
@@ -161,7 +196,8 @@ function displayChannelCommands() {
 	for (var i = 0; i < channelData.commands.length; i++) {
 		var cmd = channelData.commands[i];
 		var row = '<tr class="row-command row-command-access-' + cmd.restriction +'">';
-        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + cleanHtmlAttr(cmd.value) + '" data-modaltitle="Edit command"><i class="icon-pencil"></i><span class="sr-only">Edit</span></span></td>';
+        row += '<td class="js-commands-editcolumn"><span class="table-edit-btn" data-toggle="modal" data-target="#commandAddModal" data-command="' + cmd.key + '" data-accesslevel="' + cmd.restriction + '" data-response="' + cleanHtmlAttr(cmd.value) + '" data-modaltitle="Edit command" title="Edit"><i class="icon-pencil"></i><span class="sr-only">Edit</span></span>';
+        row += '&nbsp;&nbsp;&nbsp;<span class="table-delete-btn" data-toggle="modal" data-target="#commandDeleteModal" data-command="' + cmd.key + '" title="Delete"><i class="icon-trash"></i><span class="sr-only">Delete</span></span></td>';
 		row += '<td><kbd class="command">' + cmd.key + '</kbd></td>';
         row += '<td class="row-command-col-access" data-order="' + cmd.restriction + '">' + prettifyAccessLevel(cmd.restriction) + '</td>';
         row += '<td class="should-be-linkified should-be-emotified">' + prettifyStringVariables(cmd.value) + '</td>';
@@ -208,46 +244,38 @@ function displayChannelCommands() {
         $('#commandAddModalLabel').text(modalTitle);
     });
 
+    $('#commandDeleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var command = button.data('command');
+        $('#commandDeleteModalName').val(command);
+		$('.js-command-delete-modal-name').text(command);
+    });
+
     $('#commandAddModalSave').click(function(e) {
+		handleBotActionButton(
+			this,
+			{
+				a: "setCommand",
+				channel: channel,
+				name: $('#commandAddModalName').val(),
+				oldName: $('#commandAddModalOldName').val(),
+				response: $('#commandAddModalResponse').val(),
+				restriction: $('input:checked', '#commandAddModalAccessLevel').val()
+			},
+			'Command successfully modified!'
+		);
+    });
 
-        var $btn = $(this).button('loading');
-
-        $.ajax({
-            data: {
-                a: "setCommand",
-                channel: channel,
-                name: $('#commandAddModalName').val(),
-                oldName: $('#commandAddModalOldName').val(),
-                response: $('#commandAddModalResponse').val(),
-                restriction: $('input:checked', '#commandAddModalAccessLevel').val()
-            },
-            dataType: "text",
-            url: "/botaction.php",
-            success: function(txt) {
-                if (txt == "success") {
-                    $btn.button('reset');
-                    Messenger().post({
-                      message: 'Command successfully modified!',
-                      type: 'success'
-                    });
-                } else {
-                    Messenger().post({
-                      message: "Error: " + txt,
-                      type: 'error'
-                    });
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                Messenger().post({
-                  message: "A connection error occurred.",
-                  type: 'error'
-                });
-            },
-            complete: function(jqXHR, textStatus) {
-                $btn.button('reset');
-            }
-        });
-
+	$('#commandDeleteModalConfirm').click(function(e) {
+		handleBotActionButton(
+			this,
+			{
+				a: "deleteCommand",
+				channel: channel,
+				name: $('#commandDeleteModalName').val()
+			},
+			'Command successfully deleted!'
+		);
     });
 }
 
@@ -960,11 +988,13 @@ function displayChannelReqsongs() {
 
     setInterval(updateReqsongs, 5000);
 
-
-
 }
 
 function updateReqsongs() {
+
+	return; //TEMPORARILY DISABLING
+	// THIS METHOD NEEDS TO CHECK IF THE REQSONGS TAB IS OPEN BEFORE MAKING AJAX REQUEST
+
     $.ajax({
         data: {
             a: "listReqsong",
