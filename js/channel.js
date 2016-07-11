@@ -627,8 +627,8 @@ function showHlstream() {
     playerVars += "&amp;auto_play=false&amp;start_volume=100&amp;videoId=" + currentHlstream.id;
 
     var playerHtml = "";
-    playerHtml += "<object bgcolor='#313131' data='http://www.twitch.tv/widgets/archive_embed_player.swf' height='472' id='player' type='application/x-shockwave-flash' width='775'>";
-    playerHtml += "<param name='movie' value='http://www.twitch.tv/widgets/archive_embed_player.swf' />";
+    playerHtml += "<object bgcolor='#313131' data='https://www.twitch.tv/widgets/archive_embed_player.swf' height='472' id='player' type='application/x-shockwave-flash' width='775'>";
+    playerHtml += "<param name='movie' value='https://www.twitch.tv/widgets/archive_embed_player.swf' />";
     playerHtml += "<param name='allowScriptAccess' value='always' />";
     playerHtml += "<param name='allowNetworking' value='all' />";
     playerHtml += "<param name='allowFullScreen' value='true' />";
