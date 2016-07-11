@@ -38,3 +38,11 @@ RewriteRule ^highlights/view/(\w+)/([^.]+)?$ /c/$1#highlights/$2 [L,R,NE]
 
 RewriteRule ^highlights/(\w+)/?$ /c/$1#highlights [L,R,NE]
 
+# redirect to "www."
+RewriteCond %{HTTP_HOST} !^www\.coebot\.tv [NC]
+RewriteRule ^(.*)$ https://www.coebot.tv/$1 [R=301,L]
+
+# redirect to HTTPS
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://www.coebot.tv/$1 [R=301,L]
+
