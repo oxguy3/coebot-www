@@ -24,6 +24,20 @@ function prettifyRegex(pattern) {
     return pattern;
 }
 
+var cleanHtmlTextMap = {
+   "&": "&amp;",
+   "<": "&lt;",
+   ">": "&gt;",
+   '"': '&quot;',
+   "'": '&#39;',
+   "/": '&#x2F;'
+ };
+
+ function cleanHtmlText(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return cleanHtmlTextMap[s];
+    });
+ }
 function cleanHtmlAttr(val) {
     return val.replace(/"/g, "&quot;");
 }
@@ -164,9 +178,9 @@ function updateIsLive(streams, channels) {
         var popover = isLiveTitles[liveStatus];
         if (liveStatus == isLiveOn) {
             popover = '<div class="islive-popover">';
-            
+
             popover += '<img src="'+stream.preview.medium+'" class="img-responsive" height="180" width="320">';
-            
+
             popover += '<i class="icon-gamepad"></i> ' + ((stream.channel.game) ? stream.channel.game : "Unknown") + '<br>';
             popover += '<i class="icon-user"></i> ' + Humanize.intComma(stream.viewers) + '';
             popover += '</div>';
