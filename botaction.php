@@ -75,7 +75,7 @@ if ($action == "join") {
   $botSession->doPart();
   $botSession->finalize();
 
-  die("success");
+  respondMessage("success");
 
 
 
@@ -109,7 +109,7 @@ if ($action == "join") {
 
   $botSession->finalize();
 
-  die("success");
+  respondMessage("success");
 
 
 
