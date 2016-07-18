@@ -9,27 +9,27 @@ You might notice that one particular file is missing. To keep secret data safe, 
 ```php
 <?php
 
-define(SITE_DOMAIN, "coebot.tv"); // change to your domain name
-define(SITE_ENV, "PROD"); // set to "PROD" or "TEST" depending on if the site is live or not
+define('SITE_DOMAIN', "coebot.tv"); // change to your domain name
+define('SITE_ENV', "PROD"); // set to "PROD" or "TEST" depending on if the site is live or not
 
 // mysql details for new site
-define(DB_SERV, "<ip/hostname of mysql server>");
-define(DB_USER, "<mysql username>");
-define(DB_PASS, "<mysql password>");
-define(DB_NAME, "<mysql database name>");
-define(DB_PREF, "<prefix to prepend to all table names>");
+define('DB_SERV', "<ip/hostname of mysql server>");
+define('DB_USER', "<mysql username>");
+define('DB_PASS', "<mysql password>");
+define('DB_NAME', "<mysql database name>");
+define('DB_PREF', "<prefix to prepend to all table names>");
 
 // mysql details for highlights site
-define(DB_HIGHLIGHTS_SERV, "<ip/hostname of mysql server>");
-define(DB_HIGHLIGHTS_USER, "<mysql username>");
-define(DB_HIGHLIGHTS_PASS, "<mysql password>");
-define(DB_HIGHLIGHTS_DATA, "<mysql database name>");
+define('DB_HIGHLIGHTS_SERV', "<ip/hostname of mysql server>");
+define('DB_HIGHLIGHTS_USER', "<mysql username>");
+define('DB_HIGHLIGHTS_PASS', "<mysql password>");
+define('DB_HIGHLIGHTS_DATA', "<mysql database name>");
 
 // twitch api keys
-define(TWITCH_CLIENT_SECRET, "<twitch api client secret>");
-define(TWITCH_CLIENT_ID, "<twitch api client id>");
-define(TWITCH_REDIRECT_URI, "http://coebot.tv/twitchconnect.php"); // change "coebot.tv" to your domain name
-define(TWITCH_REQUIRED_SCOPES, "user_read"); // shouldn't need to change this
+define('TWITCH_CLIENT_SECRET', "<twitch api client secret>");
+define('TWITCH_CLIENT_ID', "<twitch api client id>");
+define('TWITCH_REDIRECT_URI', "http://coebot.tv/twitchconnect.php"); // change "coebot.tv" to your domain name
+define('TWITCH_REQUIRED_SCOPES', "user_read"); // shouldn't need to change this
 
 // twitch usernames (all lowercase) of anyone who should have admin powers on the website
 $GLOBAL_ADMINS = array('itsoxguy3', 'endsgamer');
