@@ -39,6 +39,8 @@ $GLOBAL_ADMINS = array('itsoxguy3', 'endsgamer');
 
 The site is in pretty rapid development right now and this version of the file is going to become outdated (in fact, it already is); please contact me if you need help with this.
 
+The other issue you will find is that the `.htaccess` currently has rules set up to forward all non-www/non-https requests to "https://www.coebot.tv/". You'll need to modify or remove these rules to run the site on your own host. There are [a number of reasons](http://www.yes-www.org/) why I recommend enforcing the "www." prefix, but the site should work just fine without it.
+
 ## Private API
 This site uses a private API to communicate with CoeBot. This API is still in planning and is rapidly evolving (do not assume currently existing endpoints will exist indefinitely), but the specification so far is available [here](https://docs.google.com/document/d/1tQNETtRvTuSdGKEep57yuO_8J_YfjS5J3--Q6vH0Rcc/edit?usp=sharing). The source code of api.php is considered more canonical than this document for the time being however.
 
