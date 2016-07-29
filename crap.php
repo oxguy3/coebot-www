@@ -6,10 +6,10 @@ header('Content-type: text/plain');
 
 $action = $_GET['a'];
 
-if ($action == "session") {
+/*if ($action == "session") {
   print_r($_SESSION);
 
-} else if ($action == "get") {
+} else*/ if ($action == "get") {
   print_r($_GET);
   
 } else if ($action == "post") {
