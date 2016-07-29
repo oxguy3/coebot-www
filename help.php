@@ -31,7 +31,7 @@ function makeQA($id, $question, $answer) {
     <div class="col-md-12">
       <h1>Help</h1>
 
-      <p class="lead">For any questions you may have, feel free to tweet us <a href=\"http://twitter.com/coebottv\" target=\"_blank\">@CoeBotTV</a>. You can also reach out to us individually; <a href=\"http://twitter.com/endsgamer\" target=\"_blank\">@endsgamer</a> is the chat bot developer and <a href=\"http://twitter.com/oxguy3\" target=\"_blank\">@oxguy3</a> is the website developer.</p>
+      <p class="lead">For any questions you may have, feel free to tweet us <a href="http://twitter.com/coebottv" target="_blank">@CoeBotTV</a>. You can also reach out to us individually; <a href="http://twitter.com/endsgamer" target="_blank">@endsgamer</a> is the chat bot developer and <a href="http://twitter.com/oxguy3" target="_blank">@oxguy3</a> is the website developer.</p>
 
 
       <h2 id="faq">Frequently Asked Questions</h2>
