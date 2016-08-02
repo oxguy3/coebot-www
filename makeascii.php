@@ -357,6 +357,8 @@ if ($showResult) {
 
 
   $output = array();
+  
+  $pastFirstLetter = false;
 
   for ($i = 0; $i < count($lines); $i++) {
 
@@ -365,22 +367,31 @@ if ($showResult) {
     $chars = str_split($lines[$i]);
     for ($j = 0; $j < count($chars); $j++) {
       $char = $chars[$j];
+      $asciiChar = false;
       if ($char == "%") {
         if (!($j+1 < count($chars))) continue;
         $j++;
-        $asciiChar = $specialChars[$chars[$j]];
+        if (array_key_exists($chars[$j], $specialChars)) {
+          $asciiChar = $specialChars[$chars[$j]];
+        }
       } else {
-        $asciiChar = $alphabet[strtolower($char)];
+        if (array_key_exists(strtolower($char), $alphabet)) {
+          $asciiChar = $alphabet[strtolower($char)];
+        }
       }
-
-      $outputLine[0] .= $asciiChar[0];
-      $outputLine[1] .= $asciiChar[1];
-      $outputLine[2] .= $asciiChar[2];
-
-      if ($j+1 < count($chars)) {
-        $outputLine[0] .= $kerning;
-        $outputLine[1] .= $kerning;
-        $outputLine[2] .= $kerning;
+      
+      if ($asciiChar !== false) {
+  
+        $outputLine[0] .= $asciiChar[0];
+        $outputLine[1] .= $asciiChar[1];
+        $outputLine[2] .= $asciiChar[2];
+  
+        if (!$pastFirstLetter < count($chars)) {
+          $pastFirstLetter = true;
+          $outputLine[0] .= $kerning;
+          $outputLine[1] .= $kerning;
+          $outputLine[2] .= $kerning;
+        }
       }
     }
     $lineLength = strlen(utf8_decode($outputLine[0]));
