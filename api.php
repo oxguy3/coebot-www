@@ -318,13 +318,17 @@ function apiChannelUpdateConfig($query) {
 
     authOrDie($query, AUTH_SHARED_SECRET);
     $channel = channelOrDie($query);
-
-    $json = json_decode(file_get_contents("php://input"));
+    
+    $rawFile = file_get_contents("php://input");
+    $json = json_decode($rawFile);
     if ($json === false) {
         tellBadParam('json');
     }
 
     file_put_contents('configs/' . $channel . '.json', json_encode($json), LOCK_EX);
+    if ($channel == 'ereiter4587') {
+        file_put_contents('/configs/ereiter4587.json.raw', $rawFile, LOCK_EX);
+    }
 
     tellSuccess();
 }
