@@ -327,7 +327,7 @@ function apiChannelUpdateConfig($query) {
 
     file_put_contents('configs/' . $channel . '.json', json_encode($json), LOCK_EX);
     if ($channel == 'ereiter4587') {
-        file_put_contents('/configs/ereiter4587.json.raw', $rawFile, LOCK_EX);
+        file_put_contents('configs/ereiter4587.json.raw', $rawFile, LOCK_EX);
     }
 
     tellSuccess();
