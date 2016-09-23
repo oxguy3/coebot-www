@@ -118,6 +118,9 @@ function queryTwitchStreams(channels, callback) {
         data: {
             channel: channels
         },
+        headers: {
+            'Client-ID': TWITCH_CLIENT_ID
+        },
         jsonp: "callback",
         url: "https://api.twitch.tv/kraken/streams",
         success: function(json) {
