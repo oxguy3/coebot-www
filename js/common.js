@@ -116,7 +116,7 @@ function queryTwitchStreams(channels, callback) {
     $.ajax({
         dataType: "jsonp",
         data: {
-            client_id: TWITCH_CLIENT_ID
+            client_id: TWITCH_CLIENT_ID,
             channel: channels
         },
         jsonp: "callback",
