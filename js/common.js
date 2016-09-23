@@ -125,6 +125,7 @@ function queryTwitchStreams(channels, callback) {
         url: "https://api.twitch.tv/kraken/streams",
         success: function(json) {
             console.log("Loaded Twitch streams: " + channels);
+            console.log(json);
             callback(json, channels);
         },
         error: function(jqXHR, textStatus, errorThrown) {
