@@ -116,10 +116,8 @@ function queryTwitchStreams(channels, callback) {
     $.ajax({
         dataType: "jsonp",
         data: {
+            client_id: TWITCH_CLIENT_ID
             channel: channels
-        },
-        headers: {
-            'Client-ID': TWITCH_CLIENT_ID
         },
         jsonp: "callback",
         url: "https://api.twitch.tv/kraken/streams",
@@ -146,7 +144,7 @@ function getLiveStatus(stream) {
 
 function stringifyChannels() {
     var str = [];
-    var CHANCT = 200;
+    var CHANCT = 180;
     for (var i = 0; i < coebotData.channels.length; i++) {
         if (i % CHANCT == 0) {
             str[i/CHANCT] = "";
