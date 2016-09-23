@@ -955,6 +955,10 @@ function twitchGetChannel($channel) {
     curl_setopt($curlSession, CURLOPT_URL, 'https://api.twitch.tv/kraken/channels/' . $channel);
     curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curlSession, CURLOPT_HTTPHEADER, array(
+        'Accept: application/vnd.twitchtv.v3+json',
+        'Client-ID: '.TWITCH_CLIENT_ID,
+    ));
 
     $jsonData = json_decode(curl_exec($curlSession));
     curl_close($curlSession);
@@ -985,7 +989,8 @@ function twitchGetUser($accessToken) {
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curlSession, CURLOPT_HTTPHEADER, array(
         'Accept: application/vnd.twitchtv.v3+json',
-        'Authorization: OAuth ' . $accessToken
+        'Authorization: OAuth ' . $accessToken,
+        'Client-ID: '.TWITCH_CLIENT_ID,
     ));
 
     $jsonData = json_decode(curl_exec($curlSession));
