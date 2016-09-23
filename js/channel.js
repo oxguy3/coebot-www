@@ -1196,6 +1196,9 @@ $(document).ready(function() {
         cache: true,
         dataType: "jsonp",
         jsonp: "callback",
+        headers: {
+            'Client-ID': TWITCH_CLIENT_ID
+        },
         url: "https://api.twitch.tv/kraken/chat/" + channel + "/emoticons",
         success: function(json) {
             console.log("Loaded Twitch emotes");
