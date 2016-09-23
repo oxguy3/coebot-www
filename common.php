@@ -76,6 +76,7 @@ function printHead($pageTitle=false, $extraCss=array(), $extraJs=array(), $extra
     <script src="/js/jquery.linkify.min.js"></script>
     <script src="/js/messenger.min.js"></script>
     <script src="/js/messenger-theme-flat.js"></script>
+    <script>var TWITCH_CLIENT_ID = <?php echo json_encode(TWITCH_CLIENT_ID); ?>;</script>
     <script src="/js/common.js"></script>
     <?php
 
