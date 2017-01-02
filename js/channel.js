@@ -1181,6 +1181,9 @@ $(document).ready(function() {
     $.ajax({
         dataType: "jsonp",
         jsonp: "callback",
+        headers: {
+            'Client-ID': TWITCH_CLIENT_ID
+        },
         url: "https://api.twitch.tv/kraken/channels/" + channel,
         success: function(json) {
             console.log("Loaded Twitch channel data");
